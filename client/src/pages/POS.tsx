@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { getProducts, getCategories, getCustomers, createSale } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { 
-  ShoppingCart, RotateCcw, RefreshCcw, Check, Plus, Minus, 
-  Trash2, UserPlus, MoreVertical, Pause, CreditCard 
+  ShoppingCart, RotateCcw, RefreshCcw, Plus, Minus, 
+  Trash2, UserPlus, MoreVertical, Pause, CreditCard, X,
+  BarChart3, Tag
 } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../style/pos.css";
+import { queryClient } from "@/lib/queryClient";
 
 interface CartItem {
   id: string;
@@ -24,24 +25,23 @@ export default function POS() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedCustomer, setSelectedCustomer] = useState<string>("walk-in");
-  const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState(5);
   const [tax, setTax] = useState(5);
-  const [shipping, setShipping] = useState(0);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [shipping, setShipping] = useState(40.21);
+  const [coupon, setCoupon] = useState(25);
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
-  const { data: products = [] } = useQuery({
+  const { data: products = [], isLoading: productsLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
 
-  const { data: categories = [] } = useQuery({
+  const { data: categories = [], isLoading: categoriesLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
   });
 
-  const { data: customers = [] } = useQuery({
+  const { data: customers = [], isLoading: customersLoading } = useQuery({
     queryKey: ["customers"],
     queryFn: getCustomers,
   });
@@ -54,9 +54,9 @@ export default function POS() {
         description: "Sale has been processed successfully",
       });
       setCart([]);
-      setDiscount(0);
-      setShipping(0);
-      setShowPaymentModal(false);
+      setDiscount(5);
+      setShipping(40.21);
+      setCoupon(25);
       queryClient.invalidateQueries({ queryKey: ["sales"] });
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
@@ -73,24 +73,25 @@ export default function POS() {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 7,
     slidesToScroll: 1,
+    arrows: true,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: { slidesToShow: 6 },
+      },
       {
         breakpoint: 992,
         settings: { slidesToShow: 5 },
       },
       {
-        breakpoint: 800,
+        breakpoint: 768,
         settings: { slidesToShow: 4 },
       },
       {
-        breakpoint: 776,
+        breakpoint: 576,
         settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 567,
-        settings: { slidesToShow: 2 },
       },
     ],
   };
@@ -131,6 +132,10 @@ export default function POS() {
         },
       ]);
     }
+    toast({
+      title: "Added to cart",
+      description: `${product.name} added to cart`,
+    });
   };
 
   const updateQuantity = (id: string, change: number) => {
@@ -166,18 +171,27 @@ export default function POS() {
 
   const removeFromCart = (id: string) => {
     setCart(cart.filter((item) => item.id !== id));
+    toast({
+      title: "Removed from cart",
+      description: "Item removed from cart",
+    });
   };
 
   const clearCart = () => {
     setCart([]);
-    setDiscount(0);
-    setShipping(0);
+    setDiscount(5);
+    setShipping(40.21);
+    setCoupon(25);
+    toast({
+      title: "Cart cleared",
+      description: "All items removed from cart",
+    });
   };
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discountAmount = (subtotal * discount) / 100;
   const taxAmount = ((subtotal - discountAmount + shipping) * tax) / 100;
-  const total = subtotal - discountAmount + taxAmount + shipping;
+  const total = subtotal - discountAmount + taxAmount + shipping - coupon;
 
   const handlePayment = () => {
     if (cart.length === 0) {
@@ -206,14 +220,43 @@ export default function POS() {
     createSaleMutation.mutate(saleData);
   };
 
+  const handleHold = () => {
+    toast({
+      title: "Order on Hold",
+      description: "Order has been put on hold",
+    });
+  };
+
+  const handleVoid = () => {
+    clearCart();
+    toast({
+      title: "Order Voided",
+      description: "Order has been voided",
+    });
+  };
+
+  const handleTransaction = () => {
+    toast({
+      title: "Recent Transactions",
+      description: "Opening recent transactions...",
+    });
+  };
+
+  const handleViewOrders = () => {
+    toast({
+      title: "View Orders",
+      description: "Opening orders list...",
+    });
+  };
+
   const getCategoryImage = (index: number) => {
     const images = [
-      "assets/img/categories/category-01.png",
-      "assets/img/categories/category-02.png", 
-      "assets/img/categories/category-03.png",
-      "assets/img/categories/category-04.png",
-      "assets/img/categories/category-05.png",
-      "assets/img/categories/category-06.png",
+      "/assets/img/categories/category-01.png",
+      "/assets/img/categories/category-02.png", 
+      "/assets/img/categories/category-03.png",
+      "/assets/img/categories/category-04.png",
+      "/assets/img/categories/category-05.png",
+      "/assets/img/categories/category-06.png",
     ];
     return images[index % images.length];
   };
@@ -222,28 +265,56 @@ export default function POS() {
     <div className="page-wrapper pos-pg-wrapper ms-0">
       <div className="content pos-design p-0">
         <div className="btn-row d-sm-flex align-items-center">
-          <button className="btn btn-secondary mb-xs-3 me-2">
-            <span className="me-1 d-flex align-items-center">
-              <ShoppingCart size={16} />
-            </span>
-            View Orders
-          </button>
           <button 
-            className="btn btn-info me-2" 
-            onClick={clearCart}
-            disabled={cart.length === 0}
+            className="btn btn-secondary mb-xs-3"
+            data-testid="button-view-brands"
+            onClick={() => toast({ title: "View All Brands", description: "Opening brands list..." })}
           >
             <span className="me-1 d-flex align-items-center">
-              <RotateCcw size={16} />
+              <Tag size={16} />
             </span>
-            Reset
+            View All Brands
           </button>
-          <button className="btn btn-primary">
+          <button 
+            className="btn btn-warning"
+            data-testid="button-barcode"
+            onClick={() => toast({ title: "Barcode Scanner", description: "Opening barcode scanner..." })}
+          >
             <span className="me-1 d-flex align-items-center">
-              <RefreshCcw size={16} />
+              <BarChart3 size={16} />
             </span>
-            Transaction
+            Barcode
           </button>
+          <div className="dropdown">
+            <button 
+              className="btn btn-primary dropdown-toggle" 
+              type="button" 
+              data-bs-toggle="dropdown"
+              data-testid="button-dashboard-dropdown"
+            >
+              Dashboard
+            </button>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" href="#">Sales Dashboard</a></li>
+              <li><a className="dropdown-item" href="#">Inventory Dashboard</a></li>
+              <li><a className="dropdown-item" href="#">Reports</a></li>
+            </ul>
+          </div>
+          <div className="dropdown">
+            <button 
+              className="btn btn-info dropdown-toggle" 
+              type="button" 
+              data-bs-toggle="dropdown"
+              data-testid="button-freshmart-dropdown"
+            >
+              Freshmart
+            </button>
+            <ul className="dropdown-menu">
+              <li><a className="dropdown-item" href="#">Store Settings</a></li>
+              <li><a className="dropdown-item" href="#">Location</a></li>
+              <li><a className="dropdown-item" href="#">Branches</a></li>
+            </ul>
+          </div>
         </div>
 
         <div className="row align-items-start pos-wrapper">
@@ -251,37 +322,41 @@ export default function POS() {
             <div className="pos-categories tabs_wrapper">
               <h5>Categories</h5>
               <p>Select From Below Categories</p>
-              <Slider {...sliderSettings} className="tabs owl-carousel pos-category">
-                <div 
-                  className={`pos-slick-item ${selectedCategory === "all" ? "active" : ""}`}
-                  onClick={() => setSelectedCategory("all")}
-                >
-                  <a href="#">
-                    <img src="assets/img/categories/category-01.png" alt="All Categories" />
-                  </a>
-                  <h6>
-                    <a href="#">All Categories</a>
-                  </h6>
-                  <span>{products.length} Items</span>
-                </div>
-                {categories.map((category: any, index: number) => (
-                  <div
-                    key={category.id}
-                    className={`pos-slick-item ${selectedCategory === category.id ? "active" : ""}`}
-                    onClick={() => setSelectedCategory(category.id)}
+              <div className="pos-category">
+                <Slider {...sliderSettings} className="tabs owl-carousel">
+                  <div 
+                    className={`pos-slick-item ${selectedCategory === "all" ? "active" : ""}`}
+                    onClick={() => setSelectedCategory("all")}
+                    data-testid="category-all"
                   >
-                    <a href="#">
-                      <img src={getCategoryImage(index + 1)} alt={category.name} />
+                    <a href="#" onClick={(e) => e.preventDefault()}>
+                      <img src="/assets/img/categories/category-01.png" alt="All Categories" />
                     </a>
                     <h6>
-                      <a href="#">{category.name}</a>
+                      <a href="#" onClick={(e) => e.preventDefault()}>All</a>
                     </h6>
-                    <span>
-                      {products.filter((p: any) => p.categoryId === category.id).length} Items
-                    </span>
+                    <span>{products.length} Items</span>
                   </div>
-                ))}
-              </Slider>
+                  {categories.map((category: any, index: number) => (
+                    <div
+                      key={category.id}
+                      className={`pos-slick-item ${selectedCategory === category.id ? "active" : ""}`}
+                      onClick={() => setSelectedCategory(category.id)}
+                      data-testid={`category-${category.id}`}
+                    >
+                      <a href="#" onClick={(e) => e.preventDefault()}>
+                        <img src={getCategoryImage(index + 1)} alt={category.name} />
+                      </a>
+                      <h6>
+                        <a href="#" onClick={(e) => e.preventDefault()}>{category.name}</a>
+                      </h6>
+                      <span>
+                        {products.filter((p: any) => p.categoryId === category.id).length} Items
+                      </span>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
 
               <div className="pos-products">
                 <div className="d-flex align-items-center justify-content-between">
@@ -289,44 +364,54 @@ export default function POS() {
                 </div>
                 <div className="tabs_container">
                   <div className="tab_content active">
-                    <div className="row">
-                      {filteredProducts.map((product: any) => (
-                        <div key={product.id} className="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2">
-                          <div 
-                            className="product-info default-cover card"
-                            onClick={() => addToCart(product)}
-                          >
-                            <a href="#" className="img-bg">
-                              {product.image ? (
-                                <img src={product.image} alt={product.name} />
-                              ) : (
-                                <img src="assets/img/products/pos-product-01.png" alt={product.name} />
-                              )}
-                              <span>
-                                <Check size={16} />
-                              </span>
-                            </a>
-                            <h6 className="cat-name">
-                              <a href="#">
-                                {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
+                    {productsLoading ? (
+                      <div className="text-center py-5">
+                        <div className="spinner-border text-primary" role="status">
+                          <span className="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="row">
+                        {filteredProducts.map((product: any) => (
+                          <div key={product.id} className="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2">
+                            <div 
+                              className="product-info default-cover card"
+                              onClick={() => addToCart(product)}
+                              data-testid={`product-${product.id}`}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <a href="#" className="img-bg" onClick={(e) => e.preventDefault()}>
+                                {product.image ? (
+                                  <img src={product.image} alt={product.name} />
+                                ) : (
+                                  <img src="/assets/img/products/pos-product-01.png" alt={product.name} />
+                                )}
+                                <span>
+                                  <Plus size={16} />
+                                </span>
                               </a>
-                            </h6>
-                            <h6 className="product-name">
-                              <a href="#">{product.name}</a>
-                            </h6>
-                            <div className="d-flex align-items-center justify-content-between price">
-                              <span>{product.stock} Pcs</span>
-                              <p>${product.price}</p>
+                              <h6 className="cat-name">
+                                <a href="#" onClick={(e) => e.preventDefault()}>
+                                  {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
+                                </a>
+                              </h6>
+                              <h6 className="product-name">
+                                <a href="#" onClick={(e) => e.preventDefault()}>{product.name}</a>
+                              </h6>
+                              <div className="d-flex align-items-center justify-content-between price">
+                                <span>{product.stock} Pcs</span>
+                                <p>${product.price}</p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
-                      {filteredProducts.length === 0 && (
-                        <div className="col-12 text-center py-5">
-                          <p className="text-muted">No products found</p>
-                        </div>
-                      )}
-                    </div>
+                        ))}
+                        {filteredProducts.length === 0 && (
+                          <div className="col-12 text-center py-5">
+                            <p className="text-muted">No products found in this category</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -338,13 +423,18 @@ export default function POS() {
               <div className="head d-flex align-items-center justify-content-between w-100">
                 <div>
                   <h5>Order List</h5>
-                  <span>Transaction ID : #{Math.random().toString(36).substr(2, 9).toUpperCase()}</span>
+                  <span>Transaction ID : #POS{Date.now().toString().slice(-6)}</span>
                 </div>
                 <div>
-                  <a className="confirm-text" href="#">
-                    <Trash2 size={16} className="text-danger me-1" onClick={clearCart} />
+                  <a 
+                    className="confirm-text" 
+                    href="#"
+                    onClick={(e) => { e.preventDefault(); clearCart(); }}
+                    data-testid="button-clear-all-header"
+                  >
+                    <Trash2 size={16} className="text-danger me-1" />
                   </a>
-                  <a href="#" className="text-default">
+                  <a href="#" className="text-default" onClick={(e) => e.preventDefault()}>
                     <MoreVertical size={16} />
                   </a>
                 </div>
@@ -358,8 +448,9 @@ export default function POS() {
                       className="form-select"
                       value={selectedCustomer}
                       onChange={(e) => setSelectedCustomer(e.target.value)}
+                      data-testid="select-customer"
                     >
-                      <option value="walk-in">Walk-in Customer</option>
+                      <option value="walk-in">Walk in Customer</option>
                       {customers.map((customer: any) => (
                         <option key={customer.id} value={customer.id}>
                           {customer.name}
@@ -367,46 +458,68 @@ export default function POS() {
                       ))}
                     </select>
                   </div>
-                  <a href="#" className="btn btn-primary btn-icon ms-2">
+                  <a 
+                    href="#" 
+                    className="btn btn-primary btn-icon ms-2"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toast({ title: "Add Customer", description: "Opening customer form..." });
+                    }}
+                    data-testid="button-add-customer"
+                  >
                     <UserPlus size={16} />
                   </a>
                 </div>
+                {selectedCustomer !== "walk-in" && (
+                  <div className="customer-details mt-3 p-3 bg-light rounded">
+                    <div className="d-flex align-items-center gap-2">
+                      <span className="fw-bold">
+                        {customers.find((c: any) => c.id === selectedCustomer)?.name || "Customer"}
+                      </span>
+                      <span className="badge bg-primary">Gold</span>
+                      <span className="badge bg-success">Loyalty</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="product-added block-section">
                 <div className="head-text d-flex align-items-center justify-content-between">
                   <h6 className="d-flex align-items-center mb-0">
-                    Product Added<span className="count">{cart.length}</span>
+                    Product Added
+                    <span className="count ms-2">{cart.length}</span>
                   </h6>
                   <a 
                     href="#" 
                     className="d-flex align-items-center text-danger"
                     onClick={(e) => { e.preventDefault(); clearCart(); }}
+                    data-testid="button-clear-all"
                   >
                     <span className="me-1">Clear all</span>
+                    <X size={14} />
                   </a>
                 </div>
                 <div className="product-wrap">
                   {cart.length === 0 ? (
                     <div className="text-center text-muted py-4">
-                      <ShoppingCart size={40} className="mb-2" />
+                      <ShoppingCart size={40} className="mb-2 opacity-50" />
                       <p>Cart is empty</p>
                     </div>
                   ) : (
                     cart.map((item) => (
-                      <div key={item.id} className="product-list d-flex align-items-center justify-content-between">
+                      <div key={item.id} className="product-list d-flex align-items-center justify-content-between" data-testid={`cart-item-${item.id}`}>
                         <div className="d-flex align-items-center product-info">
-                          <a href="#" className="img-bg">
+                          <a href="#" className="img-bg" onClick={(e) => e.preventDefault()}>
                             {item.image ? (
                               <img src={item.image} alt={item.name} />
                             ) : (
-                              <img src="assets/img/products/pos-product-01.png" alt={item.name} />
+                              <img src="/assets/img/products/pos-product-01.png" alt={item.name} />
                             )}
                           </a>
                           <div className="info">
                             <span>{item.sku || `PT${Math.floor(Math.random() * 10000)}`}</span>
                             <h6>
-                              <a href="#">{item.name}</a>
+                              <a href="#" onClick={(e) => e.preventDefault()}>{item.name}</a>
                             </h6>
                             <p>${item.price.toFixed(2)}</p>
                           </div>
@@ -416,6 +529,7 @@ export default function POS() {
                             href="#"
                             className="dec d-flex justify-content-center align-items-center"
                             onClick={(e) => { e.preventDefault(); updateQuantity(item.id, -1); }}
+                            data-testid={`button-decrease-${item.id}`}
                           >
                             <Minus size={14} />
                           </a>
@@ -424,11 +538,13 @@ export default function POS() {
                             className="form-control text-center"
                             value={item.quantity}
                             readOnly
+                            data-testid={`input-quantity-${item.id}`}
                           />
                           <a
                             href="#"
                             className="inc d-flex justify-content-center align-items-center"
                             onClick={(e) => { e.preventDefault(); updateQuantity(item.id, 1); }}
+                            data-testid={`button-increase-${item.id}`}
                           >
                             <Plus size={14} />
                           </a>
@@ -438,6 +554,7 @@ export default function POS() {
                             className="btn-icon delete-icon confirm-text"
                             href="#"
                             onClick={(e) => { e.preventDefault(); removeFromCart(item.id); }}
+                            data-testid={`button-delete-${item.id}`}
                           >
                             <Trash2 size={14} />
                           </a>
@@ -448,146 +565,197 @@ export default function POS() {
                 </div>
               </div>
 
-              <div className="block-section">
-                <div className="selling-info">
-                  <div className="row">
-                    <div className="col-12 col-sm-4">
-                      <div className="input-block">
-                        <label>Order Tax</label>
-                        <select 
-                          className="form-select"
-                          value={tax}
-                          onChange={(e) => setTax(parseFloat(e.target.value))}
-                        >
-                          <option value="5">GST 5%</option>
-                          <option value="10">GST 10%</option>
-                          <option value="15">GST 15%</option>
-                          <option value="20">GST 20%</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-12 col-sm-4">
-                      <div className="input-block">
-                        <label>Shipping</label>
-                        <input 
-                          type="number"
-                          className="form-control"
-                          value={shipping}
-                          onChange={(e) => setShipping(parseFloat(e.target.value) || 0)}
-                          min="0"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-12 col-sm-4">
-                      <div className="input-block">
-                        <label>Discount</label>
-                        <select 
-                          className="form-select"
-                          value={discount}
-                          onChange={(e) => setDiscount(parseFloat(e.target.value))}
-                        >
-                          <option value="0">0%</option>
-                          <option value="5">5%</option>
-                          <option value="10">10%</option>
-                          <option value="15">15%</option>
-                          <option value="20">20%</option>
-                        </select>
+              {cart.length > 0 && (
+                <>
+                  <div className="block-section">
+                    <div className="discount-info p-3 mb-3 d-flex align-items-start gap-2" style={{ backgroundColor: '#F3F4F6', borderRadius: '8px' }}>
+                      <Tag size={20} className="text-primary mt-1" />
+                      <div>
+                        <div className="fw-semibold text-primary">Discount {discount}%</div>
+                        <small className="text-muted">For ${subtotal >= 20 ? subtotal.toFixed(2) : '20'} Minimum Purchase, {cart.length} Items</small>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="order-total">
-                  <table className="table table-responsive table-borderless">
-                    <tbody>
-                      <tr>
-                        <td>Sub Total</td>
-                        <td className="text-end">${subtotal.toFixed(2)}</td>
-                      </tr>
-                      <tr>
-                        <td>Tax (GST {tax}%)</td>
-                        <td className="text-end">${taxAmount.toFixed(2)}</td>
-                      </tr>
-                      <tr>
-                        <td>Shipping</td>
-                        <td className="text-end">${shipping.toFixed(2)}</td>
-                      </tr>
-                      <tr>
-                        <td className="danger">Discount ({discount}%)</td>
-                        <td className="danger text-end">-${discountAmount.toFixed(2)}</td>
-                      </tr>
-                      <tr>
-                        <td>Total</td>
-                        <td className="text-end">${total.toFixed(2)}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
 
-              <div className="block-section payment-method">
-                <h6>Payment Method</h6>
-                <div className="row d-flex align-items-center justify-content-center methods">
-                  <div className="col-md-6 col-lg-4 item">
-                    <div className="default-cover">
-                      <a href="#">
-                        <img src="assets/img/icons/cash-pay.svg" alt="Cash" />
-                        <span>Cash</span>
-                      </a>
+                  <div className="block-section">
+                    <h6 className="mb-3">Payment Summary</h6>
+                    <div className="order-total">
+                      <table className="table table-responsive table-borderless">
+                        <tbody>
+                          <tr>
+                            <td>Shipping</td>
+                            <td className="text-end">
+                              <span className="badge bg-secondary" style={{ fontSize: '12px' }}>
+                                ${shipping.toFixed(2)}
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Tax ({tax}%)</td>
+                            <td className="text-end">${taxAmount.toFixed(2)}</td>
+                          </tr>
+                          <tr>
+                            <td>Coupon</td>
+                            <td className="text-end text-success">-${coupon.toFixed(2)}</td>
+                          </tr>
+                          <tr>
+                            <td>Discount ({discount}%)</td>
+                            <td className="text-end text-danger">-${discountAmount.toFixed(2)}</td>
+                          </tr>
+                          <tr className="border-top">
+                            <td className="fw-bold">Sub Total</td>
+                            <td className="text-end fw-bold">${subtotal.toFixed(2)}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <div className="col-md-6 col-lg-4 item">
-                    <div className="default-cover">
-                      <a href="#">
-                        <img src="assets/img/icons/credit-card.svg" alt="Debit Card" />
-                        <span>Debit Card</span>
-                      </a>
+
+                  <div className="block-section">
+                    <div className="selling-info">
+                      <div className="row">
+                        <div className="col-12 col-sm-4">
+                          <div className="input-block">
+                            <label>Tax (%)</label>
+                            <select 
+                              className="form-select"
+                              value={tax}
+                              onChange={(e) => setTax(parseFloat(e.target.value))}
+                              data-testid="select-tax"
+                            >
+                              <option value="5">5%</option>
+                              <option value="10">10%</option>
+                              <option value="15">15%</option>
+                              <option value="20">20%</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="col-12 col-sm-4">
+                          <div className="input-block">
+                            <label>Shipping</label>
+                            <input 
+                              type="number"
+                              className="form-control"
+                              value={shipping}
+                              onChange={(e) => setShipping(parseFloat(e.target.value) || 0)}
+                              min="0"
+                              step="0.01"
+                              data-testid="input-shipping"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-12 col-sm-4">
+                          <div className="input-block">
+                            <label>Discount (%)</label>
+                            <select 
+                              className="form-select"
+                              value={discount}
+                              onChange={(e) => setDiscount(parseFloat(e.target.value))}
+                              data-testid="select-discount"
+                            >
+                              <option value="0">0%</option>
+                              <option value="5">5%</option>
+                              <option value="10">10%</option>
+                              <option value="15">15%</option>
+                              <option value="20">20%</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="col-md-6 col-lg-4 item">
-                    <div className="default-cover">
-                      <a href="#">
-                        <img src="assets/img/icons/qr-scan.svg" alt="Scan" />
-                        <span>Scan</span>
-                      </a>
+
+                  <div className="d-grid btn-block mb-3">
+                    <a 
+                      className="btn btn-secondary" 
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      style={{ fontSize: '16px', fontWeight: '600', padding: '12px' }}
+                      data-testid="text-grand-total"
+                    >
+                      Grand Total : ${total.toFixed(2)}
+                    </a>
+                  </div>
+
+                  <div className="row g-2 mb-3">
+                    <div className="col-6">
+                      <button 
+                        className="btn btn-warning w-100"
+                        onClick={handleHold}
+                        data-testid="button-hold"
+                      >
+                        <span className="me-1 d-flex align-items-center justify-content-center">
+                          <Pause size={16} />
+                        </span>
+                        Hold
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button 
+                        className="btn btn-info w-100"
+                        onClick={handleVoid}
+                        data-testid="button-void"
+                      >
+                        <span className="me-1 d-flex align-items-center justify-content-center">
+                          <X size={16} />
+                        </span>
+                        Void
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button 
+                        className="btn btn-primary w-100"
+                        onClick={handlePayment}
+                        disabled={createSaleMutation.isPending}
+                        data-testid="button-payment"
+                        style={{ backgroundColor: '#06b6d4', borderColor: '#06b6d4' }}
+                      >
+                        <span className="me-1 d-flex align-items-center justify-content-center">
+                          <CreditCard size={16} />
+                        </span>
+                        {createSaleMutation.isPending ? "Processing..." : "Payment"}
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button 
+                        className="btn btn-dark w-100"
+                        onClick={handleViewOrders}
+                        data-testid="button-view-orders"
+                      >
+                        <span className="me-1 d-flex align-items-center justify-content-center">
+                          <ShoppingCart size={16} />
+                        </span>
+                        View Orders
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button 
+                        className="btn w-100"
+                        onClick={clearCart}
+                        data-testid="button-reset"
+                        style={{ backgroundColor: '#9333ea', borderColor: '#9333ea', color: 'white' }}
+                      >
+                        <span className="me-1 d-flex align-items-center justify-content-center">
+                          <RotateCcw size={16} />
+                        </span>
+                        Reset
+                      </button>
+                    </div>
+                    <div className="col-6">
+                      <button 
+                        className="btn btn-danger w-100"
+                        onClick={handleTransaction}
+                        data-testid="button-transaction"
+                      >
+                        <span className="me-1 d-flex align-items-center justify-content-center">
+                          <RefreshCcw size={16} />
+                        </span>
+                        Transaction
+                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="d-grid btn-block">
-                <a className="btn btn-secondary" href="#">
-                  Grand Total : ${total.toFixed(2)}
-                </a>
-              </div>
-
-              <div className="btn-row d-sm-flex align-items-center justify-content-between">
-                <a href="#" className="btn btn-info btn-icon flex-fill">
-                  <span className="me-1 d-flex align-items-center">
-                    <Pause size={16} />
-                  </span>
-                  Hold
-                </a>
-                <a 
-                  href="#" 
-                  className="btn btn-danger btn-icon flex-fill"
-                  onClick={(e) => { e.preventDefault(); clearCart(); }}
-                >
-                  <span className="me-1 d-flex align-items-center">
-                    <Trash2 size={16} />
-                  </span>
-                  Void
-                </a>
-                <a 
-                  href="#" 
-                  className="btn btn-success btn-icon flex-fill"
-                  onClick={(e) => { e.preventDefault(); handlePayment(); }}
-                >
-                  <span className="me-1 d-flex align-items-center">
-                    <CreditCard size={16} />
-                  </span>
-                  Payment
-                </a>
-              </div>
+                </>
+              )}
             </aside>
           </div>
         </div>
