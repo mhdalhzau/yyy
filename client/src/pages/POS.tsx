@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ShoppingCart, Search, Plus, Minus, Trash2, X, RotateCcw, RefreshCw, Check } from "lucide-react";
+import { ShoppingCart, Search, Plus, Minus, Trash2, X, RotateCcw, RefreshCcw, Check } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -240,7 +240,7 @@ export default function POS() {
             data-testid="button-transaction"
           >
             <span className="me-1 d-flex align-items-center">
-              <RefreshCw className="feather-16" />
+              <RefreshCcw className="feather-16" />
             </span>
             Transaction
           </Button>
