@@ -17,6 +17,7 @@ import SalesReport from "@/pages/SalesReport";
 import PurchaseReport from "@/pages/PurchaseReport";
 import ExpenseReport from "@/pages/ExpenseReport";
 import ProfitLoss from "@/pages/ProfitLoss";
+import POS from "@/pages/POS";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/products/add" component={AddProduct} />
         <Route path="/categories" component={Categories} />
         <Route path="/low-stock" component={LowStock} />
+        <Route path="/pos" component={POS} />
         <Route path="/sales" component={Sales} />
         <Route path="/purchases" component={Purchases} />
         <Route path="/customers" component={Customers} />

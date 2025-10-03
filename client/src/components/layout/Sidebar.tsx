@@ -4,7 +4,7 @@ import {
   Home, Box, Plus, Tag, AlertTriangle, ShoppingCart, 
   ShoppingBag, Undo, FileText, Users, Truck, 
   TrendingUp, BarChart3, Wallet, DollarSign, Settings,
-  X
+  X, Monitor
 } from "lucide-react";
 
 interface SidebarProps {
@@ -26,6 +26,7 @@ const navigation = [
   {
     category: "Transaksi", 
     items: [
+      { name: "POS", href: "/pos", icon: Monitor },
       { name: "Penjualan", href: "/sales", icon: ShoppingCart },
       { name: "Pembelian", href: "/purchases", icon: ShoppingBag },
       { name: "Retur Penjualan", href: "/sales/returns", icon: Undo },
