@@ -7,9 +7,6 @@ import {
   Trash2, UserPlus, MoreVertical, Pause, CreditCard, X,
   BarChart3, Tag
 } from "lucide-react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { queryClient } from "@/lib/queryClient";
 
 interface CartItem {
@@ -69,32 +66,6 @@ export default function POS() {
     },
   });
 
-  const sliderSettings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 7,
-    slidesToScroll: 1,
-    arrows: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: { slidesToShow: 6 },
-      },
-      {
-        breakpoint: 992,
-        settings: { slidesToShow: 5 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 4 },
-      },
-      {
-        breakpoint: 576,
-        settings: { slidesToShow: 3 },
-      },
-    ],
-  };
 
   const filteredProducts = products.filter((product: any) => {
     const matchesCategory = selectedCategory === "all" || product.categoryId === selectedCategory;
@@ -317,109 +288,96 @@ export default function POS() {
           </div>
         </div>
 
-        <div className="row align-items-start pos-wrapper">
-          <div className="col-md-12 col-lg-8">
-            <div className="pos-categories tabs_wrapper">
-              <h5>Categories</h5>
-              <p>Select From Below Categories</p>
-              <div className="pos-category">
-                <Slider {...sliderSettings} className="tabs owl-carousel">
-                  <div 
-                    className={`pos-slick-item ${selectedCategory === "all" ? "active" : ""}`}
-                    onClick={() => setSelectedCategory("all")}
-                    data-testid="category-all"
-                  >
-                    <a href="#" onClick={(e) => e.preventDefault()}>
-                      <img src="/assets/img/categories/category-01.png" alt="All Categories" />
-                    </a>
-                    <h6>
-                      <a href="#" onClick={(e) => e.preventDefault()}>All</a>
-                    </h6>
-                    <span>{products.length} Items</span>
-                  </div>
-                  {categories.map((category: any, index: number) => (
-                    <div
-                      key={category.id}
-                      className={`pos-slick-item ${selectedCategory === category.id ? "active" : ""}`}
-                      onClick={() => setSelectedCategory(category.id)}
-                      data-testid={`category-${category.id}`}
-                    >
-                      <a href="#" onClick={(e) => e.preventDefault()}>
-                        <img src={getCategoryImage(index + 1)} alt={category.name} />
-                      </a>
-                      <h6>
-                        <a href="#" onClick={(e) => e.preventDefault()}>{category.name}</a>
-                      </h6>
-                      <span>
-                        {products.filter((p: any) => p.categoryId === category.id).length} Items
-                      </span>
-                    </div>
-                  ))}
-                </Slider>
+        <div className="pos-wrapper-grid">
+          <aside className="pos-sidebar-categories">
+            <div 
+              className={`pos-category-item ${selectedCategory === "all" ? "active" : ""}`}
+              onClick={() => setSelectedCategory("all")}
+              data-testid="category-all"
+            >
+              <div className="category-icon">
+                <img src="/assets/img/categories/category-01.png" alt="All" />
               </div>
-
-              <div className="pos-products">
-                <div className="d-flex align-items-center justify-content-between">
-                  <h5 className="mb-3">Products</h5>
+              <div className="category-info">
+                <h6>All</h6>
+                <span>{products.length} Items</span>
+              </div>
+            </div>
+            {categories.map((category: any, index: number) => (
+              <div
+                key={category.id}
+                className={`pos-category-item ${selectedCategory === category.id ? "active" : ""}`}
+                onClick={() => setSelectedCategory(category.id)}
+                data-testid={`category-${category.id}`}
+              >
+                <div className="category-icon">
+                  <img src={getCategoryImage(index + 1)} alt={category.name} />
                 </div>
-                <div className="tabs_container">
-                  <div className="tab_content active">
-                    {productsLoading ? (
-                      <div className="text-center py-5">
-                        <div className="spinner-border text-primary" role="status">
-                          <span className="visually-hidden">Loading...</span>
+                <div className="category-info">
+                  <h6>{category.name}</h6>
+                  <span>{products.filter((p: any) => p.categoryId === category.id).length} Items</span>
+                </div>
+              </div>
+            ))}
+          </aside>
+
+          <div className="pos-products-wrapper">
+            <div className="pos-products">
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <h5 className="mb-0">Products</h5>
+              </div>
+              {productsLoading ? (
+                <div className="text-center py-5">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="products-grid">
+                  {filteredProducts.map((product: any) => (
+                    <div key={product.id} className="product-item">
+                      <div 
+                        className="product-info default-cover card"
+                        onClick={() => addToCart(product)}
+                        data-testid={`product-${product.id}`}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <a href="#" className="img-bg" onClick={(e) => e.preventDefault()}>
+                          {product.image ? (
+                            <img src={product.image} alt={product.name} />
+                          ) : (
+                            <img src="/assets/img/products/pos-product-01.png" alt={product.name} />
+                          )}
+                          <span>
+                            <Plus size={16} />
+                          </span>
+                        </a>
+                        <h6 className="cat-name">
+                          <a href="#" onClick={(e) => e.preventDefault()}>
+                            {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
+                          </a>
+                        </h6>
+                        <h6 className="product-name">
+                          <a href="#" onClick={(e) => e.preventDefault()}>{product.name}</a>
+                        </h6>
+                        <div className="d-flex align-items-center justify-content-between price">
+                          <span>{product.stock} Pcs</span>
+                          <p>${product.price}</p>
                         </div>
                       </div>
-                    ) : (
-                      <div className="row">
-                        {filteredProducts.map((product: any) => (
-                          <div key={product.id} className="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2">
-                            <div 
-                              className="product-info default-cover card"
-                              onClick={() => addToCart(product)}
-                              data-testid={`product-${product.id}`}
-                              style={{ cursor: 'pointer' }}
-                            >
-                              <a href="#" className="img-bg" onClick={(e) => e.preventDefault()}>
-                                {product.image ? (
-                                  <img src={product.image} alt={product.name} />
-                                ) : (
-                                  <img src="/assets/img/products/pos-product-01.png" alt={product.name} />
-                                )}
-                                <span>
-                                  <Plus size={16} />
-                                </span>
-                              </a>
-                              <h6 className="cat-name">
-                                <a href="#" onClick={(e) => e.preventDefault()}>
-                                  {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
-                                </a>
-                              </h6>
-                              <h6 className="product-name">
-                                <a href="#" onClick={(e) => e.preventDefault()}>{product.name}</a>
-                              </h6>
-                              <div className="d-flex align-items-center justify-content-between price">
-                                <span>{product.stock} Pcs</span>
-                                <p>${product.price}</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                        {filteredProducts.length === 0 && (
-                          <div className="col-12 text-center py-5">
-                            <p className="text-muted">No products found in this category</p>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  ))}
+                  {filteredProducts.length === 0 && (
+                    <div className="col-12 text-center py-5">
+                      <p className="text-muted">No products found in this category</p>
+                    </div>
+                  )}
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
-          <div className="col-md-12 col-lg-4 ps-0">
-            <aside className="product-order-list">
+          <aside className="product-order-list">
               <div className="head d-flex align-items-center justify-content-between w-100">
                 <div>
                   <h5>Order List</h5>
@@ -757,7 +715,6 @@ export default function POS() {
                 </>
               )}
             </aside>
-          </div>
         </div>
       </div>
     </div>
