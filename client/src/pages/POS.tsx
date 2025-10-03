@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ShoppingCart, Search, Plus, Minus, Trash2, X } from "lucide-react";
+import { ShoppingCart, Search, Plus, Minus, Trash2, X, RotateCcw, RefreshCw, Check } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -70,23 +70,23 @@ export default function POS() {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 5,
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1200,
+        breakpoint: 992,
         settings: { slidesToShow: 5 },
       },
       {
-        breakpoint: 992,
+        breakpoint: 800,
         settings: { slidesToShow: 4 },
       },
       {
-        breakpoint: 768,
+        breakpoint: 776,
         settings: { slidesToShow: 3 },
       },
       {
-        breakpoint: 576,
+        breakpoint: 567,
         settings: { slidesToShow: 2 },
       },
     ],
@@ -210,304 +210,297 @@ export default function POS() {
   };
 
   return (
-    <div className="pos-design">
-      <div className="d-flex align-items-center justify-content-between mb-4">
-        <h4 className="mb-0">Point of Sale</h4>
-        <div className="d-flex gap-2">
+    <div className="page-wrapper pos-pg-wrapper ms-0">
+      <div className="content pos-design p-0">
+        <div className="btn-row d-sm-flex align-items-center">
           <Button
-            variant="outline"
+            variant="secondary"
+            className="mb-xs-3 me-2"
+            data-testid="button-view-orders"
+          >
+            <span className="me-1 d-flex align-items-center">
+              <ShoppingCart className="feather-16" />
+            </span>
+            View Orders
+          </Button>
+          <Button
+            variant="default"
+            className="me-2"
             onClick={clearCart}
             disabled={cart.length === 0}
+            data-testid="button-reset"
           >
+            <span className="me-1 d-flex align-items-center">
+              <RotateCcw className="feather-16" />
+            </span>
             Reset
           </Button>
+          <Button
+            variant="default"
+            data-testid="button-transaction"
+          >
+            <span className="me-1 d-flex align-items-center">
+              <RefreshCw className="feather-16" />
+            </span>
+            Transaction
+          </Button>
         </div>
-      </div>
 
-      <div className="row">
-        <div className="col-lg-8">
-          <Card className="p-4 mb-4">
-            <div className="mb-3">
-              <h5 className="mb-2">Categories</h5>
-              <Slider {...sliderSettings} className="category-slider">
-                <div
+        <div className="row align-items-start pos-wrapper">
+          <div className="col-md-12 col-lg-8">
+            <div className="pos-categories tabs_wrapper">
+              <h5>Categories</h5>
+              <p>Select From Below Categories</p>
+              <Slider {...sliderSettings} className="tabs owl-carousel pos-category">
+                <div 
+                  className={`pos-slick-item ${selectedCategory === "all" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("all")}
-                  className={`category-item ${
-                    selectedCategory === "all" ? "active" : ""
-                  }`}
-                  style={{ cursor: "pointer", textAlign: "center", padding: "10px" }}
+                  data-testid="category-all"
                 >
-                  <div
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                      margin: "0 auto 8px",
-                      borderRadius: "8px",
-                      background: "#f0f0f0",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <ShoppingCart size={30} />
+                  <div className="category-icon">
+                    <ShoppingCart size={32} />
                   </div>
-                  <h6 style={{ fontSize: "14px", margin: 0 }}>All</h6>
-                  <span style={{ fontSize: "12px", color: "#666" }}>
-                    {products.length} Items
-                  </span>
+                  <h6>All Categories</h6>
+                  <span>{products.length} Items</span>
                 </div>
                 {categories.map((category: any) => (
                   <div
                     key={category.id}
+                    className={`pos-slick-item ${selectedCategory === category.id ? "active" : ""}`}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`category-item ${
-                      selectedCategory === category.id ? "active" : ""
-                    }`}
-                    style={{ cursor: "pointer", textAlign: "center", padding: "10px" }}
+                    data-testid={`category-${category.id}`}
                   >
-                    <div
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        margin: "0 auto 8px",
-                        borderRadius: "8px",
-                        background: "#f0f0f0",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "24px",
-                      }}
-                    >
-                      {category.name.charAt(0).toUpperCase()}
+                    <div className="category-icon">
+                      <span className="category-letter">{category.name.charAt(0).toUpperCase()}</span>
                     </div>
-                    <h6 style={{ fontSize: "14px", margin: 0 }}>
-                      {category.name}
-                    </h6>
-                    <span style={{ fontSize: "12px", color: "#666" }}>
-                      {
-                        products.filter(
-                          (p: any) => p.categoryId === category.id
-                        ).length
-                      }{" "}
-                      Items
+                    <h6>{category.name}</h6>
+                    <span>
+                      {products.filter((p: any) => p.categoryId === category.id).length} Items
                     </span>
                   </div>
                 ))}
               </Slider>
-            </div>
 
-            <div className="mb-3">
-              <div className="position-relative">
-                <Search
-                  className="position-absolute"
-                  size={18}
-                  style={{ left: "10px", top: "50%", transform: "translateY(-50%)" }}
-                />
-                <Input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
-                  style={{ paddingLeft: "40px" }}
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              {filteredProducts.map((product: any) => (
-                <div key={product.id} className="col-md-4 col-lg-3 mb-3">
-                  <Card
-                    className="product-card h-100"
-                    onClick={() => addToCart(product)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <div
-                      style={{
-                        height: "150px",
-                        background: "#f5f5f5",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: "8px 8px 0 0",
-                      }}
-                    >
-                      {product.image ? (
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          style={{ maxHeight: "100%", maxWidth: "100%" }}
-                        />
-                      ) : (
-                        <ShoppingCart size={40} color="#ccc" />
+              <div className="pos-products">
+                <div className="d-flex align-items-center justify-content-between">
+                  <h5 className="mb-3">Products</h5>
+                </div>
+                <div className="tabs_container">
+                  <div className="tab_content active">
+                    <div className="row">
+                      {filteredProducts.map((product: any) => (
+                        <div key={product.id} className="col-sm-2 col-md-6 col-lg-3 col-xl-3 pe-2">
+                          <div 
+                            className="product-info default-cover card"
+                            onClick={() => addToCart(product)}
+                            data-testid={`product-${product.id}`}
+                          >
+                            <div className="img-bg">
+                              {product.image ? (
+                                <img src={product.image} alt={product.name} />
+                              ) : (
+                                <div className="placeholder-img">
+                                  <ShoppingCart size={40} color="#ccc" />
+                                </div>
+                              )}
+                              <span className="check-icon">
+                                <Check className="feather-16" />
+                              </span>
+                            </div>
+                            <h6 className="cat-name">
+                              {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
+                            </h6>
+                            <h6 className="product-name">{product.name}</h6>
+                            <div className="d-flex align-items-center justify-content-between price">
+                              <span>{product.stock} Pcs</span>
+                              <p>${product.price}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                      {filteredProducts.length === 0 && (
+                        <div className="col-12 text-center py-5">
+                          <p className="text-muted">No products found</p>
+                        </div>
                       )}
                     </div>
-                    <div className="p-3">
-                      <h6
-                        className="mb-1"
-                        style={{ fontSize: "14px", fontWeight: 600 }}
-                      >
-                        {product.name}
-                      </h6>
-                      <div className="d-flex justify-content-between align-items-center">
-                        <span style={{ fontSize: "12px", color: "#666" }}>
-                          {product.stock} in stock
-                        </span>
-                        <strong style={{ color: "#2563eb" }}>
-                          ${product.price}
-                        </strong>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
-              ))}
-              {filteredProducts.length === 0 && (
-                <div className="col-12 text-center py-5">
-                  <p className="text-muted">No products found</p>
-                </div>
-              )}
-            </div>
-          </Card>
-        </div>
-
-        <div className="col-lg-4">
-          <Card className="p-4 sticky-top" style={{ top: "20px" }}>
-            <h5 className="mb-3 d-flex align-items-center gap-2">
-              <ShoppingCart size={20} />
-              Cart ({cart.length})
-            </h5>
-
-            <div className="mb-3">
-              <Label>Customer</Label>
-              <select
-                className="form-select"
-                value={selectedCustomer}
-                onChange={(e) => setSelectedCustomer(e.target.value)}
-              >
-                <option value="walk-in">Walk-in Customer</option>
-                {customers.map((customer: any) => (
-                  <option key={customer.id} value={customer.id}>
-                    {customer.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div
-              className="cart-items mb-3"
-              style={{ maxHeight: "300px", overflowY: "auto" }}
-            >
-              {cart.length === 0 ? (
-                <div className="text-center text-muted py-5">
-                  <ShoppingCart size={40} className="mb-2" />
-                  <p>Cart is empty</p>
-                </div>
-              ) : (
-                cart.map((item) => (
-                  <div
-                    key={item.id}
-                    className="d-flex align-items-center gap-2 mb-3 pb-3 border-bottom"
-                  >
-                    <div className="flex-grow-1">
-                      <h6 className="mb-1" style={{ fontSize: "14px" }}>
-                        {item.name}
-                      </h6>
-                      <p className="mb-0" style={{ fontSize: "13px", color: "#666" }}>
-                        ${item.price.toFixed(2)} each
-                      </p>
-                    </div>
-                    <div className="d-flex align-items-center gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => updateQuantity(item.id, -1)}
-                      >
-                        <Minus size={14} />
-                      </Button>
-                      <span style={{ minWidth: "30px", textAlign: "center" }}>
-                        {item.quantity}
-                      </span>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => updateQuantity(item.id, 1)}
-                      >
-                        <Plus size={14} />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => removeFromCart(item.id)}
-                      >
-                        <Trash2 size={14} />
-                      </Button>
-                    </div>
                   </div>
-                ))
-              )}
-            </div>
-
-            <div className="mb-3">
-              <div className="row mb-2">
-                <div className="col-6">
-                  <Label>Discount (%)</Label>
-                  <Input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={discount}
-                    onChange={(e) =>
-                      setDiscount(
-                        Math.min(100, Math.max(0, parseFloat(e.target.value) || 0))
-                      )
-                    }
-                  />
-                </div>
-                <div className="col-6">
-                  <Label>Tax (%)</Label>
-                  <Input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={tax}
-                    onChange={(e) =>
-                      setTax(Math.max(0, parseFloat(e.target.value) || 0))
-                    }
-                  />
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="border-top pt-3 mb-3">
-              <div className="d-flex justify-content-between mb-2">
-                <span>Subtotal:</span>
-                <strong>${subtotal.toFixed(2)}</strong>
-              </div>
-              {discount > 0 && (
-                <div className="d-flex justify-content-between mb-2 text-success">
-                  <span>Discount ({discount}%):</span>
-                  <strong>-${discountAmount.toFixed(2)}</strong>
+          <div className="col-md-12 col-lg-4 ps-0">
+            <aside className="product-order-list">
+              <div className="head d-flex align-items-center justify-content-between w-100">
+                <div>
+                  <h5>Order List</h5>
+                  <span>Transaction ID : #{Math.random().toString(36).substr(2, 9).toUpperCase()}</span>
                 </div>
-              )}
-              <div className="d-flex justify-content-between mb-2">
-                <span>Tax ({tax}%):</span>
-                <strong>${taxAmount.toFixed(2)}</strong>
               </div>
-              <div className="d-flex justify-content-between mb-3 fs-5">
-                <strong>Total:</strong>
-                <strong className="text-primary">${total.toFixed(2)}</strong>
-              </div>
-            </div>
 
-            <Button
-              className="w-100"
-              size="lg"
-              onClick={handleCheckout}
-              disabled={cart.length === 0 || createSaleMutation.isPending}
-            >
-              {createSaleMutation.isPending ? "Processing..." : "Complete Sale"}
-            </Button>
-          </Card>
+              <div className="customer-info block-section">
+                <h6>Customer Information</h6>
+                <div className="input-block">
+                  <select
+                    className="form-select"
+                    value={selectedCustomer}
+                    onChange={(e) => setSelectedCustomer(e.target.value)}
+                    data-testid="select-customer"
+                  >
+                    <option value="walk-in">Walk-in Customer</option>
+                    {customers.map((customer: any) => (
+                      <option key={customer.id} value={customer.id}>
+                        {customer.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="product-added block-section">
+                <div className="head-text d-flex align-items-center justify-content-between">
+                  <h6 className="d-flex align-items-center mb-0">
+                    Product Added<span className="count">{cart.length}</span>
+                  </h6>
+                </div>
+                <div className="product-wrap">
+                  {cart.length === 0 ? (
+                    <div className="text-center text-muted py-5">
+                      <ShoppingCart size={40} className="mb-2" />
+                      <p>Cart is empty</p>
+                    </div>
+                  ) : (
+                    cart.map((item) => (
+                      <div key={item.id} className="product-list d-flex align-items-center justify-content-between">
+                        <div className="d-flex align-items-center product-info">
+                          <div className="img-bg">
+                            {item.image ? (
+                              <img src={item.image} alt={item.name} />
+                            ) : (
+                              <div className="placeholder-img-sm">
+                                <ShoppingCart size={20} color="#ccc" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="info">
+                            <h6>{item.name}</h6>
+                            <p>${item.price.toFixed(2)}</p>
+                          </div>
+                        </div>
+                        <div className="d-flex align-items-center action">
+                          <div className="qty-item text-center">
+                            <button
+                              className="dec d-flex justify-content-center align-items-center"
+                              onClick={() => updateQuantity(item.id, -1)}
+                              data-testid={`button-decrease-${item.id}`}
+                            >
+                              <Minus size={14} />
+                            </button>
+                            <input
+                              type="text"
+                              className="form-control text-center"
+                              value={item.quantity}
+                              readOnly
+                              data-testid={`input-quantity-${item.id}`}
+                            />
+                            <button
+                              className="inc d-flex justify-content-center align-items-center"
+                              onClick={() => updateQuantity(item.id, 1)}
+                              data-testid={`button-increase-${item.id}`}
+                            >
+                              <Plus size={14} />
+                            </button>
+                          </div>
+                          <button
+                            className="btn btn-sm btn-icon delete-icon"
+                            onClick={() => removeFromCart(item.id)}
+                            data-testid={`button-remove-${item.id}`}
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              <div className="block-section">
+                <div className="order-total">
+                  <table className="table table-responsive table-borderless">
+                    <tbody>
+                      <tr>
+                        <td>Sub Total</td>
+                        <td className="text-end">${subtotal.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div className="input-block mb-0">
+                            <label>Discount (%)</label>
+                            <Input
+                              type="number"
+                              min="0"
+                              max="100"
+                              value={discount}
+                              onChange={(e) =>
+                                setDiscount(
+                                  Math.min(100, Math.max(0, parseFloat(e.target.value) || 0))
+                                )
+                              }
+                              data-testid="input-discount"
+                            />
+                          </div>
+                        </td>
+                        <td className="text-end">-${discountAmount.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div className="input-block mb-0">
+                            <label>Tax (%)</label>
+                            <Input
+                              type="number"
+                              min="0"
+                              max="100"
+                              value={tax}
+                              onChange={(e) =>
+                                setTax(Math.max(0, parseFloat(e.target.value) || 0))
+                              }
+                              data-testid="input-tax"
+                            />
+                          </div>
+                        </td>
+                        <td className="text-end">${taxAmount.toFixed(2)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div className="block-section payment-method">
+                <div className="d-flex align-items-center justify-content-between">
+                  <div className="default-cover">
+                    <h6>Grand Total</h6>
+                  </div>
+                  <div className="btn-total">
+                    <h6 className="text-primary">${total.toFixed(2)}</h6>
+                  </div>
+                </div>
+              </div>
+
+              <div className="btn-row d-sm-flex align-items-center justify-content-between">
+                <Button
+                  className="btn-totallabel w-100"
+                  size="lg"
+                  onClick={handleCheckout}
+                  disabled={cart.length === 0 || createSaleMutation.isPending}
+                  data-testid="button-complete-sale"
+                >
+                  {createSaleMutation.isPending ? "Processing..." : "Complete Sale"}
+                </Button>
+              </div>
+            </aside>
+          </div>
         </div>
       </div>
     </div>

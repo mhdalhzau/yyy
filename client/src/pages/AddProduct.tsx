@@ -265,7 +265,7 @@ export default function AddProduct() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="border-2 border-dashed border-border rounded-lg p-6 text-center">
+                <div className="border-2 border-dashed border-border rounded-lg p-6 text-center relative">
                   {imagePreview ? (
                     <div className="space-y-4">
                       <img
@@ -286,25 +286,27 @@ export default function AddProduct() {
                       </Button>
                     </div>
                   ) : (
-                    <div className="space-y-4">
-                      <Upload className="w-12 h-12 text-muted-foreground mx-auto" />
-                      <div>
-                        <p className="text-sm text-muted-foreground">
-                          Klik untuk upload gambar atau drag & drop
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          PNG, JPG up to 5MB
-                        </p>
+                    <>
+                      <div className="space-y-4">
+                        <Upload className="w-12 h-12 text-muted-foreground mx-auto" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">
+                            Klik untuk upload gambar atau drag & drop
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            PNG, JPG up to 5MB
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        data-testid="input-image"
+                      />
+                    </>
                   )}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    data-testid="input-image"
-                  />
                 </div>
               </div>
             </CardContent>
