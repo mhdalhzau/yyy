@@ -204,8 +204,8 @@ export default function Sales() {
                       <TableCell>
                         <Badge 
                           variant={
-                            sale.status === "completed" ? "success" :
-                            sale.status === "pending" ? "warning" : "danger"
+                            sale.status === "completed" ? "default" :
+                            sale.status === "pending" ? "secondary" : "destructive"
                           }
                           data-testid={`badge-status-${sale.id}`}
                         >

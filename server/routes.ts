@@ -139,10 +139,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/products", upload.single("image"), async (req, res) => {
     try {
-      const productData = insertProductSchema.parse({
+      // Parse numeric fields from FormData strings
+      const parsedBody = {
         ...req.body,
+        cost: req.body.cost ? parseFloat(req.body.cost) : undefined,
+        price: req.body.price ? parseFloat(req.body.price) : undefined,
+        stock: req.body.stock ? parseInt(req.body.stock, 10) : undefined,
+        minStock: req.body.minStock ? parseInt(req.body.minStock, 10) : undefined,
+        isActive: req.body.isActive === 'true' || req.body.isActive === true,
         imageUrl: req.file ? `/uploads/${req.file.filename}` : undefined
-      });
+      };
+      const productData = insertProductSchema.parse(parsedBody);
       const product = await storage.createProduct(productData);
       res.status(201).json(product);
     } catch (error) {
@@ -152,11 +159,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.put("/api/products/:id", upload.single("image"), async (req, res) => {
     try {
-      const updateData = {
+      // Parse numeric fields from FormData strings
+      const parsedBody = {
         ...req.body,
+        ...(req.body.cost && { cost: parseFloat(req.body.cost) }),
+        ...(req.body.price && { price: parseFloat(req.body.price) }),
+        ...(req.body.stock && { stock: parseInt(req.body.stock, 10) }),
+        ...(req.body.minStock && { minStock: parseInt(req.body.minStock, 10) }),
+        ...(req.body.isActive !== undefined && { isActive: req.body.isActive === 'true' || req.body.isActive === true }),
         ...(req.file && { imageUrl: `/uploads/${req.file.filename}` })
       };
-      const productData = insertProductSchema.partial().parse(updateData);
+      const productData = insertProductSchema.partial().parse(parsedBody);
       const product = await storage.updateProduct(req.params.id, productData);
       if (!product) {
         return res.status(404).json({ message: "Product not found" });

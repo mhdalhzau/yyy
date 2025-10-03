@@ -10,6 +10,8 @@ import AddProduct from "@/pages/AddProduct";
 import Categories from "@/pages/Categories";
 import LowStock from "@/pages/LowStock";
 import Sales from "@/pages/Sales";
+import SalesReturns from "@/pages/SalesReturns";
+import Invoices from "@/pages/Invoices";
 import Purchases from "@/pages/Purchases";
 import Customers from "@/pages/Customers";
 import Suppliers from "@/pages/Suppliers";
@@ -17,6 +19,7 @@ import SalesReport from "@/pages/SalesReport";
 import PurchaseReport from "@/pages/PurchaseReport";
 import ExpenseReport from "@/pages/ExpenseReport";
 import ProfitLoss from "@/pages/ProfitLoss";
+import Settings from "@/pages/Settings";
 import POS from "@/pages/POS";
 import NotFound from "@/pages/not-found";
 
@@ -31,6 +34,8 @@ function Router() {
         <Route path="/low-stock" component={LowStock} />
         <Route path="/pos" component={POS} />
         <Route path="/sales" component={Sales} />
+        <Route path="/sales/returns" component={SalesReturns} />
+        <Route path="/invoices" component={Invoices} />
         <Route path="/purchases" component={Purchases} />
         <Route path="/customers" component={Customers} />
         <Route path="/suppliers" component={Suppliers} />
@@ -38,6 +43,7 @@ function Router() {
         <Route path="/reports/purchases" component={PurchaseReport} />
         <Route path="/reports/expenses" component={ExpenseReport} />
         <Route path="/reports/profit-loss" component={ProfitLoss} />
+        <Route path="/settings" component={Settings} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
