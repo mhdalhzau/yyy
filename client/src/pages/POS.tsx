@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getProducts, getCategories, getCustomers, createSale } from "@/lib/api";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { ShoppingCart, Search, Plus, Minus, Trash2, X, RotateCcw, RefreshCcw, Check } from "lucide-react";
+import { 
+  ShoppingCart, RotateCcw, RefreshCcw, Check, Plus, Minus, 
+  Trash2, UserPlus, MoreVertical, Pause, CreditCard 
+} from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,15 +17,17 @@ interface CartItem {
   price: number;
   quantity: number;
   image?: string;
+  sku?: string;
 }
 
 export default function POS() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedCustomer, setSelectedCustomer] = useState<string>("walk-in");
-  const [searchTerm, setSearchTerm] = useState("");
   const [discount, setDiscount] = useState(0);
-  const [tax, setTax] = useState(10);
+  const [tax, setTax] = useState(5);
+  const [shipping, setShipping] = useState(0);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -49,11 +50,13 @@ export default function POS() {
     mutationFn: createSale,
     onSuccess: () => {
       toast({
-        title: "Sale completed",
+        title: "Payment Completed",
         description: "Sale has been processed successfully",
       });
       setCart([]);
       setDiscount(0);
+      setShipping(0);
+      setShowPaymentModal(false);
       queryClient.invalidateQueries({ queryKey: ["sales"] });
       queryClient.invalidateQueries({ queryKey: ["products"] });
     },
@@ -70,7 +73,7 @@ export default function POS() {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 6,
     slidesToScroll: 1,
     responsive: [
       {
@@ -93,13 +96,8 @@ export default function POS() {
   };
 
   const filteredProducts = products.filter((product: any) => {
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "all" ||
-      product.categoryId === selectedCategory;
-    return matchesSearch && matchesCategory && product.stock > 0;
+    const matchesCategory = selectedCategory === "all" || product.categoryId === selectedCategory;
+    return matchesCategory && product.stock > 0;
   });
 
   const addToCart = (product: any) => {
@@ -129,6 +127,7 @@ export default function POS() {
           price: parseFloat(product.price),
           quantity: 1,
           image: product.image,
+          sku: product.sku,
         },
       ]);
     }
@@ -172,17 +171,15 @@ export default function POS() {
   const clearCart = () => {
     setCart([]);
     setDiscount(0);
+    setShipping(0);
   };
 
-  const subtotal = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discountAmount = (subtotal * discount) / 100;
-  const taxAmount = ((subtotal - discountAmount) * tax) / 100;
-  const total = subtotal - discountAmount + taxAmount;
+  const taxAmount = ((subtotal - discountAmount + shipping) * tax) / 100;
+  const total = subtotal - discountAmount + taxAmount + shipping;
 
-  const handleCheckout = () => {
+  const handlePayment = () => {
     if (cart.length === 0) {
       toast({
         title: "Cart is empty",
@@ -209,41 +206,44 @@ export default function POS() {
     createSaleMutation.mutate(saleData);
   };
 
+  const getCategoryImage = (index: number) => {
+    const images = [
+      "assets/img/categories/category-01.png",
+      "assets/img/categories/category-02.png", 
+      "assets/img/categories/category-03.png",
+      "assets/img/categories/category-04.png",
+      "assets/img/categories/category-05.png",
+      "assets/img/categories/category-06.png",
+    ];
+    return images[index % images.length];
+  };
+
   return (
     <div className="page-wrapper pos-pg-wrapper ms-0">
       <div className="content pos-design p-0">
         <div className="btn-row d-sm-flex align-items-center">
-          <Button
-            variant="secondary"
-            className="mb-xs-3 me-2"
-            data-testid="button-view-orders"
-          >
+          <button className="btn btn-secondary mb-xs-3 me-2">
             <span className="me-1 d-flex align-items-center">
-              <ShoppingCart className="feather-16" />
+              <ShoppingCart size={16} />
             </span>
             View Orders
-          </Button>
-          <Button
-            variant="default"
-            className="me-2"
+          </button>
+          <button 
+            className="btn btn-info me-2" 
             onClick={clearCart}
             disabled={cart.length === 0}
-            data-testid="button-reset"
           >
             <span className="me-1 d-flex align-items-center">
-              <RotateCcw className="feather-16" />
+              <RotateCcw size={16} />
             </span>
             Reset
-          </Button>
-          <Button
-            variant="default"
-            data-testid="button-transaction"
-          >
+          </button>
+          <button className="btn btn-primary">
             <span className="me-1 d-flex align-items-center">
-              <RefreshCcw className="feather-16" />
+              <RefreshCcw size={16} />
             </span>
             Transaction
-          </Button>
+          </button>
         </div>
 
         <div className="row align-items-start pos-wrapper">
@@ -255,25 +255,27 @@ export default function POS() {
                 <div 
                   className={`pos-slick-item ${selectedCategory === "all" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("all")}
-                  data-testid="category-all"
                 >
-                  <div className="category-icon">
-                    <ShoppingCart size={32} />
-                  </div>
-                  <h6>All Categories</h6>
+                  <a href="#">
+                    <img src="assets/img/categories/category-01.png" alt="All Categories" />
+                  </a>
+                  <h6>
+                    <a href="#">All Categories</a>
+                  </h6>
                   <span>{products.length} Items</span>
                 </div>
-                {categories.map((category: any) => (
+                {categories.map((category: any, index: number) => (
                   <div
                     key={category.id}
                     className={`pos-slick-item ${selectedCategory === category.id ? "active" : ""}`}
                     onClick={() => setSelectedCategory(category.id)}
-                    data-testid={`category-${category.id}`}
                   >
-                    <div className="category-icon">
-                      <span className="category-letter">{category.name.charAt(0).toUpperCase()}</span>
-                    </div>
-                    <h6>{category.name}</h6>
+                    <a href="#">
+                      <img src={getCategoryImage(index + 1)} alt={category.name} />
+                    </a>
+                    <h6>
+                      <a href="#">{category.name}</a>
+                    </h6>
                     <span>
                       {products.filter((p: any) => p.categoryId === category.id).length} Items
                     </span>
@@ -293,24 +295,25 @@ export default function POS() {
                           <div 
                             className="product-info default-cover card"
                             onClick={() => addToCart(product)}
-                            data-testid={`product-${product.id}`}
                           >
-                            <div className="img-bg">
+                            <a href="#" className="img-bg">
                               {product.image ? (
                                 <img src={product.image} alt={product.name} />
                               ) : (
-                                <div className="placeholder-img">
-                                  <ShoppingCart size={40} color="#ccc" />
-                                </div>
+                                <img src="assets/img/products/pos-product-01.png" alt={product.name} />
                               )}
-                              <span className="check-icon">
-                                <Check className="feather-16" />
+                              <span>
+                                <Check size={16} />
                               </span>
-                            </div>
+                            </a>
                             <h6 className="cat-name">
-                              {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
+                              <a href="#">
+                                {categories.find((c: any) => c.id === product.categoryId)?.name || "Product"}
+                              </a>
                             </h6>
-                            <h6 className="product-name">{product.name}</h6>
+                            <h6 className="product-name">
+                              <a href="#">{product.name}</a>
+                            </h6>
                             <div className="d-flex align-items-center justify-content-between price">
                               <span>{product.stock} Pcs</span>
                               <p>${product.price}</p>
@@ -337,24 +340,36 @@ export default function POS() {
                   <h5>Order List</h5>
                   <span>Transaction ID : #{Math.random().toString(36).substr(2, 9).toUpperCase()}</span>
                 </div>
+                <div>
+                  <a className="confirm-text" href="#">
+                    <Trash2 size={16} className="text-danger me-1" onClick={clearCart} />
+                  </a>
+                  <a href="#" className="text-default">
+                    <MoreVertical size={16} />
+                  </a>
+                </div>
               </div>
 
               <div className="customer-info block-section">
                 <h6>Customer Information</h6>
-                <div className="input-block">
-                  <select
-                    className="form-select"
-                    value={selectedCustomer}
-                    onChange={(e) => setSelectedCustomer(e.target.value)}
-                    data-testid="select-customer"
-                  >
-                    <option value="walk-in">Walk-in Customer</option>
-                    {customers.map((customer: any) => (
-                      <option key={customer.id} value={customer.id}>
-                        {customer.name}
-                      </option>
-                    ))}
-                  </select>
+                <div className="input-block d-flex align-items-center">
+                  <div className="flex-grow-1">
+                    <select
+                      className="form-select"
+                      value={selectedCustomer}
+                      onChange={(e) => setSelectedCustomer(e.target.value)}
+                    >
+                      <option value="walk-in">Walk-in Customer</option>
+                      {customers.map((customer: any) => (
+                        <option key={customer.id} value={customer.id}>
+                          {customer.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <a href="#" className="btn btn-primary btn-icon ms-2">
+                    <UserPlus size={16} />
+                  </a>
                 </div>
               </div>
 
@@ -363,10 +378,17 @@ export default function POS() {
                   <h6 className="d-flex align-items-center mb-0">
                     Product Added<span className="count">{cart.length}</span>
                   </h6>
+                  <a 
+                    href="#" 
+                    className="d-flex align-items-center text-danger"
+                    onClick={(e) => { e.preventDefault(); clearCart(); }}
+                  >
+                    <span className="me-1">Clear all</span>
+                  </a>
                 </div>
                 <div className="product-wrap">
                   {cart.length === 0 ? (
-                    <div className="text-center text-muted py-5">
+                    <div className="text-center text-muted py-4">
                       <ShoppingCart size={40} className="mb-2" />
                       <p>Cart is empty</p>
                     </div>
@@ -374,51 +396,51 @@ export default function POS() {
                     cart.map((item) => (
                       <div key={item.id} className="product-list d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center product-info">
-                          <div className="img-bg">
+                          <a href="#" className="img-bg">
                             {item.image ? (
                               <img src={item.image} alt={item.name} />
                             ) : (
-                              <div className="placeholder-img-sm">
-                                <ShoppingCart size={20} color="#ccc" />
-                              </div>
+                              <img src="assets/img/products/pos-product-01.png" alt={item.name} />
                             )}
-                          </div>
+                          </a>
                           <div className="info">
-                            <h6>{item.name}</h6>
+                            <span>{item.sku || `PT${Math.floor(Math.random() * 10000)}`}</span>
+                            <h6>
+                              <a href="#">{item.name}</a>
+                            </h6>
                             <p>${item.price.toFixed(2)}</p>
                           </div>
                         </div>
-                        <div className="d-flex align-items-center action">
-                          <div className="qty-item text-center">
-                            <button
-                              className="dec d-flex justify-content-center align-items-center"
-                              onClick={() => updateQuantity(item.id, -1)}
-                              data-testid={`button-decrease-${item.id}`}
-                            >
-                              <Minus size={14} />
-                            </button>
-                            <input
-                              type="text"
-                              className="form-control text-center"
-                              value={item.quantity}
-                              readOnly
-                              data-testid={`input-quantity-${item.id}`}
-                            />
-                            <button
-                              className="inc d-flex justify-content-center align-items-center"
-                              onClick={() => updateQuantity(item.id, 1)}
-                              data-testid={`button-increase-${item.id}`}
-                            >
-                              <Plus size={14} />
-                            </button>
-                          </div>
-                          <button
-                            className="btn btn-sm btn-icon delete-icon"
-                            onClick={() => removeFromCart(item.id)}
-                            data-testid={`button-remove-${item.id}`}
+                        <div className="qty-item text-center">
+                          <a
+                            href="#"
+                            className="dec d-flex justify-content-center align-items-center"
+                            onClick={(e) => { e.preventDefault(); updateQuantity(item.id, -1); }}
                           >
-                            <Trash2 size={16} />
-                          </button>
+                            <Minus size={14} />
+                          </a>
+                          <input
+                            type="text"
+                            className="form-control text-center"
+                            value={item.quantity}
+                            readOnly
+                          />
+                          <a
+                            href="#"
+                            className="inc d-flex justify-content-center align-items-center"
+                            onClick={(e) => { e.preventDefault(); updateQuantity(item.id, 1); }}
+                          >
+                            <Plus size={14} />
+                          </a>
+                        </div>
+                        <div className="d-flex align-items-center action">
+                          <a
+                            className="btn-icon delete-icon confirm-text"
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); removeFromCart(item.id); }}
+                          >
+                            <Trash2 size={14} />
+                          </a>
                         </div>
                       </div>
                     ))
@@ -427,6 +449,53 @@ export default function POS() {
               </div>
 
               <div className="block-section">
+                <div className="selling-info">
+                  <div className="row">
+                    <div className="col-12 col-sm-4">
+                      <div className="input-block">
+                        <label>Order Tax</label>
+                        <select 
+                          className="form-select"
+                          value={tax}
+                          onChange={(e) => setTax(parseFloat(e.target.value))}
+                        >
+                          <option value="5">GST 5%</option>
+                          <option value="10">GST 10%</option>
+                          <option value="15">GST 15%</option>
+                          <option value="20">GST 20%</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="col-12 col-sm-4">
+                      <div className="input-block">
+                        <label>Shipping</label>
+                        <input 
+                          type="number"
+                          className="form-control"
+                          value={shipping}
+                          onChange={(e) => setShipping(parseFloat(e.target.value) || 0)}
+                          min="0"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-12 col-sm-4">
+                      <div className="input-block">
+                        <label>Discount</label>
+                        <select 
+                          className="form-select"
+                          value={discount}
+                          onChange={(e) => setDiscount(parseFloat(e.target.value))}
+                        >
+                          <option value="0">0%</option>
+                          <option value="5">5%</option>
+                          <option value="10">10%</option>
+                          <option value="15">15%</option>
+                          <option value="20">20%</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="order-total">
                   <table className="table table-responsive table-borderless">
                     <tbody>
@@ -435,42 +504,20 @@ export default function POS() {
                         <td className="text-end">${subtotal.toFixed(2)}</td>
                       </tr>
                       <tr>
-                        <td>
-                          <div className="input-block mb-0">
-                            <label>Discount (%)</label>
-                            <Input
-                              type="number"
-                              min="0"
-                              max="100"
-                              value={discount}
-                              onChange={(e) =>
-                                setDiscount(
-                                  Math.min(100, Math.max(0, parseFloat(e.target.value) || 0))
-                                )
-                              }
-                              data-testid="input-discount"
-                            />
-                          </div>
-                        </td>
-                        <td className="text-end">-${discountAmount.toFixed(2)}</td>
+                        <td>Tax (GST {tax}%)</td>
+                        <td className="text-end">${taxAmount.toFixed(2)}</td>
                       </tr>
                       <tr>
-                        <td>
-                          <div className="input-block mb-0">
-                            <label>Tax (%)</label>
-                            <Input
-                              type="number"
-                              min="0"
-                              max="100"
-                              value={tax}
-                              onChange={(e) =>
-                                setTax(Math.max(0, parseFloat(e.target.value) || 0))
-                              }
-                              data-testid="input-tax"
-                            />
-                          </div>
-                        </td>
-                        <td className="text-end">${taxAmount.toFixed(2)}</td>
+                        <td>Shipping</td>
+                        <td className="text-end">${shipping.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td className="danger">Discount ({discount}%)</td>
+                        <td className="danger text-end">-${discountAmount.toFixed(2)}</td>
+                      </tr>
+                      <tr>
+                        <td>Total</td>
+                        <td className="text-end">${total.toFixed(2)}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -478,26 +525,68 @@ export default function POS() {
               </div>
 
               <div className="block-section payment-method">
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="default-cover">
-                    <h6>Grand Total</h6>
+                <h6>Payment Method</h6>
+                <div className="row d-flex align-items-center justify-content-center methods">
+                  <div className="col-md-6 col-lg-4 item">
+                    <div className="default-cover">
+                      <a href="#">
+                        <img src="assets/img/icons/cash-pay.svg" alt="Cash" />
+                        <span>Cash</span>
+                      </a>
+                    </div>
                   </div>
-                  <div className="btn-total">
-                    <h6 className="text-primary">${total.toFixed(2)}</h6>
+                  <div className="col-md-6 col-lg-4 item">
+                    <div className="default-cover">
+                      <a href="#">
+                        <img src="assets/img/icons/credit-card.svg" alt="Debit Card" />
+                        <span>Debit Card</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-md-6 col-lg-4 item">
+                    <div className="default-cover">
+                      <a href="#">
+                        <img src="assets/img/icons/qr-scan.svg" alt="Scan" />
+                        <span>Scan</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              <div className="d-grid btn-block">
+                <a className="btn btn-secondary" href="#">
+                  Grand Total : ${total.toFixed(2)}
+                </a>
+              </div>
+
               <div className="btn-row d-sm-flex align-items-center justify-content-between">
-                <Button
-                  className="btn-totallabel w-100"
-                  size="lg"
-                  onClick={handleCheckout}
-                  disabled={cart.length === 0 || createSaleMutation.isPending}
-                  data-testid="button-complete-sale"
+                <a href="#" className="btn btn-info btn-icon flex-fill">
+                  <span className="me-1 d-flex align-items-center">
+                    <Pause size={16} />
+                  </span>
+                  Hold
+                </a>
+                <a 
+                  href="#" 
+                  className="btn btn-danger btn-icon flex-fill"
+                  onClick={(e) => { e.preventDefault(); clearCart(); }}
                 >
-                  {createSaleMutation.isPending ? "Processing..." : "Complete Sale"}
-                </Button>
+                  <span className="me-1 d-flex align-items-center">
+                    <Trash2 size={16} />
+                  </span>
+                  Void
+                </a>
+                <a 
+                  href="#" 
+                  className="btn btn-success btn-icon flex-fill"
+                  onClick={(e) => { e.preventDefault(); handlePayment(); }}
+                >
+                  <span className="me-1 d-flex align-items-center">
+                    <CreditCard size={16} />
+                  </span>
+                  Payment
+                </a>
               </div>
             </aside>
           </div>
