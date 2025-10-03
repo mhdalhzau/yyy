@@ -139,11 +139,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/products", upload.single("image"), async (req, res) => {
     try {
-      // Parse numeric fields from FormData strings
+      // Parse fields from FormData - keep cost and price as strings for decimal precision
       const parsedBody = {
         ...req.body,
-        cost: req.body.cost ? parseFloat(req.body.cost) : undefined,
-        price: req.body.price ? parseFloat(req.body.price) : undefined,
+        cost: req.body.cost || undefined,
+        price: req.body.price || undefined,
         stock: req.body.stock ? parseInt(req.body.stock, 10) : undefined,
         minStock: req.body.minStock ? parseInt(req.body.minStock, 10) : undefined,
         isActive: req.body.isActive === 'true' || req.body.isActive === true,
@@ -153,17 +153,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const product = await storage.createProduct(productData);
       res.status(201).json(product);
     } catch (error) {
-      res.status(400).json({ message: "Invalid product data" });
+      console.error("Product creation error:", error);
+      res.status(400).json({ 
+        message: "Invalid product data",
+        error: error instanceof Error ? error.message : String(error)
+      });
     }
   });
 
   app.put("/api/products/:id", upload.single("image"), async (req, res) => {
     try {
-      // Parse numeric fields from FormData strings
+      // Parse fields from FormData - keep cost and price as strings for decimal precision
       const parsedBody = {
         ...req.body,
-        ...(req.body.cost && { cost: parseFloat(req.body.cost) }),
-        ...(req.body.price && { price: parseFloat(req.body.price) }),
+        ...(req.body.cost && { cost: req.body.cost }),
+        ...(req.body.price && { price: req.body.price }),
         ...(req.body.stock && { stock: parseInt(req.body.stock, 10) }),
         ...(req.body.minStock && { minStock: parseInt(req.body.minStock, 10) }),
         ...(req.body.isActive !== undefined && { isActive: req.body.isActive === 'true' || req.body.isActive === true }),
