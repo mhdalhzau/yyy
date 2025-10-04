@@ -59,10 +59,12 @@ export default function Sales() {
           <h1 className="text-3xl font-bold text-foreground" data-testid="text-page-title">Penjualan</h1>
           <p className="text-muted-foreground">Kelola transaksi penjualan</p>
         </div>
-        <Button className="btn-primary" data-testid="button-add-sale">
-          <Plus className="w-4 h-4 mr-2" />
-          Transaksi Baru
-        </Button>
+        <Link href="/pos">
+          <Button className="btn-primary" data-testid="button-add-sale">
+            <Plus className="w-4 h-4 mr-2" />
+            Transaksi Baru
+          </Button>
+        </Link>
       </div>
 
       {/* Summary Cards */}

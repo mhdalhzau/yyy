@@ -29,17 +29,17 @@ export default function POS() {
   const { toast } = useToast();
 
   const { data: products = [], isLoading: productsLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["/api/products"],
     queryFn: getProducts,
   });
 
   const { data: categories = [], isLoading: categoriesLoading } = useQuery({
-    queryKey: ["categories"],
+    queryKey: ["/api/categories"],
     queryFn: getCategories,
   });
 
   const { data: customers = [], isLoading: customersLoading } = useQuery({
-    queryKey: ["customers"],
+    queryKey: ["/api/customers"],
     queryFn: getCustomers,
   });
 
@@ -54,8 +54,10 @@ export default function POS() {
       setDiscount(5);
       setShipping(40.21);
       setCoupon(25);
-      queryClient.invalidateQueries({ queryKey: ["sales"] });
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/sales"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/sales/recent"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
     },
     onError: () => {
       toast({
