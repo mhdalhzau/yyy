@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Base Font
 $font-size-base: 14px;
 $font-size-sm: $font-size-base * .875;
@@ -14,20 +16,20 @@ $font-weight-bolder: bolder;
 $font-family-primary: 'Nunito', sans-serif;
 $font-family-secondary: "Poppins", sans-serif;
 $font-awesome: "Fontawesome";
-	
+        
 // Theme Colors Variables
 $primary: #FF9F43;
-$primary-hover: darken($primary, 10%);
+$primary-hover: color.scale($primary, $lightness: -10%);
 $secondary: #092C4C;
-$secondary-hover: darken($secondary, 10%);
+$secondary-hover: color.scale($secondary, $lightness: -10%);
 $success: #28C76F;
-$success-hover: darken($success, 10%);
+$success-hover: color.scale($success, $lightness: -10%);
 $info: #17a2b8;
-$info-hover: darken($info, 10%);
+$info-hover: color.scale($info, $lightness: -10%);
 $warning: #FF9900;
-$warning-hover: darken($warning, 10%);
+$warning-hover: color.scale($warning, $lightness: -10%);
 $danger: #FF0000;
-$danger-hover: darken($danger, 10%);
+$danger-hover: color.scale($danger, $lightness: -10%);
 $dark: #29344a;
 $light: #f8f9fa;
 $white: #ffffff;
@@ -219,7 +221,7 @@ $dark-gradient: linear-gradient(to right, $dark 0%, #54505D 100%);
 $link-color: $primary;
 $link-decoration: none;
 $link-shade-percentage: 20%;
-$link-hover-color: darken($link-color, 10%);
+$link-hover-color: color.scale($link-color, $lightness: -10%);
 $link-hover-decoration: null;
 $spacer: 1rem;
 
