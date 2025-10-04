@@ -8,7 +8,11 @@ import {
   X, Monitor, ChevronDown, ChevronRight, Package,
   Archive, Clock, Layers, FolderTree, Award, Zap,
   Shield, Barcode, QrCode, PackageCheck, GitBranch,
-  RefreshCw, Clipboard, FileStack
+  RefreshCw, Clipboard, FileStack, ReceiptText, Ticket,
+  Store, Warehouse, UserPlus, Briefcase, Building2, Clock3,
+  CalendarCheck, CalendarDays, CreditCard, UserCog, Lock,
+  UserX, User, Globe, AlertCircle, MapPin, FileQuestion,
+  HardDrive, LogOut, Sliders
 } from "lucide-react";
 
 interface SidebarProps {
@@ -63,10 +67,18 @@ const navigation: NavigationItem[] = [
     category: "Sales",
     icon: ShoppingCart,
     items: [
-      { name: "POS", href: "/pos", icon: Monitor },
       { name: "Sales", href: "/sales", icon: ShoppingCart },
       { name: "Invoices", href: "/invoices", icon: FileText },
       { name: "Sales Return", href: "/sales/returns", icon: Undo },
+      { name: "Quotation", href: "/sales/quotation", icon: ReceiptText },
+      { name: "POS", href: "/pos", icon: Monitor },
+    ]
+  },
+  {
+    category: "Promo",
+    icon: Ticket,
+    items: [
+      { name: "Coupons", href: "/promo/coupons", icon: Ticket },
     ]
   },
   {
@@ -79,11 +91,35 @@ const navigation: NavigationItem[] = [
     ]
   },
   {
-    category: "People",
+    category: "Finance & Accounts",
+    icon: Wallet,
+    items: [
+      { name: "Expenses", href: "/expenses", icon: Wallet },
+      { name: "Expense Category", href: "/expenses/categories", icon: FolderTree },
+    ]
+  },
+  {
+    category: "Peoples",
     icon: Users,
     items: [
       { name: "Customers", href: "/customers", icon: Users },
       { name: "Suppliers", href: "/suppliers", icon: Truck },
+      { name: "Stores", href: "/stores", icon: Store },
+      { name: "Warehouses", href: "/warehouses", icon: Warehouse },
+    ]
+  },
+  {
+    category: "HRM",
+    icon: UserPlus,
+    items: [
+      { name: "Employees", href: "/hrm/employees", icon: UserPlus },
+      { name: "Departments", href: "/hrm/departments", icon: Building2 },
+      { name: "Designation", href: "/hrm/designation", icon: Briefcase },
+      { name: "Shifts", href: "/hrm/shifts", icon: Clock3 },
+      { name: "Attendance", href: "/hrm/attendance", icon: CalendarCheck },
+      { name: "Leaves", href: "/hrm/leaves", icon: CalendarDays },
+      { name: "Holidays", href: "/hrm/holidays", icon: CalendarDays },
+      { name: "Payroll", href: "/hrm/payroll", icon: CreditCard },
     ]
   },
   {
@@ -92,16 +128,48 @@ const navigation: NavigationItem[] = [
     items: [
       { name: "Sales Report", href: "/reports/sales", icon: TrendingUp },
       { name: "Purchase Report", href: "/reports/purchases", icon: BarChart3 },
+      { name: "Inventory Report", href: "/reports/inventory", icon: Package },
+      { name: "Invoice Report", href: "/reports/invoices", icon: FileText },
+      { name: "Supplier Report", href: "/reports/suppliers", icon: Truck },
+      { name: "Customer Report", href: "/reports/customers", icon: Users },
       { name: "Expense Report", href: "/reports/expenses", icon: Wallet },
+      { name: "Income Report", href: "/reports/income", icon: DollarSign },
+      { name: "Tax Report", href: "/reports/tax", icon: FileStack },
       { name: "Profit & Loss", href: "/reports/profit-loss", icon: DollarSign },
       { name: "Stock Report", href: "/reports/stock", icon: FileStack },
+    ]
+  },
+  {
+    category: "User Management",
+    icon: UserCog,
+    items: [
+      { name: "Users", href: "/users", icon: User },
+      { name: "Roles & Permissions", href: "/users/roles", icon: Lock },
+      { name: "Delete Account Request", href: "/users/delete-requests", icon: UserX },
+    ]
+  },
+  {
+    category: "Pages",
+    icon: FileQuestion,
+    items: [
+      { name: "Profile", href: "/pages/profile", icon: User },
+      { name: "Authentication", href: "/pages/authentication", icon: Lock },
+      { name: "Error Pages", href: "/pages/errors", icon: AlertCircle },
+      { name: "Places", href: "/pages/places", icon: MapPin },
+      { name: "Blank Page", href: "/pages/blank", icon: FileQuestion },
+      { name: "Coming Soon", href: "/pages/coming-soon", icon: Clock },
+      { name: "Under Maintenance", href: "/pages/maintenance", icon: AlertCircle },
     ]
   },
   {
     category: "Settings",
     icon: Settings,
     items: [
-      { name: "Settings", href: "/settings", icon: Settings },
+      { name: "General Settings", href: "/settings/general", icon: Settings },
+      { name: "Website Settings", href: "/settings/website", icon: Globe },
+      { name: "App Settings", href: "/settings/app", icon: Monitor },
+      { name: "System Settings", href: "/settings/system", icon: HardDrive },
+      { name: "Other Settings", href: "/settings/other", icon: Sliders },
     ]
   }
 ];
@@ -171,7 +239,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </div>
         </div>
         
-        <nav className="p-4">
+        <nav className="p-4 pb-20">
           {navigation.map((item, index) => {
             if ('href' in item && item.href && item.icon) {
               const Icon = item.icon;

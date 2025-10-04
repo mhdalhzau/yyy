@@ -1,6 +1,11 @@
 import { 
   type User, type InsertUser,
   type Category, type InsertCategory,
+  type SubCategory, type InsertSubCategory,
+  type Brand, type InsertBrand,
+  type Unit, type InsertUnit,
+  type VariantAttribute, type InsertVariantAttribute,
+  type Warranty, type InsertWarranty,
   type Product, type InsertProduct,
   type Customer, type InsertCustomer,
   type Supplier, type InsertSupplier,
@@ -9,8 +14,21 @@ import {
   type Purchase, type InsertPurchase,
   type PurchaseItem, type InsertPurchaseItem,
   type Expense, type InsertExpense,
+  type StockAdjustment, type InsertStockAdjustment,
+  type StockTransfer, type InsertStockTransfer,
+  type PurchaseOrder, type InsertPurchaseOrder,
+  type PurchaseOrderItem, type InsertPurchaseOrderItem,
+  type SalesReturn, type InsertSalesReturn,
+  type SalesReturnItem, type InsertSalesReturnItem,
+  type PurchaseReturn, type InsertPurchaseReturn,
+  type PurchaseReturnItem, type InsertPurchaseReturnItem,
   users,
   categories,
+  subCategories,
+  brands,
+  units,
+  variantAttributes,
+  warranties,
   products,
   customers,
   suppliers,
@@ -18,7 +36,15 @@ import {
   saleItems,
   purchases,
   purchaseItems,
-  expenses
+  expenses,
+  stockAdjustments,
+  stockTransfers,
+  purchaseOrders,
+  purchaseOrderItems,
+  salesReturns,
+  salesReturnItems,
+  purchaseReturns,
+  purchaseReturnItems
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { db } from "./db";
@@ -42,6 +68,7 @@ export interface IStorage {
   getProduct(id: string): Promise<Product | undefined>;
   getProductsByCategoryId(categoryId: string): Promise<Product[]>;
   getLowStockProducts(): Promise<Product[]>;
+  getExpiredProducts(): Promise<Product[]>;
   getTopSellingProducts(limit?: number): Promise<Product[]>;
   createProduct(product: InsertProduct): Promise<Product>;
   updateProduct(id: string, product: Partial<InsertProduct>): Promise<Product | undefined>;
@@ -90,6 +117,83 @@ export interface IStorage {
   updateExpense(id: string, expense: Partial<InsertExpense>): Promise<Expense | undefined>;
   deleteExpense(id: string): Promise<boolean>;
 
+  // SubCategories
+  getSubCategories(): Promise<SubCategory[]>;
+  getSubCategory(id: string): Promise<SubCategory | undefined>;
+  getSubCategoriesByCategoryId(categoryId: string): Promise<SubCategory[]>;
+  createSubCategory(subCategory: InsertSubCategory): Promise<SubCategory>;
+  updateSubCategory(id: string, subCategory: Partial<InsertSubCategory>): Promise<SubCategory | undefined>;
+  deleteSubCategory(id: string): Promise<boolean>;
+
+  // Brands
+  getBrands(): Promise<Brand[]>;
+  getBrand(id: string): Promise<Brand | undefined>;
+  createBrand(brand: InsertBrand): Promise<Brand>;
+  updateBrand(id: string, brand: Partial<InsertBrand>): Promise<Brand | undefined>;
+  deleteBrand(id: string): Promise<boolean>;
+
+  // Units
+  getUnits(): Promise<Unit[]>;
+  getUnit(id: string): Promise<Unit | undefined>;
+  createUnit(unit: InsertUnit): Promise<Unit>;
+  updateUnit(id: string, unit: Partial<InsertUnit>): Promise<Unit | undefined>;
+  deleteUnit(id: string): Promise<boolean>;
+
+  // VariantAttributes
+  getVariantAttributes(): Promise<VariantAttribute[]>;
+  getVariantAttribute(id: string): Promise<VariantAttribute | undefined>;
+  createVariantAttribute(variantAttribute: InsertVariantAttribute): Promise<VariantAttribute>;
+  updateVariantAttribute(id: string, variantAttribute: Partial<InsertVariantAttribute>): Promise<VariantAttribute | undefined>;
+  deleteVariantAttribute(id: string): Promise<boolean>;
+
+  // Warranties
+  getWarranties(): Promise<Warranty[]>;
+  getWarranty(id: string): Promise<Warranty | undefined>;
+  createWarranty(warranty: InsertWarranty): Promise<Warranty>;
+  updateWarranty(id: string, warranty: Partial<InsertWarranty>): Promise<Warranty | undefined>;
+  deleteWarranty(id: string): Promise<boolean>;
+
+  // StockAdjustments
+  getStockAdjustments(): Promise<StockAdjustment[]>;
+  getStockAdjustment(id: string): Promise<StockAdjustment | undefined>;
+  getStockAdjustmentsByProductId(productId: string): Promise<StockAdjustment[]>;
+  createStockAdjustment(stockAdjustment: InsertStockAdjustment): Promise<StockAdjustment>;
+
+  // StockTransfers
+  getStockTransfers(): Promise<StockTransfer[]>;
+  getStockTransfer(id: string): Promise<StockTransfer | undefined>;
+  getStockTransfersByProductId(productId: string): Promise<StockTransfer[]>;
+  createStockTransfer(stockTransfer: InsertStockTransfer): Promise<StockTransfer>;
+  updateStockTransfer(id: string, stockTransfer: Partial<InsertStockTransfer>): Promise<StockTransfer | undefined>;
+
+  // PurchaseOrders
+  getPurchaseOrders(): Promise<PurchaseOrder[]>;
+  getPurchaseOrder(id: string): Promise<PurchaseOrder | undefined>;
+  createPurchaseOrder(purchaseOrder: InsertPurchaseOrder): Promise<PurchaseOrder>;
+  updatePurchaseOrder(id: string, purchaseOrder: Partial<InsertPurchaseOrder>): Promise<PurchaseOrder | undefined>;
+
+  // PurchaseOrderItems
+  getPurchaseOrderItems(purchaseOrderId: string): Promise<PurchaseOrderItem[]>;
+  createPurchaseOrderItem(purchaseOrderItem: InsertPurchaseOrderItem): Promise<PurchaseOrderItem>;
+
+  // SalesReturns
+  getSalesReturns(): Promise<SalesReturn[]>;
+  getSalesReturn(id: string): Promise<SalesReturn | undefined>;
+  createSalesReturn(salesReturn: InsertSalesReturn): Promise<SalesReturn>;
+
+  // SalesReturnItems
+  getSalesReturnItems(salesReturnId: string): Promise<SalesReturnItem[]>;
+  createSalesReturnItem(salesReturnItem: InsertSalesReturnItem): Promise<SalesReturnItem>;
+
+  // PurchaseReturns
+  getPurchaseReturns(): Promise<PurchaseReturn[]>;
+  getPurchaseReturn(id: string): Promise<PurchaseReturn | undefined>;
+  createPurchaseReturn(purchaseReturn: InsertPurchaseReturn): Promise<PurchaseReturn>;
+
+  // PurchaseReturnItems
+  getPurchaseReturnItems(purchaseReturnId: string): Promise<PurchaseReturnItem[]>;
+  createPurchaseReturnItem(purchaseReturnItem: InsertPurchaseReturnItem): Promise<PurchaseReturnItem>;
+
   // Dashboard Stats
   getDashboardStats(): Promise<{
     totalSales: string;
@@ -106,6 +210,11 @@ export interface IStorage {
 export class MemStorage implements IStorage {
   private users: Map<string, User> = new Map();
   private categories: Map<string, Category> = new Map();
+  private subCategories: Map<string, SubCategory> = new Map();
+  private brands: Map<string, Brand> = new Map();
+  private units: Map<string, Unit> = new Map();
+  private variantAttributes: Map<string, VariantAttribute> = new Map();
+  private warranties: Map<string, Warranty> = new Map();
   private products: Map<string, Product> = new Map();
   private customers: Map<string, Customer> = new Map();
   private suppliers: Map<string, Supplier> = new Map();
@@ -114,6 +223,14 @@ export class MemStorage implements IStorage {
   private purchases: Map<string, Purchase> = new Map();
   private purchaseItems: Map<string, PurchaseItem[]> = new Map();
   private expenses: Map<string, Expense> = new Map();
+  private stockAdjustments: Map<string, StockAdjustment> = new Map();
+  private stockTransfers: Map<string, StockTransfer> = new Map();
+  private purchaseOrders: Map<string, PurchaseOrder> = new Map();
+  private purchaseOrderItems: Map<string, PurchaseOrderItem[]> = new Map();
+  private salesReturns: Map<string, SalesReturn> = new Map();
+  private salesReturnItems: Map<string, SalesReturnItem[]> = new Map();
+  private purchaseReturns: Map<string, PurchaseReturn> = new Map();
+  private purchaseReturnItems: Map<string, PurchaseReturnItem[]> = new Map();
 
   constructor() {
     this.initializeData();
@@ -193,6 +310,99 @@ export class MemStorage implements IStorage {
     ];
 
     suppliers.forEach(supplier => this.suppliers.set(supplier.id, supplier));
+
+    // Initialize with sample brands
+    const brands = [
+      {
+        id: "brand-1",
+        name: "Apple",
+        description: "Premium consumer electronics",
+        logoUrl: null,
+        createdAt: new Date(),
+      },
+      {
+        id: "brand-2",
+        name: "Samsung",
+        description: "Global electronics brand",
+        logoUrl: null,
+        createdAt: new Date(),
+      },
+      {
+        id: "brand-3",
+        name: "Nike",
+        description: "Sports and athletic apparel",
+        logoUrl: null,
+        createdAt: new Date(),
+      }
+    ];
+
+    brands.forEach(brand => this.brands.set(brand.id, brand));
+
+    // Initialize with sample units
+    const units = [
+      {
+        id: "unit-1",
+        name: "Piece",
+        shortName: "pcs",
+        createdAt: new Date(),
+      },
+      {
+        id: "unit-2",
+        name: "Kilogram",
+        shortName: "kg",
+        createdAt: new Date(),
+      },
+      {
+        id: "unit-3",
+        name: "Liter",
+        shortName: "l",
+        createdAt: new Date(),
+      }
+    ];
+
+    units.forEach(unit => this.units.set(unit.id, unit));
+
+    // Initialize with sample warranties
+    const warranties = [
+      {
+        id: "warranty-1",
+        name: "1 Year Warranty",
+        duration: 12,
+        durationType: "months",
+        description: "Standard 1 year manufacturer warranty",
+        createdAt: new Date(),
+      },
+      {
+        id: "warranty-2",
+        name: "6 Month Warranty",
+        duration: 6,
+        durationType: "months",
+        description: "Limited 6 month warranty",
+        createdAt: new Date(),
+      }
+    ];
+
+    warranties.forEach(warranty => this.warranties.set(warranty.id, warranty));
+
+    // Initialize with sample sub-categories
+    const subCategoriesData = [
+      {
+        id: "subcat-1",
+        name: "Smartphones",
+        categoryId: "cat-1",
+        description: "Mobile phones and smartphones",
+        createdAt: new Date(),
+      },
+      {
+        id: "subcat-2",
+        name: "Laptops",
+        categoryId: "cat-1",
+        description: "Portable computers",
+        createdAt: new Date(),
+      }
+    ];
+
+    subCategoriesData.forEach(subCat => this.subCategories.set(subCat.id, subCat));
   }
 
   // Users
@@ -267,6 +477,13 @@ export class MemStorage implements IStorage {
     return Array.from(this.products.values()).filter(product => product.stock <= product.minStock);
   }
 
+  async getExpiredProducts(): Promise<Product[]> {
+    const now = new Date();
+    return Array.from(this.products.values()).filter(product => 
+      product.expiryDate && new Date(product.expiryDate) < now
+    );
+  }
+
   async getTopSellingProducts(limit: number = 10): Promise<Product[]> {
     // For demo purposes, return products sorted by stock (assuming higher stock means more sales)
     return Array.from(this.products.values())
@@ -279,7 +496,12 @@ export class MemStorage implements IStorage {
     const product: Product = { 
       ...insertProduct,
       description: insertProduct.description || null,
+      subCategoryId: insertProduct.subCategoryId || null,
+      brandId: insertProduct.brandId || null,
+      unitId: insertProduct.unitId || null,
+      warrantyId: insertProduct.warrantyId || null,
       barcode: insertProduct.barcode || null,
+      expiryDate: insertProduct.expiryDate || null,
       imageUrl: insertProduct.imageUrl || null,
       stock: insertProduct.stock || 0,
       minStock: insertProduct.minStock || 10,
@@ -528,6 +750,369 @@ export class MemStorage implements IStorage {
 
   async deleteExpense(id: string): Promise<boolean> {
     return this.expenses.delete(id);
+  }
+
+  // SubCategories
+  async getSubCategories(): Promise<SubCategory[]> {
+    return Array.from(this.subCategories.values());
+  }
+
+  async getSubCategory(id: string): Promise<SubCategory | undefined> {
+    return this.subCategories.get(id);
+  }
+
+  async getSubCategoriesByCategoryId(categoryId: string): Promise<SubCategory[]> {
+    return Array.from(this.subCategories.values()).filter(subCat => subCat.categoryId === categoryId);
+  }
+
+  async createSubCategory(insertSubCategory: InsertSubCategory): Promise<SubCategory> {
+    const id = randomUUID();
+    const subCategory: SubCategory = {
+      ...insertSubCategory,
+      description: insertSubCategory.description || null,
+      id,
+      createdAt: new Date()
+    };
+    this.subCategories.set(id, subCategory);
+    return subCategory;
+  }
+
+  async updateSubCategory(id: string, updateData: Partial<InsertSubCategory>): Promise<SubCategory | undefined> {
+    const subCategory = this.subCategories.get(id);
+    if (!subCategory) return undefined;
+    
+    const updated = { ...subCategory, ...updateData };
+    this.subCategories.set(id, updated);
+    return updated;
+  }
+
+  async deleteSubCategory(id: string): Promise<boolean> {
+    return this.subCategories.delete(id);
+  }
+
+  // Brands
+  async getBrands(): Promise<Brand[]> {
+    return Array.from(this.brands.values());
+  }
+
+  async getBrand(id: string): Promise<Brand | undefined> {
+    return this.brands.get(id);
+  }
+
+  async createBrand(insertBrand: InsertBrand): Promise<Brand> {
+    const id = randomUUID();
+    const brand: Brand = {
+      ...insertBrand,
+      description: insertBrand.description || null,
+      logoUrl: insertBrand.logoUrl || null,
+      id,
+      createdAt: new Date()
+    };
+    this.brands.set(id, brand);
+    return brand;
+  }
+
+  async updateBrand(id: string, updateData: Partial<InsertBrand>): Promise<Brand | undefined> {
+    const brand = this.brands.get(id);
+    if (!brand) return undefined;
+    
+    const updated = { ...brand, ...updateData };
+    this.brands.set(id, updated);
+    return updated;
+  }
+
+  async deleteBrand(id: string): Promise<boolean> {
+    return this.brands.delete(id);
+  }
+
+  // Units
+  async getUnits(): Promise<Unit[]> {
+    return Array.from(this.units.values());
+  }
+
+  async getUnit(id: string): Promise<Unit | undefined> {
+    return this.units.get(id);
+  }
+
+  async createUnit(insertUnit: InsertUnit): Promise<Unit> {
+    const id = randomUUID();
+    const unit: Unit = {
+      ...insertUnit,
+      id,
+      createdAt: new Date()
+    };
+    this.units.set(id, unit);
+    return unit;
+  }
+
+  async updateUnit(id: string, updateData: Partial<InsertUnit>): Promise<Unit | undefined> {
+    const unit = this.units.get(id);
+    if (!unit) return undefined;
+    
+    const updated = { ...unit, ...updateData };
+    this.units.set(id, updated);
+    return updated;
+  }
+
+  async deleteUnit(id: string): Promise<boolean> {
+    return this.units.delete(id);
+  }
+
+  // VariantAttributes
+  async getVariantAttributes(): Promise<VariantAttribute[]> {
+    return Array.from(this.variantAttributes.values());
+  }
+
+  async getVariantAttribute(id: string): Promise<VariantAttribute | undefined> {
+    return this.variantAttributes.get(id);
+  }
+
+  async createVariantAttribute(insertVariantAttribute: InsertVariantAttribute): Promise<VariantAttribute> {
+    const id = randomUUID();
+    const variantAttribute: VariantAttribute = {
+      ...insertVariantAttribute,
+      values: insertVariantAttribute.values || null,
+      id,
+      createdAt: new Date()
+    };
+    this.variantAttributes.set(id, variantAttribute);
+    return variantAttribute;
+  }
+
+  async updateVariantAttribute(id: string, updateData: Partial<InsertVariantAttribute>): Promise<VariantAttribute | undefined> {
+    const variantAttribute = this.variantAttributes.get(id);
+    if (!variantAttribute) return undefined;
+    
+    const updated = { ...variantAttribute, ...updateData };
+    this.variantAttributes.set(id, updated);
+    return updated;
+  }
+
+  async deleteVariantAttribute(id: string): Promise<boolean> {
+    return this.variantAttributes.delete(id);
+  }
+
+  // Warranties
+  async getWarranties(): Promise<Warranty[]> {
+    return Array.from(this.warranties.values());
+  }
+
+  async getWarranty(id: string): Promise<Warranty | undefined> {
+    return this.warranties.get(id);
+  }
+
+  async createWarranty(insertWarranty: InsertWarranty): Promise<Warranty> {
+    const id = randomUUID();
+    const warranty: Warranty = {
+      ...insertWarranty,
+      description: insertWarranty.description || null,
+      id,
+      createdAt: new Date()
+    };
+    this.warranties.set(id, warranty);
+    return warranty;
+  }
+
+  async updateWarranty(id: string, updateData: Partial<InsertWarranty>): Promise<Warranty | undefined> {
+    const warranty = this.warranties.get(id);
+    if (!warranty) return undefined;
+    
+    const updated = { ...warranty, ...updateData };
+    this.warranties.set(id, updated);
+    return updated;
+  }
+
+  async deleteWarranty(id: string): Promise<boolean> {
+    return this.warranties.delete(id);
+  }
+
+  // StockAdjustments
+  async getStockAdjustments(): Promise<StockAdjustment[]> {
+    return Array.from(this.stockAdjustments.values());
+  }
+
+  async getStockAdjustment(id: string): Promise<StockAdjustment | undefined> {
+    return this.stockAdjustments.get(id);
+  }
+
+  async getStockAdjustmentsByProductId(productId: string): Promise<StockAdjustment[]> {
+    return Array.from(this.stockAdjustments.values()).filter(adj => adj.productId === productId);
+  }
+
+  async createStockAdjustment(insertStockAdjustment: InsertStockAdjustment): Promise<StockAdjustment> {
+    const id = randomUUID();
+    const stockAdjustment: StockAdjustment = {
+      ...insertStockAdjustment,
+      notes: insertStockAdjustment.notes || null,
+      id,
+      createdAt: new Date()
+    };
+    this.stockAdjustments.set(id, stockAdjustment);
+    return stockAdjustment;
+  }
+
+  // StockTransfers
+  async getStockTransfers(): Promise<StockTransfer[]> {
+    return Array.from(this.stockTransfers.values());
+  }
+
+  async getStockTransfer(id: string): Promise<StockTransfer | undefined> {
+    return this.stockTransfers.get(id);
+  }
+
+  async getStockTransfersByProductId(productId: string): Promise<StockTransfer[]> {
+    return Array.from(this.stockTransfers.values()).filter(transfer => transfer.productId === productId);
+  }
+
+  async createStockTransfer(insertStockTransfer: InsertStockTransfer): Promise<StockTransfer> {
+    const id = randomUUID();
+    const stockTransfer: StockTransfer = {
+      ...insertStockTransfer,
+      notes: insertStockTransfer.notes || null,
+      status: insertStockTransfer.status || "pending",
+      id,
+      createdAt: new Date()
+    };
+    this.stockTransfers.set(id, stockTransfer);
+    return stockTransfer;
+  }
+
+  async updateStockTransfer(id: string, updateData: Partial<InsertStockTransfer>): Promise<StockTransfer | undefined> {
+    const stockTransfer = this.stockTransfers.get(id);
+    if (!stockTransfer) return undefined;
+    
+    const updated = { ...stockTransfer, ...updateData };
+    this.stockTransfers.set(id, updated);
+    return updated;
+  }
+
+  // PurchaseOrders
+  async getPurchaseOrders(): Promise<PurchaseOrder[]> {
+    return Array.from(this.purchaseOrders.values());
+  }
+
+  async getPurchaseOrder(id: string): Promise<PurchaseOrder | undefined> {
+    return this.purchaseOrders.get(id);
+  }
+
+  async createPurchaseOrder(insertPurchaseOrder: InsertPurchaseOrder): Promise<PurchaseOrder> {
+    const id = randomUUID();
+    const purchaseOrder: PurchaseOrder = {
+      ...insertPurchaseOrder,
+      tax: insertPurchaseOrder.tax || "0",
+      status: insertPurchaseOrder.status || "pending",
+      expectedDate: insertPurchaseOrder.expectedDate || null,
+      notes: insertPurchaseOrder.notes || null,
+      id,
+      createdAt: new Date()
+    };
+    this.purchaseOrders.set(id, purchaseOrder);
+    return purchaseOrder;
+  }
+
+  async updatePurchaseOrder(id: string, updateData: Partial<InsertPurchaseOrder>): Promise<PurchaseOrder | undefined> {
+    const purchaseOrder = this.purchaseOrders.get(id);
+    if (!purchaseOrder) return undefined;
+    
+    const updated = { ...purchaseOrder, ...updateData };
+    this.purchaseOrders.set(id, updated);
+    return updated;
+  }
+
+  // PurchaseOrderItems
+  async getPurchaseOrderItems(purchaseOrderId: string): Promise<PurchaseOrderItem[]> {
+    return this.purchaseOrderItems.get(purchaseOrderId) || [];
+  }
+
+  async createPurchaseOrderItem(insertPurchaseOrderItem: InsertPurchaseOrderItem): Promise<PurchaseOrderItem> {
+    const id = randomUUID();
+    const purchaseOrderItem: PurchaseOrderItem = { ...insertPurchaseOrderItem, id };
+    
+    const items = this.purchaseOrderItems.get(insertPurchaseOrderItem.purchaseOrderId) || [];
+    items.push(purchaseOrderItem);
+    this.purchaseOrderItems.set(insertPurchaseOrderItem.purchaseOrderId, items);
+    
+    return purchaseOrderItem;
+  }
+
+  // SalesReturns
+  async getSalesReturns(): Promise<SalesReturn[]> {
+    return Array.from(this.salesReturns.values());
+  }
+
+  async getSalesReturn(id: string): Promise<SalesReturn | undefined> {
+    return this.salesReturns.get(id);
+  }
+
+  async createSalesReturn(insertSalesReturn: InsertSalesReturn): Promise<SalesReturn> {
+    const id = randomUUID();
+    const salesReturn: SalesReturn = {
+      ...insertSalesReturn,
+      customerId: insertSalesReturn.customerId || null,
+      tax: insertSalesReturn.tax || "0",
+      reason: insertSalesReturn.reason || null,
+      notes: insertSalesReturn.notes || null,
+      id,
+      createdAt: new Date()
+    };
+    this.salesReturns.set(id, salesReturn);
+    return salesReturn;
+  }
+
+  // SalesReturnItems
+  async getSalesReturnItems(salesReturnId: string): Promise<SalesReturnItem[]> {
+    return this.salesReturnItems.get(salesReturnId) || [];
+  }
+
+  async createSalesReturnItem(insertSalesReturnItem: InsertSalesReturnItem): Promise<SalesReturnItem> {
+    const id = randomUUID();
+    const salesReturnItem: SalesReturnItem = { ...insertSalesReturnItem, id };
+    
+    const items = this.salesReturnItems.get(insertSalesReturnItem.salesReturnId) || [];
+    items.push(salesReturnItem);
+    this.salesReturnItems.set(insertSalesReturnItem.salesReturnId, items);
+    
+    return salesReturnItem;
+  }
+
+  // PurchaseReturns
+  async getPurchaseReturns(): Promise<PurchaseReturn[]> {
+    return Array.from(this.purchaseReturns.values());
+  }
+
+  async getPurchaseReturn(id: string): Promise<PurchaseReturn | undefined> {
+    return this.purchaseReturns.get(id);
+  }
+
+  async createPurchaseReturn(insertPurchaseReturn: InsertPurchaseReturn): Promise<PurchaseReturn> {
+    const id = randomUUID();
+    const purchaseReturn: PurchaseReturn = {
+      ...insertPurchaseReturn,
+      supplierId: insertPurchaseReturn.supplierId || null,
+      tax: insertPurchaseReturn.tax || "0",
+      reason: insertPurchaseReturn.reason || null,
+      notes: insertPurchaseReturn.notes || null,
+      id,
+      createdAt: new Date()
+    };
+    this.purchaseReturns.set(id, purchaseReturn);
+    return purchaseReturn;
+  }
+
+  // PurchaseReturnItems
+  async getPurchaseReturnItems(purchaseReturnId: string): Promise<PurchaseReturnItem[]> {
+    return this.purchaseReturnItems.get(purchaseReturnId) || [];
+  }
+
+  async createPurchaseReturnItem(insertPurchaseReturnItem: InsertPurchaseReturnItem): Promise<PurchaseReturnItem> {
+    const id = randomUUID();
+    const purchaseReturnItem: PurchaseReturnItem = { ...insertPurchaseReturnItem, id };
+    
+    const items = this.purchaseReturnItems.get(insertPurchaseReturnItem.purchaseReturnId) || [];
+    items.push(purchaseReturnItem);
+    this.purchaseReturnItems.set(insertPurchaseReturnItem.purchaseReturnId, items);
+    
+    return purchaseReturnItem;
   }
 
   // Dashboard Stats
