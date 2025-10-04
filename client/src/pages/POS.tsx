@@ -618,51 +618,91 @@ export default function POS() {
                   <div className="row g-2 mb-3">
                     <div className="col-6">
                       <button 
-                        className="btn btn-warning w-100"
+                        className="btn w-100"
                         onClick={handleHold}
                         data-testid="button-hold"
+                        style={{ 
+                          backgroundColor: '#ff6600', 
+                          borderColor: '#ff6600', 
+                          color: 'white',
+                          fontWeight: '600',
+                          padding: '12px',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
                       >
-                        <span className="me-1 d-flex align-items-center justify-content-center">
-                          <Pause size={16} />
-                        </span>
+                        <Pause size={16} />
                         Hold
                       </button>
                     </div>
                     <div className="col-6">
                       <button 
-                        className="btn btn-info w-100"
+                        className="btn w-100"
                         onClick={handleVoid}
                         data-testid="button-void"
+                        style={{ 
+                          backgroundColor: '#3b82f6', 
+                          borderColor: '#3b82f6', 
+                          color: 'white',
+                          fontWeight: '600',
+                          padding: '12px',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
                       >
-                        <span className="me-1 d-flex align-items-center justify-content-center">
-                          <X size={16} />
-                        </span>
+                        <X size={16} />
                         Void
                       </button>
                     </div>
                     <div className="col-6">
                       <button 
-                        className="btn btn-primary w-100"
+                        className="btn w-100"
                         onClick={handlePayment}
                         disabled={createSaleMutation.isPending}
                         data-testid="button-payment"
-                        style={{ backgroundColor: '#06b6d4', borderColor: '#06b6d4' }}
+                        style={{ 
+                          backgroundColor: '#06b6d4', 
+                          borderColor: '#06b6d4', 
+                          color: 'white',
+                          fontWeight: '600',
+                          padding: '12px',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          opacity: createSaleMutation.isPending ? 0.7 : 1
+                        }}
                       >
-                        <span className="me-1 d-flex align-items-center justify-content-center">
-                          <CreditCard size={16} />
-                        </span>
+                        <CreditCard size={16} />
                         {createSaleMutation.isPending ? "Processing..." : "Payment"}
                       </button>
                     </div>
                     <div className="col-6">
                       <button 
-                        className="btn btn-dark w-100"
+                        className="btn w-100"
                         onClick={handleViewOrders}
                         data-testid="button-view-orders"
+                        style={{ 
+                          backgroundColor: '#6b21a8', 
+                          borderColor: '#6b21a8', 
+                          color: 'white',
+                          fontWeight: '600',
+                          padding: '12px',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
                       >
-                        <span className="me-1 d-flex align-items-center justify-content-center">
-                          <ShoppingCart size={16} />
-                        </span>
+                        <ShoppingCart size={16} />
                         View Orders
                       </button>
                     </div>
@@ -671,23 +711,42 @@ export default function POS() {
                         className="btn w-100"
                         onClick={clearCart}
                         data-testid="button-reset"
-                        style={{ backgroundColor: '#9333ea', borderColor: '#9333ea', color: 'white' }}
+                        style={{ 
+                          backgroundColor: '#9333ea', 
+                          borderColor: '#9333ea', 
+                          color: 'white',
+                          fontWeight: '600',
+                          padding: '12px',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
                       >
-                        <span className="me-1 d-flex align-items-center justify-content-center">
-                          <RotateCcw size={16} />
-                        </span>
+                        <RotateCcw size={16} />
                         Reset
                       </button>
                     </div>
                     <div className="col-6">
                       <button 
-                        className="btn btn-danger w-100"
+                        className="btn w-100"
                         onClick={handleTransaction}
                         data-testid="button-transaction"
+                        style={{ 
+                          backgroundColor: '#dc2626', 
+                          borderColor: '#dc2626', 
+                          color: 'white',
+                          fontWeight: '600',
+                          padding: '12px',
+                          borderRadius: '6px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px'
+                        }}
                       >
-                        <span className="me-1 d-flex align-items-center justify-content-center">
-                          <RefreshCcw size={16} />
-                        </span>
+                        <RefreshCcw size={16} />
                         Transaction
                       </button>
                     </div>
