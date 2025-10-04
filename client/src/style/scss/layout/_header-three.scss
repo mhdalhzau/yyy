@@ -1,8 +1,11 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .page-wrapper-three {
     margin-left: 0;
     padding-top: 0;
     .content {
-        background: $body-bg;
+        background: variables.$body-bg;
         border-radius: 20px;
         margin-top: -82px;
     }
@@ -11,7 +14,7 @@
     position: relative;
     .header-left {
         border-right: 0 !important;
-        @include margin-padding(null, 25px);
+        @include mixins.margin-padding(null, 25px);
     }
 }
 .logo-white {
@@ -23,17 +26,17 @@
     width: 100%;
     height: 150px;
     background: #1B2950;
-    border-top: 1px solid $gray-400;
+    border-top: 1px solid variables.$gray-400;
     box-shadow: 0px 4px 14px rgba(198, 198, 198, 0.25);    
     z-index: unset;
     .sidebar-menu {
-        @include margin-padding(null, 0 15px);
+        @include mixins.margin-padding(null, 0 15px);
         & > ul  {
            & > li {
                 margin-bottom: 0;
                 margin-right: 20px;
                 & > a {
-                    @include margin-padding(null, 22px 15px);
+                    @include mixins.margin-padding(null, 22px 15px);
                     img, svg {
                         filter:  brightness(0) invert(1);
                         margin-right: 0;
@@ -41,7 +44,7 @@
                     &:hover {
                         background: transparent;
                         span {
-                            color:$primary !important;
+                            color:variables.$primary !important;
                         }
                         img, svg {
                             filter: brightness(0) saturate(100%) invert(75%) sepia(10%) saturate(5676%) hue-rotate(326deg) brightness(105%) contrast(112%);
@@ -53,7 +56,7 @@
                     }
                     &::before {
                         content: "";
-                        @include position(absolute, 50%, -10px, null, null);
+                        @include mixins.position(absolute, 50%, -10px, null, null);
                         width: 1px;
                         height: 15px;
                         background: #6B7A99;
@@ -62,13 +65,13 @@
                 }
                 & > a {
                     span {                        
-                        color: $white  !important;
+                        color: variables.$white  !important;
                     }
                 }
                 a {
-                    font-weight: $font-weight-medium;
-                    font-size: $font-size-15;
-                    color: $white;
+                    font-weight: variables.$font-weight-medium;
+                    font-size: variables.$font-size-15;
+                    color: variables.$white;
                     img {
                         position: relative;
                         top: 3px;
@@ -101,7 +104,7 @@
                         &.submenu {
                             a {
                                 padding: 8px 15px !important;
-                                color: $white;
+                                color: variables.$white;
                                 .menu-arrow {
                                     float: right;
                                     margin-right: 15px;
@@ -120,7 +123,7 @@
                                     margin-right: 7px;
                                 }
                                 &:hover {
-                                    color: $primary;
+                                    color: variables.$primary;
                                     img {                                        
                                         filter: brightness(0) saturate(100%) invert(75%) sepia(10%) saturate(5676%) hue-rotate(326deg) brightness(105%) contrast(112%);
                                     }
@@ -131,11 +134,11 @@
                             }
                             ul {
                                 position: relative;    
-                                @include margin-padding(null, 0); 
+                                @include mixins.margin-padding(null, 0); 
                                 li {
                                     a {
                                         padding: 8px 10px 8px 40px !important;
-                                        color: $white;
+                                        color: variables.$white;
                                     }
                                 }                           
                             }
@@ -148,7 +151,7 @@
                         }
                     }
                 }                                
-                @include respond-below(custom1199) {
+                @include mixins.respond-below(custom1199) {
                    margin-right: 0;
                 }
                 &:last-child {
@@ -162,12 +165,12 @@
         }
     }
 }
-@include respond-above(custom992) {
+@include mixins.respond-above(custom992) {
     .hide-sidebar {
         display: none;
     }
 }
-@include respond-below(custom991) {
+@include mixins.respond-below(custom991) {
     .header-three {
         position: fixed;
     }

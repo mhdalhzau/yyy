@@ -1,5 +1,8 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .file-manager {
-    color:  $text-color;
+    color:  variables.$text-color;
     .search-dropdown {
         height: auto;
     }
@@ -24,7 +27,7 @@
                     svg {
                         &.fa-filter {
                             top: 50%;
-                            @include transform(translateY(-50%));                            
+                            @include mixins.transform(translateY(-50%));                            
                         }
                     }
                 }
@@ -41,18 +44,18 @@
             margin-left: 10px;
         }
         .form-sort {
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 margin-top: 0;
                 margin-bottom:  15px;
             }
         }
         .table-top-head {
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 margin-bottom: 15px;
             }
             li {
                 &:last-child {
-                    @include respond-below(custom991) {
+                    @include mixins.respond-below(custom991) {
                         margin-right: 0;
                     }
                 }
@@ -60,13 +63,13 @@
         }
     }
     .bulk-action-type {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             align-items: start!important;
         }
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             display: block!important;
         }
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             .form-sort {
                 margin-top: 0;
                 margin-bottom: 15px;
@@ -75,34 +78,34 @@
         }
     }
     aside {
-        border: 1px solid $gray-400;
-        box-shadow: $box-shadow;
-        @include rounded(8px);
+        border: 1px solid variables.$gray-400;
+        box-shadow: variables.$box-shadow;
+        @include mixins.rounded(8px);
         h5 {
-            font-size: $font-size-18;
-            font-weight: $font-weight-bold;
-            border-bottom:  1px solid $gray-100;
-            @include margin-padding(0 0 15px 0, 0 0 15px 0);
+            font-size: variables.$font-size-18;
+            font-weight: variables.$font-weight-bold;
+            border-bottom:  1px solid variables.$gray-100;
+            @include mixins.margin-padding(0 0 15px 0, 0 0 15px 0);
         }
         .btn {
-            font-weight: $font-weight-bold;
+            font-weight: variables.$font-weight-bold;
         }
         .dropdown {
             > a { 
                 width: auto;
                 height: auto;
-                color:  $white;
-                @include rounded(8px);
+                color:  variables.$white;
+                @include mixins.rounded(8px);
                 &:hover, &:focus {
-                    border-color: $secondary;
-                    background: $secondary;
+                    border-color: variables.$secondary;
+                    background: variables.$secondary;
                 }
             }
             ul {
                 width: 100%;
                 li {
                     a {
-                        font-size: $font-size-15;
+                        font-size: variables.$font-size-15;
                     }
                 }
             }
@@ -116,11 +119,11 @@
                     align-items: center;
                     -webkit-box-align: center;
                     -ms-flex-align: center;
-                    color: $text-color;
-                    font-size: $font-size-base;
-                    font-weight: $font-weight-semibold;
-                    @include margin-padding(0 0 5px 0, 7px 10px);
-                    @include rounded(5px);
+                    color: variables.$text-color;
+                    font-size: variables.$font-size-base;
+                    font-weight: variables.$font-weight-semibold;
+                    @include mixins.margin-padding(0 0 5px 0, 7px 10px);
+                    @include mixins.rounded(5px);
                     span {
                         display: -webkit-box;
                         display: -ms-flexbox;
@@ -130,43 +133,43 @@
                         -ms-flex-align: center;
                     }
                     &:hover, &.active {
-                        background: $secondary;
-                        color: $white;
+                        background: variables.$secondary;
+                        color: variables.$white;
                     }
                 }
             }
         }
         span {
-            font-size: $font-size-13;
-            font-weight: $font-weight-medium; 
+            font-size: variables.$font-size-13;
+            font-weight: variables.$font-weight-medium; 
         }
         h6 {
-            font-size: $font-size-16;
-            font-weight: $font-weight-semibold;
+            font-size: variables.$font-size-16;
+            font-weight: variables.$font-weight-semibold;
             position: relative;
             z-index: 2;
         }
         .space-manager {
-            color:  $white;
-            background: $secondary;
-            @include rounded(8px);
+            color:  variables.$white;
+            background: variables.$secondary;
+            @include mixins.rounded(8px);
             position: relative;
             img {
-                @include position(absolute,0,0,null,null);
+                @include mixins.position(absolute,0,0,null,null);
             }
             h6 {
                 a {
-                    color:  $white;
+                    color:  variables.$white;
                 }
             }
             p {
-                color:  $sub-title;
+                color:  variables.$sub-title;
             }
         }
     }
     .progress {
         height: 6px;
-        @include rounded(5px);
+        @include mixins.rounded(5px);
     }
     .search-set {
          .search-input {
@@ -188,16 +191,16 @@
         }
     }
     h4 {
-        font-size: $font-size-18;
-        font-weight: $font-weight-semibold;
+        font-size: variables.$font-size-18;
+        font-weight: variables.$font-weight-semibold;
     }
     h6 {
-        font-size: $font-size-16;
-        font-weight: $font-weight-semibold;
+        font-size: variables.$font-size-16;
+        font-weight: variables.$font-weight-semibold;
         a {
-            color: $secondary;
+            color: variables.$secondary;
             &:hover {
-                color: $primary;
+                color: variables.$primary;
             }
         }
     }
@@ -205,13 +208,13 @@
         .detail {
             a {
                 &.bg {
-                    @include rounded(8px 8px 0 0);
+                    @include mixins.rounded(8px 8px 0 0);
                     span {
                         width: 66px;
                         height: 66px;
-                        @include rounded(100%);
+                        @include mixins.rounded(100%);
                         img {
-                            @include transition(all 0.5s ease);
+                            @include mixins.transition(all 0.5s ease);
                         }
                     }
                 }
@@ -224,20 +227,20 @@
         }
     }
     .info {
-        @include rounded(0 0 8px 8px);
+        @include mixins.rounded(0 0 8px 8px);
         padding: 15px;
-        background: $white;
-        box-shadow: $box-shadow;
+        background: variables.$white;
+        box-shadow: variables.$box-shadow;
         span {
-            color:  $text-color;
-            font-size: $font-size-13;
+            color:  variables.$text-color;
+            font-size: variables.$font-size-13;
         }
     }
     .folders {
-        border: 1px solid $gray-100;
-        box-shadow: $box-shadow;
-        @include rounded(8px);
-        background: $white;
+        border: 1px solid variables.$gray-100;
+        box-shadow: variables.$box-shadow;
+        @include mixins.rounded(8px);
+        background: variables.$white;
         width: 320px;
         h6 {
             width: 100%;
@@ -250,11 +253,11 @@
 
     .dropdown {
         > a {
-            color: $secondary;
+            color: variables.$secondary;
             width: 25px;
             height: 25px;
-            @include transition(all 0.5s ease);
-            @include rounded(100%);
+            @include mixins.transition(all 0.5s ease);
+            @include mixins.rounded(100%);
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -265,36 +268,36 @@
             -webkit-justify-content: center;
             -ms-flex-pack: center;
             &:hover {
-                background: $primary;
+                background: variables.$primary;
                 i {
-                    color: $white;
+                    color: variables.$white;
                 }
             }
         }
     }
     .project-plan {
-        font-size: $font-size-13;
-        font-weight: $font-weight-semibold;
+        font-size: variables.$font-size-13;
+        font-weight: variables.$font-weight-semibold;
         margin-top: 10px;
         label {
-            color: $secondary;
+            color: variables.$secondary;
             margin-right: 9px;
-            font-size: $font-size-13;
+            font-size: variables.$font-size-13;
         }
         ul {
             li {
-                font-size: $font-size-13;
+                font-size: variables.$font-size-13;
                 position: relative;
                 padding: 0 9px 0 14px;
-                color:  $text-color;
+                color:  variables.$text-color;
                 &:before {
                     content:  '';
-                    @include position(absolute,50%,null,null,0);
-                    @include transform(translateY(-50%));
+                    @include mixins.position(absolute,50%,null,null,0);
+                    @include mixins.transform(translateY(-50%));
                     width: 5px;
                     height: 5px;
-                    background: $gray-400;
-                    @include rounded(5px);
+                    background: variables.$gray-400;
+                    @include mixins.rounded(5px);
                 }
             }
         }
@@ -302,11 +305,11 @@
     .avatar-wrap {
         a {
             svg {
-                color: $text-color;
+                color: variables.$text-color;
             }
             &:hover {
                 svg {
-                    color: $primary; 
+                    color: variables.$primary; 
                 }
             }
         }
@@ -316,7 +319,7 @@
         --bs-accordion-border-width: none;
         .accordion-item {
             border:  none;
-            border-bottom: 1px solid $gray-100;
+            border-bottom: 1px solid variables.$gray-100;
             background: none;
             &:last-of-type {
                 border-bottom-right-radius: 0;
@@ -326,20 +329,20 @@
             .accordion-button {
                 background: none;
                 border:  none;
-                font-size: $font-size-18;
-                font-weight: $font-weight-semibold;
-                color: $secondary;
+                font-size: variables.$font-size-18;
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$secondary;
                 padding: 0;
                 display: inline-block;
                 width: auto;
                 &:after {
-                    @include transition(all 0.8s ease);
+                    @include mixins.transition(all 0.8s ease);
                     background-image: none;
                     content: "View All";
                     font-family: "Nunito", sans-serif;
-                    font-size: $font-size-base;
-                    font-weight: $font-weight-bold;
-                    color: $text-color;
+                    font-size: variables.$font-size-base;
+                    font-weight: variables.$font-weight-bold;
+                    color: variables.$text-color;
                     transform:  none;
                     width: 60px;
                     text-align: right;
@@ -352,7 +355,7 @@
                 }
                 &:hover {
                     &:after {
-                        color: $primary;
+                        color: variables.$primary;
                     }
                 }
             }
@@ -382,8 +385,8 @@
             right: 0 !important;
             top:  27px !important;
             transform: none !important;
-            background: $white !important;
-            box-shadow: $box-shadow;
+            background: variables.$white !important;
+            box-shadow: variables.$box-shadow;
             z-index: 99999 !important;
         }
         .owl-nav {
@@ -399,12 +402,12 @@
                     position: relative;
                     width: 15px;
                     i {
-                        color: $text-color;
+                        color: variables.$text-color;
                     }
                     &:hover {
                         background: none;
                         i {
-                           color: $primary;
+                           color: variables.$primary;
                         }
                     }
                 }
@@ -422,19 +425,19 @@
             .info {
                 a {
                     svg {
-                        color: $text-color;
+                        color: variables.$text-color;
                     }
                 }
             }
         }
     }
     .all-files {
-        box-shadow: $box-shadow;
+        box-shadow: variables.$box-shadow;
         border: none;
         .btn-grp {
             a {
                 padding: 6px 8px;
-                @include rounded(8px);
+                @include mixins.rounded(8px);
                 cursor: pointer;
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -445,19 +448,19 @@
                 justify-content: center;
                 -webkit-justify-content: center;
                 -ms-flex-pack: center;
-                @include respond-below(custom575) {
+                @include mixins.respond-below(custom575) {
                     margin-bottom: 15px;
                     display: inline-block;
                 }
                 &.btn-outline-secondary {
-                    color:  $text-color;
-                    background: $body-bg;
-                    border-color: $body-bg;
+                    color:  variables.$text-color;
+                    background: variables.$body-bg;
+                    border-color: variables.$body-bg;
                 }
                 &:hover {
-                    background: $secondary;
-                    border-color: $secondary;
-                    color: $white;
+                    background: variables.$secondary;
+                    border-color: variables.$secondary;
+                    color: variables.$white;
                 }
             }
         }
@@ -466,12 +469,12 @@
                 tr { 
                     td {  
                         display: table-cell;
-                        font-size: $font-size-base;
-                        font-weight: $font-weight-medium;
+                        font-size: variables.$font-size-base;
+                        font-weight: variables.$font-weight-medium;
                         white-space: nowrap;
                         a {
-                            font-size: $font-size-base;
-                            font-weight: $font-weight-medium;
+                            font-size: variables.$font-size-base;
+                            font-weight: variables.$font-weight-medium;
                             &.product-img { 
                                 img {
                                     width: 32px;
@@ -486,11 +489,11 @@
         }
     }
     #file-delete {
-        font-size: $font-size-base;
+        font-size: variables.$font-size-base;
     }
 }
 .color-primary {
-    color:  $text-color;
+    color:  variables.$text-color;
 }
 .icon-select {
     position: relative;
@@ -498,8 +501,8 @@
     height: 38px;
 
     .icon {
-        @include position(absolute,50%,null,null,10px);
-        @include transform(translateY(-50%));
+        @include mixins.position(absolute,50%,null,null,10px);
+        @include mixins.transform(translateY(-50%));
         z-index: 100;
     }
     .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -507,30 +510,30 @@
     }
 }
 .bg-light-orange {
-    background: $primary-200;
+    background: variables.$primary-200;
     span {
-        background: $primary-200;
+        background: variables.$primary-200;
     }
 }
 .bg-light-red {
-    background: $danger-200;
+    background: variables.$danger-200;
     span {
-        background: $danger-200;
+        background: variables.$danger-200;
     }
 }
 .bg-light-green {
-    background: $success-300;
+    background: variables.$success-300;
     span {
-        background: $success-300;
+        background: variables.$success-300;
     }
 }
 .seprator-sm {
-    @include margin-padding(0 0 24px 0, 0 0 9px 0);
-    border-bottom: 1px solid $gray-100;
+    @include mixins.margin-padding(0 0 24px 0, 0 0 9px 0);
+    border-bottom: 1px solid variables.$gray-100;
 }
 .seprator-lg {
-    @include margin-padding(0 0 24px 0, 0 0 24px 0);
-    border-bottom: 1px solid $gray-100;
+    @include mixins.margin-padding(0 0 24px 0, 0 0 24px 0);
+    border-bottom: 1px solid variables.$gray-100;
 }
 .group-avatar {
     .avatar {
@@ -549,12 +552,12 @@
     }
     .count {
         a { 
-            color: $success;
+            color: variables.$success;
             line-height: 27px;
-            font-size: $font-size-13;
-            font-weight: $font-weight-medium;
+            font-size: variables.$font-size-13;
+            font-weight: variables.$font-weight-medium;
             &:hover {
-                color: $primary;
+                color: variables.$primary;
             }
         }
     }
@@ -562,7 +565,7 @@
       display: block;
       border-radius: 100%;
       width: 100%;
-      border: 2px solid $white;
+      border: 2px solid variables.$white;
     }
 }
 
@@ -589,18 +592,18 @@
 .video-section video{
   max-width:100%;
   height:100%;
-  @include rounded(10px 10px 0 0);
+  @include mixins.rounded(10px 10px 0 0);
 }
 .delete-alert {
     padding: 10px 20px;
-    background: $danger-200;
+    background: variables.$danger-200;
     border:  none;
-    @include rounded(8px);
+    @include mixins.rounded(8px);
     p {
-        font-size: $font-size-15;
+        font-size: variables.$font-size-15;
     }
     .btn {
-        font-weight: $font-weight-bold;
+        font-weight: variables.$font-weight-bold;
     }
 }
 .deleted-info {
@@ -608,8 +611,8 @@
     .bin-bg {
         width: 184px;
         height: 184px;
-        @include rounded(100%);
-        background: $light;
+        @include mixins.rounded(100%);
+        background: variables.$light;
         margin: 0 auto;
     }
 }
@@ -623,54 +626,54 @@
     right: -456px;
     top: 0;
     height: 100%;
-    background: $white;
+    background: variables.$white;
     z-index: 100001;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     overflow-y: auto;
-    @include transition(all 0.5s ease);
-    @include respond-below(custom575) {
+    @include mixins.transition(all 0.5s ease);
+    @include mixins.respond-below(custom575) {
         width: 320px;
         right: -320px;
     }
     &.open-sidebar {
         right: 0;
-        @include transition(all 0.5s ease);
+        @include mixins.transition(all 0.5s ease);
     }
     .head {
         .color-primary {
             &:hover {
-                color: $danger;
+                color: variables.$danger;
             }
         }
     } 
     h4, h5 {
-        font-weight: $font-weight-bold;
+        font-weight: variables.$font-weight-bold;
     }
     h4 {
-        font-size: $font-size-20;
+        font-size: variables.$font-size-20;
     }
     h5 {
-        font-size: $font-size-18;
+        font-size: variables.$font-size-18;
     }
     h6 {
-         font-size: $font-size-15;
-        font-weight: $font-weight-semibold;
+         font-size: variables.$font-size-15;
+        font-weight: variables.$font-weight-semibold;
     }
     .nav-tabs {
-        border-bottom: 1px solid $gray-100;
+        border-bottom: 1px solid variables.$gray-100;
         .nav-link {
             padding: 8px 20px;
-            font-size: $font-size-16;
-            font-weight: $font-weight-semibold;
-            @include rounded(8px);
+            font-size: variables.$font-size-16;
+            font-weight: variables.$font-weight-semibold;
+            @include mixins.rounded(8px);
             border: none;
-            background: $body-bg;
-            color: $secondary;
+            background: variables.$body-bg;
+            color: variables.$secondary;
             &:hover, &.active {
-                background: $primary;
-                color: $white;
+                background: variables.$primary;
+                color: variables.$white;
             }
         }
     }
@@ -683,9 +686,9 @@
                     }
                     p {
                         &.location {
-                            background: $body-bg;
-                            border: 1px solid $gray-100;
-                            @include rounded(5px);
+                            background: variables.$body-bg;
+                            border: 1px solid variables.$gray-100;
+                            @include mixins.rounded(5px);
                             padding: 5px;
                             display: inline-block;
                             img {
@@ -710,7 +713,7 @@
                         a {
                             margin-right: 10px;
                             padding-right: 10px;
-                            border-right: 1px solid $gray-100;
+                            border-right: 1px solid variables.$gray-100;
                         }
                     }
                     &:last-child {
@@ -720,10 +723,10 @@
                         }
                     }
                     .add {
-                        background: $primary;
-                        color:  $white;
+                        background: variables.$primary;
+                        color:  variables.$white;
                         &:hover {
-                            background: $secondary;
+                            background: variables.$secondary;
                         }
                     }
                 }
@@ -731,31 +734,31 @@
         }
     }
     p {
-        color: $text-color;
-        font-size: $font-size-15;
+        color: variables.$text-color;
+        font-size: variables.$font-size-15;
     }
     .show-all {
-        font-weight: $font-weight-bold;
+        font-weight: variables.$font-weight-bold;
         &:hover {
-            color: $secondary;
+            color: variables.$secondary;
         }
     }
 
 }
 .text-danger {
-    color: $danger!important;
+    color: variables.$danger!important;
 }
 .avatar-md {
     width: 45px;
     height: 45px;
-    @include rounded(45px);
+    @include mixins.rounded(45px);
 }
 .text-secondary {
-    color: $secondary!important;
+    color: variables.$secondary!important;
 }
 .text-primary {
-    color: $primary!important;
+    color: variables.$primary!important;
 }
 .text-default {
-    color: $text-color;
+    color: variables.$text-color;
 }

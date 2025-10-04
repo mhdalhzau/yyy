@@ -1,10 +1,13 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .main-chat-blk {
     .slimscroll {
 		height: calc(100vh - 60px) !important;
     }
     .slimscroll-active-sidebar {
         a {
-            color: $text-color;
+            color: variables.$text-color;
         }
     }
 
@@ -102,7 +105,7 @@
         background: #EDEDED;
     }
     .emoj-group-list-foot ul li.add-emoj a i {
-        font-size: $font-size-20;
+        font-size: variables.$font-size-20;
         color: #424242;
     }
 
@@ -131,7 +134,7 @@
 		}
 		.sidebar {
 			position: initial;
-			@include respond-below(custom991) {
+			@include mixins.respond-below(custom991) {
 				margin-left: 0;
 			}
 		}
@@ -142,29 +145,29 @@
 		}
 		.setting-title-head {
 			h4 {
-				font-size: $font-size-18;
-				color: $secondary;
-				font-weight: $font-weight-bold;
+				font-size: variables.$font-size-18;
+				color: variables.$secondary;
+				font-weight: variables.$font-weight-bold;
 			}
 		}
 		.chat .slimscroll {
 			height: calc(100vh - 135px) !important;
 		}
 		.dropdown-menu .dropdown-item {
-			font-size: $font-size-14;
+			font-size: variables.$font-size-14;
 			cursor: pointer;
 			padding: 7px 14px;
-			font-weight: $font-weight-medium;
+			font-weight: variables.$font-weight-medium;
 			color: #424242;
 		}
 		.dropdown-menu .dropdown-item i {
-			font-size: $font-size-16;
+			font-size: variables.$font-size-16;
 			color: #424242;
 		}
 		
 		.dropdown-menu .dropdown-item span {
 			float: right;
-			font-size: $font-size-18;
+			font-size: variables.$font-size-18;
 			color: #424242;
 		}
 		
@@ -179,7 +182,7 @@
 			background-color: #e6e6e6;
 		}
 		.dropdown-menu {
-			background: $white;
+			background: variables.$white;
 			border: 1px solid #E5E7EB;
 			box-sizing: border-box;
 			box-shadow: 0px 4px 3px 0px rgba(0, 0, 0, 0.1);
@@ -198,7 +201,7 @@
 			align-items: center;
 		}
 		.dropdown-menu.chat-drop-menu .dropdown-item i {
-			font-size: $font-size-16;
+			font-size: variables.$font-size-16;
 			color: #424242;
 		}
 		.dropdown-menu .dropdown-item:hover,
@@ -252,7 +255,7 @@
 	transition: all .5s ease;
 	-webkit-transition: all .5s ease;
 	-ms-transition: all .5s ease;
-	background: $white;
+	background: variables.$white;
 	.chat-header {
 		display: flex;
 		display: -webkit-flex;
@@ -273,11 +276,11 @@
 				margin-right: 1rem;
 			}
 			h5 {
-				font-size: $font-size-15;
-				font-weight: $font-weight-semibold;
+				font-size: variables.$font-size-15;
+				font-weight: variables.$font-weight-semibold;
 				margin-bottom: 4px;
 				line-height: 1;
-				color: $gray-900;
+				color: variables.$gray-900;
 			}
 		}
 		.chat-options {
@@ -289,8 +292,8 @@
 				-webkit-align-items: center;
 				>li {
 					>a {
-						font-size: $font-size-14;
-						color: $gray-900;
+						font-size: variables.$font-size-14;
+						color: variables.$gray-900;
 						cursor: pointer;
 						width: 40px;
 						height: 40px;
@@ -303,12 +306,12 @@
 						justify-content: center;
 						-webkit-justify-content: center;
 						i {
-							font-size: $font-size-20;
+							font-size: variables.$font-size-20;
 						}
 						&:not(.no-bg) {
 							&:hover {
-								background-color: $gray-100;
-								border-color: $gray-100;
+								background-color: variables.$gray-100;
+								border-color: variables.$gray-100;
 							}
 						}
 					}
@@ -348,14 +351,14 @@
 						margin-right: 1rem;
 					}
 					h5 {
-						font-size: $font-size-15;
+						font-size: variables.$font-size-15;
 						margin-bottom: 0;
 					}
 					.time {
-						color: $white;
+						color: variables.$white;
 						margin-top: 2px;
 						font-size: 12px;
-						font-weight: $font-weight-normal;
+						font-weight: variables.$font-weight-normal;
 						i {
 							color: rgba(247, 247, 247, 0.5);
 							img {
@@ -371,17 +374,17 @@
 					border-radius: 0px 15px 15px 15px;
                     background: var(--light-color, #F6F7F8);
 					padding: 14px 20px;
-					color: $gray-900;
-					font-size: $font-size-14;
-					font-weight: $font-weight-normal;
+					color: variables.$gray-900;
+					font-size: variables.$font-size-14;
+					font-weight: variables.$font-weight-normal;
 					box-shadow: 0px 6px 12px 0px #00000008;
 					a {
-						color: $cyan;
+						color: variables.$cyan;
 					}
 				}
 				.message-content.award-link {
 					a {
-						color: $gray-900;
+						color: variables.$gray-900;
 						margin-bottom: 2px;
 						display: block;
 					}
@@ -398,9 +401,9 @@
 					.image-not-download {
 						span {
 							position: absolute;
-							color: $white;
+							color: variables.$white;
 							font-size: 13px;
-							font-weight: $font-weight-medium;
+							font-weight: variables.$font-weight-medium;
 							position: absolute;
 							top: 50%;
 							left: 50%;
@@ -414,13 +417,13 @@
 			.chat-profile-name {
 				h6 {
 					margin-bottom: 0;
-					color: $gray-900;
-					font-weight: $font-weight-semibold;
-					font-size: $font-size-15;
+					color: variables.$gray-900;
+					font-weight: variables.$font-weight-semibold;
+					font-size: variables.$font-size-15;
 					span {
 						font-size: 12px;
-						color: $gray-500;
-						font-weight: $font-weight-normal;
+						color: variables.$gray-500;
+						font-weight: variables.$font-weight-normal;
 						padding-left: 10px;
 					}
 				}
@@ -433,15 +436,15 @@
 				.message-content {
 					border-radius: 15px 0px 15px 15px;
                     background: rgba(255, 159, 67, 0.12);
-					color: $gray-900;
+					color: variables.$gray-900;
 					padding: 15px;
 					.chat-time {
 						justify-content: flex-start;
 						-webkit-justify-content: flex-start;
 						.time {
-							color: $gray-500;
+							color: variables.$gray-500;
 							i {
-								color: $cyan;
+								color: variables.$cyan;
 							}
 						}
 					}
@@ -465,7 +468,7 @@
 						align-items: flex-end;
 						-webkit-align-items: flex-end;
 						padding-bottom: 22px;
-						color: $gray-600;
+						color: variables.$gray-600;
 					}
 				}
 				.chat-content {
@@ -512,7 +515,7 @@
 					bottom: 8px;
 					line-height: 0;
 					a {
-						color: $white;
+						color: variables.$white;
 						font-size: 10px;
 					}
 					div+div {
@@ -533,9 +536,9 @@
 					line-height: 0;
 					bottom: 14px;
 					a {
-						color: $white;
+						color: variables.$white;
 						font-size: 10px;
-						color: $gray-800;
+						color: variables.$gray-800;
 					}
 					div+div {
 						margin-left: 8px;
@@ -547,30 +550,30 @@
 					}
 				}
 				position: relative;
-				background: $gray-300;
+				background: variables.$gray-300;
 				border-radius: 10px;
 				padding: 10px;
 				margin-bottom: 7px;
 				.file-type {
 					width: 54px;
 					height: 54px;
-					background-color: $white;
+					background-color: variables.$white;
 					border-radius: 4px;
 					i {
-						color: $gray-500;
-						font-size: $font-size-24;
+						color: variables.$gray-500;
+						font-size: variables.$font-size-24;
 					}
 				}
 				.file-details {
 					span.file-name {
-						color: $gray-900;
+						color: variables.$gray-900;
 						display: inline-block;
 						width: 100%;
-						font-size: $font-size-15;
-						font-weight: $font-weight-medium;
+						font-size: variables.$font-size-15;
+						font-weight: variables.$font-weight-medium;
 					}
 					span.file-size {
-						color: $gray-500;
+						color: variables.$gray-500;
 						display: inline-block;
 						width: 100%;
 					}
@@ -585,8 +588,8 @@
 						margin-bottom: 0;
 						li {
 							list-style: none;
-							color: $gray-900;
-							font-size: $font-size-14;
+							color: variables.$gray-900;
+							font-size: variables.$font-size-14;
 							position: relative;
 							&::before {
 								content: "";
@@ -603,7 +606,7 @@
 								}
 							}
 							a {
-								color: $primary;
+								color: variables.$primary;
 							}
 						}
 						li+li {
@@ -629,14 +632,14 @@
 			left: 0;
 			right: 0;
 			padding: 24px;
-			@include respond-below(custom991) {
+			@include mixins.respond-below(custom991) {
 				padding-bottom: 15px;
 			}
 			.form-buttons {
 				.btn {
 					margin-left: 0px;
-					color: $gray-400;
-					font-size: $font-size-20;
+					color: variables.$gray-400;
+					font-size: variables.$font-size-20;
 					padding: 0;
 					width: 20px;
 					height: 20px;
@@ -653,17 +656,17 @@
 					width: 40px;
 					height: 40px;
 					border-radius: 6px;
-                    background: $primary;
+                    background: variables.$primary;
 					display: inline-flex;
 					justify-content: center;
 					align-items: center;
-					color: $white !important;
+					color: variables.$white !important;
 					margin-left: 10px;
 					&:hover {
-						background-color: $white;
-						border-color: $gray-800;
+						background-color: variables.$white;
+						border-color: variables.$gray-800;
 						i {
-							color: $gray-800;
+							color: variables.$gray-800;
 						}
 					}
 					&:focus {
@@ -673,23 +676,23 @@
 			}
 			.specker-col {
 				span {
-					color: $gray-800;
+					color: variables.$gray-800;
 					font-size: 25px;
 				}
 			}
 			.attach-col {
 				i {
-					color: $gray-800;
-					font-size: $font-size-20;
+					color: variables.$gray-800;
+					font-size: variables.$font-size-20;
 				}
 				right: inherit;
 				left: 60px;
 			}
 			.smile-col {
 				i {
-					color: $gray-800;
-					font-size: $font-size-20;
-					font-size: $font-size-22;
+					color: variables.$gray-800;
+					font-size: variables.$font-size-20;
+					font-size: variables.$font-size-22;
 				}
 				right: inherit;
 				left: 15px;
@@ -699,7 +702,7 @@
 				.action-circle {
 					width: 38px;
 					height: 38px;
-					background: $white;
+					background: variables.$white;
 					border-radius: 50px;
 					display: -webkit-box;
 					display: -ms-flexbox;
@@ -711,30 +714,30 @@
 					-webkit-justify-content: center;
 					-ms-flex-pack: center;
 					&:hover {
-						background-color: $gray-100;
-						border-color: $gray-100;
+						background-color: variables.$gray-100;
+						border-color: variables.$gray-100;
 					}
 					i {
-						color: $gray-900;
-						font-size: $font-size-18;
+						color: variables.$gray-900;
+						font-size: variables.$font-size-18;
 					}
 				}
 			}
 			.form-control {
 				&::-webkit-input-placeholder {
-					color: $gray-900;
+					color: variables.$gray-900;
 					opacity: 1;
 				}
 				&::-moz-placeholder {
-					color: $gray-900;
+					color: variables.$gray-900;
 					opacity: 1;
 				}
 				&:-ms-input-placeholder {
-					color: $gray-900;
+					color: variables.$gray-900;
 					opacity: 1;
 				}
 				&:-moz-placeholder {
-					color: $gray-900;
+					color: variables.$gray-900;
 					opacity: 1;
 				}
 			}
@@ -750,8 +753,8 @@
 	}
 }
 .last-seen {
-	color: $gray-900;
-	font-size: $font-size-14;
+	color: variables.$gray-900;
+	font-size: variables.$font-size-14;
 }
 .user_callog {
 	display: flex;
@@ -763,11 +766,11 @@
 .chat-options.chat-option-profile {
 	.list-inline-item {
 		a {
-			background: $primary;
+			background: variables.$primary;
 			width: 38px;
 			height: 38px;
 			border-radius: 50px;
-			color: $gray-900;
+			color: variables.$gray-900;
 			padding: 0;
 			display: -webkit-box;
 			display: -ms-flexbox;
@@ -778,10 +781,10 @@
 			justify-content: center;
 			-webkit-justify-content: center;
 			-ms-flex-pack: center;
-			color: $white;
+			color: variables.$white;
 			&:hover {
 				background: #1b2950;
-				color: $white;
+				color: variables.$white;
 			}
 		}
 	}
@@ -793,9 +796,9 @@
 }
 .last-seen-profile {
 	span {
-		color: $gray-900;
-		font-size: $font-size-14;
-		font-weight: $font-weight-normal;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-14;
+		font-weight: variables.$font-weight-normal;
 		margin-bottom: 12px;
 		display: block;
 	}
@@ -806,8 +809,8 @@
 	width: 40px;
 	height: 40px;
 	border-radius: 20px;
-	font-size: $font-size-14;
-	color: $white;
+	font-size: variables.$font-size-14;
+	color: variables.$white;
 	text-align: center;
 	background: #ffa977;
 	bottom: 40px;
@@ -820,28 +823,28 @@
 }
 .btn-warning {
 	&:hover {
-		color: $white;
-		background-color: $primary-800;
-		border-color: $primary-900;
+		color: variables.$white;
+		background-color: variables.$primary-800;
+		border-color: variables.$primary-900;
 	}
 }
 .right_sidebar_profile {
 	margin-top: 0px;
 }
 .account_details {
-	background-color: $gray-300;
-	border-color: $gray-400;
+	background-color: variables.$gray-300;
+	border-color: variables.$gray-400;
 	border-radius: 5px !important;
 	border-bottom: 0 !important;
 }
 .security_details {
-	background-color: $gray-300;
-	border-color: $gray-400;
+	background-color: variables.$gray-300;
+	border-color: variables.$gray-400;
 	border-radius: 5px !important;
 	border-bottom: 0 !important;
 }
 .close_icon {
-	font-size: $font-size-18;
+	font-size: variables.$font-size-18;
 }
 .button_plus {
 	margin-left: 0px;
@@ -863,18 +866,18 @@
 		border-radius: 0px 0px 5px 5px;
 		border: 1px solid #E5E7EB;
 		font-size: 13px;
-		background-color: $white;
-		color: $gray-900;
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
+		background-color: variables.$white;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
 		&:hover {
-			border-color: $gray-200;
+			border-color: variables.$gray-200;
 		}
 		&:focus {
-			border-color: $gray-200;
+			border-color: variables.$gray-200;
 		}
 		&:focus-visible {
-			border-color: $gray-200;
+			border-color: variables.$gray-200;
 		}
 	}
 }
@@ -900,8 +903,8 @@
 	-webkit-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
 	i {
-		font-size: $font-size-16;
-		color: $gray-900;
+		font-size: variables.$font-size-16;
+		color: variables.$gray-900;
 	}
 }
 .user-chat-search {
@@ -921,18 +924,18 @@
 		border-radius: 0px 0px 5px 5px;
 		border: 1px solid #E5E7EB;
 		font-size: 13px;
-		background-color: $white;
-		color: $gray-900;
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
+		background-color: variables.$white;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
 		&:hover {
-			border-color: $gray-200;
+			border-color: variables.$gray-200;
 		}
 		&:focus {
-			border-color: $gray-200;
+			border-color: variables.$gray-200;
 		}
 		&:focus-visible {
-			border-color: $gray-200;
+			border-color: variables.$gray-200;
 		}
 	}
 }
@@ -952,7 +955,7 @@
 	width: 25px;
 	height: 25px;
 	border-radius: 25px;
-	color: $gray-900;
+	color: variables.$gray-900;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -968,7 +971,7 @@
 	width: 25px;
 	height: 25px;
 	border-radius: 25px;
-	color: $gray-900;
+	color: variables.$gray-900;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -989,19 +992,19 @@
 }
 .archive-btn {
 	border: 1px solid #008024;
-	color: $gray-600;
+	color: variables.$gray-600;
 	border-radius: 4px;
 	font-size: 11px;
-	font-weight: $font-weight-medium;
+	font-weight: variables.$font-weight-medium;
 	padding: 2px 6px;
 	margin-right: 1.5rem;
 }
 .archive-btn-grey {
 	border: 1px solid #909090;
-	color: $gray-500;
+	color: variables.$gray-500;
 	border-radius: 4px;
 	font-size: 9px;
-	font-weight: $font-weight-medium;
+	font-weight: variables.$font-weight-medium;
 	padding: 2px 6px;
 	margin-top: .25rem;
 }
@@ -1078,13 +1081,13 @@
 		}
 	}
 	h6 {
-		color: $gray-900;
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
 		margin-bottom: 0;
 		span {
 			i {
-				color: $warning-700;
+				color: variables.$warning-700;
 			}
 		}
 	}
@@ -1106,7 +1109,7 @@
 			span {
 				width: 28px;
 				height: 28px;
-				background: $primary;
+				background: variables.$primary;
 				border-radius: 50px;
 				display: -webkit-box;
 				display: -ms-flexbox;
@@ -1122,9 +1125,9 @@
 	}
 	li {
 		margin-bottom: 0;
-		color: $gray-900;
-		font-size: $font-size-14;
-		font-weight: $font-weight-normal;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-14;
+		font-weight: variables.$font-weight-normal;
 		list-style: none;
 	}
 	li+li {
@@ -1138,7 +1141,7 @@
 		bottom: 8px;
 		line-height: 0;
 		a {
-			color: $white;
+			color: variables.$white;
 			font-size: 10px;
 		}
 		div+div {
@@ -1191,17 +1194,17 @@
 	.select2-container--default {
 		.select2-selection--single {
 			.select2-selection__rendered {
-				color: $gray-500;
-				font-size: $font-size-18;
+				color: variables.$gray-500;
+				font-size: variables.$font-size-18;
 				font-weight: normal;
 				line-height: 24px;
-				font-weight: $font-weight-semibold;
+				font-weight: variables.$font-weight-semibold;
 			}
 			.select2-selection__arrow {
 				height: 24px;
 				right: 7px;
 				b {
-					border-color: $gray-700;
+					border-color: variables.$gray-700;
 					border-style: solid;
 					border-width: 0 2px 2px 0;
 					padding: 3px;
@@ -1218,7 +1221,7 @@
 			}
 		}
 		.select2-results__option--highlighted[aria-selected] {
-			background-color: $secondary-800;
+			background-color: variables.$secondary-800;
 		}
 		.select2-selection--multiple {
 			border: 1px solid #ddd;
@@ -1229,11 +1232,11 @@
 		.select2-selection--single {
 			.select2-selection__arrow {
 				b {
-					border-color: $gray-700;
+					border-color: variables.$gray-700;
 					border-width: 2px 0 0 2px;
 					padding: 3px;
 					margin-top: -5px;
-					border-color: $gray-700;
+					border-color: variables.$gray-700;
 					border-style: solid;
 					border-width: 0 2px 2px 0;
 					padding: 3px;
@@ -1261,8 +1264,8 @@
 .review-files {
 	p {
 		margin-bottom: 5px;
-		color: $gray-900;
-		font-size: $font-size-14;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-14;
 	}
 }
 .like-chat-grp {
@@ -1291,9 +1294,9 @@
 				justify-content: center;
 				-webkit-justify-content: center;
 				-ms-flex-pack: center;
-				color: $gray-900;
-				font-weight: $font-weight-normal;
-				font-size: $font-size-14;
+				color: variables.$gray-900;
+				font-weight: variables.$font-weight-normal;
+				font-size: variables.$font-size-14;
 				img {
 					margin-left: 5px;
 				}
@@ -1327,19 +1330,19 @@
 		transform: translateY(-50%);
 		-webkit-transform: translateY(-50%);
 		-ms-transform: translateY(-50%);
-		background-color: $gray-300;
+		background-color: variables.$gray-300;
 		width: 100%;
 		height: 1px;
 	}
 }
 .chat-date {
 	border-radius: 100px;
-    background: $gray-300;
-	color: $gray-900;
-	font-size: $font-size-14;
+    background: variables.$gray-300;
+	color: variables.$gray-900;
+	font-size: variables.$font-size-14;
 	padding: 4px 20px;
 	display: inline-block;
-	font-weight: $font-weight-normal;
+	font-weight: variables.$font-weight-normal;
 	position: relative;
 	border: 1px solid #E0E0E0;
 }
@@ -1384,9 +1387,9 @@
 .theme-content {
 	h6 {
 		margin-bottom: 6px;
-		color: $gray-900;
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
 	}
 	p {
 		margin-bottom: 0;
@@ -1396,8 +1399,8 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		display: -webkit-box;
-		color: $gray-900;
-		font-size: $font-size-14;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-14;
 	}
 }
 .chat-message-grp {
@@ -1424,7 +1427,7 @@
 				&:hover {
 					.stared-group {
 						h6 {
-							color: $gray-800;
+							color: variables.$gray-800;
 						}
 					}
 				}
@@ -1455,44 +1458,44 @@
 		-webkit-justify-content: center;
 		-ms-flex-pack: center;
 		i {
-			font-size: $font-size-16;
+			font-size: variables.$font-size-16;
 		}
 	}
 	h6 {
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
-		color: $text-color;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
+		color: variables.$text-color;
 		margin-bottom: 0;
 	}
 }
 .star-message {
 	background: #FEF6DC;
 	i {
-		color: $warning-700;
+		color: variables.$warning-700;
 	}
 }
 .mute-message {
 	background: #EBFDFFFA;
 	i {
-		color: $cyan;
+		color: variables.$cyan;
 	}
 }
 .block-message {
 	background: #FFE8E9;
 	i {
-		color: $purple;
+		color: variables.$purple;
 	}
 }
 .report-message {
 	background: #F8ECFF;
 	i {
-		color: $secondary;
+		color: variables.$secondary;
 	}
 }
 .delete-message {
 	background: #FFE8E9;
 	i {
-		color: $danger-800;
+		color: variables.$danger-800;
 	}
 }
 .count-group {
@@ -1506,9 +1509,9 @@
 		width: 16px;
 		height: 16px;
 		border-radius: 50px;
-		color: $white;
+		color: variables.$white;
 		font-size: 10px;
-		background: $primary;
+		background: variables.$primary;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -1522,22 +1525,22 @@
 	}
 	i {
 		color: #424242;
-		font-size: $font-size-16;
+		font-size: variables.$font-size-16;
 	}
 }
 .nav.nav-tabs.chat-tabs {
 	.nav-item {
 		.nav-link {
-			font-size: $font-size-16;
+			font-size: variables.$font-size-16;
 			font-weight: bold;
-			color: $white;
+			color: variables.$white;
 			background-color: transparent;
 			border: 0;
 		}
 		.nav-link.active {
-			font-size: $font-size-16;
+			font-size: variables.$font-size-16;
 			font-weight: bold;
-			color: $primary-800;
+			color: variables.$primary-800;
 		}
 	}
 }
@@ -1545,8 +1548,8 @@
 	ul {
 		li {
 			a {
-				color: $black;
-				font-size: $font-size-18;
+				color: variables.$black;
+				font-size: variables.$font-size-18;
 			}
 		}
 	}
@@ -1555,13 +1558,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: $font-size-16;
+	font-size: variables.$font-size-16;
 	border-radius: 50px;
 	width: 28px;
 	height: 28px;
 	&:hover {
 		background: #F5F5F5;
-		border-color: $gray-100;
+		border-color: variables.$gray-100;
 	}
 }
 .header-action {
@@ -1572,8 +1575,8 @@
 		display: inline-block;
 		margin-left: 10px;
 		a {
-			color: $gray-900;
-			font-size: $font-size-18;
+			color: variables.$gray-900;
+			font-size: variables.$font-size-18;
 		}
 	}
 }
@@ -1618,10 +1621,10 @@
 				-webkit-align-items: center;
 				justify-content: center;
 				-webkit-justify-content: center;
-				background-color: $gray-400;
-				font-size: $font-size-16;
-				font-weight: $font-weight-semibold;
-				color: $violet;
+				background-color: variables.$gray-400;
+				font-size: variables.$font-size-16;
+				font-weight: variables.$font-weight-semibold;
+				color: variables.$violet;
 			}
 		}
 		a.admin-shade {
@@ -1653,9 +1656,9 @@
 		border-radius: 50%;
 		top: 0px;
 		right: 2px;
-		border: 2px solid $white;
+		border: 2px solid variables.$white;
 		z-index: 9;
-		background-color: $yellow;
+		background-color: variables.$yellow;
 	}
 }
 .avatar-offline {
@@ -1668,7 +1671,7 @@
 		border-radius: 50%;
 		top: 0px;
 		right: 2px;
-		border: 2px solid $white;
+		border: 2px solid variables.$white;
 		z-index: 9;
 	}
 }
@@ -1682,13 +1685,13 @@
 		border-radius: 50%;
 		top: 0px;
 		right: 2px;
-		border: 2px solid $white;
+		border: 2px solid variables.$white;
 		z-index: 9;
-		background-color: $green;
+		background-color: variables.$green;
 	}
 }
 .animate-typing-col {
-	color: $success;
+	color: variables.$success;
 	.dot {
 		display: inline-block;
 		width: 4px;
@@ -1712,7 +1715,7 @@
 .chat_form {
 	border-radius: 20px;
 	margin-right: 0px;
-	background: $white;
+	background: variables.$white;
 	border: 1px solid #C2C2C2;
 	box-shadow: 0px 4px 4px #F5F8FF;
 	border-radius: 6px;
@@ -1721,9 +1724,9 @@
 }
 .contact-close {
 	a {
-		color: $gray-900;
+		color: variables.$gray-900;
 		opacity: 0.5;
-		border-color: $gray-300;
+		border-color: variables.$gray-300;
 	}
 }
 .main-wrapper {
@@ -1736,14 +1739,14 @@
 	}
 }
 .primary-title {
-	color: $primary-800;
-	font-size: $font-size-14;
+	color: variables.$primary-800;
+	font-size: variables.$font-size-14;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 0;
 	i {
-		font-size: $font-size-14;
+		font-size: variables.$font-size-14;
 	}
 }
 .contact-action {
@@ -1754,25 +1757,25 @@
 		padding: 11px 0;
 		border-bottom: 1px solid #f1f1f1;
 		a {
-			color: $gray-900;
-			color: $gray-900;
-			font-size: $font-size-14;
+			color: variables.$gray-900;
+			color: variables.$gray-900;
+			font-size: variables.$font-size-14;
 			font-weight: bold;
 		}
 	}
 	li.report-contact {
 		a {
-			color: $danger;
+			color: variables.$danger;
 		}
 	}
 	li.delete-chat {
 		a {
-			color: $danger;
+			color: variables.$danger;
 		}
 	}
 	li.sign-out {
 		a {
-			color: $danger;
+			color: variables.$danger;
 		}
 	}
 }
@@ -1800,7 +1803,7 @@
 	display: -webkit-flex;
 	flex-direction: column;
 	-webkit-flex-direction: column;
-	background-color: $light;
+	background-color: variables.$light;
 	opacity: 100%;
 	transition: all .5s ease;
 	-webkit-transition: all .5s ease;
@@ -1808,7 +1811,7 @@
 	position: relative;
 	width: 320px;
 	.right-sidebar-wrap {
-		background-color: $white;
+		background-color: variables.$white;
 		border-left: 1px solid #E0E0E0;
 		border-radius: 0px;
 		margin-top: 0px;
@@ -1828,7 +1831,7 @@
 			width: 25px;
 			height: 25px;
 			border-radius: 25px;
-			color: $gray-900;
+			color: variables.$gray-900;
 			display: flex;
 			display: -webkit-flex;
 			justify-content: center;
@@ -1836,10 +1839,10 @@
 			align-items: center;
 			-webkit-align-items: center;
 			&.close-star {
-				color: $warning;
+				color: variables.$warning;
 			}
 			&.close-trash {
-				color: $danger;
+				color: variables.$danger;
 			}
 		}
 	}
@@ -1863,14 +1866,14 @@
 	}
 	.chat-title {
 		h4 {
-			font-size: $font-size-18;
-			font-weight: $font-weight-semibold;
-			color: $gray-900;
+			font-size: variables.$font-size-18;
+			font-weight: variables.$font-weight-semibold;
+			color: variables.$gray-900;
 		}
 		span {
 			font-size: 12px;
-			font-weight: $font-weight-normal;
-			color: $gray-900;
+			font-weight: variables.$font-weight-normal;
+			color: variables.$gray-900;
 		}
 	}
 }
@@ -1904,26 +1907,26 @@
 				list-style: none;
 				margin-bottom: 15px;
 				h6 {
-					font-size: $font-size-15;
-					font-weight: $font-weight-normal;
-					color: $gray-900;
+					font-size: variables.$font-size-15;
+					font-weight: variables.$font-weight-normal;
+					color: variables.$gray-900;
 					margin-bottom: 5px;
 				}
 				h5 {
-					font-size: $font-size-15;
-					font-weight: $font-weight-medium;
-					color: $gray-900;
+					font-size: variables.$font-size-15;
+					font-weight: variables.$font-weight-medium;
+					color: variables.$gray-900;
 					margin-bottom: 0px;
 				}
 				span {
-					font-size: $font-size-16;
-					font-weight: $font-weight-normal;
-					color: $gray-900;
+					font-size: variables.$font-size-16;
+					font-weight: variables.$font-weight-normal;
+					color: variables.$gray-900;
 				}
 				a {
-					font-size: $font-size-15;
-					font-weight: $font-weight-medium;
-					color: $gray-800;
+					font-size: variables.$font-size-15;
+					font-weight: variables.$font-weight-medium;
+					color: variables.$gray-800;
 					border-radius: 100px;
 					padding: 5px;
 					background: #F5F5F5;
@@ -1931,7 +1934,7 @@
 					align-items: center;
 					justify-content: center;
 					&:hover {
-						color: $gray-900;
+						color: variables.$gray-900;
 					}
 				}
 				a+a {
@@ -1958,15 +1961,15 @@
 		width: 25px;
 		height: 25px;
 		border-radius: 25px;
-		color: $gray-900;
+		color: variables.$gray-900;
 		display: flex;
 		display: -webkit-flex;
 		justify-content: center;
 		-webkit-justify-content: center;
 		align-items: center;
 		-webkit-align-items: center;
-		background-color: $gray-100;
-		border-color: $gray-100;
+		background-color: variables.$gray-100;
+		border-color: variables.$gray-100;
 	}
 }
 .group-description {
@@ -1977,21 +1980,21 @@
 					width: 25px;
 					height: 25px;
 					border-radius: 25px;
-					color: $gray-900;
+					color: variables.$gray-900;
 					display: flex;
 					display: -webkit-flex;
 					justify-content: center;
 					-webkit-justify-content: center;
 					align-items: center;
 					-webkit-align-items: center;
-					border-color: $gray-100;
+					border-color: variables.$gray-100;
 				}
 			}
 		}
 	}
 }
 .list_group_notread {
-	color: $primary-800 !important;
+	color: variables.$primary-800 !important;
 }
 .chat-cont-type {
 	display: flex;
@@ -2000,9 +2003,9 @@
 	.chat-type-wrapper {
 		margin-bottom: 0;
 		p {
-			color: $gray-500;
+			color: variables.$gray-500;
 			font-size: 12px;
-			font-weight: $font-weight-normal;
+			font-weight: variables.$font-weight-normal;
 			margin-bottom: 0;
 		}
 	}
@@ -2012,14 +2015,14 @@
 	position: relative;
 	padding-left: 35px;
 	cursor: pointer;
-	font-size: $font-size-22;
+	font-size: variables.$font-size-22;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	font-size: $font-size-16;
-	font-weight: $font-weight-normal;
-	color: $gray-900;
+	font-size: variables.$font-size-16;
+	font-weight: variables.$font-weight-normal;
+	color: variables.$gray-900;
 	margin-right: 24px;
 	input {
 		position: absolute;
@@ -2028,7 +2031,7 @@
 		&:checked {
 			~ {
 				.checkmark {
-					background-color: $gray-800;
+					background-color: variables.$gray-800;
 					&:after {
 						display: block;
 					}
@@ -2053,7 +2056,7 @@
 	left: 0;
 	height: 22px;
 	width: 22px;
-	background-color: $white;
+	background-color: variables.$white;
 	border: 1px solid #E4E4E4;
 	border-radius: 50%;
 	&:after {
@@ -2064,14 +2067,14 @@
 }
 .pass-login {
 	label {
-		color: $gray-900;
-		font-size: $font-size-14;
-		font-weight: $font-weight-medium;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-14;
+		font-weight: variables.$font-weight-medium;
 	}
 }
 .select2-container--default {
 	.select2-results__option--highlighted[aria-selected] {
-		background-color: $gray-800 !important;
+		background-color: variables.$gray-800 !important;
 	}
 }
 .right-sidebar-profile {
@@ -2094,7 +2097,7 @@
 .group_header {
 	width: 38px !important;
 	height: 38px !important;
-	border: 2px solid $white;
+	border: 2px solid variables.$white;
 }
 .last-chat-time {
 	i.missed-col {
@@ -2110,9 +2113,9 @@
 .right-sidebar-head {
 	padding: 0px 24px;
 	h5 {
-		font-size: $font-size-15;
-		font-weight: $font-weight-semibold;
-		color: $gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-semibold;
+		color: variables.$gray-900;
 		margin-bottom: 0px;
 	}
 }
@@ -2142,20 +2145,20 @@
 		margin-bottom: 15px;
 		.nav {
 			.nav-item.active {
-				background: $primary;
+				background: variables.$primary;
 				border-radius: 6px;
-				color: $gray-900;
-				color: $white;
+				color: variables.$gray-900;
+				color: variables.$white;
 			}
 			.nav-item {
 				padding: 2px 10px;
-				font-size: $font-size-14;
-				color: $gray-900;
-				font-weight: $font-weight-medium;
+				font-size: variables.$font-size-14;
+				color: variables.$gray-900;
+				font-weight: variables.$font-weight-medium;
 				border: 0;
 				margin-right: 10px;
-				background: $body-bg;
-				color: $secondary;
+				background: variables.$body-bg;
+				color: variables.$secondary;
 				border-radius: 6px;
 				&:last-child {
 					margin-right: 0px;
@@ -2172,13 +2175,13 @@
 				}
 				span {
 					i {
-						font-size: $font-size-20;
-						color: $white;
+						font-size: variables.$font-size-20;
+						color: variables.$white;
 					}
 					position: absolute;
-					color: $white;
+					color: variables.$white;
 					font-size: 13px;
-					font-weight: $font-weight-medium;
+					font-weight: variables.$font-weight-medium;
 					position: absolute;
 					top: 50%;
 					left: 50%;
@@ -2189,7 +2192,7 @@
 				&:hover {
 					span {
 						i {
-							color: $gray-300;
+							color: variables.$gray-300;
 						}
 					}
 				}
@@ -2240,7 +2243,7 @@
 		-ms-flex-pack: center;
 		margin-right: 10px;
 		i {
-			font-size: $font-size-24;
+			font-size: variables.$font-size-24;
 		}
 	}
 }
@@ -2256,9 +2259,9 @@
 		align-items: center;
 		li {
 			list-style: none;
-			color: $gray-900;
-			font-size: $font-size-14;
-			font-weight: $font-weight-normal;
+			color: variables.$gray-900;
+			font-size: variables.$font-size-14;
+			font-weight: variables.$font-weight-normal;
 			position: relative;
 			&::before {
 				content: "";
@@ -2280,14 +2283,14 @@
 		}
 	}
 	h6 {
-		color: $gray-900;
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
+		color: variables.$gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
 	}
 }
 .media-download {
 	a {
-		color: $gray-900;
+		color: variables.$gray-900;
 	}
 }
 .social-media-col {
@@ -2304,8 +2307,8 @@
 		li {
 			float: left;
 			a {
-				color: $violet;
-				font-size: $font-size-18;
+				color: variables.$violet;
+				font-size: variables.$font-size-18;
 			}
 		}
 		li+li {
@@ -2313,9 +2316,9 @@
 		}
 	}
 	h6 {
-		font-weight: $font-weight-semibold;
-		color: $black;
-		font-size: $font-size-15;
+		font-weight: variables.$font-weight-semibold;
+		color: variables.$black;
+		font-size: variables.$font-size-15;
 		margin-bottom: 20px;
 	}
 }
@@ -2331,30 +2334,30 @@
 .media-link-detail {
 	h6 {
 		a {
-			color: $gray-900;
-			font-size: $font-size-15;
-			font-weight: $font-weight-medium;
+			color: variables.$gray-900;
+			font-size: variables.$font-size-15;
+			font-weight: variables.$font-weight-medium;
 			margin-bottom: 5px;
 		}
 	}
 	span {
 		a {
-			color: $gray-900;
-			font-size: $font-size-14;
-			font-weight: $font-weight-normal;
+			color: variables.$gray-900;
+			font-size: variables.$font-size-14;
+			font-weight: variables.$font-weight-normal;
 			word-break: break-all;
 		}
 	}
 	a {
 		&:hover {
-			color: $gray-800;
+			color: variables.$gray-800;
 		}
 	}
 }
 .share-media-blk {
 	a {
-		color: $gray-800;
-		font-weight: $font-weight-medium;
+		color: variables.$gray-800;
+		font-weight: variables.$font-weight-medium;
 	}
 }
 .link-img {
@@ -2366,9 +2369,9 @@
 }
 .settings-col {
 	h6 {
-		font-weight: $font-weight-semibold;
-		color: $black;
-		font-size: $font-size-15;
+		font-weight: variables.$font-weight-semibold;
+		color: variables.$black;
+		font-size: variables.$font-size-15;
 		margin-bottom: 20px;
 	}
 	margin-top: 35px;
@@ -2382,8 +2385,8 @@
 		padding: 0;
 		margin: 0;
 		li {
-			color: $gray-600;
-			font-weight: $font-weight-medium;
+			color: variables.$gray-600;
+			font-weight: variables.$font-weight-medium;
 		}
 		li+li {
 			margin-top: 15px;
@@ -2409,7 +2412,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: $gray-500;
+		background-color: variables.$gray-500;
 		-webkit-transition: .4s;
 		transition: .4s;
 		&:before {
@@ -2419,14 +2422,14 @@
 			width: 15px;
 			left: 4px;
 			bottom: 4px;
-			background-color: $white;
+			background-color: variables.$white;
 			-webkit-transition: .4s;
 			transition: .4s;
 		}
 	}
 	input {
 		&:checked+.slider {
-			background-color: $blue;
+			background-color: variables.$blue;
 			&:before {
 				-webkit-transform: translateX(16px);
 				-ms-transform: translateX(16px);
@@ -2465,16 +2468,16 @@
 		li {
 			display: block;
 			width: 100%;
-			font-weight: $font-weight-medium;
+			font-weight: variables.$font-weight-medium;
 			position: relative;
 			a {
-				color: $danger;
+				color: variables.$danger;
 				padding-left: 25px;
 				span {
 					position: absolute;
 					left: 0;
 					top: 0px;
-					font-size: $font-size-16;
+					font-size: variables.$font-size-16;
 				}
 			}
 		}
@@ -2484,14 +2487,14 @@
 	}
 }
 .load-more-btn {
-	font-weight: $font-weight-semibold;
+	font-weight: variables.$font-weight-semibold;
 	margin-top: 10px;
 	i {
 		background: #0057FF;
 		border-radius: 50%;
 		height: 12px;
 		width: 12px;
-		color: $white;
+		color: variables.$white;
 		line-height: 8px;
 		font-size: 12px;
 		vertical-align: top;
@@ -2521,7 +2524,7 @@
 		li {
 			border: 1px solid #E0E0E0;
 			border-radius: 5px;
-			background-color: $white;
+			background-color: variables.$white;
 			padding: 10px;
 		}
 		li+li {
@@ -2533,19 +2536,19 @@
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;
-			font-size: $font-size-15;
-			font-weight: $font-weight-medium;
+			font-size: variables.$font-size-15;
+			font-weight: variables.$font-weight-medium;
 			margin-bottom: 5px;
-			color: $gray-900;
+			color: variables.$gray-900;
 		}
 		p {
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			margin-bottom: 0;
-			color: $gray-900;
-			font-size: $font-size-14;
-			font-weight: $font-weight-normal;
+			color: variables.$gray-900;
+			font-size: variables.$font-size-14;
+			font-weight: variables.$font-weight-normal;
 		}
 		flex: 1;
 		position: relative;
@@ -2556,15 +2559,15 @@
 	}
 	.admin-profiles {
 		display: inline-block;
-		color: $gray-800;
+		color: variables.$gray-800;
 		border-radius: 6px;
 		font-size: 12px;
 		padding: 2px 10px;
-		font-weight: $font-weight-medium;
+		font-weight: variables.$font-weight-medium;
 		background: #F8ECFF;
 		&:hover {
 			background: #680A83;
-			color: $white;
+			color: variables.$white;
 		}
 	}
 }
@@ -2574,9 +2577,9 @@
 	margin-bottom: 15px;
 	h6 {
 		margin-bottom: 15px;
-		font-size: $font-size-15;
-		font-weight: $font-weight-medium;
-		color: $gray-900;
+		font-size: variables.$font-size-15;
+		font-weight: variables.$font-weight-medium;
+		color: variables.$gray-900;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -2598,23 +2601,23 @@
 		align-items: center;
 		height: 100%;
 		>a {
-			color: $gray-500;
+			color: variables.$gray-500;
 		}
 	}
 }
 .chat-action-col {
 	>a {
-		color: $gray-900;
+		color: variables.$gray-900;
 	}
 }
 .darkmode-btn {
 	width: 35px;
 	height: 32px;
-	background-color: $blue;
+	background-color: variables.$blue;
 	border: 1px solid #FBFBFB;
 	border-radius: 5px;
-	color: $white;
-	font-size: $font-size-16;
+	color: variables.$white;
+	font-size: variables.$font-size-16;
 	display: flex;
 	display: -webkit-flex;
 	align-items: center;
@@ -2623,24 +2626,24 @@
 	-webkit-justify-content: center;
 	margin: 0 auto;
 	&:hover {
-		color: $white;
+		color: variables.$white;
 	}
 	&:focus {
-		color: $white;
+		color: variables.$white;
 	}
 }
 .add-contacts-btn {
 	&:hover {
-		color: $white;
+		color: variables.$white;
 	}
 	&:focus {
-		color: $white;
+		color: variables.$white;
 	}
 	width: 25px;
 	height: 25px;
 	border-radius: 30px;
-	background-color: $gray-800;
-	color: $white;
+	background-color: variables.$gray-800;
+	color: variables.$white;
 	font-size: 10px;
 	display: flex;
 	display: -webkit-flex;
@@ -2653,13 +2656,13 @@
 .group-call-tab {
 	.nav-tabs {
 		.nav-link {
-			color: $gray-800;
+			color: variables.$gray-800;
 			border: 0;
 			border-radius: 10px;
-			font-weight: $font-weight-medium;
+			font-weight: variables.$font-weight-medium;
 			padding: 6px 25px;
 			&:hover {
-				color: $gray-800;
+				color: variables.$gray-800;
 			}
 		}
 		.nav-link+.nav-link {
@@ -2667,7 +2670,7 @@
 		}
 		.nav-link.active {
 			background-color: rgba(90, 7, 139, 0.1);
-			color: $gray-800;
+			color: variables.$gray-800;
 		}
 	}
 	nav {
@@ -2679,7 +2682,7 @@
 			left: 0;
 			bottom: 0;
 			width: 100%;
-			background-color: $gray-400;
+			background-color: variables.$gray-400;
 			height: 1px;
 		}
 	}
@@ -2739,14 +2742,14 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	color: $white !important;
+	color: variables.$white !important;
 	background-color: #FFA977 !important;
 	margin-left: 15px;
-	font-size: $font-size-22;
+	font-size: variables.$font-size-22;
 }
 
 .status_telegram {
-	color: $white;
+	color: variables.$white;
 }
 
 .media-lists {
@@ -2797,7 +2800,7 @@ ul.list-inline .list-inline-item {
 }
 
 .open_drop {
-	color: $white !important;
+	color: variables.$white !important;
 }
 
 .send-btn_status:focus {
@@ -2814,7 +2817,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar .avatar-title {
-	color: $white;
+	color: variables.$white;
 	background: #680A83;
 	width: 100%;
 	height: 100%;
@@ -2823,7 +2826,7 @@ ul.list-inline .list-inline-item {
 	justify-content: center;
 	text-transform: uppercase;
 	font-size: 19px;
-	font-weight: $font-weight-semibold;
+	font-weight: variables.$font-weight-semibold;
 }
 
 .avatar > a {
@@ -2847,7 +2850,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar.avatar-sm .avatar-title {
-	font-size: $font-size-14;
+	font-size: variables.$font-size-14;
 }
 
 .avatar.avatar-lg {
@@ -2901,15 +2904,15 @@ ul.list-inline .list-inline-item {
 }
 
 .accordion-col .accordion-content h6 {
-	font-size: $font-size-14;
+	font-size: variables.$font-size-14;
 }
 
 
 
 .status-right {
-	font-weight: $font-weight-medium;
+	font-weight: variables.$font-weight-medium;
 	color: #444444;
-	font-size: $font-size-16;
+	font-size: variables.$font-size-16;
 	text-align: center;
 }
 
@@ -2925,7 +2928,7 @@ ul.list-inline .list-inline-item {
 }
 
 .star-drop .btn-outline-light i {
-	font-size: $font-size-20;
+	font-size: variables.$font-size-20;
 }
 
 .star-drop .btn.btn-outline-light:hover {
@@ -2971,8 +2974,8 @@ ul.list-inline .list-inline-item {
 }
 
 .chat-title h4 a {
-	font-size: $font-size-14;
-	font-weight: $font-weight-bold;
+	font-size: variables.$font-size-14;
+	font-weight: variables.$font-weight-bold;
 	text-transform: uppercase;
 	color: #4B0973;
 	margin-bottom: 0;
@@ -2983,7 +2986,7 @@ ul.list-inline .list-inline-item {
 	height: 30px;
 	background-color: #680A83;
 	border-radius: 30px;
-	color: $white;
+	color: variables.$white;
 	display: flex;
 	display: -webkit-flex;
 	align-items: center;
@@ -3021,7 +3024,7 @@ ul.list-inline .list-inline-item {
 	display: -webkit-flex;
 	align-items: center;
 	-webkit-align-items: center;
-	font-size: $font-size-20;
+	font-size: variables.$font-size-20;
 }
 .all-chats .add-section ul li:hover{
   background-color: #F5F5F5;
@@ -3030,7 +3033,7 @@ ul.list-inline .list-inline-item {
 
 .online {
 	color: #008024;
-	font-weight: $font-weight-medium;
+	font-weight: variables.$font-weight-medium;
 }
 
 .top-online-contacts {
@@ -3050,8 +3053,8 @@ ul.list-inline .list-inline-item {
 }
 .fav-title h6 {
 	margin-bottom: 0;
-	font-size: $font-size-18;
-	font-weight: $font-weight-semibold;
+	font-size: variables.$font-size-18;
+	font-weight: variables.$font-weight-semibold;
 	display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -3060,12 +3063,12 @@ ul.list-inline .list-inline-item {
 	align-items: center;
 }
 .fav-title h6 i {
-	font-size: $font-size-22;
+	font-size: variables.$font-size-22;
 }
 .fav-title a {
 	margin-bottom: 0;
-	color: $primary;
-	font-weight: $font-weight-medium;
+	color: variables.$primary;
+	font-weight: variables.$font-weight-medium;
 }
 .fav-title a:hover {
 	color: #0A0A0A;
@@ -3101,13 +3104,13 @@ ul.list-inline .list-inline-item {
 	background-color: #49E073;
 	width: 10px;
 	height: 10px;
-	border: 2px solid $white;
+	border: 2px solid variables.$white;
 	border-radius: 50px;
 }
 
 .dropdown-menu .dropdown-item span.edit-profile-icon,
 .dropdown-menu .dropdown-item span.profile-icon-col {
-	font-size: $font-size-15;
+	font-size: variables.$font-size-15;
 }
 
 .avatar {
@@ -3128,7 +3131,7 @@ ul.list-inline .list-inline-item {
 	width: 100%;
 	height: 100%;
 	background-color: #650681;
-	color: $white;
+	color: variables.$white;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -3144,7 +3147,7 @@ ul.list-inline .list-inline-item {
 	height: 25%;
 	border-radius: 50%;
 	content: '';
-	border: 2px solid $white;
+	border: 2px solid variables.$white;
 }
 
 .avatar-online::before {
@@ -3168,7 +3171,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar .avatar-title {
-	font-size: $font-size-18;
+	font-size: variables.$font-size-18;
 }
 
 .avatar-xs {
@@ -3208,7 +3211,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar-sm .avatar-title {
-	font-size: $font-size-15;
+	font-size: variables.$font-size-15;
 }
 
 .avatar-sm.avatar-away::before,
@@ -3231,7 +3234,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar-lg .avatar-title {
-	font-size: $font-size-24;
+	font-size: variables.$font-size-24;
 }
 
 .avatar-lg.avatar-away::before,
@@ -3254,7 +3257,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar-xl .avatar-title {
-	font-size: $font-size-28;
+	font-size: variables.$font-size-28;
 }
 
 .avatar-xl.avatar-away::before,
@@ -3277,7 +3280,7 @@ ul.list-inline .list-inline-item {
 }
 
 .avatar-xxl .avatar-title {
-	font-size: $font-size-30;
+	font-size: variables.$font-size-30;
 }
 
 .avatar-xxl.avatar-away::before,
@@ -3411,7 +3414,7 @@ ul.list-inline .list-inline-item {
 }
 
 .input-group .input-group-text {
-	font-size: $font-size-14;
+	font-size: variables.$font-size-14;
 }
 
 .tooltip > .tooltip-inner {
@@ -3424,10 +3427,10 @@ ul.list-inline .list-inline-item {
 }
 .tooltip .arrow {
 	display: none;
-	background-color: $primary;
+	background-color: variables.$primary;
 }
 .tooltip .tooltip-inner {
-	background-color: $primary;
+	background-color: variables.$primary;
 }
 
 .sticky-top {
@@ -3459,20 +3462,20 @@ ul.list-inline .list-inline-item {
 	position: relative;
 	z-index: 99;
 	width: 340px;
-	@include respond-below(custom767) {
+	@include mixins.respond-below(custom767) {
 		width: 100%;
 	}
 }
 
 .main-wrapper .content .sidebar-group .sidebar {
-	background: $white;
+	background: variables.$white;
 	overflow: hidden;
 	width: 340px !important;
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 	border-right: 1px solid rgba(224, 224, 224, 1);
-	@include respond-below(custom767) {
+	@include mixins.respond-below(custom767) {
 		width: 100%!important;
 	}
 }
@@ -3485,7 +3488,7 @@ ul.list-inline .list-inline-item {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 30px;
-	font-weight: $font-weight-semibold;
+	font-weight: variables.$font-weight-semibold;
 	background-color: #680A83;
 }
 
@@ -3494,7 +3497,7 @@ ul.list-inline .list-inline-item {
 }
 
 .header-top > span {
-	font-size: $font-size-22;
+	font-size: variables.$font-size-22;
 }
 
 .header-top ul {
@@ -3530,9 +3533,9 @@ ul.list-inline .list-inline-item {
 	margin-right: 6px;
 }
 .sidebar-body .profile-name {
-	font-weight: $font-weight-semibold;
+	font-weight: variables.$font-weight-semibold;
 	color: #0A0A0A;
-	font-size: $font-size-18;
+	font-size: variables.$font-size-18;
 	margin-bottom: 0;
 }
 
@@ -3559,7 +3562,7 @@ ul.list-inline .list-inline-item {
 }
 
 .close_profile4 {
-	color: $black;
+	color: variables.$black;
 	border-color: #e6e6e6;
 }
 
@@ -3621,8 +3624,8 @@ ul.list-inline .list-inline-item {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	font-size: $font-size-15;
-	font-weight: $font-weight-medium;
+	font-size: variables.$font-size-15;
+	font-weight: variables.$font-weight-medium;
 	margin-bottom: 3px;
 	color: #0A0A0A;
 }
@@ -3633,7 +3636,7 @@ ul.list-inline .list-inline-item {
 	overflow: hidden;
 	margin-bottom: 0;
 	color: #232323;
-	font-size: $font-size-14;
+	font-size: variables.$font-size-14;
 }
 .sidebar .user-list li .users-list-body p.missed-call-col {
 	color: #DE3E44;
@@ -3645,7 +3648,7 @@ ul.list-inline .list-inline-item {
 
 .sidebar .user-list li .users-list-body .last-chat-time .text-muted {
 	color: #424242 !important;
-	font-weight: $font-weight-normal;
+	font-weight: variables.$font-weight-normal;
 	font-size: 12px;
 	margin-bottom: 5px;
 	display: block;
@@ -3666,8 +3669,8 @@ ul.list-inline .list-inline-item {
 	-webkit-justify-content: center;
 	line-height: 0;
 	font-size: 11px;
-	background-color: $primary;
-	color: $white;
+	background-color: variables.$primary;
+	color: variables.$white;
 	border-radius: 50%;
 	margin-left: auto;
 	margin-top: 10px;
@@ -3690,11 +3693,11 @@ ul.list-inline .list-inline-item {
 }
 
 .sidebar .user-list li.unread h5 {
-	color: $white;
+	color: variables.$white;
 }
 
 .sidebar .user-list li.unread p {
-	color: $white;
+	color: variables.$white;
 }
 
 .sidebar .user-list li.unread .text-muted {
@@ -3738,11 +3741,11 @@ ul.list-inline .list-inline-item {
 	margin-top: 0;
 	margin-bottom: 24px;
 	color: #424242;
-	font-size: $font-size-16;
-	font-weight: $font-weight-normal;
+	font-size: variables.$font-size-16;
+	font-weight: variables.$font-weight-normal;
 }
 .select-message-box .btn i {
-	font-size: $font-size-15;
+	font-size: variables.$font-size-15;
 }
 
 .group-description {
@@ -3754,8 +3757,8 @@ ul.list-inline .list-inline-item {
 	margin-bottom: 15px;
 }
 .group-description h5 {
-	font-size: $font-size-15;
-	font-weight: $font-weight-medium;
+	font-size: variables.$font-size-15;
+	font-weight: variables.$font-weight-medium;
 	color: #0A0A0A;
 	margin-bottom: 10px;
 	display: -webkit-box;
@@ -3773,20 +3776,20 @@ ul.list-inline .list-inline-item {
 }
 .group-description p { 
 	color: #424242;
-	font-size: $font-size-16;
-	font-weight: $font-weight-normal;
+	font-size: variables.$font-size-16;
+	font-weight: variables.$font-weight-normal;
 	margin-bottom: 10px;
 }
 .group-description p.description-date { 
 	color: #424242;
 	font-size: 12px;
-	font-weight: $font-weight-normal;
+	font-weight: variables.$font-weight-normal;
 	margin-bottom: 0px;
 }
 .encrypted-message p {
 	font-size: 12px;
 	color: #424242;
-	font-weight: $font-weight-normal;
+	font-weight: variables.$font-weight-normal;
 	margin-bottom: 0;
 }
 .group-view-all {
@@ -3794,8 +3797,8 @@ ul.list-inline .list-inline-item {
 }
 .group-view-all a {
 	color: #680A83;
-	font-size: $font-size-14;
-	font-weight: $font-weight-medium;
+	font-size: variables.$font-size-14;
+	font-weight: variables.$font-weight-medium;
 }
 .group-view-all a:hover {
 	color: #0A0A0A;
@@ -3823,8 +3826,8 @@ ul.list-inline .list-inline-item {
 	height: 50px;
 }
 .edit-set-details p {
-	font-size: $font-size-14;
-	font-weight: $font-weight-normal;
+	font-size: variables.$font-size-14;
+	font-weight: variables.$font-weight-normal;
 	color: #424242;
 	margin-bottom: 0;
 }
@@ -3844,13 +3847,13 @@ ul.list-inline .list-inline-item {
 	color: #0A0A0A;
 }
 .select-group-chat .dropdown-toggle {
-	font-weight: $font-weight-semibold;
+	font-weight: variables.$font-weight-semibold;
 	color: #0A0A0A;
-	font-size: $font-size-18;
+	font-size: variables.$font-size-18;
 }
 .select-group-chat .dropdown-menu .dropdown-item {
-	font-size: $font-size-14;
-	font-weight: $font-weight-normal;
+	font-size: variables.$font-size-14;
+	font-weight: variables.$font-weight-normal;
 	color: #0A0A0A;
 }
 .select-group-chat .dropdown-menu li:first-child .dropdown-item:hover {
@@ -3860,7 +3863,7 @@ ul.list-inline .list-inline-item {
 	border-radius: 0 0 5px 5px;
 }
 .dropzone {
-	background: $white;
+	background: variables.$white;
 	border: 1px dashed #C2C2C2;
 	border-radius: 5px;
 	padding: 10px;
@@ -3872,14 +3875,14 @@ ul.list-inline .list-inline-item {
 }
 .dropzone p {
 	margin-bottom: 10px;
-	font-size: $font-size-16;
-	font-weight: $font-weight-medium;
+	font-size: variables.$font-size-16;
+	font-weight: variables.$font-weight-medium;
 	color: #0A0A0A;
 }
 .dropzone span {
 	color: #424242;
-	font-size: $font-size-14;
-	font-weight: $font-weight-normal;
+	font-size: variables.$font-size-14;
+	font-weight: variables.$font-weight-normal;
 }
 .uplaod-image img {
 	border-radius: 20px;
@@ -3910,7 +3913,7 @@ ul.list-inline .list-inline-item {
 }
 .upload-img-file .modal-header .close {
 	background-color: transparent;
-	color: $white;
+	color: variables.$white;
 }
 .check-star i {
 	color: #FEC001;
@@ -3944,7 +3947,7 @@ ul.list-inline .list-inline-item {
 	background: #EDEDED;
 }
 .emoj-group-list ul li.add-emoj a i {
-	font-size: $font-size-20;
+	font-size: variables.$font-size-20;
 	color: #424242;
 }
 .chat .slimscroll {
@@ -3955,8 +3958,8 @@ ul.list-inline .list-inline-item {
 	text-align: right;
 }
 .settings-option a {
-	font-size: $font-size-15;
-	font-weight: $font-weight-medium;
+	font-size: variables.$font-size-15;
+	font-weight: variables.$font-weight-medium;
 	color: #680A83;
 }
 .empty-dark-img {
@@ -3970,12 +3973,12 @@ ul.list-inline .list-inline-item {
 .chat-window{
     .card{
         .card-header {
-            background-color: $white;
-            border-bottom: 1px solid $gray-300;
+            background-color: variables.$white;
+            border-bottom: 1px solid variables.$gray-300;
         }
     }
     .badge-success {
-        background-color: $success !important;
+        background-color: variables.$success !important;
     }
 }
 .chat-page {
@@ -3986,7 +3989,7 @@ ul.list-inline .list-inline-item {
 .chat-search{
     .input-group {
         .form-control{
-            @include margin-padding(0,0 0 0 36px);
+            @include mixins.margin-padding(0,0 0 0 36px);
             height: 46px;
         }
         .input-group-prepend {
@@ -3996,10 +3999,10 @@ ul.list-inline .list-inline-item {
 			align-items: center;
 			-webkit-box-align: center;
 			-ms-flex-align: center;
-            color: $gray-700;
+            color: variables.$gray-700;
             pointer-events: none;
             z-index: 4;
-            @include position(absolute,0,15px,0,null);
+            @include mixins.position(absolute,0,15px,0,null);
         }
     }
 }
@@ -4009,17 +4012,17 @@ ul.list-inline .list-inline-item {
         overflow-y: auto;
         padding: 0;
         .media {
-            border-bottom: 1px solid $gray-300;
-            @include margin-padding(0,10px);
-            @include transition(all .2s);
+            border-bottom: 1px solid variables.$gray-300;
+            @include mixins.margin-padding(0,10px);
+            @include mixins.transition(all .2s);
             &.active {
-                background-color:  $gray-100;
+                background-color:  variables.$gray-100;
             }
             &:hover{
-                background-color:  $gray-100;
+                background-color:  variables.$gray-100;
             }
             .media-img-wrap {
-                @include margin-padding(0  15px 0 0,null);
+                @include mixins.margin-padding(0  15px 0 0,null);
                 position: relative;
                 .avatar > img {
                     width: 100%;
@@ -4039,13 +4042,13 @@ ul.list-inline .list-inline-item {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
-                    color: $secondary;
-                    font-size: $font-size-16;
-                    font-weight: $font-weight-bold;
+                    color: variables.$secondary;
+                    font-size: variables.$font-size-16;
+                    font-weight: variables.$font-weight-bold;
                 }
                 .user-last-chat {
-                    color: $gray-800;
-                    font-size: $font-size-base;
+                    color: variables.$gray-800;
+                    font-size: variables.$font-size-base;
                     line-height: 24px;
                     max-width: 170px;
                     overflow: hidden;
@@ -4053,8 +4056,8 @@ ul.list-inline .list-inline-item {
                     white-space: nowrap;
                 }
                 .last-chat-time {
-                    color: $gray-600;
-                    font-size:$font-size-13;
+                    color: variables.$gray-600;
+                    font-size:variables.$font-size-13;
                 }
                  div{
                     &:last-child {
@@ -4067,7 +4070,7 @@ ul.list-inline .list-inline-item {
     
 }
 .chat-cont-right {
-    @include transition(all 0.4s);
+    @include mixins.transition(all 0.4s);
     .chat-scroll {
         max-height: calc(100vh - 293px);
         overflow-y: auto;
@@ -4076,7 +4079,7 @@ ul.list-inline .list-inline-item {
     .msg_head {
         .back-user-list {
             display: none;
-            @include margin-padding(0 0 0 -10px ,0 10px);
+            @include mixins.margin-padding(0 0 0 -10px ,0 10px);
         }
     }
     .img_cont {
@@ -4087,18 +4090,18 @@ ul.list-inline .list-inline-item {
             height: 45px;
             min-width: 45px;
             width: 45px;
-            border: 1.5px solid $primary;
+            border: 1.5px solid variables.$primary;
         }
     }
     .user_info {
-        @include margin-padding(0 auto 0 15px,0);
+        @include mixins.margin-padding(0 auto 0 15px,0);
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
     ul.list-unstyled {
-        @include margin-padding(0 auto,0);
+        @include mixins.margin-padding(0 auto,0);
         width: 100%;
         .media{
             &.sent {
@@ -4117,15 +4120,15 @@ ul.list-inline .list-inline-item {
   					align-items: flex-end;
                     -ms-flex-direction: column;
   					flex-direction: column;
-                    @include margin-padding(0 20px 0 0 ,0);
+                    @include mixins.margin-padding(0 20px 0 0 ,0);
                     .msg-box {
-                        @include margin-padding(0,0 0 0 50px);
+                        @include mixins.margin-padding(0,0 0 0 50px);
                         position: relative;
                         + .msg-box{
-                            @include margin-padding(5px 0 0,0);
+                            @include mixins.margin-padding(5px 0 0,0);
                         }
                         p{
-                            @include margin-padding(0,0);
+                            @include mixins.margin-padding(0,0);
                         }
                         &:first-child::before {
                             border-bottom: 6px solid transparent;
@@ -4135,35 +4138,35 @@ ul.list-inline .list-inline-item {
                             content: "";
                             height: 0;
                             width: 0;
-                            @include position(absolute,0,-12px,null,auto);
+                            @include mixins.position(absolute,0,-12px,null,auto);
                         }
                        > div {
-                            @include margin-padding(0,10px 15px);
-                            @include rounded(10px);
+                            @include mixins.margin-padding(0,10px 15px);
+                            @include mixins.rounded(10px);
                             background-color: #e3e3e3;
                             display: inline-block;
                             position: relative;
                         }
                         &:first-child > div {
-                            @include rounded(10px 0 10px 10px) ;
+                            @include mixins.rounded(10px 0 10px 10px) ;
                         }
                     }
                     .chat-msg-attachments {
                     	display: -webkit-box;
 				        display: -ms-flexbox;
 				        display: flex;
-                        @include margin-padding(0 -1px,4px 0);
+                        @include mixins.margin-padding(0 -1px,4px 0);
                         width: 100%;
                         .chat-attachment {
                             position: relative;
                             max-width: 130px;
                             overflow: hidden;
                             &:before {
-                                @include position(absolute,0,0,0,0);
-                                background: $black;
+                                @include mixins.position(absolute,0,0,0,0);
+                                background: variables.$black;
                                 content: "";
                                 opacity: 0.4;
-                                @include transition(all .4s);
+                                @include mixins.transition(all .4s);
                             }
                             &:hover{
                                 .chat-attach-download{
@@ -4179,11 +4182,11 @@ ul.list-inline .list-inline-item {
                             max-width: 100%;
                         }
                         .chat-attach-download {
-                            @include position(absolute,50%,null,null,50%);
+                            @include mixins.position(absolute,50%,null,null,50%);
                             transform: translate(-50%, -50%);
                             opacity: 0;
-                            @include transition(all .4s);
-                            color: $white;
+                            @include mixins.transition(all .4s);
+                            color: variables.$white;
                             width: 32px;
                             line-height: 32px;
                             background: rgba(255, 255, 255, 0.2);
@@ -4197,20 +4200,20 @@ ul.list-inline .list-inline-item {
                     	align-items: center;
   						-webkit-box-align: center;
   						-ms-flex-align: center;
-                        @include margin-padding(5px 0 0,0);
+                        @include mixins.margin-padding(5px 0 0,0);
                         -ms-flex-wrap: wrap;
   						flex-wrap: wrap;
                         clear: both;
                         flex-direction: row-reverse;
                         list-style: none;
                         li{
-                            @include margin-padding(0,0 0 0 16px);
+                            @include mixins.margin-padding(0,0 0 0 16px);
                             position: relative;
 
                             &:not(:last-child)::after {
-                                @include position(absolute,50%,auto,null,8px);
+                                @include mixins.position(absolute,50%,auto,null,8px);
                                 transform: translate(-50%, -50%);
-                                background: $primary;
+                                background: variables.$primary;
                                 content: '';
                                 height: 4px;
                                 width: 4px;
@@ -4220,7 +4223,7 @@ ul.list-inline .list-inline-item {
                             color: rgba(50, 65, 72, 0.4);
                         }
                         a {
-                            color: $gray-800;
+                            color: variables.$gray-800;
                         }
                     }
                 }
@@ -4230,26 +4233,26 @@ ul.list-inline .list-inline-item {
                 margin-bottom: 20px;
                 .media-body{
                     position: relative;
-                    @include margin-padding(0 0 0 20px,0);
+                    @include mixins.margin-padding(0 0 0 20px,0);
                     &::before {
                         border-bottom: 6px solid transparent;
-                        border-right: 6px solid $primary;
-                        border-top: 6px solid $primary;
+                        border-right: 6px solid variables.$primary;
+                        border-top: 6px solid variables.$primary;
                         border-left: 6px solid transparent;
                         content: "";
                         height: 0;
-                        @include position(absolute,0px,auto,null,-6px);
+                        @include mixins.position(absolute,0px,auto,null,-6px);
                         width: 0;
                     }
                     > div {
-                        @include margin-padding(0,10px 15px);
-                        @include rounded(10px);
-                        background-color: $primary;
+                        @include mixins.margin-padding(0,10px 15px);
+                        @include mixins.rounded(10px);
+                        background-color: variables.$primary;
                         display: table;
                         position: relative;
                         p {
-                            color: $white;
-                            @include margin-padding(0,0);
+                            color: variables.$white;
+                            @include mixins.margin-padding(0,0);
                         }
                     }
                 }
@@ -4269,7 +4272,7 @@ ul.list-inline .list-inline-item {
 				-ms-flex-align: center;
                 -ms-flex-wrap: wrap;
   				flex-wrap: wrap;
-                @include margin-padding(5px 0 0,0);
+                @include mixins.margin-padding(5px 0 0,0);
                 clear: both;
                 list-style: none;
                 .chat-time {
@@ -4280,18 +4283,18 @@ ul.list-inline .list-inline-item {
             	display: -webkit-box;
 				display: -ms-flexbox;
 				display: flex;
-                @include margin-padding(0 -1px,4px 0);
+                @include mixins.margin-padding(0 -1px,4px 0);
                 width: 100%;
                 .chat-attachment {
                     position: relative;
                     max-width: 130px;
                     overflow: hidden;
                     &:before {
-                        @include position(absolute,0,0,0,0);
-                        background: $black;
+                        @include mixins.position(absolute,0,0,0,0);
+                        background: variables.$black;
                         content: "";
                         opacity: 0.4;
-                        @include transition(all .4s);
+                        @include mixins.transition(all .4s);
                     }
                     &:hover{
                         .chat-attach-download{
@@ -4307,11 +4310,11 @@ ul.list-inline .list-inline-item {
                     max-width: 100%;
                 }
                 .chat-attach-download {
-                    @include position(absolute,50%,null,null,50%);
-                    @include transform(translate(-50%, -50%));
-                    @include transition(all .4s);
+                    @include mixins.position(absolute,50%,null,null,50%);
+                    @include mixins.transform(translate(-50%, -50%));
+                    @include mixins.transition(all .4s);
                     opacity: 0;
-                    color: $white;
+                    color: variables.$white;
                     width: 32px;
                     line-height: 32px;
                     background: rgba(255, 255, 255, 0.2);
@@ -4322,7 +4325,7 @@ ul.list-inline .list-inline-item {
            
         }
         .chat-date {
-            font-size: $font-size-base;
+            font-size: variables.$font-size-base;
             margin: 1.875rem 0;
             overflow: hidden;
             position: relative;
@@ -4333,15 +4336,15 @@ ul.list-inline .list-inline-item {
                 content: "";
                 height: 1px;
                 margin-right: 28px;
-                @include position(absolute,50%,50%,null,null);
+                @include mixins.position(absolute,50%,50%,null,null);
                 width: 100%;
             }
             &:after {
                 background-color: #e0e3e4;
                 content: "";
                 height: 1px;
-                @include margin-padding(0 0 0 28px,null);
-                @include position(absolute,50%,null,null,50%);
+                @include mixins.margin-padding(0 0 0 28px,null);
+                @include mixins.position(absolute,50%,null,null,50%);
                 width: 100%;
             }
         }
@@ -4349,16 +4352,16 @@ ul.list-inline .list-inline-item {
     
 }
 .card-footer {
-    background-color: $white;
-    border-top: 1px solid $gray-300;
-    @include margin-padding(0,1rem 1.5rem);
+    background-color: variables.$white;
+    border-top: 1px solid variables.$gray-300;
+    @include mixins.margin-padding(0,1rem 1.5rem);
     .type_msg {
         background-color: rgba(0,0,0,0.1) !important;
         border: 0 !important;
         overflow-y: auto;
     }
 }
-@include respond-below(custom992) {
+@include mixins.respond-below(custom992) {
     .chat-window.chat-slide .chat-cont-right {
         right: 0;
         opacity: 1;
@@ -4366,7 +4369,7 @@ ul.list-inline .list-inline-item {
     }
 
     .chat-cont-right {
-        @include position(absolute, null, -100px, null, null);
+        @include mixins.position(absolute, null, -100px, null, null);
         opacity: 0;
         visibility: hidden;
         z-index: 99;
@@ -4385,11 +4388,11 @@ ul.list-inline .list-inline-item {
 		height: 8px;
 		width: 8px;
 		float: left;
-		background-color: $white;
+		background-color: variables.$white;
 		display: block;
 		opacity: .4;
-		@include margin-padding(0 1px, null);
-		@include rounded(50%);
+		@include mixins.margin-padding(0 1px, null);
+		@include mixins.rounded(50%);
 		&:nth-of-type(1) {
 			animation: 1s blink infinite .33333s;
 		}
@@ -4412,10 +4415,10 @@ ul.list-inline .list-inline-item {
 		width: 18px;
 	}
 	.income-success {
-		color: $success;
+		color: variables.$success;
 	}
 	.income-success-missed {
-		color: $danger;
+		color: variables.$danger;
 	}
 }
 .history-modal-profile {
@@ -4423,12 +4426,12 @@ ul.list-inline .list-inline-item {
 		padding: 24px;
 	}
 	.right-sidebar-profile {
-		background: $body-bg;
+		background: variables.$body-bg;
 		border-radius: 8px;
 		padding: 24px;
 		.list-inline-item {
 			a {
-				background: $primary;
+				background: variables.$primary;
 				width: 40px;
 				height: 40px;
 				border-radius: 50px;
@@ -4443,7 +4446,7 @@ ul.list-inline .list-inline-item {
                 -ms-flex-pack: center;
 				&:hover {
 					background: #1b2950;
-					color: $white;
+					color: variables.$white;
 				}
 			}
 		}
@@ -4460,12 +4463,12 @@ ul.list-inline .list-inline-item {
 .modal-profile-detail {
 	.modal-userlist {
 		li {
-			font-size: $font-size-14;
-			color: $black;
+			font-size: variables.$font-size-14;
+			color: variables.$black;
 			margin-bottom: 10px;
 			span {
 				display: block;
-				color: $text-color;
+				color: variables.$text-color;
 			}
 			&:last-child {
 				margin-bottom: 0;

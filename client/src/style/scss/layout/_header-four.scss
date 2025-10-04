@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .sidebar.collapsed-sidebar {
     border: 0;
     box-shadow: 0px 4px 14px rgba(198, 198, 198, 0.25);
@@ -13,8 +16,8 @@
             max-width: 66px;
             margin-left: 0px;
             color: rgba(255, 255, 255, 0.5);
-            @include transition( all .299s);
-            @include margin-padding(0, 0);
+            @include mixins.transition( all .299s);
+            @include mixins.margin-padding(0, 0);
             box-shadow: 0px 0 14px rgba(198, 198, 198, 0.25);
             min-height: 100vh;
             border: 0;
@@ -22,30 +25,30 @@
             left: 0;
             z-index: 999;
             .nav-tabs {
-                @include margin-padding(null, 14px 14px 0);
+                @include mixins.margin-padding(null, 14px 14px 0);
                 border: 0;
             .nav-item {
 				margin-bottom: 10px;
                 .nav-link {
-                    @include margin-padding(null, 5px);
+                    @include mixins.margin-padding(null, 5px);
 					width: 38px;
 					height: 38px;
                     &:hover {
-                        background-color: $primary;
+                        background-color: variables.$primary;
                         img {
 							filter: brightness(0) invert(1);
                         }
 						svg {						
-							color: $white;
+							color: variables.$white;
 						}
                     }
                     &:active, &.active {
-						background-color: $primary;
+						background-color: variables.$primary;
                         img {
 							filter: brightness(0) invert(1);
                         }
 						svg {						
-							color: $white;
+							color: variables.$white;
 						}
                         &::after {
                             content: none;
@@ -78,7 +81,7 @@
     //     display:block;
     // }
     .sidebar-menu {
-        @include margin-padding(null, 0 20px 0 0);
+        @include mixins.margin-padding(null, 0 20px 0 0);
         ul li {
             a {
                 display: -webkit-box;
@@ -87,65 +90,65 @@
                 align-items: center;
                 -webkit-box-align: center;
                 -ms-flex-align: center;
-                @include margin-padding(null, 10px 15px 10px 25px);
+                @include mixins.margin-padding(null, 10px 15px 10px 25px);
                 position: relative;
-                color: $gray-600;
+                color: variables.$gray-600;
                 svg{
                     width: 18px;
-                    color: $gray-600;
+                    color: variables.$gray-600;
                 }
                 img{
                     width:18px;
-                    color: $gray-600;
+                    color: variables.$gray-600;
                 }
                 &:hover{
-                    color: $primary;
+                    color: variables.$primary;
                     img {
                         filter: brightness(0) saturate(100%) invert(75%) sepia(10%) saturate(5676%) hue-rotate(326deg) brightness(105%) contrast(112%);
                     }
                     span{
-                        color: $primary;
+                        color: variables.$primary;
                     }
                     svg{
-                        color: $primary;
+                        color: variables.$primary;
                     }
                 }
                 &::before {
                     content: "";
-                    @include position(absolute, 50%, null, null, 10px);
+                    @include mixins.position(absolute, 50%, null, null, 10px);
                     transform: translateY(-50%);
-                    background: $gray-500;
+                    background: variables.$gray-500;
                     width: 5px;
                     height: 5px;
                 }
                 &.active{
-                    color: $primary;
+                    color: variables.$primary;
                     svg{
-                        color: $primary;
+                        color: variables.$primary;
                     }
                     img {
                         filter: brightness(0) saturate(100%) invert(75%) sepia(10%) saturate(5676%) hue-rotate(326deg) brightness(105%) contrast(112%);
                     }
                     span{
-                        color: $primary;
+                        color: variables.$primary;
                     }
                 }
                 span{
                     margin-left: 0;
-                    font-size: $font-size-15;
-                    font-weight: $font-weight-medium;
-                    color: $gray-600;
+                    font-size: variables.$font-size-15;
+                    font-weight: variables.$font-weight-medium;
+                    color: variables.$gray-600;
                 }
                 .menu-arrow {
                     display: inline-block;
                     font-family: "Font Awesome 5 Free";
                     text-rendering: auto;
                     line-height: 40px;
-                    font-size: $font-size-18;
+                    font-size: variables.$font-size-18;
                     line-height: 18px;
-                    @include position(absolute,12px,0px,null,null);
-                    @include transform(translate(0, 0));
-                    @include transition(all 0.2s ease);
+                    @include mixins.position(absolute,12px,0px,null,null);
+                    @include mixins.transform(translate(0, 0));
+                    @include mixins.transition(all 0.2s ease);
                     &.inside-submenu {
                         right: 15px;
                         &.inside-submenu-two {
@@ -155,7 +158,7 @@
                 }
                 &.subdrop{
                     .menu-arrow {
-                        @include transform(rotate(90deg));
+                        @include mixins.transform(rotate(90deg));
                     }
                 }
             }
@@ -180,7 +183,7 @@
             ul {
                 li {
                     a {
-                        @include margin-padding(null, 10px 15px 10px 25px);
+                        @include mixins.margin-padding(null, 10px 15px 10px 25px);
                         left: 14px;
                     }
                 }
@@ -197,7 +200,7 @@
     margin-left: 250px;
 }
 
-@include respond-below(custom992) {
+@include mixins.respond-below(custom992) {
     .page-wrapper-four {
         margin-left: 0;
 

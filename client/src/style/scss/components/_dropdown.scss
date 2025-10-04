@@ -1,3 +1,5 @@
+@use "../utils/variables";
+
 .img-cropper {
 	.dropup {
 		.dropdown-toggle {
@@ -25,57 +27,57 @@
       font-family: "Font Awesome 5 Free";
       border: 0;
       font-size: 0.6rem;
-      font-weight: $font-weight-semibold;
+      font-weight: variables.$font-weight-semibold;
 		}
 
 		&.btn-primary {
-			color: $white;
+			color: variables.$white;
 		}
 	}
 	.dropdown-menu {
-		font-family: $font-family-primary;
+		font-family: variables.$font-family-primary;
 	}
 }
 .dropdown-menu {
-  border-color: $border-color;
+  border-color: variables.$border-color;
   box-shadow: 0 1rem 1.125rem rgba(169, 169, 169, 0.15);
   font-size: 0.875rem;
-  color: $text-color;
-  background-color: $white;
+  color: variables.$text-color;
+  background-color: variables.$white;
   padding: 0;
   z-index: 10;
 }
 .dropdown-divider {
-  border-color: $border-color;
+  border-color: variables.$border-color;
 }
 
 .dropdown-item-text {
-  color: $text-color;
+  color: variables.$text-color;
 }
 .dropdown-header {
-  color: $text-color;
+  color: variables.$text-color;
 }
 .dropdown-item {
-  color: $text-color;
+  color: variables.$text-color;
   white-space: unset;
   padding: 0.5rem 0.9375rem;
   font-size: 0.8125rem;
 
   &.disabled,
   &:disabled {
-    color: $text-color;
+    color: variables.$text-color;
     opacity: 0.5;
   }
   &:not(.active) {
     &:hover,
     &:focus,
     &:active {
-      color: $primary;
-      background-color: rgba($primary, 0.05);
+      color: variables.$primary;
+      background-color: rgba(variables.$primary, 0.05);
     }
   }
   &.active {
-    background-color: $primary !important;
+    background-color: variables.$primary !important;
   }
 }
 .dropdown-toggle::after {
@@ -86,7 +88,7 @@
   font-family: "Font Awesome 5 Free";
   border: 0;
   font-size: 0.6rem;
-  font-weight: $font-weight-semibold;
+  font-weight: variables.$font-weight-semibold;
 }
 .dropup .dropdown-toggle::after {
   display: inline-block;
@@ -96,7 +98,7 @@
   font-family: "Font Awesome 5 Free";
   border: 0;
   font-size: 0.6rem;
-  font-weight: $font-weight-semibold;
+  font-weight: variables.$font-weight-semibold;
 }
 
 .dropup .dropdown-toggle::after {
@@ -107,7 +109,7 @@
   font-family: "Font Awesome 5 Free";
   border: 0;
   font-size: 0.6rem;
-  font-weight: $font-weight-semibold;
+  font-weight: variables.$font-weight-semibold;
 }
 .dropend .dropdown-toggle::after {
   display: inline-block;
@@ -117,7 +119,7 @@
   font-family: "Font Awesome 5 Free";
   border: 0;
   font-size: 0.6rem;
-  font-weight: $font-weight-semibold;
+  font-weight: variables.$font-weight-semibold;
 }
 .dropstart .dropdown-toggle::before {
   display: inline-block;
@@ -127,17 +129,17 @@
   font-family: "Font Awesome 5 Free";
   border: 0;
   font-size: 0.6rem;
-  font-weight: $font-weight-semibold;
+  font-weight: variables.$font-weight-semibold;
 }
 .btn.dropdown-toggle-split {
   opacity: 0.85;
 }
 
 .dropdown-menu-dark {
-  background-color: $dark;
+  background-color: variables.$dark;
   border-color: rgba(255, 255, 255, 0.1);
   li a {
-    color: $white;
+    color: variables.$white;
   }
 }
 .btn-list {
@@ -170,27 +172,27 @@
       &:focus,
       &:active,
       &.active {
-        color: $white;
+        color: variables.$white;
       }
     }
   }
   &.dropdown-menu-primary {
-    @include dropdown-menu-color($primary);
+    @include dropdown-menu-color(variables.$primary);
   }
   &.dropdown-menu-secondary {
-    @include dropdown-menu-color($secondary);
+    @include dropdown-menu-color(variables.$secondary);
   }
   &.dropdown-menu-warning {
-    @include dropdown-menu-color($warning);
+    @include dropdown-menu-color(variables.$warning);
   }
   &.dropdown-menu-info {
-    @include dropdown-menu-color($info);
+    @include dropdown-menu-color(variables.$info);
   }
   &.dropdown-menu-success {
-    @include dropdown-menu-color($success);
+    @include dropdown-menu-color(variables.$success);
   }
   &.dropdown-menu-danger {
-    @include dropdown-menu-color($danger);
+    @include dropdown-menu-color(variables.$danger);
   }
 }
 .dropdown-menu {
@@ -200,8 +202,8 @@
       &:focus,
       &:active,
       &.active {
-        background-color: rgba($primary, 0.1) !important;
-        color: $primary;
+        background-color: rgba(variables.$primary, 0.1) !important;
+        color: variables.$primary;
       }
     }
   }
@@ -211,8 +213,8 @@
       &:focus,
       &:active,
       &.active {
-        background-color: rgba($secondary, 0.1) !important;
-        color: $secondary;
+        background-color: rgba(variables.$secondary, 0.1) !important;
+        color: variables.$secondary;
       }
     }
   }
@@ -222,8 +224,8 @@
       &:focus,
       &:active,
       &.active {
-        background-color: rgba($warning, 0.1) !important;
-        color: $warning;
+        background-color: rgba(variables.$warning, 0.1) !important;
+        color: variables.$warning;
       }
     }
   }
@@ -233,8 +235,8 @@
       &:focus,
       &:active,
       &.active {
-        background-color: rgba($info, 0.1) !important;
-        color: $info;
+        background-color: rgba(variables.$info, 0.1) !important;
+        color: variables.$info;
       }
     }
   }
@@ -245,7 +247,7 @@
       &:active,
       &.active {
         background-color: rgba(var(--success-rgb), 0.1) !important;
-        color: $success;
+        color: variables.$success;
       }
     }
   }
@@ -256,7 +258,7 @@
       &:active,
       &.active {
         background-color: rgba(var(--danger-rgb), 0.1) !important;
-        color: $danger;
+        color: variables.$danger;
       }
     }
   }
@@ -269,34 +271,34 @@
       &:focus,
       &:active,
       &.active {
-        color: $white;
+        color: variables.$white;
         background-color: $color !important;
       }
     }
   }
   &.dropmenu-light-primary {
-    background-color: rgba(var($secondary), 0.1);
-    @include dropmenu-light-color($primary);
+    background-color: rgba(var(variables.$secondary), 0.1);
+    @include dropmenu-light-color(variables.$primary);
   }
   &.dropmenu-light-secondary {
-    background-color: rgba(var($secondary), 0.1);
-    @include dropmenu-light-color($secondary);
+    background-color: rgba(var(variables.$secondary), 0.1);
+    @include dropmenu-light-color(variables.$secondary);
   }
   &.dropmenu-light-info {
-    background-color: rgba($info, 0.1);
-    @include dropmenu-light-color($info);
+    background-color: rgba(variables.$info, 0.1);
+    @include dropmenu-light-color(variables.$info);
   }
   &.dropmenu-light-warning {
-    background-color: rgba($warning, 0.1);
-    @include dropmenu-light-color($warning);
+    background-color: rgba(variables.$warning, 0.1);
+    @include dropmenu-light-color(variables.$warning);
   }
   &.dropmenu-light-success {
-    background-color: rgba($success, 0.1);
-    @include dropmenu-light-color($success);
+    background-color: rgba(variables.$success, 0.1);
+    @include dropmenu-light-color(variables.$success);
   }
   &.dropmenu-light-danger {
     background-color: rgba(var(--danger-rgb), 0.1);
-    @include dropmenu-light-color($danger);
+    @include dropmenu-light-color(variables.$danger);
   }
 }
 .dropdown-divider {

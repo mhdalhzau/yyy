@@ -1,0 +1,4 @@
+// Shared configuration file
+// This makes variables and mixins available with the @use rule
+@forward "utils/variables";
+@forward "utils/mixins";

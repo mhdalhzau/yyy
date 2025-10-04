@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .btn-icon {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -25,15 +28,15 @@
     }
 }
 .btn-row {
-    @include respond-below(custom575) {
+    @include mixins.respond-below(custom575) {
         flex-direction: column;
     }
     .btn {
-        font-size: $font-size-base;
-        color:  $white;
-        @include margin-padding(0 10px 0 0, 10px);
-        @include rounded(4px);
-        @include respond-below(custom575) {
+        font-size: variables.$font-size-base;
+        color:  variables.$white;
+        @include mixins.margin-padding(0 10px 0 0, 10px);
+        @include mixins.rounded(4px);
+        @include mixins.respond-below(custom575) {
             margin: 0 0 15px 0;
             width: 100%;
         }
@@ -44,69 +47,69 @@
 }
 .pos-categories, .order-list {
     h5, h6 {
-        color: $secondary;
+        color: variables.$secondary;
     }
     h5 {
-        font-size: $font-size-18;
-        font-weight: $font-weight-bold;
+        font-size: variables.$font-size-18;
+        font-weight: variables.$font-weight-bold;
     }
 }
 .btn-info {
-    background-color: $blue;
-    border-color: $blue;
+    background-color: variables.$blue;
+    border-color: variables.$blue;
     &:hover {
-        background-color: $primary;
-        border-color: $primary;
+        background-color: variables.$primary;
+        border-color: variables.$primary;
     }
 }
 .btn-primary {
-    background-color: $primary;
-    border-color: $primary;
+    background-color: variables.$primary;
+    border-color: variables.$primary;
     &:hover {
-        background-color: $secondary;
-        border-color: $secondary;
+        background-color: variables.$secondary;
+        border-color: variables.$secondary;
     }
-    @include respond-below(custom991)
+    @include mixins.respond-below(custom991)
 		{
 			margin-top: 10px;
 				}
-    @include respond-below(custom767)
+    @include mixins.respond-below(custom767)
 		{
 			margin-top: 10px;
 				}
-                @include respond-below(custom575)
+                @include mixins.respond-below(custom575)
 		{
 			margin-top: 10px;
 				}
 }
 .btn-secondary {
-    background-color: $secondary;
-    border-color: $secondary;
+    background-color: variables.$secondary;
+    border-color: variables.$secondary;
     &:hover {
-        background-color: $primary;
-        border-color: $primary;
+        background-color: variables.$primary;
+        border-color: variables.$primary;
     }
 }
 .btn-danger {
-    background-color: $danger;
-    border-color: $danger;
+    background-color: variables.$danger;
+    border-color: variables.$danger;
     &:hover {
-        background-color: $secondary;
-        border-color: $secondary;
+        background-color: variables.$secondary;
+        border-color: variables.$secondary;
     }
 }
 .btn-success {
-    background-color: $success;
-    border-color: $success;
+    background-color: variables.$success;
+    border-color: variables.$success;
     &:hover {
-        background-color: $secondary;
-        border-color: $secondary;
+        background-color: variables.$secondary;
+        border-color: variables.$secondary;
     }
 }
 .owl-carousel {
     .owl-nav {
         margin: 0;
-        @include position(absolute,-60px,0,null,null);
+        @include mixins.position(absolute,-60px,0,null,null);
         button {
             margin-top: 0;
             margin-bottom: 0;
@@ -114,20 +117,20 @@
                 position: relative;
                 width: 28px;
                 height: 28px;
-                @include rounded(28px);
+                @include mixins.rounded(28px);
                 i {
-                    color:  $primary;
+                    color:  variables.$primary;
                 }
                 &:hover {
-                    background-color: $secondary;
-                    border-color: $secondary;
+                    background-color: variables.$secondary;
+                    border-color: variables.$secondary;
                 }
             }
         }
     }
 }
 .pos-categories {
-    background-color: $light;
+    background-color: variables.$light;
     padding: 24px;
     border-collapse: collapse;
 }
@@ -136,7 +139,7 @@
     margin-bottom: 24px;
     height: 125px;
     .owl-item {
-        background-color: $white;
+        background-color: variables.$white;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -150,17 +153,17 @@
         flex-wrap: wrap;
         text-align: center;
         cursor: pointer;
-        border: 1px solid $gray-100;
-        box-shadow: $box-shadow;
-        @include transition(all 0.5s ease);
-        @include rounded(8px);
+        border: 1px solid variables.$gray-100;
+        box-shadow: variables.$box-shadow;
+        @include mixins.transition(all 0.5s ease);
+        @include mixins.rounded(8px);
         margin-left: -0.1px!important;
         li {
             padding: 15px 0;
         }
         a {
             img {
-                @include transition(all 0.5s ease);
+                @include mixins.transition(all 0.5s ease);
                 min-width:  40px;
                 width: 40px;
                 height: 40px;
@@ -168,8 +171,8 @@
             }
         }
         h6 {
-            font-size: $font-size-15;
-            font-weight: $font-weight-semibold;
+            font-size: variables.$font-size-15;
+            font-weight: variables.$font-weight-semibold;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -177,18 +180,18 @@
             width: 100%;
             margin-bottom: 5px;
             a {
-                color: $secondary;
+                color: variables.$secondary;
             }
         }
         span {
-            color:  $text-color;
+            color:  variables.$text-color;
         }
         &:hover {
-            border-color: $primary;    
+            border-color: variables.$primary;    
             border-radius: 5px;
             h6 {
                 a {
-                    color:  $primary;
+                    color:  variables.$primary;
                 }
             }
             a {
@@ -207,16 +210,16 @@
                 margin-right: 5px;
             }
             &.owl-next, &.owl-prev {
-                background-color: $white;
-                border:  1px solid $gray-100;
+                background-color: variables.$white;
+                border:  1px solid variables.$gray-100;
                 i {
-                    color:  $secondary;
+                    color:  variables.$secondary;
                 }
                 &:hover {
-                    background-color: $primary;
-                    border-color: $primary;
+                    background-color: variables.$primary;
+                    border-color: variables.$primary;
                     i {
-                        color: $white;
+                        color: variables.$white;
                     }
                 }
             }
@@ -226,12 +229,12 @@
 .pos-products {
     .product-info {
         padding: 15px;
-        color:  $sub-title;
-        @include transition(all 0.5s ease);
+        color:  variables.$sub-title;
+        @include mixins.transition(all 0.5s ease);
         .img-bg {
             height: 117px;
-            background-color: $gray-100;
-            @include rounded(10px);
+            background-color: variables.$gray-100;
+            @include mixins.rounded(10px);
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -244,15 +247,15 @@
             margin-bottom: 10px;
             position: relative;
             img {
-                @include transition(all 0.5s ease);
+                @include mixins.transition(all 0.5s ease);
             }
             span {
-                @include transition(all 0.5s ease);
-                @include position(absolute,0,0,null,null);
+                @include mixins.transition(all 0.5s ease);
+                @include mixins.position(absolute,0,0,null,null);
                 width: 18px;
                 height: 18px;
-                @include rounded(100%);
-                background: $success;
+                @include mixins.rounded(100%);
+                background: variables.$success;
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -264,37 +267,37 @@
                 -ms-flex-pack: center;
                 display: none;
                 svg {
-                    color: $white;
-                    @include position(absolute,1px,null,null,1px);
+                    color: variables.$white;
+                    @include mixins.position(absolute,1px,null,null,1px);
                 }
             }
         }
         h6 {
-            font-size: $font-size-15;
-            font-weight: $font-weight-bold;
+            font-size: variables.$font-size-15;
+            font-weight: variables.$font-weight-bold;
             &.cat-name {
                 a {
-                    color: $sub-title;
+                    color: variables.$sub-title;
                 }
             }
             &.product-name {
                 a {
-                    color: $secondary;
+                    color: variables.$secondary;
                 }
             }
         }
         .price {
             margin-top: 17px;
             span {
-                color:  $purple;
+                color:  variables.$purple;
             }
             p {
-                color: $primary;
+                color: variables.$primary;
             }
 
         }
         &:hover, &.active {
-            border-color: $primary;
+            border-color: variables.$primary;
             .img-bg {
                 img {
                     transform: scale(1.2);
@@ -311,15 +314,15 @@
     overflow: auto;
 
     .product-list {
-        box-shadow: $box-shadow;
-        @include margin-padding(0 0 10px 0, 10px);
+        box-shadow: variables.$box-shadow;
+        @include mixins.margin-padding(0 0 10px 0, 10px);
         .product-info {
             width: 60%;
             .img-bg {
                 width: 83px;
                 height: 83px;
-                background-color: $body-bg;
-                @include rounded(10px);
+                background-color: variables.$body-bg;
+                @include mixins.rounded(10px);
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -335,26 +338,26 @@
         }
         .info {
             span {
-                background-color: $primary;
-                @include rounded(3px);
-                font-weight: $font-weight-semibold;
-                color: $white;
-                font-size: $font-size-base;
+                background-color: variables.$primary;
+                @include mixins.rounded(3px);
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$white;
+                font-size: variables.$font-size-base;
                 padding: 0 10px;
                 min-width: 64px;
             }
             h6 {
-                font-size: $font-size-base;
-                font-weight: $font-weight-bold;
+                font-size: variables.$font-size-base;
+                font-weight: variables.$font-weight-bold;
                 margin-bottom: 0;
                 a {
-                    color: $secondary;
+                    color: variables.$secondary;
                 }
             }
             p {
-                font-size: $font-size-15;
-                font-weight: $font-weight-semibold;
-                color: $text-color;
+                font-size: variables.$font-size-15;
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$text-color;
             }
         }
         .qty-item {
@@ -362,21 +365,21 @@
             margin-right: 7px;
             input {
                 padding: 1px 9px;
-                background: $body-bg;
-                @include rounded(8px);
+                background: variables.$body-bg;
+                @include mixins.rounded(8px);
                 height: 28px;
                 width: 71px;
                 text-align: center;
-                font-size: $font-size-base;
+                font-size: variables.$font-size-base;
             }
             .dec, .inc {
                 position: absolute;
                 top: 50%;
-                @include transform(translateY(-50%));
-                color: $secondary;
-                @include transition(all 0.5s ease);
+                @include mixins.transform(translateY(-50%));
+                color: variables.$secondary;
+                @include mixins.transition(all 0.5s ease);
                 &:hover {
-                    color: $primary;
+                    color: variables.$primary;
                 }
             }
             .dec {
@@ -389,23 +392,23 @@
         .action {
             a {
                 padding: 7px;
-                @include rounded(8px);
-                border: 1px solid $gray-100;
+                @include mixins.rounded(8px);
+                border: 1px solid variables.$gray-100;
                 cursor: pointer;
                 &.edit-icon {
-                    color: $blue;
+                    color: variables.$blue;
                     &:hover {
-                        background-color: $blue;
-                        border-color: $blue;
-                        color: $white;
+                        background-color: variables.$blue;
+                        border-color: variables.$blue;
+                        color: variables.$white;
                     }
                 }
                 &.delete-icon {
-                    color: $danger;
+                    color: variables.$danger;
                     &:hover {
-                        background-color: $danger;
-                        border-color: $danger;
-                        color: $white;
+                        background-color: variables.$danger;
+                        border-color: variables.$danger;
+                        color: variables.$white;
                     }
                 }
             }
@@ -415,32 +418,32 @@
 aside {
     height: 100%;
     padding: 24px;
-    background-color: $white;
-    border-left: 1px solid $gray-100;
+    background-color: variables.$white;
+    border-left: 1px solid variables.$gray-100;
     &.product-order-list {
         h6 {
-            font-size: $font-size-16;
-            font-weight: $font-weight-semibold;
+            font-size: variables.$font-size-16;
+            font-weight: variables.$font-weight-semibold;
             margin-bottom: 20px;
-            color: $title-color;
+            color: variables.$title-color;
         }
         .block-section {
-            @include margin-padding(20px 0 20px 0, 0 0 20px 0);
-            border-bottom: 1px solid $gray-100;
+            @include mixins.margin-padding(20px 0 20px 0, 0 0 20px 0);
+            border-bottom: 1px solid variables.$gray-100;
         }
         .head {
-            background-color: $body-bg;
-            @include rounded(8px);
+            background-color: variables.$body-bg;
+            @include mixins.rounded(8px);
             padding: 10px;
             h5 {
-                color: $secondary;
-                font-size: $font-size-18;
-                font-weight: $font-weight-bold;
+                color: variables.$secondary;
+                font-size: variables.$font-size-18;
+                font-weight: variables.$font-weight-bold;
             }
             span {
-                color: $text-color;
-                font-size: $font-size-15;
-                font-weight: $font-weight-medium;
+                color: variables.$text-color;
+                font-size: variables.$font-size-15;
+                font-weight: variables.$font-weight-medium;
             }
         }
         .customer-info {
@@ -449,7 +452,7 @@ aside {
                 .btn {
                     min-width: 40px;
                     min-height: 40px;
-                    @include margin-padding(0 0 0 10px, 5px);
+                    @include mixins.margin-padding(0 0 0 10px, 5px);
                 }
             }
         }
@@ -475,12 +478,12 @@ aside {
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    background: $primary;
-                    @include rounded(100%);
-                    color: $white;
-                    font-size: $font-size-10;
-                    font-weight: $font-weight-semibold;
-                    @include margin-padding(0 0 0 7px, null);
+                    background: variables.$primary;
+                    @include mixins.rounded(100%);
+                    color: variables.$white;
+                    font-size: variables.$font-size-10;
+                    font-weight: variables.$font-weight-semibold;
+                    @include mixins.margin-padding(0 0 0 7px, null);
                 }
             }
         }
@@ -491,32 +494,32 @@ aside {
                     margin-bottom: 5px;
                 }
                 .select2-container--default .select2-selection--single .select2-selection__rendered {
-                    @include rounded(5px);
-                    border-color: $navy;
+                    @include mixins.rounded(5px);
+                    border-color: variables.$navy;
                 }
             }
         }
         .order-total{
-            background-color: $gray-100;
+            background-color: variables.$gray-100;
             padding: 24px;
-            @include rounded(8px);
+            @include mixins.rounded(8px);
             table {
                 tr {
                     td {
                         padding: 0 0 15px 0;
-                        color: $text-color;
-                        font-size: $font-size-15;
-                        font-weight: $font-weight-medium;
+                        color: variables.$text-color;
+                        font-size: variables.$font-size-15;
+                        font-weight: variables.$font-weight-medium;
                         background: transparent;
                         &.danger {
-                            color: $danger;
+                            color: variables.$danger;
                         }
                     }
                     &:last-child {
                         td {
                             padding: 20px 0 0 0;
-                            font-size: $font-size-16;
-                            font-weight: $font-weight-semibold;
+                            font-size: variables.$font-size-16;
+                            font-weight: variables.$font-weight-semibold;
                         }
                     }
                 }
@@ -527,19 +530,19 @@ aside {
             .methods {
                 .item {
                     padding: 0 7px;
-                    @include respond-below(custom991) {
+                    @include mixins.respond-below(custom991) {
                         padding-bottom: 15px;
                     }
                 }
                 .default-cover {
-                    @include transition(all 0.5s ease);
+                    @include mixins.transition(all 0.5s ease);
                     a {
-                        box-shadow: $box-shadow-sm;
-                        @include margin-padding(null, 10px 15px);
+                        box-shadow: variables.$box-shadow-sm;
+                        @include mixins.margin-padding(null, 10px 15px);
                         text-align: center;
                         display: block;
-                        font-size: $font-size-15;
-                        color: $secondary;
+                        font-size: variables.$font-size-15;
+                        color: variables.$secondary;
                         span {
                             white-space: nowrap;
                             text-overflow: ellipsis;
@@ -549,8 +552,8 @@ aside {
 
                     }
                     &:hover {
-                        background-color: $gray-200;
-                        border-color: $primary;
+                        background-color: variables.$gray-200;
+                        border-color: variables.$primary;
                         img {
                             filter: invert(75%) sepia(66%) saturate(1955%) hue-rotate(327deg) brightness(103%) contrast(102%);
                         }
@@ -559,11 +562,11 @@ aside {
             }
         }
         .btn-block {
-            @include margin-padding(20px 0 20px 0, 0 0 20px 0);
-            border-bottom: 1px solid $gray-100;
+            @include mixins.margin-padding(20px 0 20px 0, 0 0 20px 0);
+            border-bottom: 1px solid variables.$gray-100;
             .btn {
-                font-size: $font-size-base;
-                font-weight: $font-weight-bold;
+                font-size: variables.$font-size-base;
+                font-weight: variables.$font-weight-bold;
                 padding: 13px 10px;
             }
         }
@@ -571,23 +574,23 @@ aside {
             padding: 0;
             .btn {
                 margin-right: 5px;
-                @include rounded(4px);
-                font-size: $font-size-base;
+                @include mixins.rounded(4px);
+                font-size: variables.$font-size-base;
                 &.btn-info {
-                    background-color: $purple;
-                    border-color: $purple;
+                    background-color: variables.$purple;
+                    border-color: variables.$purple;
                 }
                 &.btn-danger {
-                    background-color: $danger;
-                    border-color: $danger;
+                    background-color: variables.$danger;
+                    border-color: variables.$danger;
                 }
                 &.btn-success {
-                    background-color: $success;
-                    border-color: $success;
+                    background-color: variables.$success;
+                    border-color: variables.$success;
                 }
                 &:hover {
-                    background-color: $secondary;
-                    border-color: $secondary;      
+                    background-color: variables.$secondary;
+                    border-color: variables.$secondary;      
                 }
             }
         }
@@ -599,32 +602,32 @@ aside {
         .icon-head {
             margin-bottom: 10px;
             svg {
-                color: $success;
+                color: variables.$success;
             }
         }
         h4 {
-            font-size: $font-size-20;
-            font-weight: $font-weight-bold;
+            font-size: variables.$font-size-20;
+            font-weight: variables.$font-weight-bold;
         }
         .modal-footer {
             .btn {
                 &:hover {
-                    color: $white;
+                    color: variables.$white;
                 }
             }
         }
     }
 }
 #print-receipt {
-    color:  $text-color;
+    color:  variables.$text-color;
     .modal-dialog {
         width: 424px;
     }
     .modal-body {
         padding: 30px;
-        color: $text-color;
+        color: variables.$text-color;
         h6 {
-            font-size: $font-size-16;
+            font-size: variables.$font-size-16;
         }
         .info {
             h6 {
@@ -632,43 +635,43 @@ aside {
                 font-weight: normal;
             }
             a {
-                color: $text-color;
+                color: variables.$text-color;
             }
         }
         .tax-invoice {
             h6 {
                 margin: 10px 0;
-                font-weight: $font-weight-semibold;
+                font-weight: variables.$font-weight-semibold;
                 position: relative;
                 &:after, &:before {
-                    @include transform(translateY(-50%));
+                    @include mixins.transform(translateY(-50%));
                     content: "";
-                    border-top:  1px dashed $text-color;
+                    border-top:  1px dashed variables.$text-color;
                     width: 35%;
                 }
                 &:before {
-                    @include position(absolute,50%,null,null,0);
+                    @include mixins.position(absolute,50%,null,null,0);
                 }
                 &:after {
-                    @include position(absolute,50%,0,null,null);
+                    @include mixins.position(absolute,50%,0,null,null);
                 }
             }
             .invoice-user-name {
                 margin-bottom: 10px;
             }
             span {
-                color: $secondary;
+                color: variables.$secondary;
             }
         }
         table {
             thead {
                 th {
-                    color: $secondary;
+                    color: variables.$secondary;
                     width: auto;
                     min-width: auto;
                     padding: 5px;
-                    border-top: 1px dashed $text-color;
-                    border-bottom: 1px dashed $text-color;
+                    border-top: 1px dashed variables.$text-color;
+                    border-bottom: 1px dashed variables.$text-color;
                 }
             }
             tbody{ 
@@ -678,13 +681,13 @@ aside {
                         padding: 5px;
                     }
                     table {
-                        border-top: 1px dashed $text-color;
+                        border-top: 1px dashed variables.$text-color;
                         tr {
                             &:last-child {
                                 td {
-                                    font-weight: $font-weight-medium;
-                                    font-size: $font-size-15;
-                                    color: $secondary;
+                                    font-weight: variables.$font-weight-medium;
+                                    font-size: variables.$font-size-15;
+                                    color: variables.$secondary;
                                 }
                             }
                         }    
@@ -693,8 +696,8 @@ aside {
             }
         }
         .invoice-bar {
-            border-top: 1px dashed $text-color;
-            @include margin-padding(null, 20px 0 0 0);
+            border-top: 1px dashed variables.$text-color;
+            @include mixins.margin-padding(null, 20px 0 0 0);
         }
         .btn {
             width: 200px;
@@ -703,20 +706,20 @@ aside {
 }
 .pos-modal {
     .modal-header {
-        background-color: $body-bg;
+        background-color: variables.$body-bg;
         h5 {
-            font-size: $font-size-18;
-            font-weight: $font-weight-bold;
+            font-size: variables.$font-size-18;
+            font-weight: variables.$font-weight-bold;
         }
     }
     &#hold-order {
         h2 {
-            font-size: $font-size-36;
-            font-weight: $font-weight-bold;
-            color: $gray-900;
+            font-size: variables.$font-size-36;
+            font-weight: variables.$font-weight-bold;
+            color: variables.$gray-900;
             margin-bottom: 10px;
-            background-color: $body-bg;
-            @include rounded(10px);
+            background-color: variables.$body-bg;
+            @include mixins.rounded(10px);
         }
         .input-block {
             label {
@@ -741,7 +744,7 @@ aside {
     }
     .badge {
         padding: 5px 10px;
-        font-size: $font-size-15;
+        font-size: variables.$font-size-15;
         font-weight: normal;
     }
     &#orders {
@@ -752,12 +755,12 @@ aside {
             height: 50vh;
             overflow: auto;
             .default-cover {
-                border: 1px solid $gray-100;
-                box-shadow: $box-shadow;
-                @include rounded(8px);
+                border: 1px solid variables.$gray-100;
+                box-shadow: variables.$box-shadow;
+                @include mixins.rounded(8px);
             }
             .record {
-                font-size: $font-size-15;
+                font-size: variables.$font-size-15;
                 td {
                     padding-bottom: 15px;
                 }
@@ -770,17 +773,17 @@ aside {
                 }
                 .colon {
                     padding: 0 10px;
-                    color: $secondary;
+                    color: variables.$secondary;
                 }
                 .text {
-                    color: $text-color;
+                    color: variables.$text-color;
                     white-space: nowrap;
                 }
             }
             p {
-                font-size: $font-size-15;
-                background-color: $body-bg;
-                @include rounded(8px);
+                font-size: variables.$font-size-15;
+                background-color: variables.$body-bg;
+                @include mixins.rounded(8px);
             }
             .search-set {
                 .search-input {
@@ -800,9 +803,9 @@ aside {
             .drag-drop {
                 position: relative;
                 padding: 20px;
-                border:  1px dashed $sub-title;
+                border:  1px dashed variables.$sub-title;
                 input[type="file"] {
-                    @include position(absolute,0,0,null,0);
+                    @include mixins.position(absolute,0,0,null,0);
                     width: 100%;
                     height: 100%;
                     opacity: 0;
@@ -810,37 +813,37 @@ aside {
                 }
             }
             span {
-                font-size: $font-size-13;
-                font-weight: $font-weight-medium;
-                color: $text-color;
+                font-size: variables.$font-size-13;
+                font-weight: variables.$font-weight-medium;
+                color: variables.$text-color;
             }
             p {
-                font-size: $font-size-16;
-                font-weight: $font-weight-semibold;
-                color: $secondary;
+                font-size: variables.$font-size-16;
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$secondary;
                 margin-bottom: 0;
             }
             .progress {
                 height: 6px;
-                @include rounded(5px);
+                @include mixins.rounded(5px);
             }
             ul {
                 li {
-                    @include margin-padding(0 0 15px 0, 15px);
-                    @include rounded(8px);
-                    border: 1px solid $gray-100;
+                    @include mixins.margin-padding(0 0 15px 0, 15px);
+                    @include mixins.rounded(8px);
+                    border: 1px solid variables.$gray-100;
                     h6 {
                         a {
-                            font-size: $font-size-16;
-                            font-weight: $font-weight-semibold;
-                            color: $secondary;
+                            font-size: variables.$font-size-16;
+                            font-weight: variables.$font-weight-semibold;
+                            color: variables.$secondary;
                             svg {
-                                color:  $success;
+                                color:  variables.$success;
                             }
                         }
                         &:hover {
                             a {
-                                color: $primary;
+                                color: variables.$primary;
                             }
                         }
                     }
@@ -863,12 +866,12 @@ aside {
         }
         .progress {
             height: 6px;
-            @include rounded(5px);
+            @include mixins.rounded(5px);
         }
     }
 }
 label span {
-    color: $danger;
+    color: variables.$danger;
 }
 .wordset {
     ul {
@@ -876,9 +879,9 @@ label span {
             a {
                 width: 38px;
                 height: 38px;
-                @include rounded(8px);
-                border:  1px solid $gray-100;
-                color: $secondary;
+                @include mixins.rounded(8px);
+                border:  1px solid variables.$gray-100;
+                color: variables.$secondary;
                 display: flex;
                 align-items: center;
                 justify-content: center;

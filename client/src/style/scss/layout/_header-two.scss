@@ -1,7 +1,9 @@
+@use "../utils/mixins";
+
 .header-two {
     .header-left {
         border: 0 !important;        
-        @include margin-padding(null, 0 10px);
+        @include mixins.margin-padding(null, 0 10px);
     }
     .top-nav-search {
         float: left;
@@ -77,14 +79,14 @@
         }
     }
 }
-@include respond-below(custom991) {
+@include mixins.respond-below(custom991) {
     .sidebar.sidebar-two {
         left: 0;
         top: 60px;
     }
 }
 .header-block {
-    @include respond-below(custom991) {
+    @include mixins.respond-below(custom991) {
         display: block !important;
     }
 }

@@ -1,7 +1,10 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .page-wrapper {
     .content {
         &.settings-content {
-            background-color: $white;
+            background-color: variables.$white;
             padding-bottom: 24px;
         }
     }
@@ -22,23 +25,23 @@
         border-right: 0;
         border: 1px solid rgba(145, 158, 171, 0.30);
         border-radius: 8px;
-        @include respond-below(custom1399) {
+        @include mixins.respond-below(custom1399) {
             width: 250px;
         }
-        @include respond-below(custom1199) {
+        @include mixins.respond-below(custom1199) {
             width: 200px;
             margin-right: 15px;
         }
-        @include respond-below(custom991) {
+        @include mixins.respond-below(custom991) {
             display: none;
         }
         .slimScrollDiv {
             background-color: transparent;
             width: 309px !important;
-            @include respond-below(custom1399) {
+            @include mixins.respond-below(custom1399) {
                 width: 250px !important;
             }
-            @include respond-below(custom1199) {
+            @include mixins.respond-below(custom1199) {
                 width: 200px !important;
             }
         }
@@ -48,17 +51,17 @@
         }
         .sidebar-menu {
             padding: 10px 15px;
-            @include respond-below(custom1199) {
+            @include mixins.respond-below(custom1199) {
                 padding: 10px 8px;
             }
             .menu-arrow {
-                background-color: $white;
+                background-color: variables.$white;
                 right: 5px;
                 &::before {
-                    border-left: 1px solid $text-color;
-                    border-bottom: 1px solid $text-color;
+                    border-left: 1px solid variables.$text-color;
+                    border-bottom: 1px solid variables.$text-color;
                     border-right: none;
-                    color: $text-color;
+                    color: variables.$text-color;
                 }
             }
             .submenu-open {
@@ -69,38 +72,38 @@
                     .submenu {
                         a {
                             &.active {
-                                background-color: $white;
+                                background-color: variables.$white;
                                 &.subdrop {
-                                    background-color: $white;
+                                    background-color: variables.$white;
                                     margin-bottom: 10px;
                                 }
                                 .menu-arrow {
-                                    background-color: $white;
+                                    background-color: variables.$white;
                                 }
                                 .menu-arrow {
                                     &::before {
-                                        border-color: $text-color;
+                                        border-color: variables.$text-color;
                                     }
                                 }
                             }
                             &.subdrop {
                                 .menu-arrow {
-                                    background-color: $white;
+                                    background-color: variables.$white;
                                     transform: rotate(180deg);
                                     -webkit-transform: rotate(180deg);
                                     -ms-transform: rotate(180deg);
-                                    color: $secondary;
+                                    color: variables.$secondary;
                                 }
                             }
                             svg {
-                                color: $secondary;
+                                color: variables.$secondary;
                             }
                             span {
-                                color: $secondary;
-                                font-weight: $font-weight-semibold;
-                                font-size: $font-size-16;
-                                @include respond-below(custom1199) {
-                                    font-size: $font-size-base;
+                                color: variables.$secondary;
+                                font-weight: variables.$font-weight-semibold;
+                                font-size: variables.$font-size-16;
+                                @include mixins.respond-below(custom1199) {
+                                    font-size: variables.$font-size-base;
                                 }
                             }
                         }
@@ -113,7 +116,7 @@
                                     }
                                     &.active {
                                         background-color: rgba(254, 159, 67, 0.08);
-                                        color: $primary;
+                                        color: variables.$primary;
                                         border-radius: 8px;
                                         padding: 10px 18px;
                                         &::after {
@@ -121,7 +124,7 @@
                                             width: 7px;
                                             height: 7px;
                                             border-radius: 50%;
-                                            background-color: $primary;
+                                            background-color: variables.$primary;
                                             right: 10px;
                                             left: unset;
                                             border: 0;
@@ -143,8 +146,8 @@
     flex: 1;
     .setting-title {
         h4 {
-            font-size: $font-size-18;
-            font-weight: $font-weight-bold;
+            font-size: variables.$font-size-18;
+            font-weight: variables.$font-weight-bold;
             margin-bottom: 20px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(145, 158, 171, 0.30);
@@ -159,8 +162,8 @@
     }
     .new-employee-field {
         span {
-            color: $text-color;
-            font-size: $font-size-base;
+            color: variables.$text-color;
+            font-size: variables.$font-size-base;
             display: block;
             margin-top: 5px;
         }
@@ -202,7 +205,7 @@
             &:last-child {
                 margin-bottom: 0
             }
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 display: block;
             }
             .security-type {
@@ -212,7 +215,7 @@
                 align-items: center;
                 -webkit-box-align: center;
                 -ms-flex-align: center;
-                @include respond-below(custom575) {
+                @include mixins.respond-below(custom575) {
                     margin-bottom: 20px;
                 }
                 .security-icon {
@@ -227,51 +230,51 @@
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    background-color: $body-bg;
+                    background-color: variables.$body-bg;
                     border-radius: 10px;
                     margin-right: 10px;
                     flex-shrink: 0;
                     svg {
-                        color: $primary;
+                        color: variables.$primary;
                     }
                 }
             }
             .security-title {
                 h5 {
-                    font-size: $font-size-base;
-                    font-weight: $font-weight-bold;
+                    font-size: variables.$font-size-base;
+                    font-weight: variables.$font-weight-bold;
                 }
                 p {
-                    color: $text-color;
-                    font-size: $font-size-15;
+                    color: variables.$text-color;
+                    font-size: variables.$font-size-15;
                 }
             }
             .security-btn {
                 .btn-danger {
-                    background-color: $danger;
+                    background-color: variables.$danger;
                     &:hover {
-                        border-color: $secondary;
-                        background-color: $secondary;
+                        border-color: variables.$secondary;
+                        background-color: variables.$secondary;
                     }
                 }
                 .badges-connected {
                     background: rgba(40, 199, 111, 0.05);
-                    color: $success;
-                    border: 1px solid $success;
+                    color: variables.$success;
+                    border: 1px solid variables.$success;
                     padding: 3px 6px;
                     border-radius: 6px;
                 }
                 .fa-check-circle {
-                    color: $success;
+                    color: variables.$success;
                 }
                 .remove-red {
-                    color: $danger;
-                    font-weight: $font-weight-bold;
+                    color: variables.$danger;
+                    font-weight: variables.$font-weight-bold;
                 }
                 .manage-btn {
                     border: 1px solid var(--Stroke, rgba(145, 158, 171, 0.30));
                     padding: 8px 20px;
-                    color: $secondary;
+                    color: variables.$secondary;
                     border-radius: 5px;
                 }
             }
@@ -303,13 +306,13 @@
     &.email-setting {
         .security-title {
             h5 {
-                font-weight: $font-weight-bold;
-                font-size: $font-size-18;
+                font-weight: variables.$font-weight-bold;
+                font-size: variables.$font-size-18;
             }
         }
     }
     ul {
-        background-color: $white;
+        background-color: variables.$white;
         padding: 24px;
         box-shadow: 0px 4px 60px 0px rgba(231, 231, 231, 0.47);
         border-radius: 8px;
@@ -330,33 +333,33 @@
             }
             .connect-btn {
                 a {
-                    border: 1px solid $success;
-                    color: $success;
+                    border: 1px solid variables.$success;
+                    color: variables.$success;
                     background-color: rgba(40, 199, 111, 0.05);
                     padding: 3px 5px;
                     border-radius: 5px;
-                    font-size: $font-size-base;
+                    font-size: variables.$font-size-base;
                 }
                 &.not-connect {
                     a {
-                        border-color: $gray-100;
-                        color: $secondary;
-                        background-color: $white;
-                        font-weight: $font-weight-semibold;
+                        border-color: variables.$gray-100;
+                        color: variables.$secondary;
+                        background-color: variables.$white;
+                        font-weight: variables.$font-weight-semibold;
                     }
                 }
             }
             .security-title {
                 h5 {
-                    font-weight: $font-weight-semibold;
-                    font-size: $font-size-16;
+                    font-weight: variables.$font-weight-semibold;
+                    font-size: variables.$font-size-16;
                 }
             }
             .system-app-icon {
                 width: 40px;
                 height: 40px;
                 border-radius: 8px;
-                background-color: $body-bg;
+                background-color: variables.$body-bg;
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -370,19 +373,19 @@
                 flex-shrink: 0;
             }
             p {
-                font-size: $font-size-13;
-                color: $text-color;
-                font-weight: $font-weight-medium;
+                font-size: variables.$font-size-13;
+                color: variables.$text-color;
+                font-weight: variables.$font-weight-medium;
                 margin-top: 5px;
             }
             .integration-btn {
                 a {
-                    border: 1px solid $gray-100;
-                    color: $secondary;
-                    background-color: $white;
+                    border: 1px solid variables.$gray-100;
+                    color: variables.$secondary;
+                    background-color: variables.$white;
                     border-radius: 8px;
                     padding: 5px 10px;
-                    font-weight: $font-weight-bold;
+                    font-weight: variables.$font-weight-bold;
                     display: flex;
                     align-items: center;
                 }
@@ -392,30 +395,30 @@
     }
 }
 .company-info {
-    border-bottom: 1px solid $gray-100;
+    border-bottom: 1px solid variables.$gray-100;
     margin-bottom: 24px;
 }
 .logo-company {
     li {
         margin-bottom: 20px;
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             flex-direction: column !important;
             align-items: start !important;
         }
         .logo-info {
             margin-right: 100px;
-            @include respond-below(custom1199) {
+            @include mixins.respond-below(custom1199) {
                 margin-right: 40px;
             }
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 margin-bottom: 20px;
             }
             h6 {
-                font-size: $font-size-base;
-                font-weight: $font-weight-bold;
+                font-size: variables.$font-size-base;
+                font-weight: variables.$font-weight-bold;
             }
             p {
-                font-size: $font-size-13;
+                font-size: variables.$font-size-13;
             }
         }
         .profile-pic-upload {
@@ -434,7 +437,7 @@
         }
         .new-logo {
             text-align: right;
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 text-align: left;
                 margin-left: 0 !important;
                 margin-top: 20px;
@@ -451,7 +454,7 @@
                 justify-content: center;
                 -webkit-justify-content: center;
                 -ms-flex-pack: center;
-                border: 1px solid $gray-100;;
+                border: 1px solid variables.$gray-100;;
                 border-radius: 8px;
                 position: relative;
                 span {
@@ -466,13 +469,13 @@
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    background-color: $danger;
+                    background-color: variables.$danger;
                     border-radius: 5px;
                     position: absolute;
                     right: 4px;
                     top: 4px;
                     svg {
-                        color: $white;
+                        color: variables.$white;
                     }
                 }
             }
@@ -482,13 +485,13 @@
 .localization-select {
     width: 200px;
     margin-bottom: 20px;
-    @include respond-below(custom1199) {
+    @include mixins.respond-below(custom1199) {
         width: 150px;
     }
     &.fixed-width {
         width: 70px;
         span {
-            color: $text-color;
+            color: variables.$text-color;
         }
     }
     &.width-custom {
@@ -502,28 +505,28 @@ textarea {
     .setting-info {
         margin-bottom: 20px;
         h6 {
-            font-size: $font-size-base;
-            font-weight: $font-weight-bold;
+            font-size: variables.$font-size-base;
+            font-weight: variables.$font-weight-bold;
         }
         p {
-            color: $text-color;
+            color: variables.$text-color;
         }
     }
 }
 .appearance-settings {
     h6 {
-        font-size: $font-size-base;
-        font-weight: $font-weight-bold;
+        font-size: variables.$font-size-base;
+        font-weight: variables.$font-weight-bold;
     }
     p {
-        color: $text-color;
+        color: variables.$text-color;
     }
     .theme-type-images {
         .theme-image {
             box-shadow: 0px 4px 60px 0px rgba(231, 231, 231, 0.47);
-            background: $white;
+            background: variables.$white;
             border-radius: 8px;
-            border: 2px solid $white;
+            border: 2px solid variables.$white;
             padding: 10px;
             margin-right: 10px;
             text-align: center;
@@ -531,14 +534,14 @@ textarea {
                 margin-right: 0;
             }
             span {
-                font-weight: $font-weight-medium;
+                font-weight: variables.$font-weight-medium;
                 margin-top: 10px;
                 display: block;
             }
             &.active {
-                border-color: $primary;
+                border-color: variables.$primary;
                 span {
-                    color: $primary;
+                    color: variables.$primary;
                 }
             }
         }
@@ -554,7 +557,7 @@ textarea {
                 width: 35px;
                 height: 35px;
                 border-radius: 50%;
-                background-color: $primary;
+                background-color: variables.$primary;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -566,7 +569,7 @@ textarea {
                         content: "";
                         width: 25px;
                         height: 25px;
-                        background-color: $primary;
+                        background-color: variables.$primary;
                         border-radius: 50%;
                         opacity: 1;
                     }
@@ -606,10 +609,10 @@ textarea {
     }
 }
 .input-notify-info {
-    color: $text-color;
+    color: variables.$text-color;
     margin-top: 5px;
     span {
-        color: $primary;
+        color: variables.$primary;
     }
 }
 .pos-payment-method {
@@ -640,7 +643,7 @@ textarea {
             li {
                 &:first-child {
                     padding-bottom: 20px;
-                    border-bottom: 1px solid $gray-100;
+                    border-bottom: 1px solid variables.$gray-100;
                 }
 
             }
@@ -649,7 +652,7 @@ textarea {
 }
 .bank-settings {
     .btn-list,.btn-grid {
-        background-color: $body-bg;
+        background-color: variables.$body-bg;
         width: 36px;
         height: 36px;
         border-radius: 8px;
@@ -666,25 +669,25 @@ textarea {
         svg {
             width: 18px;
             height: 18px;
-            color: $secondary;
+            color: variables.$secondary;
         }
         &.active {
-            background-color: $primary;
+            background-color: variables.$primary;
             svg {
-                color: $white;
+                color: variables.$white;
             }
         }
     }
 }
 .bank-box {
-    background: $secondary;
+    background: variables.$secondary;
     padding: 40px;
     border-radius: 8px;
-    border: 1px solid $secondary;
+    border: 1px solid variables.$secondary;
     position: relative;
     margin-bottom: 24px;
     &.active {
-        border-color: $success;
+        border-color: variables.$success;
         &::after {
             position: absolute;
             top: -8px;
@@ -692,11 +695,11 @@ textarea {
             content: "\f058";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
-            color: $success-900;
+            color: variables.$success-900;
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            background-color: $white;
+            background-color: variables.$white;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -712,25 +715,25 @@ textarea {
         .bank-name {
             margin-bottom: 24px;
             h6 {
-                color: $white;
-                font-size: $font-size-18;
-                font-weight: $font-weight-bold;
+                color: variables.$white;
+                font-size: variables.$font-size-18;
+                font-weight: variables.$font-weight-bold;
                 margin-bottom: 10px;
             }
             p {
-                color: $white;
+                color: variables.$white;
             }
         }
     }
     .bank-info {
         span {
-            color: $text-color;
-            font-size: $font-size-13;
+            color: variables.$text-color;
+            font-size: variables.$font-size-13;
         }
         h6 {
-            color: $white;
-            font-size: $font-size-18;
-            font-weight: $font-weight-medium;
+            color: variables.$white;
+            font-size: variables.$font-size-18;
+            font-weight: variables.$font-weight-medium;
         }
     }
 }
@@ -745,7 +748,7 @@ textarea {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     a {
-        border: 1px solid $gray-100;
+        border: 1px solid variables.$gray-100;
         border-radius: 8px;
         svg {
             width: 14px;
@@ -760,25 +763,25 @@ textarea {
             -webkit-justify-content: center;
             -ms-flex-pack: center;
             &.feather-edit {
-                color: $blue;
+                color: variables.$blue;
             }
             &.feather-trash-2 {
-                color: $danger;
+                color: variables.$danger;
             }
         }
     }
 }
 .storage-icon {
     h6 {
-        font-weight: $font-weight-semibold;
-        font-size: $font-size-16;
+        font-weight: variables.$font-weight-semibold;
+        font-size: variables.$font-size-16;
     }
 }
 svg {
     &.filter-icon {
         width: 18px;
         height: 18px;
-        color: $white;
+        color: variables.$white;
     } 
 }
 .search-path .btn-filter.setclose > .filter-icon {
@@ -796,39 +799,39 @@ svg {
         width: 100%;
     }
     .progress-bar-violet {
-        background-color: $purple;
+        background-color: variables.$purple;
         width: 5%;
     }
     .progress-bar-violet-two {
-        background-color: $purple;
+        background-color: variables.$purple;
         width: 40%;
     }
     span {
         position: absolute;
         right: 0;
         top: -20px;
-        color: $secondary;
+        color: variables.$secondary;
     }
 }
 .table tbody td.action-table-data {
     .language-action {
         a {
             border: 0;
-            color: $white;
+            color: variables.$white;
             &:hover {
-                background-color: $primary;
+                background-color: variables.$primary;
             }
             &.language-import {
-                background-color: $body-bg;
+                background-color: variables.$body-bg;
                 svg {
-                    color: $secondary;
+                    color: variables.$secondary;
                     width: 18px;
                     height: 18px;
                 }
                 &:hover {
-                    background-color: $primary;
+                    background-color: variables.$primary;
                     svg {
-                        color: $white;
+                        color: variables.$white;
                     }
                 }
             }
@@ -839,25 +842,25 @@ svg {
     }
 }
 .selected-language {
-    border: 1px solid $gray-100;
+    border: 1px solid variables.$gray-100;
     padding: 5px 10px;
     border-radius: 8px;
-    color: $secondary;
+    color: variables.$secondary;
 }
 .back-btn {
     a {
         &.btn-translation {
-            background-color: $gray-100;
+            background-color: variables.$gray-100;
             border-radius: 5px;
-            font-weight: $font-weight-medium;
+            font-weight: variables.$font-weight-medium;
             svg {
-                color: $secondary;
+                color: variables.$secondary;
             }
             &:hover {
-                background-color: $primary;
-                color: $white;
+                background-color: variables.$primary;
+                color: variables.$white;
                 svg {
-                    color: $white;
+                    color: variables.$white;
                 }
             }
         }
@@ -866,8 +869,8 @@ svg {
 td {
     span {
         &.file-data {
-            color: $blue;
-            font-weight: $font-weight-medium;
+            color: variables.$blue;
+            font-weight: variables.$font-weight-medium;
         }
     }
 }

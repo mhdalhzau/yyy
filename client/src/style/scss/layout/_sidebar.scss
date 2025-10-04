@@ -1,33 +1,36 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .sidebar,.sidebars {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    background-color: $white;
+    background-color: variables.$white;
     border-right: 1px solid transparent;
     margin-top: 0;
     z-index: 1001;
-    @include position(fixed,66px,null,0,0);
-    @include transition(all 0.5s ease);
-    border-right: 1px solid $gray-400;
+    @include mixins.position(fixed,66px,null,0,0);
+    @include mixins.transition(all 0.5s ease);
+    border-right: 1px solid variables.$gray-400;
     width: 260px;
-    @include respond-below(custom991) {
+    @include mixins.respond-below(custom991) {
         margin-left: -575px;
-        @include transition(all 0.4s ease);
+        @include mixins.transition(all 0.4s ease);
         z-index: 1041;
-        background: $white;
+        background: variables.$white;
     }
-    @include respond-below(custom575) {
+    @include mixins.respond-below(custom575) {
         width: 100%;
     }
     .slimScrollDiv {
-        background: $white;
+        background: variables.$white;
         border-right: 1px solid transparent;
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             width: 100% !important;
         }
     }
     .sidebar-menu{
-        @include margin-padding(null, 24px);
+        @include mixins.margin-padding(null, 24px);
     }
     .sidebar-menu{
         > ul{
@@ -35,7 +38,7 @@
                 margin-bottom: 24px;
                 &.active{
                     a{
-                        color: $white;
+                        color: variables.$white;
                     }
                     svg {
                         color: #FE9F43
@@ -54,9 +57,9 @@
                     align-items: center;
                     -webkit-box-align: center;
                     -ms-flex-align: center;
-                    @include margin-padding(null, 10px 15px);
+                    @include mixins.margin-padding(null, 10px 15px);
                     position: relative;
-                    color: $secondary;
+                    color: variables.$secondary;
                     svg{
                         color: #637381;
                     }
@@ -83,7 +86,7 @@
                         color: #FE9F43;
                         border-radius: 5px;
                         svg{
-                            color: $white;
+                            color: variables.$white;
                         }
                         img {
                             filter: invert(72%) sepia(76%) saturate(1430%) hue-rotate(327deg) brightness(103%) contrast(101%);
@@ -99,9 +102,9 @@
                         }
                     }
                     span{
-                        font-size: $font-size-15;
-                        font-weight: $font-weight-medium;
-                        color: $gray-600;
+                        font-size: variables.$font-size-15;
+                        font-weight: variables.$font-weight-medium;
+                        color: variables.$gray-600;
                     }
                 }
                 &.active{
@@ -119,18 +122,18 @@
                 &.submenu{
                     ul{
                         border-bottom: 1px solid rgba(222, 226, 230, 0.5);
-                        @include margin-padding(null, 10px 0);
+                        @include mixins.margin-padding(null, 10px 0);
                         display: none;
                        li{
                             a{
-                               font-weight: $font-weight-medium;
-                               font-size: $font-size-base;
-                               color: $secondary;
+                               font-weight: variables.$font-weight-medium;
+                               font-size: variables.$font-size-base;
+                               color: variables.$secondary;
                                position: relative;
                                display: block;
-                               @include margin-padding(null, 8px 8px 8px 40px);
+                               @include mixins.margin-padding(null, 8px 8px 8px 40px);
                                &.active{
-                                   color: $secondary;
+                                   color: variables.$secondary;
                                    &:after{
                                     background: #FE9F43;
                                     border: 2px solid #FDB;
@@ -141,12 +144,12 @@
                                 background: rgba(50, 71, 92, 0.38);
                                 width: 8px;
                                 height: 8px;
-                                border: 2px solid $white;
-                                @include rounded(50px);
-                                @include position(absolute,16px,null,null,16px);
+                                border: 2px solid variables.$white;
+                                @include mixins.rounded(50px);
+                                @include mixins.position(absolute,16px,null,null,16px);
                                }
                                &:hover{
-                                   color:$primary;
+                                   color:variables.$primary;
                                    &:after{
                                     background: #FE9F43;
                                     border: 2px solid #FDB;
@@ -158,8 +161,8 @@
                 }
                 &.submenu-open{
                     ul{
-                        border-bottom: 1px solid $gray-300;
-                        @include margin-padding(null, 0 0 14px 0);
+                        border-bottom: 1px solid variables.$gray-300;
+                        @include mixins.margin-padding(null, 0 0 14px 0);
                         display: block;
                        li{
                             a{
@@ -169,22 +172,22 @@
                                 align-items: center;
                                 -webkit-box-align: center;
                                 -ms-flex-align: center;
-                                font-weight: $font-weight-medium;
-                                font-size: $font-size-15;
+                                font-weight: variables.$font-weight-medium;
+                                font-size: variables.$font-size-15;
                                 color: #67748E;
                                 position: relative;
                                 width: 100%;
-                                @include margin-padding(null, 10px 10px 10px 18px);
+                                @include mixins.margin-padding(null, 10px 10px 10px 18px);
                                span {
                                 white-space: nowrap;
-                                font-size: $font-size-base;
-                                color: $text-color;
+                                font-size: variables.$font-size-base;
+                                color: variables.$text-color;
                                }
                                &.active{
-                                   color: $primary;
+                                   color: variables.$primary;
                                    a {
                                        span {
-                                            color: $primary;
+                                            color: variables.$primary;
                                        }
                                    }
                                    &:after{
@@ -193,13 +196,13 @@
                                    }
                                }
                                &:hover{
-                                   color:$primary;
+                                   color:variables.$primary;
                                    &:after{
                                     background: #FE9F43;
                                     border: 2px solid #FDB;
                                    }
                                    span {
-                                        color:$primary;
+                                        color:variables.$primary;
                                    }
                                }
                            }  
@@ -211,14 +214,14 @@
                             border-radius: 5px;
                             color: #FE9F43;
                             span {
-                                color: $primary;
+                                color: variables.$primary;
                             }
                         }
                        }
                     }
                     .submenu-hdr {
-                        font-weight: $font-weight-semibold;
-                        font-size: $font-size-base;
+                        font-weight: variables.$font-weight-semibold;
+                        font-size: variables.$font-size-base;
                         color: #1B2950;
                         margin: 0 0 14px 0;
                     }
@@ -307,19 +310,19 @@
                         a {
                         margin-left: 25px;
                         padding-bottom: 4px;
-                        font-size: $font-size-base;
-                        color: $sub-title;
+                        font-size: variables.$font-size-base;
+                        color: variables.$sub-title;
                         &::after{
                             content: "";
                             background: rgba(50, 71, 92, 0.38);
                             width: 8px;
                             height: 8px;
-                            border: 2px solid $white;
-                            @include rounded(50px);
-                            @include position(absolute,16px,null,null,0);
+                            border: 2px solid variables.$white;
+                            @include mixins.rounded(50px);
+                            @include mixins.position(absolute,16px,null,null,0);
                             }
                             &:hover{
-                                color:$primary;
+                                color:variables.$primary;
                                 &:after{
                                 background: #FE9F43;
                                 border: 2px solid #FDB;
@@ -342,23 +345,23 @@
             -ms-flex-pack: center;
             text-rendering: auto;
             line-height: 40px;
-            font-size: $font-size-18;
+            font-size: variables.$font-size-18;
             line-height: 16px;
             background: rgba(27, 41, 80, 0.04);
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            @include position(absolute,12px,15px,null,null);
-            @include transform(translate(0, 0));
-            @include transition(all 0.2s ease);
+            @include mixins.position(absolute,12px,15px,null,null);
+            @include mixins.transform(translate(0, 0));
+            @include mixins.transition(all 0.2s ease);
             &::before {
                 height: 5px;
                 width: 5px;
                 border-top: 0;
                 content: "";
                 border-left: 0;
-                border-right: 1px solid $text-color;
-                border-bottom: 1px solid $text-color;
+                border-right: 1px solid variables.$text-color;
+                border-bottom: 1px solid variables.$text-color;
                 transform: rotate(-45deg);
                 position: absolute;
                 left: 5px;
@@ -373,7 +376,7 @@
         }
         &.subdrop{
             .menu-arrow {
-                @include transform(rotate(90deg));                            
+                @include mixins.transform(rotate(90deg));                            
                 background: #FFEDDC;
             }
         }
@@ -388,53 +391,53 @@
         justify-content: center;
         -webkit-justify-content: center;
         -ms-flex-pack: center;
-        @include margin-padding(null, 10px);
-        color: $secondary;
+        @include mixins.margin-padding(null, 10px);
+        color: variables.$secondary;
         position: relative;
         &.active{
-            color: $primary;
+            color: variables.$primary;
             background: transparent;
             position: relative;
             &:after{
                 content: "";
                 border-width:10px;
-                border-color: transparent $primary transparent transparent;
+                border-color: transparent variables.$primary transparent transparent;
                 border-style: solid;
-                @include position(absolute,36px,0,null,null);
+                @include mixins.position(absolute,36px,0,null,null);
             }
         }
         
     }
     .sidebar-left {
         width: 100px;
-        @include box-shadow(null, 5px, 0px, 15px, null, rgba(0, 0, 0, .05));
+        @include mixins.box-shadow(null, 5px, 0px, 15px, null, rgba(0, 0, 0, .05));
     }
     .sidebar-right {
         width: 250px;
         height: 100%;
-        @include transition(all 0.2s ease);
+        @include mixins.transition(all 0.2s ease);
         display: none;
-        @include respond-below(custom991) {
+        @include mixins.respond-below(custom991) {
             width: calc(100% - 70px);
         }
         .slimScrollDiv {
             width: 250px !important;
             overflow: visible !important;
-            @include respond-below(custom991) {
+            @include mixins.respond-below(custom991) {
                 width: 100% !important;
             }
         }
         .tab-content {
-            @include margin-padding(null, 20px 20px 40px);
-            @include respond-below(custom991) {
-                @include margin-padding(null,10px);
+            @include mixins.margin-padding(null, 20px 20px 40px);
+            @include mixins.respond-below(custom991) {
+                @include mixins.margin-padding(null,10px);
             }
         }
         p {
-            font-size: $font-size-10;
-            color: $gray-500;
+            font-size: variables.$font-size-10;
+            color: variables.$gray-500;
             text-transform: uppercase;
-            font-weight: $font-weight-bold;
+            font-weight: variables.$font-weight-bold;
             margin-bottom: 10px;
         }
         ul {
@@ -444,16 +447,16 @@
             li {
                 &.active{
                     a{
-                        background: linear-gradient(46.62deg, $primary 0%, $violet 93.64%);
-                        color: $white;
+                        background: linear-gradient(46.62deg, variables.$primary 0%, variables.$violet 93.64%);
+                        color: variables.$white;
                     }
                 }
                 a {
-                    font-weight: $font-weight-normal;
-                    font-size: $font-size-base;
-                    color: $secondary;
+                    font-weight: variables.$font-weight-normal;
+                    font-size: variables.$font-size-base;
+                    color: variables.$secondary;
                     &.active {
-                        color: $primary;
+                        color: variables.$primary;
                     }
                 }
             }
@@ -466,14 +469,14 @@
             font-family: 'Font Awesome 5 Free';
             text-rendering: auto;
             line-height: 40px;
-            font-size: $font-size-18;
+            font-size: variables.$font-size-18;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 18px;
             top: 0px;
             position: relative;
-            font-weight: $font-weight-bold;
-            @include transform(translate(0, 0));
+            font-weight: variables.$font-weight-bold;
+            @include mixins.transform(translate(0, 0));
             &:before {
                 content: "\f105";
                 
@@ -494,7 +497,7 @@
     li {
         a.subdrop {
             .menu-arrow {
-                @include transform(rotate(90deg));
+                @include mixins.transform(rotate(90deg));
             }
         }
     }
@@ -505,17 +508,17 @@
             display: flex;
             -ms-flex-direction: column;
             flex-direction: column;
-            @include rounded(0);
-            border-bottom: 1px solid $gray-400;
-            @include margin-padding(null, 20px 0);
-            @include transition(all 0.4s ease);
+            @include mixins.rounded(0);
+            border-bottom: 1px solid variables.$gray-400;
+            @include mixins.margin-padding(null, 20px 0);
+            @include mixins.transition(all 0.4s ease);
             &:hover{
-                box-shadow: 0  0 0 150px $violet inset;
-                color: $white;
+                box-shadow: 0  0 0 150px variables.$violet inset;
+                color: variables.$white;
             }  
             span{
                 margin-top: 15px;
-                font-weight:$font-weight-medium;
+                font-weight:variables.$font-weight-medium;
             }
         }
        
@@ -523,15 +526,15 @@
     .sidemenu {
         a {
             width: 100%;
-            font-weight: $font-weight-medium;
+            font-weight: variables.$font-weight-medium;
             display: block;
-            @include rounded(5px);
-            @include margin-padding( 0 0 10px, 10px);
+            @include mixins.rounded(5px);
+            @include mixins.margin-padding( 0 0 10px, 10px);
             &:hover{
-                background: linear-gradient(46.62deg, $primary 0%, $violet 93.64%);
-                color: $white;
+                background: linear-gradient(46.62deg, variables.$primary 0%, variables.$violet 93.64%);
+                color: variables.$white;
                 svg{
-                    color:$white;
+                    color:variables.$white;
                 }
             }
             svg {
@@ -554,18 +557,18 @@
             -ms-flex-pack: center;
             position: absolute;
             opacity: 1;
-            background: $primary;
+            background: variables.$primary;
             right: -13px;
             border-radius: 50%;
             width: 25px;
             height: 25px;
-            color: $white;
+            color: variables.$white;
             cursor: pointer;
             svg {
                 transform: rotate(180deg);
             }    
             &:hover {
-                background: $primary-hover;
+                background: variables.$primary-hover;
             }       
         }
         &.active svg {
@@ -574,7 +577,7 @@
       
 }
 
-@include respond-above(custom991) {
+@include mixins.respond-above(custom991) {
     .mini-sidebar {
         .page-wrapper {
             margin-left: 80px;
@@ -624,7 +627,7 @@
     .expand-menu{
         .sidebar-right {
             display: block;
-            @include transition(all 0.2s ease);
+            @include mixins.transition(all 0.2s ease);
         }
         .sidebar {
             width: 260px;
@@ -632,7 +635,7 @@
                ul{
                    > li{
                         > a {
-                            @include margin-padding(null, 10px 15px);
+                            @include mixins.margin-padding(null, 10px 15px);
                             span{
                                 display:inline-block;
                                 line-height: 0;
@@ -678,8 +681,8 @@ body.mini-sidebar{
             justify-content: center;
             -webkit-justify-content: center;
             -ms-flex-pack: center;
-            font-weight: $font-weight-medium;
-            font-size: $font-size-15;
+            font-weight: variables.$font-weight-medium;
+            font-size: variables.$font-size-15;
             color: #67748E;
             position: relative;
             width: 100%;
@@ -714,7 +717,7 @@ body.mini-sidebar{
     width: 100%;
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.6);
-    @include position(fixed,60px,null,null,0);
+    @include mixins.position(fixed,60px,null,null,0);
     &.opened {
         display: block;
     }
@@ -728,7 +731,7 @@ body.mini-sidebar{
     }
     #toggle_btn{
         svg{
-            @include transform(rotate(180deg));
+            @include mixins.transform(rotate(180deg));
         }
     }
 }
@@ -752,7 +755,7 @@ body.mini-sidebar{
         &.sidebar-one {
             .submenu {
                 ul {
-                    background: $body-bg;
+                    background: variables.$body-bg;
                 }
             }
         }

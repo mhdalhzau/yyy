@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .chat-user-actives {
     .call-meet-blk {
         display: -webkit-box;
@@ -6,14 +9,14 @@
         align-items: center;
         -webkit-box-align: center;
         -ms-flex-align: center;
-        background: $white;
+        background: variables.$white;
         border-radius: 5px;
         margin-bottom: 15px;
         padding: 10px;
-        @include transition(all 0.5s ease);
+        @include mixins.transition(all 0.5s ease);
         &:hover {
-            background-color: $black;
-            @include transition(all 0.5s ease);
+            background-color: variables.$black;
+            @include mixins.transition(all 0.5s ease);
         }
         .meet-border {
             display: -webkit-box;
@@ -24,20 +27,20 @@
             -ms-flex-align: center;
             width: 39px;
             height: 39px;
-            background: $white;
-            border: 0.5px solid $gray-300;
+            background: variables.$white;
+            border: 0.5px solid variables.$gray-300;
             border-radius: 10px;
             margin-right: 10px;
             svg {
                 width: 16px;
-                color: $blue;
+                color: variables.$blue;
             }
         }
         .recent-user-titles {
             h5 {
-                font-size: $font-size-base;
-                font-weight: $font-weight-semibold;
-                color: $black;
+                font-size: variables.$font-size-base;
+                font-weight: variables.$font-weight-semibold;
+                color: variables.$black;
                 margin-bottom: 5px;
                 width: 150px;
                 white-space: nowrap;
@@ -45,8 +48,8 @@
                 text-overflow: ellipsis;
             }
             p {
-                font-size: $font-size-10;
-                color: $text-color;
+                font-size: variables.$font-size-10;
+                color: variables.$text-color;
             }
         }
     }
@@ -58,21 +61,21 @@
             border: 0;
             border-radius: 6px;
             &:hover {
-                background: $primary;
+                background: variables.$primary;
                 svg {
-                    color: $white;
+                    color: variables.$white;
                 }
             }
             svg {
-                color: $primary;
+                color: variables.$primary;
             }
         }
         .recent-user-titles {
             h5 {
-                color: $primary;
+                color: variables.$primary;
                 width: 100%;
                 margin-bottom: 0;
-                font-size: $font-size-15;
+                font-size: variables.$font-size-15;
             }
         }
     }
@@ -86,7 +89,7 @@
                 border-radius: 10px;
             }
             .video-avatar {
-                color: $white;
+                color: variables.$white;
                 background: #5D5D5D;
                 font-size: 50px;
                 border-radius: 10px;
@@ -136,8 +139,8 @@
                             margin-right: 0px;
                         }
                         a {
-                            color: $white;
-                            background: $white;
+                            color: variables.$white;
+                            background: variables.$white;
                             border-radius: 10px;
                             width: 54px;
                             height: 54px;
@@ -150,20 +153,20 @@
                             justify-content: center;
                             -webkit-justify-content: center;
                             -ms-flex-pack: center;
-                            font-size: $font-size-20;
+                            font-size: variables.$font-size-20;
                             white-space: nowrap;
-                            @include respond-below(custom767) {
+                            @include mixins.respond-below(custom767) {
                                 width: 45px;
                                 height: 45px;
                             }
                             i {
-                                color: $text-color;
+                                color: variables.$text-color;
                             }
                             &.stop {
-                                color: $white;
-                                background: $danger;
+                                color: variables.$white;
+                                background: variables.$danger;
                                 i {
-                                    color: $white;
+                                    color: variables.$white;
                                 }
                             }
                         }
@@ -174,7 +177,7 @@
                 ul {
                     li {
                         i {
-                            font-size: $font-size-18;
+                            font-size: variables.$font-size-18;
                         }
                     }
                 }
@@ -186,11 +189,11 @@
             max-width: 500px;
             margin: auto;
             h4 {
-                font-size: $font-size-22;
-                font-weight: $font-weight-semibold;
+                font-size: variables.$font-size-22;
+                font-weight: variables.$font-weight-semibold;
                 margin-bottom: 20px;
-                @include respond-below(custom767) {
-                    font-size: $font-size-18;
+                @include mixins.respond-below(custom767) {
+                    font-size: variables.$font-size-18;
                 }
             }
             .event-user-group {
@@ -199,37 +202,37 @@
                     .avatar {
                         width: 38px;
                         height: 38px;
-                        border: 3px solid $white;
+                        border: 3px solid variables.$white;
                         &+.avatar {
                             margin-left: -20px;
                         }
                         .avatar-title {
-                            color: $black;
-                            font-size: $font-size-base;
-                            font-weight: $font-weight-semibold;
+                            color: variables.$black;
+                            font-size: variables.$font-size-base;
+                            font-weight: variables.$font-weight-semibold;
                             background: gray;
                         }
                     }
                 }
             }
             p {
-                font-size: $font-size-13;
-                color: $text-color;
+                font-size: variables.$font-size-13;
+                color: variables.$text-color;
             }
             .btn-join-call {
                 .btn-primary {
-                    background: $primary;
+                    background: variables.$primary;
                     border-radius: 6px 6px 6px 6px;
-                    color: $white;
-                    font-size: $font-size-base;
-                    border: 1px solid $primary;
-                    font-weight: $font-weight-semibold;
+                    color: variables.$white;
+                    font-size: variables.$font-size-base;
+                    border: 1px solid variables.$primary;
+                    font-weight: variables.$font-weight-semibold;
                     min-width: 105px;
                     padding: 8px 15px;
                     &:hover {
-                        background: $danger;
+                        background: variables.$danger;
                         border: 1px solid gray;
-                        color: $primary;
+                        color: variables.$primary;
                     }
                 }
             }
@@ -250,7 +253,7 @@
         &.add-meeting {
             width: 65%;
             margin-right: 24px;
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 display: none;
                 margin-right: 0px;
             }
@@ -277,7 +280,7 @@
                     .call-recent {
                         background: none;
                         svg {
-                            color: $primary;
+                            color: variables.$primary;
                             width: 14px;
                         }
                     }
@@ -303,7 +306,7 @@
             &.open-chats {
                 width: 35%;
                 opacity: 1;
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     width: 100%;
                 }
             }
@@ -311,7 +314,7 @@
         &.open-message {
             width: 35%;
             opacity: 1;
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 width: 100%;
             }
         }
@@ -339,7 +342,7 @@
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    @include respond-below(custom767) {
+                    @include mixins.respond-below(custom767) {
                         width: 38px;
                         height: 38px;
                     }
@@ -348,13 +351,13 @@
         }
     }
     &.meet-mutes {
-        background: $primary;
+        background: variables.$primary;
         right: inherit;
         left: 20px;
         ul {
             li {
                 a {
-                    color: $white;
+                    color: variables.$white;
                     width: 50px;
                     height: 50px;
                     display: -webkit-box;
@@ -366,7 +369,7 @@
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    @include respond-below(custom767) {
+                    @include mixins.respond-below(custom767) {
                         width: 38px;
                         height: 38px;
                     }
@@ -375,14 +378,14 @@
         }
     }
     &.meet-mutes-bottom {
-        background: $primary;
+        background: variables.$primary;
         bottom: 20px;
         border-radius: 50px;
         top: inherit;
         ul {
             li {
                 a {
-                    color: $white;
+                    color: variables.$white;
                     width: 50px;
                     height: 50px;
                     display: -webkit-box;
@@ -394,12 +397,12 @@
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    @include respond-below(custom767) {
+                    @include mixins.respond-below(custom767) {
                         width: 38px;
                         height: 38px;
                     }
                     i {
-                        font-size: $font-size-20;
+                        font-size: variables.$font-size-20;
                     }
                 }
             }
@@ -417,7 +420,7 @@
         justify-content: center;
         -webkit-justify-content: center;
         -ms-flex-pack: center;
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             display: block;
         }
         ul {
@@ -450,43 +453,43 @@
                     justify-content: center;
                     -webkit-justify-content: center;
                     -ms-flex-pack: center;
-                    color: $black;
-					font-size: $font-size-18;
+                    color: variables.$black;
+					font-size: variables.$font-size-18;
                     &.call-end {
-                        background-color: $danger;
-                        border-color: $danger;
-                        color: $white;
+                        background-color: variables.$danger;
+                        border-color: variables.$danger;
+                        color: variables.$white;
 						width: 60px;
                     	height: 60px;
 						rotate: 135deg;
-						font-size: $font-size-20;
+						font-size: variables.$font-size-20;
                     }
                     &.stop {
-                        color: $white;
-                        background: $danger;
-                        border-color: $danger;
+                        color: variables.$white;
+                        background: variables.$danger;
+                        border-color: variables.$danger;
                         i {
-                            color: $white;
+                            color: variables.$white;
                         }
                     }
                 }
                 &.active {
                     a {
-                        background: $primary;
-                        border-color: $primary;
-                        color: $white;
+                        background: variables.$primary;
+                        border-color: variables.$primary;
+                        color: variables.$white;
                         img {
                             filter: invert(1) brightness(100);
                         }
                     }
                 }
             }
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 margin-bottom: 5px;
                 justify-content: center;
             }
             &:last-child {
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     margin-bottom: 0px;
                 }
             }
@@ -507,32 +510,32 @@
     -webkit-justify-content: space-between;
     -ms-flex-pack: space-between;
     margin-bottom: 30px;
-    @include respond-below(custom767) {
+    @include mixins.respond-below(custom767) {
         display: block;
     }
     .reccession-head {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             margin-bottom: 5px;
         }
         h5 {
-            font-size: $font-size-20;
-            font-weight: $font-weight-bold;
-			color: $secondary;
+            font-size: variables.$font-size-20;
+            font-weight: variables.$font-weight-bold;
+			color: variables.$secondary;
             margin-bottom: 0px;
-            @include respond-below(custom767) {
-                font-size: $font-size-18;
+            @include mixins.respond-below(custom767) {
+                font-size: variables.$font-size-18;
             }
         }
         ul {
             li {
-                font-size: $font-size-15;
-                font-weight: $font-weight-normal;
-                color: $text-color;
+                font-size: variables.$font-size-15;
+                font-weight: variables.$font-weight-normal;
+                color: variables.$text-color;
                 margin-right: 25px;
                 &:last-child {
                     margin-right: 0px;
                 }
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     margin-bottom: 10px
                 }
             }
@@ -545,17 +548,17 @@
         .btn-primary {
             background: #1b2950;
             border-radius: 6px;
-            color: $white;
+            color: variables.$white;
             border: 1px solid #1b2950;
             margin-right: 10px;
-            font-weight: $font-weight-bold;
-            font-size: $font-size-base;
+            font-weight: variables.$font-weight-bold;
+            font-size: variables.$font-size-base;
 			&:hover {
-				background: $primary;
-				border: 1px solid $primary;
+				background: variables.$primary;
+				border: 1px solid variables.$primary;
 			}
-            @include respond-below(custom767) {
-                font-size: $font-size-13;
+            @include mixins.respond-below(custom767) {
+                font-size: variables.$font-size-13;
             }
             display: -webkit-box;
             display: -ms-flexbox;
@@ -573,8 +576,8 @@
                 height: 42px;
                 background: #F7F7FA;
                 border-radius: 5px;
-                color: $text-color;
-				font-size: $font-size-18;
+                color: variables.$text-color;
+				font-size: variables.$font-size-18;
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -585,8 +588,8 @@
                 -webkit-justify-content: center;
                 -ms-flex-pack: center;
 				&:hover {
-					background: $primary;
-					color: $white;
+					background: variables.$primary;
+					color: variables.$white;
 				}
             }
         }
@@ -600,7 +603,7 @@
         position: absolute;
         left: 0px;
         top: 4px;
-        background-color: $danger;
+        background-color: variables.$danger;
         width: 13px;
         height: 13px;
         border-radius: 50px;
@@ -610,7 +613,7 @@
         position: absolute;
         left: 3px;
         top: 7px;
-        background-color: $white;
+        background-color: variables.$white;
         width: 7px;
         height: 7px;
         border-radius: 50px;
@@ -642,7 +645,7 @@
     }
 }
 .video-avatar {
-    color: $white;
+    color: variables.$white;
     background: #5D5D5D;
     font-size: 50px;
     border-radius: 10px;
@@ -659,9 +662,9 @@
     -ms-flex-pack: center;
     justify-content: center;
     h4 {
-        font-weight: $font-weight-bold;
-        font-size: $font-size-24;
-        color: $white;
+        font-weight: variables.$font-weight-bold;
+        font-size: variables.$font-size-24;
+        color: variables.$white;
     }
 }
 .video-avatar.active {
@@ -675,16 +678,16 @@
 }
 .join-content {
     p {
-        font-weight: $font-weight-normal;
-        font-size: $font-size-14;
+        font-weight: variables.$font-weight-normal;
+        font-size: variables.$font-size-14;
         margin-bottom: 25px;
-        color: $black;
+        color: variables.$black;
     }
     label {
-        font-size: $font-size-18;
+        font-size: variables.$font-size-18;
         margin-bottom: 0;
-        color: $black;
-        font-weight: $font-weight-bold;
+        color: variables.$black;
+        font-weight: variables.$font-weight-bold;
     }
 }
 .part-name {
@@ -696,24 +699,24 @@
     border-radius: 50px;
     padding: 5px 15px;
     h4 {
-        font-weight: $font-weight-medium;
-        font-size: $font-size-15;
-        color: $text-color; 
+        font-weight: variables.$font-weight-medium;
+        font-size: variables.$font-size-15;
+        color: variables.$text-color; 
         margin-bottom: 0;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        @include respond-below(custom767) {
-            font-size: $font-size-13;
+        @include mixins.respond-below(custom767) {
+            font-size: variables.$font-size-13;
         }
     }
     &.sub-part-name {
-        background: $white;
+        background: variables.$white;
         bottom: 10px;
         top: inherit;
         h4 {
-            color: $secondary;
-            font-size: $font-size-12;
+            color: variables.$secondary;
+            font-size: variables.$font-size-12;
         }
     }
 }
@@ -723,13 +726,13 @@
         top: inherit;
         bottom: 20px;
         h4 {
-            color: $white;
+            color: variables.$white;
         }
     }
 }
 .join-hover-img {
     position: absolute;
-    @include position-alignment(both);
+    @include mixins.position-alignment(both);
     .event-user-group {
         .avatar-group {
             background: rgba(0, 0, 0, 0.3);
@@ -738,7 +741,7 @@
             .avatar {
                 width: 26px;
                 height: 26px;
-                border: 1px solid $white;
+                border: 1px solid variables.$white;
                 &+.avatar {
                     margin-left: -16px;
                 }
@@ -748,7 +751,7 @@
                 .avatar-title {
                     color: #1F2937;
                     font-size: 12px;
-                    font-weight: $font-weight-semibold;
+                    font-weight: variables.$font-weight-semibold;
                     background: #F3F4F6;
                 }
             }
@@ -759,15 +762,15 @@
 	position: absolute;
 	bottom: 10px;
 	right: 12px;
-    @include respond-below(custom767) {
+    @include mixins.respond-below(custom767) {
         bottom: 8px;
         right: 13px;
     }
     a {
-        color: $text-color;
+        color: variables.$text-color;
         width: 30px;
         height: 30px;
-        background: $white;
+        background: variables.$white;
         border-radius: 50px;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -784,7 +787,7 @@
         &.other-mic-off {
             &.stop {
                 i {
-                    color: $danger;
+                    color: variables.$danger;
                 }
             }
         }
@@ -793,9 +796,9 @@
         a {
             &.other-mic-off {
                 &.stop {
-                    background-color: $danger !important;
+                    background-color: variables.$danger !important;
                     i {
-                        color: $white;
+                        color: variables.$white;
                     }
                 }
             }
@@ -807,9 +810,9 @@
         a {
             &.other-mic-off, &.other-video-off {
                 &.stop {
-                    background: $danger !important;
+                    background: variables.$danger !important;
                     i {
-                        color: $white;
+                        color: variables.$white;
                     }
                 }
             }
@@ -833,8 +836,8 @@
     .vertical-sec {
         .part-name {
             h4 {
-                font-size: $font-size-14;
-	            font-weight: $font-weight-normal;
+                font-size: variables.$font-size-14;
+	            font-weight: variables.$font-weight-normal;
             }
         }
     }
@@ -843,8 +846,8 @@
     .join-video {
         &.single-user {
             .part-name h4 {
-                font-size: $font-size-14;
-                font-weight: $font-weight-normal;
+                font-size: variables.$font-size-14;
+                font-weight: variables.$font-weight-normal;
             }
         }
     }
@@ -966,22 +969,22 @@
         border-radius: 10px;
         padding: 0;
         flex-grow: 1;
-        @include respond-below(custom1280) {
+        @include mixins.respond-below(custom1280) {
             width: 100%;
         }
-        @include respond-below(custom1199) {
+        @include mixins.respond-below(custom1199) {
             min-height: 203px;
         }
-        @include respond-below(custom991) {
+        @include mixins.respond-below(custom991) {
             min-height: 230px;
         }
         &:nth-child(even) {
             margin-right: 0px;
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 margin-right: 10px;
             }
         }
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             width: 100%;
             min-height: 257px;
         }
@@ -990,18 +993,18 @@
 }
 .multi-grid {
     .join-video.single-user {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
            width: 45%;
         }
         &:nth-child(even) {
             margin-right: 24px;
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 margin-right: 0px;
             }
         }
         &:nth-child(4n) {
             margin-right: 0px;
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 &:nth-child(4n) {
                     margin-right: 0px;
                 }
@@ -1025,20 +1028,20 @@
             margin-right: 0px;
         }
         &:nth-child(3n) {
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 margin-right: 0
             }
         }
     }
 }
 .text-avatar {
-	color: $white;
+	color: variables.$white;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     h4 {
-        color: $white;
+        color: variables.$white;
     }
 }
 .text-box {
@@ -1046,8 +1049,8 @@
     width: 86px;	
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.2);
-    font-size: $font-size-36;
-	font-weight: $font-weight-bold;
+    font-size: variables.$font-size-36;
+	font-weight: variables.$font-weight-bold;
 	display: -webkit-box;
 	display: -ms-flexbox;
     display: flex;
@@ -1066,16 +1069,16 @@
 }
 .grid-view .join-video.single-user {
     width: 47%;	
-    @include respond-below(custom767) {
+    @include mixins.respond-below(custom767) {
         width: 40%;	
     }
     &:nth-child(2n) {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             margin-right: 0px;
         }
     }
     &:nth-child(3n) {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             margin-right: 24px;
         }
     }
@@ -1127,7 +1130,7 @@
         align-items: center;
         align-content: center;
         max-width: 1300px;
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             display: block;
         }
         .join-video {
@@ -1139,17 +1142,17 @@
                 width: 97%;
                 flex-grow: 1;
                 display: flex;
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     width: 100%;
                 }
             }
         }
         .vertical-sec {
             width: 20%;
-            @include respond-below(custom1024) {
+            @include mixins.respond-below(custom1024) {
                 width: 30%;
             }
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 width: 100%;
             }
         }
@@ -1170,7 +1173,7 @@
 }
 .chat-footer .btn:hover {
 	background: #0066c5;
-	color: $white;
+	color: variables.$white;
 }
 .join-contents {
     &.show-whiteboard {
@@ -1203,9 +1206,9 @@
 		background-color: rgba(255, 255, 255, 0.2);
 		display: inline-block;
 		border-radius: 130px;
-		color: $white;
-		font-size: $font-size-14;
-		font-weight: $font-weight-semibold;
+		color: variables.$white;
+		font-size: variables.$font-size-14;
+		font-weight: variables.$font-weight-semibold;
 		width: 80px;
 		height: 30px;
 		text-align: center;
@@ -1217,7 +1220,7 @@
 			position: absolute;
 			left: 7px;
 			top: 7px;
-			background-color: $white;
+			background-color: variables.$white;
 			width: 18px;
 			height: 18px;
 			border-radius: 50px;
@@ -1227,7 +1230,7 @@
 			position: absolute;
 			left: 12px;
 			top: 12px;
-			background-color: $danger;
+			background-color: variables.$danger;
 			width: 8px;
 			height: 8px;
 			border-radius: 50px;
@@ -1254,7 +1257,7 @@
 	bottom: 20px;
 }
 .volume-col .inner-volume-col {
-	background-color: $gray-300;
+	background-color: variables.$gray-300;
     border-radius: 130px;
     width: 30px;
     height: 120px;
@@ -1268,7 +1271,7 @@
     margin: 0 auto;
     height: 80px;
     width: 5px;
-    background: $white;
+    background: variables.$white;
     border-radius: 15px;
     transform: translateX(-50%);
     -webkit-transform: translateX(-50%);
@@ -1279,7 +1282,7 @@
     width: 100%;
     position: absolute;
     bottom: 0;
-    background: $primary;
+    background: variables.$primary;
     border: none;
     border-radius: 10px;
     outline: none;
@@ -1288,7 +1291,7 @@
 	width: 20px;
     height: 20px;
     border-radius: 20px;
-    background: $primary;
+    background: variables.$primary;
     position: absolute;
     left: 50%;
     margin-top: -8px;
@@ -1313,9 +1316,9 @@
 }
 
 .volume-col .volume-icons {
-	color: $white;
+	color: variables.$white;
 	margin-left: 0px;
-	font-size: $font-size-18;
+	font-size: variables.$font-size-18;
 	margin-top: 22px;
 }
 .chat-msg-blk {
@@ -1325,14 +1328,14 @@
         margin-bottom: 1.5rem;
         display: flex;
         display: -webkit-flex;
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             max-width: 100%;
         }
         .chat-action-btns {
             .chat-user-time {
                 .chats-dot {
                     a {
-                        color: $green;
+                        color: variables.$green;
                     }
                 }
             }
@@ -1345,7 +1348,7 @@
                 order: 1;
                 -webkit-order: 1;
                 .message-content {
-                    background-color: $gray-300;
+                    background-color: variables.$gray-300;
                     border-radius: 8px;
                     .chat-time {
                         justify-content: flex-start;
@@ -1366,14 +1369,14 @@
                                             img {
                                                 -webkit-filter: blur(4px);
                                                 filter: blur(1px);
-                                                border-color: $black;
+                                                border-color: variables.$black;
                                             }
                                         }
                                         span {
                                             position: absolute;
-                                            @include position-alignment(both);
+                                            @include mixins.position-alignment(both);
                                             i {
-                                                color: $white;
+                                                color: variables.$white;
                                             }
                                         }
                                     }
@@ -1383,7 +1386,7 @@
                                         bottom: 8px;
                                         line-height: 0;
                                         a {
-                                            color: $white;
+                                            color: variables.$white;
                                             font-size: 10px;
                                         }
                                     }
@@ -1396,7 +1399,7 @@
                     }
                     &::before {
                         border-bottom: 6px solid transparent;
-                        border-left: 6px solid $gray-300;
+                        border-left: 6px solid variables.$gray-300;
                         border-right: 0;
                         border-top: 6px solid transparent;
                         content: "";
@@ -1424,7 +1427,7 @@
                 .chat-user-time {
                     .chats-dot {
                         a {
-                            color: $green;
+                            color: variables.$green;
                         }
                     }
                 }
@@ -1444,15 +1447,15 @@
             }
         }
         .message-content {
-            background-color: $gray-300;
+            background-color: variables.$gray-300;
             border-radius: 8px;
             padding: 10px 20px;
-            font-weight: $font-weight-medium;
+            font-weight: variables.$font-weight-medium;
             margin-bottom: 5px;
             position: relative;
             h4 {
-                font-size: $font-size-13;
-                color: $secondary;
+                font-size: variables.$font-size-13;
+                color: variables.$secondary;
                 margin-bottom: 0px;
                 line-height: 1.4;
             }
@@ -1466,9 +1469,9 @@
                 justify-content: center;
                 -webkit-justify-content: center;
                 -ms-flex-pack: center;
-                font-size: $font-size-10;
-                font-weight: $font-weight-medium;
-                color: $green;
+                font-size: variables.$font-size-10;
+                font-weight: variables.$font-weight-medium;
+                color: variables.$green;
                 margin-bottom: 0;
                 svg {
                     width: 10px;
@@ -1476,7 +1479,7 @@
             }
             &::before {
                 border-bottom: 6px solid transparent;
-                border-right: 6px solid $gray-300;
+                border-right: 6px solid variables.$gray-300;
                 border-top: 6px solid transparent;
                 content: "";
                 height: 0;
@@ -1499,8 +1502,8 @@
                 -webkit-justify-content: left;
                 -ms-flex-pack: left;
                 font-size: 8px;
-                font-weight: $font-weight-medium;
-                color: $text-color;
+                font-weight: variables.$font-weight-medium;
+                color: variables.$text-color;
 				i {
 					font-size: 12px;
 					color: #008024;
@@ -1521,18 +1524,18 @@
             transform: translateY(-50%);
             -webkit-transform: translateY(-50%);
             -ms-transform: translateY(-50%);
-            background-color: $green;
+            background-color: variables.$green;
             width: 100%;
             height: 1px;
         }
         .chat-date {
-            background-color: $green;
-            color: $green;
-            font-size: $font-size-13;
+            background-color: variables.$green;
+            color: variables.$green;
+            font-size: variables.$font-size-13;
             padding: 7px 14px;
             border-radius: 3px;
             display: inline-block;
-            font-weight: $font-weight-semibold;
+            font-weight: variables.$font-weight-semibold;
             position: relative;
         }
     }
@@ -1560,7 +1563,7 @@
                 .edit-group {
                     svg {
                         width: 16px;
-                        color: $green;
+                        color: variables.$green;
                     }
                 }
             }
@@ -1574,22 +1577,22 @@
                 justify-content: center;
                 -webkit-justify-content: center;
                 -ms-flex-pack: center;
-                border-bottom: 1px solid $green;
+                border-bottom: 1px solid variables.$green;
                 padding-bottom: 20px;
                 ul {
                     li {
                         a {
-                            color: $green;
+                            color: variables.$green;
                             width: 30px;
                             height: 30px;
                             background-color: gray;
                             padding: 0;
                             border-radius: 50px;
                             &:hover {
-                                background: $primary;
-                                border-color: $primary;
+                                background: variables.$primary;
+                                border-color: variables.$primary;
                                 svg {
-                                    color: $white;
+                                    color: variables.$white;
                                 }
                             }
                             svg {
@@ -1607,7 +1610,7 @@
             .left-chat-title {
                 padding: 20px;
                 margin-bottom: 0;
-                background-color: $body-bg;
+                background-color: variables.$body-bg;
                 border-radius: 10px 10px 0 0;
                 h4 {
                     display: -webkit-box;
@@ -1628,10 +1631,10 @@
                         -ms-flex-pack: center;
                         width: 25px;
                         height: 25px;
-                        background-color: $warning;
+                        background-color: variables.$warning;
                         border-radius: 50px;
-                        font-size: $font-size-14;
-                        color: $white;
+                        font-size: variables.$font-size-14;
+                        color: variables.$white;
                         margin-left: 10px;
                     }
                 }
@@ -1702,17 +1705,17 @@
                                 -webkit-box-align: center;
                                 -ms-flex-align: center;
                                 h5 {
-                                    font-size: $font-size-15;
-                                    font-weight: $font-weight-normal;
+                                    font-size: variables.$font-size-15;
+                                    font-weight: variables.$font-weight-normal;
                                     margin-bottom: 2px;
-                                    color: $text-color;
+                                    color: variables.$text-color;
                                     white-space: nowrap;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                 }
                                 p {
-                                    font-size: $font-size-12;
-                                    color: $danger;
+                                    font-size: variables.$font-size-12;
+                                    color: variables.$danger;
                                     display: -webkit-box;
                                     display: -ms-flexbox;
                                     display: flex;
@@ -1728,15 +1731,15 @@
                             .chat-user-time {
                                 .chats-dot {
                                     a {
-                                        color: $danger;
+                                        color: variables.$danger;
                                     }
                                 }
                             }
                             .last-chat-time {
                                 .text-muted {
-                                    font-size: $font-size-10;
-                                    color: $secondary;
-                                    font-weight: $font-weight-medium;
+                                    font-size: variables.$font-size-10;
+                                    color: variables.$secondary;
+                                    font-weight: variables.$font-weight-medium;
                                 }
                                 .new-message-count {
                                     width: 20px;
@@ -1749,8 +1752,8 @@
                                     -webkit-justify-content: center;
                                     line-height: 0;
                                     font-size: 11px;
-                                    background-color: $primary;
-                                    color: $white;
+                                    background-color: variables.$primary;
+                                    color: variables.$white;
                                     border-radius: 50%;
                                     margin-left: auto;
                                     margin-top: 5px;
@@ -1777,10 +1780,10 @@
                                         width: 30px;
                                         height: 30px;
                                         background: #B8BCC9;
-                                        color: $secondary;
+                                        color: variables.$secondary;
                                         border-radius: 50px;
                                         svg {
-                                            color: $secondary;
+                                            color: variables.$secondary;
                                         }
                                     }
                                 }
@@ -1798,7 +1801,7 @@
         }
     }
     .slime-grp {
-        background: $white;
+        background: variables.$white;
 		box-shadow: 0px 4px 60px 0px #E7E7E778;
 		border: 1px solid #E1E8ED;
         border-radius: 10px;
@@ -1814,12 +1817,12 @@
             -webkit-justify-content: space-between;
             -ms-flex-pack: space-between;
             margin-bottom: 20px;
-			background-color: $body-bg;
+			background-color: variables.$body-bg;
             .chat-title {
                 h4 {
-                    font-size: $font-size-18;
-                    font-weight: $font-weight-semibold;
-                    color: $secondary;
+                    font-size: variables.$font-size-18;
+                    font-weight: variables.$font-weight-semibold;
+                    color: variables.$secondary;
                     margin-bottom: 0;
                 }
             }
@@ -1839,14 +1842,14 @@
                     background: transparent;
                     border-radius: 50px;
                     &:hover {
-                        background: $primary;
+                        background: variables.$primary;
                         svg {
-                            color: $white;
+                            color: variables.$white;
                         }
                     }
                     svg {
                         width: 16px;
-                        color: $danger;
+                        color: variables.$danger;
                     }
                 }
             }
@@ -1857,7 +1860,7 @@
 			right: 0px;
 			bottom: 0px;
 			padding: 15px;
-			background: $white;
+			background: variables.$white;
 			form {
 				display: -webkit-box;
                 display: -ms-flexbox;
@@ -1873,7 +1876,7 @@
 					-webkit-transform: translateY(-50%);
 					-ms-transform: translateY(-50%);
 					a {
-						color: $text-color;
+						color: variables.$text-color;
 					}
 				}
 				.smile-col {
@@ -1894,7 +1897,7 @@
 						-webkit-box-align: center;
 						-ms-flex-align: center;
 						align-items: center;
-						font-size: $font-size-16;
+						font-size: variables.$font-size-16;
 					}
 				}
 				.send-chat {
@@ -1911,30 +1914,30 @@
                         -ms-flex-pack: center;
 						width: 34px;
 						height: 34px;
-						background: $primary;
+						background: variables.$primary;
 						border-radius: 50px;
 						&:hover {
 							background: #1b2950;
 							svg {
-								color: $white;
+								color: variables.$white;
 							}
 						}
 						svg {
 							width: 14px;
-							color: $white;
+							color: variables.$white;
 						}
 					}
 				}
 				.chat_form {
 					border-radius: 20px;
 					margin-right: 0px;
-					background: $white;
+					background: variables.$white;
 					border: 1px solid rgba(145, 158, 171, 0.3);
 					border-radius: 6px;
 					height: 48px;
 					padding: 10px 70px;
 					&::placeholder {
-						font-size: $font-size-base;
+						font-size: variables.$font-size-base;
 						color: rgba(0, 0, 0, 0.2);
 					}
 				}
@@ -1960,7 +1963,7 @@
         -webkit-transform: translate(0, -50%);
         -ms-transform: translate(0, -50%);
         transform: translate(0, -50%);
-        @include respond-below(custom1280) {
+        @include mixins.respond-below(custom1280) {
             width: 100%;
             display: -webkit-box;
             display: -ms-flexbox;
@@ -1981,13 +1984,13 @@
             -webkit-justify-content: center;
             -ms-flex-pack: center;
             &:hover {
-                background-color: $primary;
+                background-color: variables.$primary;
                 i {
-                    color: $white;
+                    color: variables.$white;
                 }
             }
             i {
-                color: $text-color;
+                color: variables.$text-color;
             }
         }
     }
@@ -2023,17 +2026,17 @@
                         width: 250px;
                         height: 250px;
                         position: absolute;
-                        border: 1px solid $primary;
+                        border: 1px solid variables.$primary;
                         border-radius: 50%;
                         left: -25px;
                         top: -25px;
-                        @include respond-below(custom991) {
+                        @include mixins.respond-below(custom991) {
                             width: 150px;
                             height: 150px;
                             left: -10px;
                             top: -10px;
                         }
-                        @include respond-below(custom767) {
+                        @include mixins.respond-below(custom767) {
                             width: 100px;
                             height: 100px;
                             left: -5px;
@@ -2047,11 +2050,11 @@
                 height: 200px;
                 margin: 0;
                 position: relative;
-                @include respond-below(custom991) {
+                @include mixins.respond-below(custom991) {
                     width: 130px;
                     height: 130px;
                 }
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     width: 90px;
                     height: 90px;
                 }
@@ -2062,13 +2065,13 @@
             }
             .user-audio-call {
                 h5 {
-                    font-size: $font-size-14;
-                    color: $white;
-                    font-weight: $font-weight-normal;
+                    font-size: variables.$font-size-14;
+                    color: variables.$white;
+                    font-weight: variables.$font-weight-normal;
                     text-transform: capitalize;
                     text-align: center;
                     margin-top: 35px;
-                    @include respond-below(custom767) {
+                    @include mixins.respond-below(custom767) {
                         margin-top: 15px;
                     }
                 }
@@ -2082,12 +2085,12 @@
                 -ms-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
                 z-index: 9;
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     bottom: 0px;
                 }
                 a {
-                    background-color: $primary;
-                    color: $white;
+                    background-color: variables.$primary;
+                    color: variables.$white;
                 }
             }
         }
@@ -2099,7 +2102,7 @@
     height: 134px;
     bottom: 20px;
     left: 20px;
-    background: $gray-300;
+    background: variables.$gray-300;
     border-radius: 50px;
     padding: 10px 14px;
     width: 30px;
@@ -2112,8 +2115,8 @@
             height: 30px;
             left: 0;
             border-radius: 50px;
-            background: $white;
-            border: 1px solid $warning;
+            background: variables.$white;
+            border: 1px solid variables.$warning;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -2131,7 +2134,7 @@
     height: 4px;
     width: 3px;
     height: 100%;
-    background: $white;
+    background: variables.$white;
     border-radius: 5px;
     writing-mode: vertical-lr;
 }
@@ -2140,14 +2143,14 @@
     appearance: none;
     width: 12px;
     height: 12px;
-    background: $primary !important;
+    background: variables.$primary !important;
     border-radius: 50%;
     cursor: pointer;
 }
 .custom-input::-moz-range-thumb {
     width: 12px;
     height: 12px;
-    background: $primary !important;
+    background: variables.$primary !important;
     border-radius: 50%;
     cursor: pointer;
 }

@@ -1,45 +1,47 @@
+@use "../utils/variables";
+
 [data-layout-mode=dark_mode] {
     .searchinputs input {
-        border-color: $black-bg;
-        background: $input-bg;
+        border-color: variables.$black-bg;
+        background: variables.$input-bg;
     }
     h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     &[data-nav-color=grey] {
         .header {
-            background: $black-bg;
+            background: variables.$black-bg;
             .user-menu .nav-item-box > a {
-                background: $input-bg;
+                background: variables.$input-bg;
             }
         }
         .sidebar .slimScrollDiv, .sidebars .slimScrollDiv {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
         .searchinputs input {
-            border-color: $black-bg;
-            background: $input-bg;
+            border-color: variables.$black-bg;
+            background: variables.$input-bg;
         }
     }
     &[data-layout-style=collapsed] {
         &[data-nav-color=grey] {
             aside {
-                background: $black-bg;
+                background: variables.$black-bg;
             }
         }
     }
     &[data-layout-style=horizontal] {
         .sidebar.horizontal-sidebar {
-            background: $black-bg;
-            border-top-color: $input-bg;
+            background: variables.$black-bg;
+            border-top-color: variables.$input-bg;
         }
         .horizontal-sidebar .sidebar-menu > ul > li.submenu ul {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
     }
     &[data-layout-style=modern] {
         .page-wrapper .content {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
     }
     --bs-heading-color: $black-bg;
@@ -49,22 +51,22 @@
     }
     &[data-layout-style=collapsed] {
         aside {
-            background-color: $black-bg;
+            background-color: variables.$black-bg;
         }
     }
     .fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-popover {
-        border-color: $input-bg !important;
+        border-color: variables.$input-bg !important;
     }
     div#global-loader {
-        background-color: $black-bg !important;
+        background-color: variables.$black-bg !important;
     }
     body {
-        background-color: $black-bg;
-        color: $theme-title;
+        background-color: variables.$black-bg;
+        color: variables.$theme-title;
         &.header-collapse {
             .header {
                 .header-left {
-                    background-color: $black-bg;     
+                    background-color: variables.$black-bg;     
                 }
             }
         }
@@ -80,20 +82,20 @@
             }
         }
         .page-wrapper-new {
-            background-color: $black-bg; 
+            background-color: variables.$black-bg; 
         }
         label, .form-label, .form-control,.notes-summernote p {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
-    background-color: $black-bg;
-    color: $theme-title;
+    background-color: variables.$black-bg;
+    color: variables.$theme-title;
     .header {
-        background: $black-bg;
-        border-bottom: 1px solid $navy;
+        background: variables.$black-bg;
+        border-bottom: 1px solid variables.$navy;
         .header-left {
-            border-color: $navy; 
-            border-bottom: 1px solid $navy;      
+            border-color: variables.$navy; 
+            border-bottom: 1px solid variables.$navy;      
             .logo-normal {
                 display: none;
             }
@@ -103,14 +105,14 @@
         }
     }
     table {
-        background: $black-bg;
+        background: variables.$black-bg;
         --bs-table-bg: transparent;
     }
     .sidebar {
-        border-right: 1px solid $navy;
-        background-color: $black-bg;
+        border-right: 1px solid variables.$navy;
+        background-color: variables.$black-bg;
         .slimScrollDiv{
-            background: $black-bg;
+            background: variables.$black-bg;
         }
         &.collapsed-sidebar {
             border: 0;
@@ -118,12 +120,12 @@
         .sidebar-menu > {
             ul > li {
                 &.submenu ul {
-                    background: $black-bg;
+                    background: variables.$black-bg;
                     border-radius: 5px;
                     padding: 10px 0;
                     li {
                         a {                            
-                            color: $gray-500;
+                            color: variables.$gray-500;
                         }
                     }
                 }
@@ -132,11 +134,11 @@
                         filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
                     }
                     span {
-                        color: $gray-500;
+                        color: variables.$gray-500;
                     }
                     &:hover {
                         img {
-                            color: $gray-500;
+                            color: variables.$gray-500;
                         }
                         svg{
                             filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
@@ -144,172 +146,172 @@
                     }
                 }
                 .submenu-hdr {
-                    color: $gray-500 !important;
+                    color: variables.$gray-500 !important;
                 }
             }
         }
     }
     .sidebar .sidebar-menu > ul > li.submenu-open ul, .sidebars .sidebar-menu > ul > li.submenu-open ul {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .page-wrapper {
-        background: $black-bg;
+        background: variables.$black-bg;
         &.page-wrapper-three {
             .content {
-                background: $black-bg;
+                background: variables.$black-bg;
             }
         }
     }
     #toggle_btn{
         &:before{
-            border: 2px solid $theme-title;
+            border: 2px solid variables.$theme-title;
         }
     }
     .user-menu.nav > li > a.select-store {
         .user-info .user-name {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .user-info .user-name {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .user-menu {
         .nav-item-box {
             > a{
-                background: $secondary;
+                background: variables.$secondary;
             }
         }
     }
     .header-left{
         &.active {
             #toggle_btn:after {
-                border: 2px solid $theme-title;
+                border: 2px solid variables.$theme-title;
             }
         }
     }
     .dash-widget{
-        background: $card-dark-bg;
-        border: 1px solid $navy;
+        background: variables.$card-dark-bg;
+        border: 1px solid variables.$navy;
         .dash-widgetcontent {
             h5 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
             h6 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .page-header {
         h4, h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .form-control {
-        color: $theme-title;
-        border: 1px solid $navy;        
+        color: variables.$theme-title;
+        border: 1px solid variables.$navy;        
     }
     select.form-control {
         &:focus {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .input-blocks label {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .dataTables_info {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .setvaluecash ul li a {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .inbox-menu li a i {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .card{
-        background-color: $card-dark-bg;
-        border: 1px solid $navy;
+        background-color: variables.$card-dark-bg;
+        border: 1px solid variables.$navy;
         .card-header {
-            border-color: $navy;
+            border-color: variables.$navy;
             .card-title {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
         .card-body {
             .card-title {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .modal-content {
-        background-color: $gray-900;
+        background-color: variables.$gray-900;
         .modal-header {
-            border-bottom: 1px solid $navy;
+            border-bottom: 1px solid variables.$navy;
         }
     }
     .inputcheck {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .custom_radio {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .fc th.fc-widget-header {
-        background-color: $gray-900;
-        border-color: $input-bg;
+        background-color: variables.$gray-900;
+        border-color: variables.$input-bg;
     }
     
     .fc-day {
-        background-color: $gray-900 !important;
+        background-color: variables.$gray-900 !important;
     }
     
     .chat-cont-left .chat-scroll .media {
         .media-body {
             .user-name, .user-last-chat {
-                color: $theme-title;
+                color: variables.$theme-title;
             }  
         } 
         &.active, &:hover {
-            background: $title-color;
+            background: variables.$title-color;
         }
     }
     .chat-cont-right ul.list-unstyled .media.sent .media-body .msg-box p {    
-        color: $secondary;
+        color: variables.$secondary;
     }
     .inbox-menu {
         li {
             a {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .increment-decrement .quantity-field {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .select2-results__options {
-        color: $gray-800;
+        color: variables.$gray-800;
     }
     .image-upload .image-uploads h4 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .horizontal-sidebar {
-        background: $black-bg;
-        border-top: 1px solid $navy;
+        background: variables.$black-bg;
+        border-top: 1px solid variables.$navy;
         &.side-three {
-            border-color: $navy;
+            border-color: variables.$navy;
         }
         .sidebar-menu > ul > li {
             & > a {
                 span {
-                    color: $gray-500;
+                    color: variables.$gray-500;
                 }                
                 img, svg {
                     filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-         rotate(165deg) brightness(93%) contrast(88%);
                 }
             }
             &.submenu ul {            
-                background: $black-bg;
+                background: variables.$black-bg;
                 li {
                     a {                        
-                        color: $gray-500;
+                        color: variables.$gray-500;
                     }
                     img, svg {
                         filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%) !important;
@@ -330,19 +332,19 @@
             }
         }
         ul li a {
-            color: $gray-500;
+            color: variables.$gray-500;
         }
     }
     .table {
         thead {
-            background: $black-bg;
-            border-bottom: 1px solid $black-bg;
+            background: variables.$black-bg;
+            border-bottom: 1px solid variables.$black-bg;
             tr{
                 &:hover {
                     background: transparent;
                 }
                 th{
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
                
             }
@@ -353,13 +355,13 @@
                     background: transparent;
                 }
                 td {
-                    color: $theme-title;
-                    border-bottom: 1px solid $navy;
-                    background: $card-dark-bg;
+                    color: variables.$theme-title;
+                    border-bottom: 1px solid variables.$navy;
+                    background: variables.$card-dark-bg;
                     a {
-                        color: $theme-title !important;
+                        color: variables.$theme-title !important;
                         &:hover {
-                            color: $primary !important;
+                            color: variables.$primary !important;
                         }
                     }
                     &.action-table-data {
@@ -372,14 +374,14 @@
                             }
                             .confirm-text {
                                 &:hover {
-                                    background-color: $danger;
-                                    border-color: $danger;
+                                    background-color: variables.$danger;
+                                    border-color: variables.$danger;
                                 }
                             }
                         }
                         a {
                             .action-eye {
-                                color: $theme-title
+                                color: variables.$theme-title
                             }
                         }
                     } 
@@ -389,175 +391,175 @@
         }
     }
     .sidebar.collapsed-sidebar .ui-aside .nav-item .nav-link {
-        border-bottom: $navy;
+        border-bottom: variables.$navy;
     }
     .sidebar.collapsed-sidebar .sidebar-menu ul li a img {        
         filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
     }
     .select2-results__option {
-        background: $gray-900;
-        color: $theme-title;
+        background: variables.$gray-900;
+        color: variables.$theme-title;
     }
     .custom-file-container label {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .select2-dropdown {
         border: 2px solid #26264e;
     }
     .swal2-popup {
-        background-color: $gray-900;
+        background-color: variables.$gray-900;
         .swal2-title {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
         .swal2-html-container {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .searchinputs {
         input {
-            border: 1px solid $navy;
-            background: $card-dark-bg;
-            color: $theme-title;
+            border: 1px solid variables.$navy;
+            background: variables.$card-dark-bg;
+            color: variables.$theme-title;
             &::placeholder {
-                color: $gray-500;
+                color: variables.$gray-500;
             }
         }
     }
     .image-upload-new .productviewscontent .productviewsname {
         h2,h3 {
-            color: $gray-500;
+            color: variables.$gray-500;
         }
     }
     .split-card {
         &::before,&::after {
-            background: $navy;
+            background: variables.$navy;
         }
     }
     input[type="email"]{
-        border: 1px solid $gray-700; 
+        border: 1px solid variables.$gray-700; 
     }
     .tabs-set .nav-tabs .nav-link {
-        background: $black-bg;
-        color: $theme-title;
+        background: variables.$black-bg;
+        color: variables.$theme-title;
         &.active {
-            background: $primary;
-            color: $white;
+            background: variables.$primary;
+            color: variables.$white;
         }
     }
     .bor-b1 {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .total-order ul li {
-        border: 1px solid $navy;
+        border: 1px solid variables.$navy;
         &:first-child {
-            border-top: 1px solid $navy;
+            border-top: 1px solid variables.$navy;
         }
         h4 {
-            border-right: 1px solid $navy;
+            border-right: 1px solid variables.$navy;
         }
     }
     hr {
-        background-color: $navy;
-        border-top: 1px solid $navy;
+        background-color: variables.$navy;
+        border-top: 1px solid variables.$navy;
     }
     .inputcheck .checkmark {
         background: transparent;
     }
     .productset {
-        background-color: $gray-900;
-        border: 1px solid $navy;
+        background-color: variables.$gray-900;
+        border: 1px solid variables.$navy;
         .productsetcontent {
             h4 {
-                color: $gray-500;
+                color: variables.$gray-500;
             }
         }
     }
     .graph-sets {
         .btn-light {
-            background-color: $black-bg !important;
-            color: $gray-500 !important;
-            border: 1px solid $navy !important;
+            background-color: variables.$black-bg !important;
+            color: variables.$gray-500 !important;
+            border: 1px solid variables.$navy !important;
             box-shadow: none;
             &:hover {
-               color: $gray-500 !important; 
+               color: variables.$gray-500 !important; 
             }
         }
         .btn-white {
-            background-color: $black-bg;
-            color: $gray-500;
+            background-color: variables.$black-bg;
+            color: variables.$gray-500;
             &:hover {
-               color: $gray-500; 
+               color: variables.$gray-500; 
             }
         }
         .dropdown-menu {
-            background-color: $black-bg;
-            border: 1px solid $navy;
+            background-color: variables.$black-bg;
+            border: 1px solid variables.$navy;
             .dropdown-item {
-                color: $gray-500;
+                color: variables.$gray-500;
                 &:hover {
-                   color: $gray-500; 
-                   background: $gray-900;
+                   color: variables.$gray-500; 
+                   background: variables.$gray-900;
                 } 
             }
         }
     }
     .view-all-link {
         a {
-            color: $theme-title;
+            color: variables.$theme-title;
             &:hover {
-                color: $primary;
+                color: variables.$primary;
             }
         }
     }
     .header {
         .dropdown-menu {
-            background: $black-bg;
-            color: $theme-title;
+            background: variables.$black-bg;
+            color: variables.$theme-title;
         }
     }
     .order-list .orderid{
         h4, h5 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .productimg {
     .productcontet h4{
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     }
     .topnav-dropdown-header {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
         .notification-title {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .topnav-dropdown-footer {
-        border-top: 1px solid $navy;
+        border-top: 1px solid variables.$navy;
         a {
-            color: $theme-title;
+            color: variables.$theme-title;
             &:hover {
-                color: $primary;
+                color: variables.$primary;
             }
         }
     }
     .user-menu.nav > li > a.select-store {
-        border: 1px solid $navy; 
+        border: 1px solid variables.$navy; 
     }
     .custom-file-container .custom-file-container__custom-file__custom-file-control__button {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .notifications {
         .notification-list {
             li {
-                border-bottom: 1px solid $navy;
+                border-bottom: 1px solid variables.$navy;
                 .noti-title {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
                 .noti-details {
-                    color: $gray-500; 
+                    color: variables.$gray-500; 
                 }
                 .notification-time {
-                    color: $gray-500;
+                    color: variables.$gray-500;
                 }
             }
         }
@@ -567,12 +569,12 @@
             &.flag-nav {
                 .dropdown-menu {
                     .dropdown-item {
-                        color: $gray-500;
+                        color: variables.$gray-500;
                         &.active{
-                            color: $white;
+                            color: variables.$white;
                         }
                         &:hover {
-                           background: $gray-900 url(../../../../public/assets/img/icons/check.svg) no-repeat calc(100% - 12px) center;
+                           background: variables.$gray-900 url(../../../../public/assets/img/icons/check.svg) no-repeat calc(100% - 12px) center;
                         } 
                     }
                 }
@@ -584,7 +586,7 @@
                     &.dropdown-toggle {
                         &.nav-link {
                             &.show {
-                                background: $gray-900;
+                                background: variables.$gray-900;
                             }
                         }
                     }
@@ -595,39 +597,39 @@
     .profilename {
         .profileset {
             h5, h6 {
-                color: $gray-500; 
+                color: variables.$gray-500; 
             }
         }
     }
     .header {
         .menu-drop-user {
             .dropdown-item {
-                color: $gray-500;
+                color: variables.$gray-500;
                 &:hover {
-                   color: $gray-500; 
-                   background: $gray-900;
+                   color: variables.$gray-500; 
+                   background: variables.$gray-900;
                 } 
             }
         }
     }
     .card {
         &.bg-white {
-            background-color: $gray-900 !important;
+            background-color: variables.$gray-900 !important;
         }
         .card-header {
-            background-color: $card-dark-bg;
+            background-color: variables.$card-dark-bg;
             .dropset {
-                color: $gray-500;
+                color: variables.$gray-500;
             }
         }
         .card-footer {
-            background-color: $gray-900;
+            background-color: variables.$gray-900;
         }
     }
     .custom-file-container .custom-file-container__custom-file__custom-file-control {
-        border: 1px solid $navy;
+        border: 1px solid variables.$navy;
         .custom-file-container__custom-file__custom-file-control__button {
-            border-left: 1px solid $navy;
+            border-left: 1px solid variables.$navy;
         }
     }
     .scanner-set {
@@ -637,27 +639,27 @@
         }
     }
     .dropdown-menu {
-        background: $black-bg;
-        color: $theme-title;
+        background: variables.$black-bg;
+        color: variables.$theme-title;
         .dropdown-item {
-            color: $gray-500;
+            color: variables.$gray-500;
             &:hover {
-               color: $gray-500; 
-               background: $gray-900;
+               color: variables.$gray-500; 
+               background: variables.$gray-900;
             } 
         }
     }
     .page-header {
         h3 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .search-set {
         .search-input {
             input[type="search"] {
-               border: 1px solid $navy;
+               border: 1px solid variables.$navy;
                &::placeholder {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
         }
@@ -666,164 +668,164 @@
     .select2-container--default .select2-selection--single,
     .select2-container--focus .select2-selection--single, .form-control, .form-select,
     .select2-container--default .select2-selection--multiple {
-        background: $card-dark-bg  !important;     
-        color: $theme-title;  
+        background: variables.$card-dark-bg  !important;     
+        color: variables.$theme-title;  
         &::placeholder {
-            color: $theme-title;  
+            color: variables.$theme-title;  
         } 
     }
     .select2-container--default .select2-results__option[aria-selected=true] {
-        background: $gray-900 !important; 
-        color: $theme-title !important;    
+        background: variables.$gray-900 !important; 
+        color: variables.$theme-title !important;    
     }
     .select2-container--default .select2-selection--single .select2-selection__rendered {   
-        color: $theme-title;
-        border-color: $navy; 
-        border: 1px solid $navy; 
+        color: variables.$theme-title;
+        border-color: variables.$navy; 
+        border: 1px solid variables.$navy; 
     }
     .select2-container--default .select2-selection--single {
-        border-color: $navy; 
-        border: 1px solid $navy; 
+        border-color: variables.$navy; 
+        border: 1px solid variables.$navy; 
     }
     .select2-container--focus .select2-selection--single {
-        border-color: $navy; 
-        border: 1px solid $navy; 
+        border-color: variables.$navy; 
+        border: 1px solid variables.$navy; 
     }
     .input-blocks{
         input[type=text]{
             &:focus{
-                border-color: $navy;
+                border-color: variables.$navy;
             }
         }
     }
     .custom-file-container {
         .custom-file-container__custom-file__custom-file-control {
-            background: $gray-900;
-            color: $theme-title;
+            background: variables.$gray-900;
+            color: variables.$theme-title;
              border-color: transparent;
         }
     }
     .input-group-text {
-        background: $gray-900;
-        color: $theme-title;
+        background: variables.$gray-900;
+        color: variables.$theme-title;
         border:1.5px solid rgba(145, 158, 171, 0.32);
     }
     .image-upload {
         &:hover {
-             background: $gray-900;
+             background: variables.$gray-900;
         }
     }
     .productdetails {
         &  > ul {
             &  > li {
                 h4 {
-                    color: $gray-500;
+                    color: variables.$gray-500;
                 }
             }
         }
     }
     .profile-set .profile-top .profile-contentname h2 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .total-order {
         ul {
             li {
                 h4 {
-                    background: $gray-900;
+                    background: variables.$gray-900;
                 }
                 h5 {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
         }
     }
     .product-details {
-        background: $gray-900;
+        background: variables.$gray-900;
         h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .comp-section {
         .card-header {
-            border: 1px solid $navy;
+            border: 1px solid variables.$navy;
         }
        .nav-tabs.nav-tabs-solid {
-            background-color: $gray-900;
+            background-color: variables.$gray-900;
         }
     }
     .list-group-item {
-        background: $gray-900;
-        color: $theme-title;
+        background: variables.$gray-900;
+        color: variables.$theme-title;
     }
     .bg-white {
-        background-color: $gray-900 !important;
+        background-color: variables.$gray-900 !important;
     }
     .section-header {
         .section-title {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .breadcrumb .breadcrumb-item a {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .product-list ul li {
         .productviews .productviewscontent .productviewsname {
             h2, h3 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
-        border-color: $theme-title;
+        border-color: variables.$theme-title;
     }
     .alertify {
         .ajs-header {
-            background: $gray-900;
+            background: variables.$gray-900;
         }
         .ajs-dialog {
-            background: $gray-900;
+            background: variables.$gray-900;
         }
         .ajs-footer {
-            background: $gray-900;
+            background: variables.$gray-900;
             .ajs-buttons .ajs-button {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .bs-popover-auto[data-popper-placement^=top]>.popover-arrow::after, .bs-popover-top>.popover-arrow::after {
-        border-top-color: $navy;
+        border-top-color: variables.$navy;
     }
     .popover {
-        background-color: $gray-900;
-        border: 1px solid $navy;
+        background-color: variables.$gray-900;
+        border: 1px solid variables.$navy;
         .popover-header {
-            background-color: $gray-900;
-            border-bottom: 1px solid $navy;
+            background-color: variables.$gray-900;
+            border-bottom: 1px solid variables.$navy;
         }
         .popover-body {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .scroll-demo {
-        border: 1px solid $navy;
+        border: 1px solid variables.$navy;
     }
     .timeline:before {
-        background-color: $navy;
+        background-color: variables.$navy;
     }
     .timeline > li  {
         & > .timeline-panel {
-            border: 1px solid $navy;
+            border: 1px solid variables.$navy;
             &::before {
                 border-top: 8px solid transparent;
-                border-right: 0 solid $navy;
+                border-right: 0 solid variables.$navy;
                 border-bottom: 8px solid transparent;
-                border-left: 8px solid $navy;
+                border-left: 8px solid variables.$navy;
             }
             &::after {
                 border-top: 7px solid transparent;
-                border-right: 0 solid $navy;
+                border-right: 0 solid variables.$navy;
                 border-bottom: 7px solid transparent;
-                border-left: 7px solid $navy;
+                border-left: 7px solid variables.$navy;
             }
         }
         &.timeline-inverted > .timeline-panel:after {
@@ -836,54 +838,54 @@
         }
     }
     .twitter-bs-wizard .twitter-bs-wizard-nav .nav-link::after {
-        background-color: $navy;
+        background-color: variables.$navy;
     }
     .btn-white {
-        background-color: $black-bg;
-        border: 1px solid $navy;
-        color: $theme-title;  
+        background-color: variables.$black-bg;
+        border: 1px solid variables.$navy;
+        color: variables.$theme-title;  
     }
     .calendar-events:hover {
-        background-color: $navy;
-        border: 1px solid $navy;
-        color: $theme-title;  
+        background-color: variables.$navy;
+        border: 1px solid variables.$navy;
+        color: variables.$theme-title;  
     }
     .fc-button {
-        color: $theme-title;
-        background: $secondary;
+        color: variables.$theme-title;
+        background: variables.$secondary;
         text-shadow: none;
     }
     .sidebar.side-three.horizontal-sidebar .sidebar-menu > ul > li > a {
         span {
-            color: $gray-500 !important;
+            color: variables.$gray-500 !important;
         }
         img, svg {
             filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
         }
     }
     .cardhead .card-header {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .sidebar-content {
-        background: $gray-900;
+        background: variables.$gray-900;
         .sidebar-header {
-            border: 1px solid $navy;
+            border: 1px solid variables.$navy;
             h5 {
-                color:$white;
+                color:variables.$white;
             }
             a img {
                 filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
             }
         }
         .switch-wrapper {
-            border-bottom: 1px solid $navy;
+            border-bottom: 1px solid variables.$navy;
         }
         .layout-wrap {
             .status-text {
-                 color: $theme-title;
+                 color: variables.$theme-title;
             }
             .status-toggle .checktoggle {
-                background: $theme-title;
+                background: variables.$theme-title;
             }
         }
     }
@@ -896,52 +898,52 @@
     .login-wrapper .login-content {
         .login-userheading {
             h3,h4 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
         .form-login {
             label {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
         .signinform {
             h4{
-                color: $theme-title;
+                color: variables.$theme-title;
                 a {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
         }
         .form-sociallink ul li a {
-            color: $theme-title;
+            color: variables.$theme-title;
             &:hover {
-                color: $white;
+                color: variables.$white;
             }
         }
         .form-login {
             input {
-                background: $gray-900 !important;     
-                color: $theme-title;  
+                background: variables.$gray-900 !important;     
+                color: variables.$theme-title;  
                 &::placeholder {
-                    color: $theme-title;  
+                    color: variables.$theme-title;  
                 } 
             }
         }
     }
     .welcome {
-        background-color: $black-bg;
-        color: $theme-title;
+        background-color: variables.$black-bg;
+        color: variables.$theme-title;
     }
     .table-top-head {
         li {
             a {
-                background-color: $black-bg;
-                border: 1px solid $navy;
+                background-color: variables.$black-bg;
+                border: 1px solid variables.$navy;
                 svg {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
                 &:hover {
-                    background: $title-color;
+                    background: variables.$title-color;
                 }
             }
         }
@@ -949,67 +951,67 @@
     .sales-cards {
         .card {
             h3,p {
-                color: $theme-title !important;
+                color: variables.$theme-title !important;
             }
         }
     }
     .main-chat-blk {
         .all-chats {
-            background: $secondary;
+            background: variables.$secondary;
         }
         .chat-member-details .member-details ul li {
             span,h5 {
-                color: $gray-600;
+                color: variables.$gray-600;
             }
         } 
         .right-sidebar .right-sidebar-wrap {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
         .sidebar-body {
             .profile-name {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
         .chat-page-wrapper {
             .setting-title-head {
                 h4 {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             } 
             .left-chat-title {
-                border-bottom-color: $gray-600;
-                background: $black-bg;
+                border-bottom-color: variables.$gray-600;
+                background: variables.$black-bg;
             }
             .dropdown-menu {
-                background: $black-bg;
-                border-color: $gray-600;
+                background: variables.$black-bg;
+                border-color: variables.$gray-600;
                 .dropdown-item {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                     i {
-                        color: $theme-title;
+                        color: variables.$theme-title;
                     }
                 }
             }
         } 
         .top-online-contacts {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
         .sidebar-body {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
         .sidebar {
             .user-list {
                 li {
                     a {
-                        border-color: $gray-600;
+                        border-color: variables.$gray-600;
                     }
                     .users-list-body {
                         h5,p {
-                            color: $theme-title;
+                            color: variables.$theme-title;
                         }
                         .last-chat-time {
                             .text-muted {
-                                color: $sub-title !important;
+                                color: variables.$sub-title !important;
                             }
                         }
                     }
@@ -1017,13 +1019,13 @@
             } 
         } 
         .chat {
-            background: $black-bg;
+            background: variables.$black-bg;
             .chat-header {
-                background: $black-bg;
+                background: variables.$black-bg;
                 box-shadow: none;
                 .user-details {
                     h5,small {
-                        color: $theme-title;
+                        color: variables.$theme-title;
                     }
                 } 
                 li {
@@ -1035,139 +1037,139 @@
                 }
             }
             .chat-body .messages .chat-profile-name h6 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         } 
         .main-wrapper {
             .content .sidebar-group .sidebar {
-                border-right-color: $gray-600;
+                border-right-color: variables.$gray-600;
             }
         } 
     } 
     .part-name.sub-part-name,.recession-meet-blk .partispant-blk span a {
-        background: $secondary;
+        background: variables.$secondary;
         h4 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .more-icon a {
-        background: $secondary;
+        background: variables.$secondary;
     }
     .recession-meet-blk .reccession-head h5 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .welcome {
         button, a {
-            border-color: $navy;
-            color: $theme-title;
+            border-color: variables.$navy;
+            color: variables.$theme-title;
         }
     }
     .bar-code-view {
-        border-color: $navy;        
+        border-color: variables.$navy;        
     }
     .productdetails {
         > ul {
             > li {
-                border-color: $navy;
+                border-color: variables.$navy;
                 h4 {
-                    border-color: $navy;                    
+                    border-color: variables.$navy;                    
                 }
                 &:last-child {
-                    border-color: $navy;                    
+                    border-color: variables.$navy;                    
                 }
                 &:first-child {
-                    border-color: $navy;                    
+                    border-color: variables.$navy;                    
                 }
             }
         }
     }
     .right-user-side {
         .slimscroll {
-            background: $black-bg;
-            border-color: $gray-600;
+            background: variables.$black-bg;
+            border-color: variables.$gray-600;
             .left-chat-title {
-                background: $secondary;
-                border-bottom-color: $gray-600 !important;
+                background: variables.$secondary;
+                border-bottom-color: variables.$gray-600 !important;
                 .chat-title h4 {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
             .chat-footer {
-                background: $black-bg;
+                background: variables.$black-bg;
             }
         } 
         &.right-side-party {
             .slimscroll {
-                background: $black-bg;
-                border-color: $gray-600;
+                background: variables.$black-bg;
+                border-color: variables.$gray-600;
                 .left-chat-title {
-                    background: $secondary;
+                    background: variables.$secondary;
                     .chat-title h4 {
-                        color: $theme-title;
+                        color: variables.$theme-title;
                     }
                 }
                 .chat-footer {
-                    background: $black-bg;
+                    background: variables.$black-bg;
                 }
                 .card-body-blk .user-list .user-list-item {
-                    background: $secondary;
+                    background: variables.$secondary;
                 }
             } 
         }
     } 
     .history-modal-profile .right-sidebar-profile {
-        background: $black-bg;
+        background: variables.$black-bg;
     }
     .modal-profile-detail .modal-userlist li {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .fc-unthemed td {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .notes-dash {
-        background: $black-bg;
-        border-color: $navy;
+        background: variables.$black-bg;
+        border-color: variables.$navy;
         .notes-top-head {
-            border-bottom: 1px solid $navy;
+            border-bottom: 1px solid variables.$navy;
             h5 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
         .content-submenu-tag h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .notes-page-wrapper {
         .content {
             .section-bulk-wrap {
-                background: $black-bg;
-                box-shadow: 0px 4px 60px 0px $white-7;
+                background: variables.$black-bg;
+                box-shadow: 0px 4px 60px 0px variables.$white-7;
             }
             .section-card-body {
                 .notes-card-details {
-                    background: $black-bg;
-                    box-shadow: 0px 4px 60px 0px $white-1;
-                    border-color: $navy;
+                    background: variables.$black-bg;
+                    box-shadow: 0px 4px 60px 0px variables.$white-1;
+                    border-color: variables.$navy;
                     .notes-card-body {
                         a {
-                            color: $text-color;
+                            color: variables.$text-color;
                         }
                     }
                     .notes-wrap-content {
                         h4 {
                             a {
-                                color: $theme-title;
+                                color: variables.$theme-title;
                             }
                         } 
                     } 
                 }
                 .dropdown-menu {
-                    border-color: $navy;
+                    border-color: variables.$navy;
                 }
             } 
             .notes-card-body {
                 .dropdown-menu {
-                    border-color: $navy;
+                    border-color: variables.$navy;
                     box-shadow: unset;
                 }
             }
@@ -1175,13 +1177,13 @@
                 .notes-card {
                     .notes-card-body {
                         a {
-                            color: $text-color;
+                            color: variables.$text-color;
                         }
                     }
                     .notes-slider-content {
                         h4 {
                             a {
-                                color: $theme-title;
+                                color: variables.$theme-title;
                             }
                         } 
                     } 
@@ -1190,30 +1192,30 @@
         }
     }
     .todo-today-content .todo-today-header h3 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .todo-wrapper-list {
-        background: $black-bg;
-        border-color: $navy;
+        background: variables.$black-bg;
+        border-color: variables.$navy;
         .todo-inbox-check {
             .todo-wrapper-list-content {
                 h4 {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             } 
         } 
     }
     .dropdown-menu.notes-menu a.dropdown-item {
-        color: $gray-500;
+        color: variables.$gray-500;
     }
     .notes-header h3 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .custom-modal-header {
-        background: $secondary;
+        background: variables.$secondary;
         .page-title {
             h4 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
@@ -1224,7 +1226,7 @@
         background: transparent;
         --bs-accordion-bg: $card-dark-bg;
         .accordion-item {
-            background: $card-dark-bg;
+            background: variables.$card-dark-bg;
         }
     }
     .accordion-card-one .accordion-item .accordion-button {
@@ -1232,127 +1234,127 @@
             background: transparent !important;
         }
         .addproduct-icon h5 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .card .card-body.add-product .text-editor.add-list.add .custom-filed {
         background: transparent;
     }
     .bootstrap-tagsinput {
-        background: $black-bg;
-        border: 1px solid $gray-700;
+        background: variables.$black-bg;
+        border: 1px solid variables.$gray-700;
     }
     .product-quantity {
-        background: $black-bg;
+        background: variables.$black-bg;
         span {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
         input {
-            background: $black-bg;
-            color: $theme-title;
+            background: variables.$black-bg;
+            color: variables.$theme-title;
         }
     }
     .searchinputs.list input {
-        background: $black-bg;
+        background: variables.$black-bg;
     }
     .table-tab ul li button.nav-link {
-        color: $theme-title;
-        background-color: $card-dark-bg;
+        color: variables.$theme-title;
+        background-color: variables.$card-dark-bg;
     }
     .table-top-head li {
         .status-toggle {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
     } 
     .barcode-content-list {
-        background: $black-bg;
+        background: variables.$black-bg;
         .search-modal-header {
-            background: $gray-900;
+            background: variables.$gray-900;
         }
         .paper-search-size {
             .search-toggle-list {
                 p {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             } 
         } 
     } 
     .barcode-scanner-link {
-        background: $black-bg;
+        background: variables.$black-bg;
         h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .seacrh-barcode-item .searchInput {
-        background: $black-bg;
+        background: variables.$black-bg;
     }
     .barcode-scan-header h5 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .modal-body-table {
-        background: $gray-900;
+        background: variables.$gray-900;
     }
     span.customer-toggle,.status-label {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .layout-drop-item .drop-item-head h5,p {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .total-employees {
-        background: $black-bg;
+        background: variables.$black-bg;
         h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .employee-grid-profile {
-        border-color: $gray-700;
-        background: $black-bg;
+        border-color: variables.$gray-700;
+        background: variables.$black-bg;
         ul.department {
-            background: $gray-900;
+            background: variables.$gray-900;
             li {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
         .profile-info.department-profile-info {
-            background: $gray-900;
+            background: variables.$gray-900;
         }
     }
     aside {
-        border-color: $navy;
+        border-color: variables.$navy;
         &.product-order-list {
             .block-section {
-                border-color: $navy;
+                border-color: variables.$navy;
             }
             .btn-block {
-                border-color: $navy;
+                border-color: variables.$navy;
             }
         }
     }
     .product-wrap .product-list .action a {
-        border-color: $navy;        
+        border-color: variables.$navy;        
     }
     .pos-categories, aside, .pos-products .product-info .img-bg{
-        background: $black-bg;
+        background: variables.$black-bg;
     }
     aside.product-order-list .order-total, aside.product-order-list .order-total table {
-        background: $gray-900;
+        background: variables.$gray-900;
     }
     .product-wrap .product-list {
         box-shadow: none;
-        background: $gray-900;
+        background: variables.$gray-900;
     }
     .pos-categories h5, .pos-categories h6, .order-list h5, .order-list h6, .pos-products .product-info h6.product-name a, .product-wrap .product-list .qty-item .dec, .product-wrap .product-list .qty-item .inc, aside.product-order-list .payment-method .methods .default-cover a span, .product-wrap .product-list .info h6 a, .file-manager aside h5, .file-manager aside ul li a, .file-manager h4, .file-manager h6 a, .file-manager .accordion .accordion-item .accordion-button::after, .fc-toolbar h2, .file-manager, .file-manager .card, .search-dropdown .search-info h6, .search-dropdown .search-info h6 svg, .search-set .search-input .btn-searchset .feather-search {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .file-manager aside .dropdown > a .feather-16, .file-manager aside ul li a .feather-16, .file-manager .project-plan ul li, .file-manager .project-plan label, .file-manager .page-header .btn-added .feather-16 {
-        color: $white;
+        color: variables.$white;
     }
     aside.product-order-list .head, .file-manager .info, .file-manager .folders {
-        background: $gray-900;
+        background: variables.$gray-900;
     }
     .file-manager .folders {
-        border-color: $navy;
-        background: $card-dark-bg;
+        border-color: variables.$navy;
+        background: variables.$card-dark-bg;
     }
     .file-manager .folders, .file-manager .info {
         box-shadow: none;
@@ -1361,7 +1363,7 @@
         filter: invert(75%) sepia(66%) saturate(1955%) hue-rotate(327deg) brightness(103%) contrast(102%);
     }
     .page-wrapper .content.settings-content,.sidebars {
-        background: $black-bg;
+        background: variables.$black-bg;
     }
     .sidebars.settings-sidebar {
         .sidebar-menu {
@@ -1370,12 +1372,12 @@
                     .submenu {
                         a {
                             span {
-                                color: $theme-title;
+                                color: variables.$theme-title;
                             }
                             &.active {
-                                background: $secondary;
+                                background: variables.$secondary;
                                 &.subdrop {
-                                    background: $secondary;
+                                    background: variables.$secondary;
                                 }
                             }
                             svg {
@@ -1391,52 +1393,52 @@
         ul {
             li {
                 .security-btn .manage-btn {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
                 .security-type {
                     .security-icon {
-                        background: $secondary;
+                        background: variables.$secondary;
                     }
                 } 
             } 
         } 
     } 
     .connected-app-card ul {
-        background: $black-bg;
-        box-shadow: 0px 4px 60px 0px $gray-800;
+        background: variables.$black-bg;
+        box-shadow: 0px 4px 60px 0px variables.$gray-800;
         li .integration-btn a {
-            background: $secondary;
-            color: $theme-title;
+            background: variables.$secondary;
+            color: variables.$theme-title;
         }
     }
     .header-left #toggle_btn svg, .btn-row .btn svg {
-        color: $white;
+        color: variables.$white;
     }
     .table.profit-table thead,.table.profit-table tbody .profit-table-bg td {
-        background: $secondary;
-        color: $theme-title;
+        background: variables.$secondary;
+        color: variables.$theme-title;
     }
     .comming-soon-pg .coming-soon-box {
-        background: $secondary;
+        background: variables.$secondary;
         opacity: 0.9;
         .coming-soon-timer li {
-            background: $secondary;
-            color: $theme-title;
+            background: variables.$secondary;
+            color: variables.$theme-title;
             span {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .login-wrapper.bg-img .login-content {
-        background: $secondary;
+        background: variables.$secondary;
         opacity: 0.9;
     }
     .login-wrapper .login-content .login-logo {
         display: none;
     }
     .pos-modal .modal-header,.pos-modal#hold-order h2 {
-        background: $black-bg;
-        color: $theme-title;
+        background: variables.$black-bg;
+        color: variables.$theme-title;
     }
     .pos-modal#orders .order-body .record {
         table {
@@ -1444,41 +1446,41 @@
         }
     }
     .tabs_wrapper ul.tabs li {
-        background: $secondary;
+        background: variables.$secondary;
     }
     .pos-category {
         .default-cover {
             h6 a {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
             span {
                 color: #B8BCC9;
             }
         }
         .owl-item {
-            background: $secondary;
+            background: variables.$secondary;
             box-shadow: none;
-            border-color: $navy;
+            border-color: variables.$navy;
             h6 {
                 a {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
         }
     }
     aside.product-order-list {
         h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
         .head {
             h5 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
 
     }
     #print-receipt .modal-body .tax-invoice span, #print-receipt .modal-body table thead th, #print-receipt .modal-body table tbody tr table tr:last-child td {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     aside.product-order-list .order-total table tr td {
         border-bottom: none;
@@ -1487,30 +1489,30 @@
         background: none;
     }
     .sidebar-footer {
-        background: $black-bg;
+        background: variables.$black-bg;
     }
     .sidebar-content .theme-head h6 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     table tbody td.action-table-data a {
-        background: $secondary;
+        background: variables.$secondary;
     }
     .disabled>.page-link {
         color: #67748E;
     }
     .apply-leave {
-        background: $card-dark-bg;
+        background: variables.$card-dark-bg;
     }
     .card .card-body .payslip-month .month-of-slip h4 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .paysilp-table-border th,.payslip-border-bottom th {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .card .card-body .emp-details {
         .emp-name-id {
             h6 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
             span {
                 color: #5B6670;
@@ -1518,7 +1520,7 @@
         } 
         .emp-location-info {
             h6 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
             span {
                 color: #5B6670;
@@ -1526,20 +1528,20 @@
         }
     } 
     .pay-slip-box .card .card-body .emp-details.justify-content-start {
-        background: $black-bg ;
+        background: variables.$black-bg ;
     }
     .card .card-body .emp-details {
-        background: $black-bg ;
+        background: variables.$black-bg ;
     }
     .connected-app-card ul li .security-title h5,.appearance-settings h6,.logo-company li .logo-info h6 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .localization-info .setting-info h6 {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .login-wrapper .login-content.user-login .login-userset {
-        background: $card-dark-bg;
-        border-color: $card-dark-bg;
+        background: variables.$card-dark-bg;
+        border-color: variables.$card-dark-bg;
         box-shadow: unset;
     }
     .custom-alert1 {
@@ -1555,29 +1557,29 @@
         }
     }
     .accordion-body {
-        background: $card-dark-bg;
+        background: variables.$card-dark-bg;
     }
     .offcanvas {
-        background: $card-dark-bg;
-        color: $theme-title !important;
+        background: variables.$card-dark-bg;
+        color: variables.$theme-title !important;
     }
     .activity {
         .activity-list {
             li {
-                background-color: $black-bg;
-                border: 1px solid $navy;
+                background-color: variables.$black-bg;
+                border: 1px solid variables.$navy;
                 .activity-content {
-                    background-color: $black-bg;
+                    background-color: variables.$black-bg;
                 }
                 a {
-                    color: $gray-700;
+                    color: variables.$gray-700;
                     &:hover {
-                        color: $primary;
+                        color: variables.$primary;
                     }
                     &.name {
-                        color: $gray-400;
+                        color: variables.$gray-400;
                         &:hover {
-                            color: $primary;
+                            color: variables.$primary;
                         }
                     }
                 }
@@ -1591,20 +1593,20 @@
     .profile-pic-upload {
         .profile-pic {
             span {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .search-dropdown {
         .search-info {
-            border-bottom: 1px solid $gray-600;
+            border-bottom: 1px solid variables.$gray-600;
         }
     }
     .card {
         .card-body{
             &.add-product{
                 .addproduct-icon{
-                    border-color: $navy;
+                    border-color: variables.$navy;
                 }    
             }
         }
@@ -1612,21 +1614,21 @@
     .add-product {
         .add-icon {
             a {
-                color: $sub-title;
+                color: variables.$sub-title;
             }
         }
     }
     .table-list-card {
         .table-responsive {
-            border-top: 1px solid $navy;
+            border-top: 1px solid variables.$navy;
         }
     }
     .appearance-settings {
         .theme-type-images {
             .theme-image {
-                background: $secondary;
-                border-color: $secondary;
-                box-shadow: 0px 4px 60px 0px $white-1;
+                background: variables.$secondary;
+                border-color: variables.$secondary;
+                box-shadow: 0px 4px 60px 0px variables.$white-1;
             }
         }
     }
@@ -1634,7 +1636,7 @@
         .card {
             .card-body {
                 .card.attendance {
-                    background: $black-bg;
+                    background: variables.$black-bg;
                 }
             }
         }
@@ -1644,7 +1646,7 @@
             li {
                 .user-audio-call {
                     h5 {
-                        color: $theme-title;
+                        color: variables.$theme-title;
                     }
                 }
             }
@@ -1652,66 +1654,66 @@
     }
     .record-time {
         span {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .bank-box {
         &.active {
              &::after {
-                background-color: $gray-800;
+                background-color: variables.$gray-800;
              }
         }
         .bank-header {
             .bank-name {
                 h6 {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
                 p {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
         }
         .bank-info {
             h6 {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }    
     }
     .sidebars.settings-sidebar {
         .sidebar-menu {
             .menu-arrow {
-                background-color: $theme-title;
+                background-color: variables.$theme-title;
                 &::before {
-                    border-left: 1px solid $black;
-                    border-bottom: 1px solid $black;
-                    color: $black;
+                    border-left: 1px solid variables.$black;
+                    border-bottom: 1px solid variables.$black;
+                    color: variables.$black;
                 }
             }
         }
     }
     .legendLabel {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .main-chat-blk {
         .chat .chat-body {
             .messages {
                 .chats {
                     .message-content {
-                        background: $secondary;
-                        color: $theme-title;
+                        background: variables.$secondary;
+                        color: variables.$theme-title;
                     }                
                 }    
                 .file-download {                
-                    background: $secondary;
+                    background: variables.$secondary;
                     .file-details {
                         span {
                             &.file-name {
-                                color: $theme-title;
+                                color: variables.$theme-title;
                             }
                         }
                         ul {
                             li {
-                                color: $theme-title;
+                                color: variables.$theme-title;
                             }
                         }
                     }
@@ -1719,40 +1721,40 @@
             }
         }
         .chat_form {
-            border: 1px solid $navy;
-            box-shadow: 0px 4px 4px $gray-800;
+            border: 1px solid variables.$navy;
+            box-shadow: 0px 4px 4px variables.$gray-800;
         }
         .chat-date {
-            background: $secondary;
-            color: $theme-title;
-            border: 1px solid $navy;
+            background: variables.$secondary;
+            color: variables.$theme-title;
+            border: 1px solid variables.$navy;
             &:before {
-                background-color: $navy;
+                background-color: variables.$navy;
             }
         }
         .chat-line {
             &:before {
-                background-color: $navy;
+                background-color: variables.$navy;
             }
         }
     }
     .notes-page-wrapper {
         .content {
             .page-add-notes {
-                border-bottom: 1px solid $navy;
+                border-bottom: 1px solid variables.$navy;
             }
         }
     }
     .file-manager {
         aside {
-            box-shadow: 0px 4px 60px 0px $white-7;
+            box-shadow: 0px 4px 60px 0px variables.$white-7;
             h5 {
-                border-bottom: 1px solid $navy;
+                border-bottom: 1px solid variables.$navy;
             }
         }
     }
     .seprator-lg {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .pos-modal.upload-modal {
         .modal-body {
@@ -1760,62 +1762,62 @@
                 li {
                     h6 {
                         a {
-                            color: $theme-title;
+                            color: variables.$theme-title;
                         }
                     }
                 }
             }
             p {
-                color: $theme-title;
+                color: variables.$theme-title;
             }
         }
     }
     .social-media-icons li a i {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .employee-grid-profile .dropdown.profile-action svg {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .login-wrapper .login-content .login-userset .my-4 p {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .alert-secondary {
         background-color: rgba(9, 44, 76, 0.8);
-        color: $white;
+        color: variables.$white;
         border-color: rgba(9, 44, 76, 0.8);
     }
     .badge{
         &.text-dark{
-            color: $white;
+            color: variables.$white;
         }
     }
     .btn-outline-secondary{
-        border: 1px solid $blue !important;
-        color: $blue !important;
+        border: 1px solid variables.$blue !important;
+        color: variables.$blue !important;
     }
     .btn-outline-light {
-        border: 1px solid $light;
-        color: $light !important;
+        border: 1px solid variables.$light;
+        color: variables.$light !important;
     }
     .btn {
         &.text-dark{
-            color: $white !important;
+            color: variables.$white !important;
         }  
     }
     .callout-info {
         background-color: rgba(23, 162, 184, 0.25);
         border-color: rgba(23, 162, 184, 0.5);
-        color: $white;
+        color: variables.$white;
     }
     .callout-warning {
         background-color: rgba(255, 153, 0, 0.25);
         border-color: rgba(255, 153, 0, 0.5);
-        color: $white;
+        color: variables.$white;
     }
     .callout-danger {
         background-color: rgba(255, 0, 0, 0.25);
         border-color: rgba(255, 0, 0, 0.5);
-        color: $white;
+        color: variables.$white;
     }
     .grid-vertical {
         color: #fff;
@@ -1825,7 +1827,7 @@
     }
     .grid-showcase{
         .text-dark {
-            color: $white !important;
+            color: variables.$white !important;
         }
     }
     .btn.btn-secondary-light {
@@ -1840,11 +1842,11 @@
     .card {
         .card-footer {
             background-color: transparent;
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .file-manager .all-files {
-        box-shadow: 0px 4px 60px 0px $white-7;
+        box-shadow: 0px 4px 60px 0px variables.$white-7;
     }
     .form-floating {
         > .form-control-plaintext {
@@ -1856,12 +1858,12 @@
         }
     }
     .form-select {
-        border-color: $gray-700; 
+        border-color: variables.$gray-700; 
     }
     .productdetails {
         > ul{
             > li h6 {
-                color: $white;
+                color: variables.$white;
             }
         }
     }
@@ -1880,10 +1882,10 @@
     .sales-cards {
         .card.color-info {
             h3{
-                color: $white !important;
+                color: variables.$white !important;
             }
             p{
-                color: $white !important;
+                color: variables.$white !important;
             }
         }
     }
@@ -1891,7 +1893,7 @@
         &.table-borderless {
             tr {
                 td .head-text {
-                    color: $theme-title;
+                    color: variables.$theme-title;
                 }
             }
         }
@@ -1902,7 +1904,7 @@
         }
     }
     .card-text{
-        color: $theme-title;
+        color: variables.$theme-title;
     }
 
     .login-wrapper.login-new {
@@ -1913,52 +1915,52 @@
         }
     }
     .file-manager .accordion .accordion-item {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .main-chat-blk .review-files p {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .main-chat-blk .chat-action-col > a {
-        color: $text-color;
+        color: variables.$text-color;
     }
     .social-authent-settings .connected-app-card ul li:first-child {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .notes-page-wrapper {
         .content {
             .section-notes-slider {
-                border-bottom: 1px solid $navy;
+                border-bottom: 1px solid variables.$navy;
             }
             .section-card-body {
                 .notes-card-details {
                     .notes-wrap-content {
-                        border-bottom: 1px solid $navy;
+                        border-bottom: 1px solid variables.$navy;
                     }
                 }
             }
         }    
     }
     .notes-dash .notes-top-head-submenu {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .login-body .login-wrapper .terms li {
         a {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .input-blocks .bootstrap-tagsinput .tag {  
-        background: $card-dark-bg;     
-        color: $theme-title; 
-        border-color: $gray-700; 
+        background: variables.$card-dark-bg;     
+        color: variables.$theme-title; 
+        border-color: variables.$gray-700; 
     }
     .company-info {
-        border-bottom: 1px solid $navy;
+        border-bottom: 1px solid variables.$navy;
     }
     .apply-leave .leave-apply .leave-date p {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .main-chat-blk .chat-page-wrapper .dropdown-menu .dropdown-item:hover {
-        color: $title-color;
+        color: variables.$title-color;
     }
     .form-floating > .form-control:not(:placeholder-shown) ~ label::after {
         background-color: transparent;
@@ -1969,54 +1971,54 @@
         }
     }
     .selected-language {
-        color: $theme-title
+        color: variables.$theme-title
     }
     .file-manager {
         aside {
-            box-shadow: 0px 4px 60px 0px $white-7;
+            box-shadow: 0px 4px 60px 0px variables.$white-7;
             h6 {
-            color: $theme-title;
+            color: variables.$theme-title;
             }
         }
     }
     .table {
-        border-color: $navy;
+        border-color: variables.$navy;
         tr {
             th {
-                border-color: $navy;
-                color: $theme-title;
+                border-color: variables.$navy;
+                color: variables.$theme-title;
             }
         }
         &.table-primary {
             tr {
                 th {
-                    background-color: $card-dark-bg;
+                    background-color: variables.$card-dark-bg;
                 }
             }
         }
     }
     .pos-category .owl-nav button {
         &.owl-next, &.owl-prev {
-            background-color: $card-dark-bg;
-            border: 1px solid $navy;
+            background-color: variables.$card-dark-bg;
+            border: 1px solid variables.$navy;
             i {
-                color: $theme-title;                
+                color: variables.$theme-title;                
             }
         }
     }        
     .select2-container--default {
         &.select2-container--focus {
             .select2-selection--multiple {
-                border-color: $navy;
+                border-color: variables.$navy;
             }
         }
         .select2-selection--multiple {
-             border-color: $navy;
+             border-color: variables.$navy;
         }
     }
     textarea {
         &::placeholder {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
 }

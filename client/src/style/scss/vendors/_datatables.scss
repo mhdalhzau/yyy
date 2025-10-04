@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 table.dataTable>thead .sorting:after, 
 table.dataTable>thead .sorting_asc:after,
 table.dataTable>thead .sorting_desc:after,
@@ -32,9 +35,9 @@ table.dataTable>thead .sorting_desc_disabled:before {
 .dataTables_info {
     float: right;
     padding-right: 15px;
-    font-size: $font-size-12;
-    color: $gray-700;
-    font-weight: $font-weight-semibold;
+    font-size: variables.$font-size-12;
+    color: variables.$gray-700;
+    font-weight: variables.$font-weight-semibold;
 }
 .custom-select {
     min-width: 80px;
@@ -42,7 +45,7 @@ table.dataTable>thead .sorting_desc_disabled:before {
 }
 .dataTables_paginate .pagination{
     li{
-        @include margin-padding(0 5px, null);
+        @include mixins.margin-padding(0 5px, null);
         a{
             background: var(--Stroke, rgba(145, 158, 171, 0.30));
             border-radius: 85px !important;
@@ -53,14 +56,14 @@ table.dataTable>thead .sorting_desc_disabled:before {
             justify-content: center;
             color: #5B6670;
             &:hover{
-                background: $primary;
-                color: $white;
+                background: variables.$primary;
+                color: variables.$white;
             }
         }
         &.active a.page-link{
-            background: $primary;
-            border-color: $primary;
-            @include rounded(85px);
+            background: variables.$primary;
+            border-color: variables.$primary;
+            @include mixins.rounded(85px);
             width: 30px;
             height: 30px;
             display: flex;

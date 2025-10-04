@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 [data-layout-style=box] {
     &[data-direction=rtl] {
         body {
@@ -29,7 +32,7 @@
                 margin-left: 80px !important;
             }
         }
-        @include respond-below(custom1399) {
+        @include mixins.respond-below(custom1399) {
             .header {
                 left: 70px;
                 right: 70px;
@@ -44,7 +47,7 @@
                 }
             }
         }
-        @include respond-below(custom1199) {
+        @include mixins.respond-below(custom1199) {
             .header {
                 left: 30px;
                 right: 30px;
@@ -60,7 +63,7 @@
             }
 
         }
-        @include respond-below(custom991) {
+        @include mixins.respond-below(custom991) {
             .header {
                 left: 0;
                 right: 0;
@@ -80,12 +83,12 @@
 [data-layout-style=collapsed] {
     &[data-nav-color=grey] {
         aside {
-            background: $gray-200;
+            background: variables.$gray-200;
         }
     }
     &[data-nav-color=dark] {
         aside {
-            background: $black-bg;
+            background: variables.$black-bg;
         }
     }
     .sidebar {
@@ -101,7 +104,7 @@
                 }
             }
         }
-        @include respond-below(custom991) {
+        @include mixins.respond-below(custom991) {
             display: block;
             &.collapsed-sidebar {
                 display: none;
@@ -126,14 +129,14 @@
         &.horizontal-sidebar {
             display: block;
         }
-        @include respond-below(custom991) {
+        @include mixins.respond-below(custom991) {
             display: block;
             &.horizontal-sidebar {
                 display: none;
             }
         }
         .sidebar-menu > ul > li > a.active svg {
-            color: $primary;
+            color: variables.$primary;
         }
     }
     .page-wrapper {
@@ -171,7 +174,7 @@
             }
         }
     }
-    @include respond-below(custom991) {
+    @include mixins.respond-below(custom991) {
         .sidebar {
             &.collapsed-sidebar {
                 display: none;
@@ -194,30 +197,30 @@
         display: none;
         &.horizontal-sidebar {
             display: block;
-            background: $black-bg;
+            background: variables.$black-bg;
             height: 150px;
             position: static;
             z-index: unset;
             border-top-color: #637381;
             .sidebar-menu {
-                @include margin-padding(null, 0 15px);
+                @include mixins.margin-padding(null, 0 15px);
                 & > ul  {
                    & > li {
                         margin-bottom: 0;
                         margin-right: 20px;
                         & > a {
-                            @include margin-padding(null, 22px 15px);
+                            @include mixins.margin-padding(null, 22px 15px);
                             img, svg {
                                 filter:  brightness(0) invert(1);
                                 margin-right: 0;
                             }
-                            @include respond-below(custom1199) {
-                                @include margin-padding(null, 22px 5px);
+                            @include mixins.respond-below(custom1199) {
+                                @include mixins.margin-padding(null, 22px 5px);
                             }
                             &:hover {
                                 background: transparent;
                                 span {
-                                    color:$primary !important;
+                                    color:variables.$primary !important;
                                 }
                                 img, svg {
                                     filter: brightness(0) saturate(100%) invert(75%) sepia(10%) saturate(5676%) hue-rotate(326deg) brightness(105%) contrast(112%);
@@ -229,7 +232,7 @@
                             }
                             &::before {
                                 content: "";
-                                @include position(absolute, 50%, -10px, null, null);
+                                @include mixins.position(absolute, 50%, -10px, null, null);
                                 width: 1px;
                                 height: 15px;
                                 background: #6B7A99;
@@ -238,20 +241,20 @@
                         }
                         & > a {
                             span {                        
-                                color: $white  !important;
+                                color: variables.$white  !important;
                             }
                         }
                         a {
-                            font-weight: $font-weight-medium;
-                            font-size: $font-size-15;
-                            color: $white;
+                            font-weight: variables.$font-weight-medium;
+                            font-size: variables.$font-size-15;
+                            color: variables.$white;
                             img {
                                 position: relative;
                                 top: 3px;
                                 width: 18px;
                                 margin-right: 7px;
                                 filter:  brightness(0) invert(1);
-                                @include respond-below(custom1199) {
+                                @include mixins.respond-below(custom1199) {
                                     margin-right: 5px;
                                 }
                             }
@@ -280,13 +283,13 @@
                                 &.submenu {
                                     a {
                                         padding: 8px 15px !important;
-                                        color: $white;
+                                        color: variables.$white;
                                         ul {
                                             li {
                                                 a {
                                                     &.active {
                                                         span {
-                                                            color: $primary;
+                                                            color: variables.$primary;
                                                         }                                                
                                                     }
                                                 }
@@ -310,7 +313,7 @@
                                             margin-right: 7px;
                                         }
                                         &:hover {
-                                            color: $primary;
+                                            color: variables.$primary;
                                             img {                                        
                                                 filter: brightness(0) saturate(100%) invert(75%) sepia(10%) saturate(5676%) hue-rotate(326deg) brightness(105%) contrast(112%);
                                             }
@@ -321,11 +324,11 @@
                                     }
                                     ul {
                                         position: relative;    
-                                        @include margin-padding(null, 0); 
+                                        @include mixins.margin-padding(null, 0); 
                                         li {
                                             a {
                                                 padding: 8px 10px 8px 40px !important;
-                                                color: $white;
+                                                color: variables.$white;
                                             }
                                         }                           
                                     }
@@ -338,7 +341,7 @@
                                 }
                             }
                         }                                
-                        @include respond-below(custom1199) {
+                        @include mixins.respond-below(custom1199) {
                            margin-right: 0;
                         }
                         &:last-child {
@@ -352,11 +355,11 @@
                 }
                 > ul > li > a {
                     span {
-                        color: $white !important;
+                        color: variables.$white !important;
                     }
                     &.active {
                         span {
-                            color: $primary !important;
+                            color: variables.$primary !important;
                         } 
                     }
                 }
@@ -367,7 +370,7 @@
                         }
                     }
                     ul li a {
-                        color: $gray-500;
+                        color: variables.$gray-500;
                     }
                 }
             }
@@ -384,10 +387,10 @@
         .content {
             max-width: 1280px;
             margin: -90px auto 0 auto;
-            background: $white;
+            background: variables.$white;
             border-radius: 20px;
             padding-bottom: 20px;
-            @include respond-below(custom1199) {
+            @include mixins.respond-below(custom1199) {
                 max-width: 950px;
             }
         }
@@ -395,10 +398,10 @@
 }
 [data-nav-color=dark] {
     .header {
-        background: $black-bg;
+        background: variables.$black-bg;
         border-bottom: 1px solid #434548;
         .header-left {
-            border-right: 1px solid $gray-600; 
+            border-right: 1px solid variables.$gray-600; 
             border-bottom: 1px solid #434548;           
             .logo-normal {
                 display: none;
@@ -409,11 +412,11 @@
         }
         .searchinputs {
             input {
-                color: $theme-title;
-                border-color: $black-bg;
-                background: $input-bg;
+                color: variables.$theme-title;
+                border-color: variables.$black-bg;
+                background: variables.$input-bg;
                 &::placeholder {
-                    color: $gray-500;
+                    color: variables.$gray-500;
                 }
             }
         }
@@ -438,46 +441,46 @@
     }
     #toggle_btn{
         &:before{
-            border: 2px solid $theme-title
+            border: 2px solid variables.$theme-title
         }
     }
     .user-menu.nav > li > a.select-store {
         .user-info .user-name {
-            color: $theme-title;
+            color: variables.$theme-title;
         }
     }
     .user-info .user-name {
-        color: $theme-title;
+        color: variables.$theme-title;
     }
     .user-menu {
         .nav-item-box {
             > a{
-                background: $input-bg;
+                background: variables.$input-bg;
             }
         }
     }
     .header-left{
         &.active {
             #toggle_btn:after {
-                border: 2px solid $theme-title;
+                border: 2px solid variables.$theme-title;
             }
         }
     }
     .sidebar {
-        border-right: 1px solid $gray-600;
-        background-color: $black-bg;
+        border-right: 1px solid variables.$gray-600;
+        background-color: variables.$black-bg;
         .slimScrollDiv{
-            background: $black-bg;
+            background: variables.$black-bg;
         }
         .sidebar-menu > {
             ul > li {
                 &.submenu ul {
-                    background: $black-bg;
+                    background: variables.$black-bg;
                     border-radius: 5px;
                     padding: 10px 0;
                     li {
                         a {                            
-                            color: $gray-500;
+                            color: variables.$gray-500;
                         }
                     }
                 }
@@ -486,11 +489,11 @@
                         filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
                     }
                     span {
-                        color: $gray-500;
+                        color: variables.$gray-500;
                     }
                     &:hover {
                         img {
-                            color: $gray-500;
+                            color: variables.$gray-500;
                         }
                         svg{
                             filter: brightness(0) saturate(100%) invert(65%) sepia(27%) saturate(206%) hue-rotate(165deg) brightness(93%) contrast(88%);
@@ -498,7 +501,7 @@
                     }
                 }
                 .submenu-hdr {
-                    color: $gray-500;
+                    color: variables.$gray-500;
                 }
             }
         }
@@ -506,17 +509,17 @@
 }
 [data-nav-color=grey] {
     .header {
-        background: $gray-200;
+        background: variables.$gray-200;
         .user-menu .nav-item-box > a {
-            background: $white;
+            background: variables.$white;
         }
     }
     .sidebar .slimScrollDiv, .sidebars .slimScrollDiv {
-        background: $gray-200;
+        background: variables.$gray-200;
     }
     .searchinputs input {
-        border-color: $gray-200;
-        background: $white;
+        border-color: variables.$gray-200;
+        background: variables.$white;
     }
 }
 [data-direction=rtl] {
@@ -561,10 +564,10 @@
                     left: -13px;
                     right: auto;
                 }
-                @include respond-above(custom991) {
+                @include mixins.respond-above(custom991) {
                     #toggle_btn {
                         float: right;
-                        font-size: $font-size-26;
+                        font-size: variables.$font-size-26;
                         line-height: 50px;
                         margin-right: 15px;
                         margin-left: 0;
@@ -572,13 +575,13 @@
                             display: inline-block;
                             width: 21px;
                             span {
-                                background-color: $white;
+                                background-color: variables.$white;
                                 display: block;
                                 float: right;
                                 height: 2px;
                                 width: 21px;
-                                @include margin-padding(0 0 5px, null);
-                                @include rounded(50px);
+                                @include mixins.margin-padding(0 0 5px, null);
+                                @include mixins.rounded(50px);
                                 &:nth-child(2) {
                                     width: 15px;
                                 }
@@ -598,7 +601,7 @@
                         &.select-store {
                             .user-info {
                                 padding: 3px 0px 3px 25px;
-                                @include respond-below(custom1199) {
+                                @include mixins.respond-below(custom1199) {
                                     padding-right: 0;
                                     padding-left: 15px;
                                 }
@@ -782,7 +785,7 @@
             padding-right: 17px;
         }
     }
-    @include respond-above(custom991) {
+    @include mixins.respond-above(custom991) {
         .mini-sidebar {
             .page-wrapper {
                 margin-right: 80px;
@@ -819,9 +822,9 @@
 .modal {
     button {
         &.close {
-            font-size: $font-size-20;
+            font-size: variables.$font-size-20;
             &:hover {
-                background: $danger;
+                background: variables.$danger;
             }
         }
     }
@@ -853,7 +856,7 @@
 	ul.tabs {
 		li.active {
 			span {
-				color: $white;
+				color: variables.$white;
 			}
 		}
 	}

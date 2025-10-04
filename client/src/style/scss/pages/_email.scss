@@ -1,8 +1,11 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .inbox-menu {
     display: inline-block;
     
     width: 100%;
-    @include margin-padding(0 0 20px,0 );
+    @include mixins.margin-padding(0 0 20px,0 );
     li {
         display: inline-block;
         width: 100%;
@@ -11,7 +14,7 @@
             display: inline-block;
             padding: 10px 15px;
             width: 100%;
-            font-weight: $font-weight-semibold;
+            font-weight: variables.$font-weight-semibold;
             text-transform: capitalize;
             -webkit-transition: 0.3s ease;
             -moz-transition: 0.3s ease;
@@ -20,7 +23,7 @@
                 background: rgba(33, 33, 33, 0.05);
             }
             i {
-                font-size: $font-size-16;
+                font-size: variables.$font-size-16;
                 padding-right: 10px;
                 color: #878787;
             }
@@ -43,16 +46,16 @@
 }
 .table-inbox {
     .starred.fas.fa-star {
-        color: $warning;
+        color: variables.$warning;
     }
     .checked {
-        background-color: $gray-300;
+        background-color: variables.$gray-300;
     }
     tbody{
         tr{
             td{
-                font-size: $font-size-14;
-                color: $secondary;
+                font-size: variables.$font-size-14;
+                color: variables.$secondary;
             }
         }
     }
@@ -61,8 +64,8 @@
     .name,
     .subject,
     .mail-date{
-        color: $black;
-        font-weight: $font-weight-bold;
+        color: variables.$black;
+        font-weight: variables.$font-weight-bold;
     }
 }
 .email-header{

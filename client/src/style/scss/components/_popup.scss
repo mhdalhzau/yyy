@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .modal-barcode {
     ul {
         display: -webkit-box;
@@ -9,16 +12,16 @@
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
         li {
-            @include rounded(7px);
+            @include mixins.rounded(7px);
             width: 25%;
             margin-bottom: 10px;
             padding: 0 5px;
-            @include respond-below(custom991) {
+            @include mixins.respond-below(custom991) {
                 width: 50%;
             }
             a {
-                border: 1px solid $gray-400;
-                @include rounded(10px);
+                border: 1px solid variables.$gray-400;
+                @include mixins.rounded(10px);
                 display: block;
                 padding: 10px;
                 text-align: center;
@@ -29,9 +32,9 @@
 
 .modal{
     .modal-title {
-        font-weight: $font-weight-bold;
-        @include respond-below(custom991) {
-            font-size: $font-size-16;
+        font-weight: variables.$font-weight-bold;
+        @include mixins.respond-below(custom991) {
+            font-size: variables.$font-size-16;
         }
     }
 	.logo-lg {
@@ -50,18 +53,18 @@
         justify-content: center;
         -webkit-justify-content: center;
         -ms-flex-pack: center;
-        color: $danger-700;
+        color: variables.$danger-700;
         opacity: 1;
-        font-size: $font-size-12;
+        font-size: variables.$font-size-12;
         width: 22px;
         height: 22px;
         border: 0;
-        font-weight: $font-weight-bold;
+        font-weight: variables.$font-weight-bold;
         background-color: transparent;
-        @include rounded(50px);
+        @include mixins.rounded(50px);
         &:hover{
             background-color: transparent;
-            color:$white;
+            color:variables.$white;
         }
     }
     .modal-footer{
@@ -69,10 +72,10 @@
        justify-content: flex-start;
         .btn {
             min-width: 130px;
-            @include margin-padding(null, 12px);
-            @include respond-below(custom991) {
+            @include mixins.margin-padding(null, 12px);
+            @include mixins.respond-below(custom991) {
                 min-width: auto;
-                @include margin-padding(null, 7px 12px);
+                @include mixins.margin-padding(null, 7px 12px);
             }
         }
         .btn-print {
@@ -85,24 +88,24 @@
             justify-content: center;
             -webkit-justify-content: center;
             -ms-flex-pack: center;
-            border: 1px solid $primary;
-            color: $primary;
+            border: 1px solid variables.$primary;
+            color: variables.$primary;
             img{
                 margin-left: 10px;
             }
             &:hover{
-                background: $primary;
-                color: $white;
+                background: variables.$primary;
+                color: variables.$white;
                 img{
                     filter: brightness(0) invert(1);
                 }
             }
         }
         .btn-secondary{
-            background: $secondary;
+            background: variables.$secondary;
             &:hover{
-                @include box-shadow(inset, 0, 0px, 0px, 100px, $white);
-                color: $secondary !important;
+                @include mixins.box-shadow(inset, 0, 0px, 0px, 100px, variables.$white);
+                color: variables.$secondary !important;
             }
         }
     }

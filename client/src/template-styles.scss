@@ -2,4 +2,4 @@
 // This file imports all the template SCSS styles
 // Note: Template uses Bootstrap, while app uses Tailwind - potential conflicts may need scoping later
 
-@import "./style/scss/main.scss";
+@use "./style/scss/main.scss";

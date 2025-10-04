@@ -1,3 +1,6 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .table-tab {
     ul {
         margin-bottom: 24px;
@@ -7,20 +10,20 @@
                 margin-right: 0;
             }
             button.nav-link {
-                font-weight: $font-weight-bold;
+                font-weight: variables.$font-weight-bold;
                 padding: 10px;
                 line-height: normal;
-                color: $secondary;
-                background-color: $gray-400;
+                color: variables.$secondary;
+                background-color: variables.$gray-400;
                 &.active {
-                    background-color: $primary;
-                    color: $white;
+                    background-color: variables.$primary;
+                    color: variables.$white;
                 }
             }
         }
     }
     .nav-pills {
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -33,14 +36,14 @@
 .badge {
     &.badge-bgdanger {
         background-color: rgba(255, 0, 0, 0.06);
-        color: $danger;
+        color: variables.$danger;
         padding: 5px 10px;
     }
 }
 button.swal2-styled.swal2-confirm {
-    background-color: $primary;
+    background-color: variables.$primary;
     &:hover {
-        background-color: $secondary
+        background-color: variables.$secondary
     }
 }
 table {
@@ -55,7 +58,7 @@ table {
                     height: 31px;
                     width: 31px;
                     border: 1px solid rgba(145, 158, 171, 0.30);
-					background-color: $white;
+					background-color: variables.$white;
                     border-radius: 8px;
                     display: -webkit-box;
                     display: -ms-flexbox;
@@ -68,17 +71,17 @@ table {
                     -ms-flex-pack: center;
                     padding: 8px;
                     .feather-edit {
-                        color: $blue;
+                        color: variables.$blue;
                         width: 14px;
                         height: 14px;
                     }
                     .action-edit {
-                       color: $text-color;
+                       color: variables.$text-color;
                        width: 14px;
                         height: 14px;
                     }
                     .feather-trash-2 {
-                        color: $danger;
+                        color: variables.$danger;
                         width: 14px;
                         height: 14px;
                     }
@@ -87,13 +90,13 @@ table {
                         height: 14px;
                     }
                     .action-download {
-                        color: $blue;
+                        color: variables.$blue;
                         width: 14px;
                         height: 14px;
                         
                     }
                     .action-eye {
-                        color: $secondary;
+                        color: variables.$secondary;
                         width: 14px;
                         height: 14px;
                     }
@@ -162,7 +165,7 @@ table {
     -webkit-justify-content: center;
     -ms-flex-pack: center;
     &.low-stock-top-head {
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             flex-wrap: wrap;  
            justify-content: start;
         }
@@ -181,7 +184,7 @@ table {
         }
         #collapse-header {
             margin-right: 0;
-            @include respond-below(custom991) {
+            @include mixins.respond-below(custom991) {
                 display: none;
             }
         }
@@ -197,8 +200,8 @@ table {
             justify-content: center;
             -webkit-justify-content: center;
             -ms-flex-pack: center;
-            border: 1px solid $gray-300;
-            background: $white;
+            border: 1px solid variables.$gray-300;
+            background: variables.$white;
             border-radius: 8px;
             padding: 6px;
             font-size: 18px;
@@ -212,26 +215,26 @@ table {
                 margin-right: 10px;
             }
             &.btn-secondary {
-                background-color: $secondary;
-                color: $white;
+                background-color: variables.$secondary;
+                color: variables.$white;
                 padding: 10px;
-                font-weight: $font-weight-bold;
-                font-size: $font-size-base;
+                font-weight: variables.$font-weight-bold;
+                font-size: variables.$font-size-base;
                 &:hover {
-                    background-color: $primary;
+                    background-color: variables.$primary;
                 }
                 svg {
                     width: 16px;
                     margin-right: 5px;
-                    color: $white;
+                    color: variables.$white;
                 }
-                @include respond-below(custom767) {
+                @include mixins.respond-below(custom767) {
                     padding: 5px;
-                    font-size: $font-size-base;
+                    font-size: variables.$font-size-base;
                 }
             }
             .action-edit.sales-action {
-                color: $blue;
+                color: variables.$blue;
             }
         }
         .status-toggle {
@@ -245,8 +248,8 @@ table {
             justify-content: center;
             -webkit-justify-content: center;
             -ms-flex-pack: center;
-            border: 1px solid $gray-100;
-            background: $white;
+            border: 1px solid variables.$gray-100;
+            background: variables.$white;
             border-radius: 8px;
             padding: 6px 10px;
             label {
@@ -256,13 +259,13 @@ table {
     }
 }
 .custom-modal-header {
-   background: $body-bg;
+   background: variables.$body-bg;
    padding: 24px;
    .page-title {
     h4 {
-        font-size: $font-size-18;
-        font-weight: $font-weight-bold;
-        color: $secondary;
+        font-size: variables.$font-size-18;
+        font-weight: variables.$font-weight-bold;
+        color: variables.$secondary;
     }
    }
 }
@@ -272,8 +275,8 @@ table {
         margin-right: 0;
     }
     label {
-        font-size: $font-size-15;
-        font-weight: $font-weight-normal;
+        font-size: variables.$font-size-15;
+        font-weight: variables.$font-weight-normal;
     }
 }
 .status-label {
@@ -284,7 +287,7 @@ table {
     text-align: right;
     a {
         min-width: auto;
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             padding: 10px 10px;
         }
     }
@@ -369,8 +372,8 @@ td {
     td {
         a {
             &.view-note {
-                color: $blue;
-                font-weight: $font-weight-bold;
+                color: variables.$blue;
+                font-weight: variables.$font-weight-bold;
             }
         }
     }
@@ -391,8 +394,8 @@ td {
     border-radius: 8px;
 }
 .product-quantity {
-    border:1px solid $gray-400;
-    background-color: $body-bg;
+    border:1px solid variables.$gray-400;
+    background-color: variables.$body-bg;
     width: 105px;
     height: 40px;
     display: -webkit-box;
@@ -408,12 +411,12 @@ td {
     input {
         width: 35px;
         border: 0;
-        background-color: $body-bg;
+        background-color: variables.$body-bg;
         text-align: center;
 		height: 35px !important;
     }
     span {
-        color: $secondary;
+        color: variables.$secondary;
         font-size: 0;
         cursor: pointer;
         .plus-circle-qty {
@@ -445,35 +448,35 @@ td {
 }
 .badge badge-linedanger {
     background-color: rgba(255, 0, 0, 0.06);
-    color: $danger;
+    color: variables.$danger;
     border-radius: 8px;
     padding: 4px 10px;
-    font-size: $font-size-base;
+    font-size: variables.$font-size-base;
 }
 .input-groupicon.calender-input input {
     padding-left: 27px;
 }
 span {
     &.customer-toggle {
-        color: $secondary;
+        color: variables.$secondary;
     }
 }
 span {
     &.unlimited-text {
-        color: $text-color;
+        color: variables.$text-color;
         margin-top: 5px;
         display: inline-block;
     }
 }
 .modal-title-head {
     h6 {
-        font-size: $font-size-16;
+        font-size: variables.$font-size-16;
         display: flex;
         align-items: center;
         margin-bottom: 20px;
         svg {
             width: 15px;
-            color: $primary;
+            color: variables.$primary;
             margin-right: 5px;
         }
     }
@@ -482,14 +485,14 @@ span {
     padding-left: 50px;
 }
 .total-employees {
-    background-color: $body-bg;
+    background-color: variables.$body-bg;
     padding: 10px 8px;
     margin-right: 24px;
     border-radius: 8px;
     h6 {
-        font-size: $font-size-base;
-        color: $secondary;
-        font-weight: $font-weight-bold;
+        font-size: variables.$font-size-base;
+        color: variables.$secondary;
+        font-weight: variables.$font-weight-bold;
         display: flex;
         align-items: center;
         
@@ -507,11 +510,11 @@ span {
             justify-content: center;
             -webkit-justify-content: center;
             -ms-flex-pack: center;
-            font-size: $font-size-10;
+            font-size: variables.$font-size-10;
             width: 18px;
             height: 18px;
-            background-color: $danger;
-            color: $white;
+            background-color: variables.$danger;
+            color: variables.$white;
             border-radius: 50%;
             margin-left: 5px;
         }
@@ -521,7 +524,7 @@ span {
     .btn-list,.btn-grid {
         width: 36px;
         height: 36px;
-        background-color: $body-bg;
+        background-color: variables.$body-bg;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -531,15 +534,15 @@ span {
         justify-content: center;
         -webkit-justify-content: center;
         -ms-flex-pack: center;
-        color: $secondary;
+        color: variables.$secondary;
         margin-right: 15px;
         border-radius: 8px;
         &.active {
-            background-color: $primary;
-            color: $white;
+            background-color: variables.$primary;
+            color: variables.$white;
             &:hover {
-                background-color: $secondary;
-                color: $white;
+                background-color: variables.$secondary;
+                color: variables.$white;
             }
         } 
         svg {
@@ -547,12 +550,12 @@ span {
             height: 18px;
         }
         &:hover {
-            background-color: $primary;
-            color: $white;
+            background-color: variables.$primary;
+            color: variables.$white;
         }
     }
     .form-sort {
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             margin-top: 0;
         }
     }
@@ -569,12 +572,12 @@ span {
     justify-content: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-    background: $primary;
-    color: $white;
+    background: variables.$primary;
+    color: variables.$white;
     border-radius: 8px;
     &:hover {
-        background-color: $secondary;
-        color: $white;
+        background-color: variables.$secondary;
+        color: variables.$white;
     }
 }
 td {
@@ -586,11 +589,11 @@ td {
     }
 }
 .badges-inactive {
-    border: 1px solid $danger;
-    color: $danger;
+    border: 1px solid variables.$danger;
+    color: variables.$danger;
     padding: 2px 10px;
-    font-size: $font-size-14;
-    font-weight: $font-weight-semibold;
+    font-size: variables.$font-size-14;
+    font-weight: variables.$font-weight-semibold;
     border-radius: 8px;
 }
 .success-email-send.modal-body {
@@ -599,17 +602,17 @@ td {
         svg {
             width: 40px;
             height: 40px;
-            color: $success;
+            color: variables.$success;
             margin-bottom: 20px;
         }
     }
     h4 {
-        font-size: $font-size-20;
-        font-weight: $font-weight-bold;
+        font-size: variables.$font-size-20;
+        font-weight: variables.$font-weight-bold;
         margin-bottom: 5px;
     }
     p {
-        font-size: $font-size-15;
+        font-size: variables.$font-size-15;
     }
     a.btn {
         padding: 10px 20px;
@@ -621,7 +624,7 @@ td {
     overflow-y: scroll;
     padding: 20px;
     box-shadow: 0px 4px 60px 0px rgba(231, 231, 231, 0.47);
-    background: $white;
+    background: variables.$white;
     border-radius: 8px;
     position: absolute;
     right: 0;
@@ -630,14 +633,14 @@ td {
     display: none;
     .drop-item-head {
         border-bottom: 1px solid rgba(145, 158, 171, 0.30);
-        @include margin-padding(0 0 20px, 0 0 20px);
+        @include mixins.margin-padding(0 0 20px, 0 0 20px);
         h5 {
-            font-size: $font-size-16;
-            font-weight: $font-weight-semibold;
+            font-size: variables.$font-size-16;
+            font-weight: variables.$font-weight-semibold;
             margin-bottom: 10px;
         }
         p {
-            font-size: $font-size-base;
+            font-size: variables.$font-size-base;
         }
     }
     ul {
@@ -667,28 +670,28 @@ td {
 }
 .table-top {
     &.table-top-new {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             flex-direction: column;
             align-items: self-start;
         }
         .search-path {
             margin-left: 0;
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 margin-top: 24px;
             }
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 flex-direction: column;
                 align-items: self-start;
                
             }
             .form-sort {
-                @include respond-below(custom575) {
+                @include mixins.respond-below(custom575) {
                     margin-top: 20px;
                 }
             }
         }
         .search-set {
-            @include respond-below(custom767) {
+            @include mixins.respond-below(custom767) {
                 flex-direction: column;
                 align-items: flex-start;
                 .total-employees {
@@ -699,26 +702,26 @@ td {
     }
 }
 .badge-applied {
-    background-color: $purple;
+    background-color: variables.$purple;
     padding: 2px 10px;
-    color: $white;
+    color: variables.$white;
     border-radius: 5px;
 }
 .badge-approved {
-    background-color: $success;
+    background-color: variables.$success;
     padding: 2px 10px;
-    color: $white;
+    color: variables.$white;
     border-radius: 5px;
 }
 .badge-reject {
-    background-color: $danger;
+    background-color: variables.$danger;
     padding: 2px 10px;
-    color: $white;
+    color: variables.$white;
     border-radius: 5px;
 }
 .table tbody tr td a.reason-for-reject {
-    color: $blue;
-    font-weight: $font-weight-semibold;
+    color: variables.$blue;
+    font-weight: variables.$font-weight-semibold;
 }
 .note-editor.note-frame.card {
     margin-bottom: 0;
@@ -727,17 +730,17 @@ table tbody td.action-table-data a.cancel-circle {
     border: 0;
     padding: 0;
     svg {
-        color: $primary;
+        color: variables.$primary;
     }
     &:hover {
         background-color: transparent;
         svg {
-            color: $danger !important;
+            color: variables.$danger !important;
         }
     }
 }
 .apply-leave {
-    background-color: $body-bg;
+    background-color: variables.$body-bg;
     border-radius: 8px;
     .leave-apply {
         display: -webkit-box;
@@ -747,19 +750,19 @@ table tbody td.action-table-data a.cancel-circle {
         -webkit-box-align: center;
         -ms-flex-align: center;
         padding: 10px;
-        @include respond-below(custom575) {
+        @include mixins.respond-below(custom575) {
             flex-direction: column;
             align-items: flex-start;
         }
         .leave-date {
             margin-right: 70px;
             span {
-                color: $text-color;
+                color: variables.$text-color;
             }
             p {
-                color: $secondary;
+                color: variables.$secondary;
             }
-            @include respond-below(custom575) {
+            @include mixins.respond-below(custom575) {
                 margin-right: 0;
                 margin-bottom: 20px;
             }
@@ -776,15 +779,15 @@ table tbody td.action-table-data a.cancel-circle {
         box-shadow: none;
         line-height: 40px;
         .tag {
-            background-color: $gray-300;
-            color: $secondary;
+            background-color: variables.$gray-300;
+            color: variables.$secondary;
             padding: 3px 10px;
             border-radius: 4px;
             position: relative;
             z-index: 1;
             .remove {
                 &::after {
-                    color: $text-color;
+                    color: variables.$text-color;
                 }
             }
         }
@@ -795,8 +798,8 @@ table tbody td.action-table-data a.cancel-circle {
         }
     }
     span.tag-text {
-        color: $text-color;
-        font-size: $font-size-13;
+        color: variables.$text-color;
+        font-size: variables.$font-size-13;
     }
 }
 .table tbody tr td .sales-dropdown-list a {
@@ -808,17 +811,17 @@ table tbody td.action-table-data a.cancel-circle {
     }
 }
 #collapse-header.active {
-    background-color: $primary;
+    background-color: variables.$primary;
     border-color: unset;
     svg {
-        color: $white;
+        color: variables.$white;
         transform: rotate(180deg);
         -webkit-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
     }
     &:hover {
         svg {
-            color: $white;
+            color: variables.$white;
         }
     }
 }
@@ -828,19 +831,19 @@ table tbody td.action-table-data a.cancel-circle {
             background-color: rgb(40, 142, 199);
             border-color: rgb(40, 142, 199);
             svg {
-                color: $white !important;
+                color: variables.$white !important;
             }
         }
         &.confirm-text {
             &:hover {
-                background-color: $danger;
-                border-color: $danger;
+                background-color: variables.$danger;
+                border-color: variables.$danger;
             }
         }
         &.edit-icon{
             &:hover {
-                background-color:$secondary;
-                border-color: $secondary;
+                background-color:variables.$secondary;
+                border-color: variables.$secondary;
             }
         }
     }
@@ -858,7 +861,7 @@ table tbody td.action-table-data a.cancel-circle {
 .profit-head {
     .input-blocks {
         .info-img {
-            color: $secondary;
+            color: variables.$secondary;
         }
         input {
             padding-left: 35px;
@@ -873,7 +876,7 @@ table tbody td.action-table-data a.cancel-circle {
         position: absolute;
         right: 8px;
         top: 10px;
-        background: $danger;
+        background: variables.$danger;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -881,7 +884,7 @@ table tbody td.action-table-data a.cancel-circle {
         height: 18px;
         border-radius: 4px;
         svg {
-            color: $white;
+            color: variables.$white;
             width: 14px;
             height: 14px;
         }
@@ -898,37 +901,37 @@ table tbody td.action-table-data a.cancel-circle {
     -webkit-justify-content: space-between;
     -ms-flex-pack: space-between;
     margin-bottom: 20px;
-    @include respond-below(custom767) {
+    @include mixins.respond-below(custom767) {
         flex-direction: column;
         align-items: start;
     }
     .details-item {
-        @include respond-below(custom767) {
+        @include mixins.respond-below(custom767) {
             margin-bottom: 20px;
         }
         h6 {
             margin-bottom: 15px;
-            font-size: $font-size-15;
-            color: $secondary;
+            font-size: variables.$font-size-15;
+            color: variables.$secondary;
         }
         p {
-            font-size: $font-size-base;
-            color: $text-color;
+            font-size: variables.$font-size-base;
+            color: variables.$text-color;
         }
         h5 {
-            color: $success;
-            font-size: $font-size-15;
+            color: variables.$success;
+            font-size: variables.$font-size-15;
             span {
                 display: block;
-                color: $text-color;
+                color: variables.$text-color;
             }
         }
     }
 }
 .order-text {
-    color: $secondary;
-    font-weight: $font-weight-semibold;
-    font-size: $font-size-base;
+    color: variables.$secondary;
+    font-weight: variables.$font-weight-semibold;
+    font-size: variables.$font-size-base;
     margin-bottom: 15px;
 }
 .profile-head-action {

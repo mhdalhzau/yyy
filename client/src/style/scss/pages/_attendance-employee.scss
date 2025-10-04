@@ -1,26 +1,29 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
 .attendance-header{
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
-    @include respond-below(custom575){
+    @include mixins.respond-below(custom575){
         display: block;
     }
     .attendance-content{
         display:flex;
         align-items: center;
         h3{
-            font-size: $font-size-20;
+            font-size: variables.$font-size-20;
             flex-shrink: 0;
             margin-left: 10px;
             span{
-                color: $text-color;
+                color: variables.$text-color;
             }
         }
     }
 }
 .table-top-head {
     &.employe{
-        @include respond-below(custom575){
+        @include mixins.respond-below(custom575){
             justify-content: flex-start;
                 margin-top: 24px;
         }
@@ -32,14 +35,14 @@
             h5{
                 display: flex;
                 justify-content: space-between;
-                font-size: $font-size-20;
+                font-size: variables.$font-size-20;
                 align-items: center;             
                 padding-bottom: 24px;
                 border-bottom: 1px solid rgba(145, 158, 171, 0.30);
                 margin-bottom: 24px;
              span{
                 font-size: 13px;
-                color: $purple;
+                color: variables.$purple;
              }
             }
             .card{
@@ -47,7 +50,7 @@
                     display: flex;
                     padding: 30px 10px;
                     align-items: center;
-                    background-color: $body-bg;
+                    background-color: variables.$body-bg;
                     flex-direction: row;
                     margin-bottom: 24px;
                     img{
@@ -70,8 +73,8 @@
     flex-direction: column;
     align-items: center;
     h4{
-    color: $primary;
-    font-size: $font-size-20;
+    color: variables.$primary;
+    font-size: variables.$font-size-20;
     border-radius: 8px;
     width: 64px;
     height: 64px;
@@ -80,7 +83,7 @@
     margin-bottom: 14px;
     }
     h6{
-        font-size: $font-size-16;
+        font-size: variables.$font-size-16;
     }
 }
 .danger-card{
@@ -89,8 +92,8 @@
     flex-direction: column;
     align-items: center;
     h4{
-    color: $danger;
-    font-size: $font-size-20;
+    color: variables.$danger;
+    font-size: variables.$font-size-20;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -99,7 +102,7 @@
     margin-bottom: 14px;
     }
     h6{
-        font-size: $font-size-16;
+        font-size: variables.$font-size-16;
     }
 }
 .light-card{
@@ -108,8 +111,8 @@
     flex-direction: column;
     align-items: center;
     h4{
-    color: $purple;
-    font-size: $font-size-20;
+    color: variables.$purple;
+    font-size: variables.$font-size-20;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -118,7 +121,7 @@
     margin-bottom: 14px;
     }
     h6{
-        font-size: $font-size-16;
+        font-size: variables.$font-size-16;
     }
 }
 .success-card{
@@ -127,8 +130,8 @@
     flex-direction: column;
     align-items: center;
     h4{
-    color: $purple;
-    font-size: $font-size-20;
+    color: variables.$purple;
+    font-size: variables.$font-size-20;
     width: 64px;
     height: 64px;
     border-radius: 8px;
@@ -137,12 +140,12 @@
     margin-bottom: 14px;
     }
     h6{
-        font-size: $font-size-16;
+        font-size: variables.$font-size-16;
     }
 }
 .widget-attend{
     display: flex;
-    @include respond-below(custom991) {
+    @include mixins.respond-below(custom991) {
         flex-wrap: wrap;
         justify-content: center;
      }
@@ -153,21 +156,21 @@
     width: 100%;
 }
 .progress-bar-success{
-    background-color:$success ;
+    background-color:variables.$success ;
 }
 .progress-bar-warning{
-    background-color: $warning;
+    background-color: variables.$warning;
 }
 .progress-bar-danger{
-    background-color: $danger;
+    background-color: variables.$danger;
 }
 .progress.attendance{
     width: 127px;
     height: 7px;
 }
 .badges-inactive.Holiday{
-    color: $purple;
-    border: 1px solid $purple;
+    color: variables.$purple;
+    border: 1px solid variables.$purple;
 }
 .modal-deletecontent{
     padding: 24px;
@@ -177,21 +180,21 @@
         height: 40px;
         justify-content: center;
         align-items: center;
-         color: $danger;
+         color: variables.$danger;
          margin: auto;
     }
     h4{
         padding: 20px 0 5px 0;
         text-align: center;
-        color: $secondary;
-        font-size: $font-size-20;
-         font-weight: $font-weight-bold;
+        color: variables.$secondary;
+        font-size: variables.$font-size-20;
+         font-weight: variables.$font-weight-bold;
     }
     p{
         text-align: center;
-        color: $text-color;
-        font-size: $font-size-15;
-        font-weight: $font-weight-normal;
+        color: variables.$text-color;
+        font-size: variables.$font-size-15;
+        font-weight: variables.$font-weight-normal;
     }
     .modal-footer-btn{
         &.delete{
