@@ -235,15 +235,13 @@ export default function POS() {
   return (
     <div className="page-wrapper pos-pg-wrapper ms-0">
       <div className="content pos-design p-0">
-        <div className="btn-row d-sm-flex align-items-center">
+        <div className="btn-row d-sm-flex align-items-center gap-2 mb-3">
           <button 
-            className="btn btn-secondary mb-xs-3"
+            className="btn btn-secondary"
             data-testid="button-view-brands"
             onClick={() => toast({ title: "View All Brands", description: "Opening brands list..." })}
           >
-            <span className="me-1 d-flex align-items-center">
-              <Tag size={16} />
-            </span>
+            <Tag size={16} className="me-1" />
             View All Brands
           </button>
           <button 
@@ -251,41 +249,23 @@ export default function POS() {
             data-testid="button-barcode"
             onClick={() => toast({ title: "Barcode Scanner", description: "Opening barcode scanner..." })}
           >
-            <span className="me-1 d-flex align-items-center">
-              <BarChart3 size={16} />
-            </span>
+            <BarChart3 size={16} className="me-1" />
             Barcode
           </button>
-          <div className="dropdown">
-            <button 
-              className="btn btn-primary dropdown-toggle" 
-              type="button" 
-              data-bs-toggle="dropdown"
-              data-testid="button-dashboard-dropdown"
-            >
-              Dashboard
-            </button>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="#">Sales Dashboard</a></li>
-              <li><a className="dropdown-item" href="#">Inventory Dashboard</a></li>
-              <li><a className="dropdown-item" href="#">Reports</a></li>
-            </ul>
-          </div>
-          <div className="dropdown">
-            <button 
-              className="btn btn-info dropdown-toggle" 
-              type="button" 
-              data-bs-toggle="dropdown"
-              data-testid="button-freshmart-dropdown"
-            >
-              Freshmart
-            </button>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="#">Store Settings</a></li>
-              <li><a className="dropdown-item" href="#">Location</a></li>
-              <li><a className="dropdown-item" href="#">Branches</a></li>
-            </ul>
-          </div>
+          <button 
+            className="btn btn-primary"
+            data-testid="button-dashboard"
+            onClick={() => toast({ title: "Dashboard", description: "Opening dashboard..." })}
+          >
+            Dashboard
+          </button>
+          <button 
+            className="btn btn-info"
+            data-testid="button-store"
+            onClick={() => toast({ title: "Store", description: "Opening store settings..." })}
+          >
+            Freshmart
+          </button>
         </div>
 
         <div className="pos-wrapper-grid">
