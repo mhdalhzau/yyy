@@ -5,8 +5,7 @@ import * as schema from "@shared/schema";
 import fs from "fs";
 import path from "path";
 
-const dbUrl = process.env.DATABASE_URL ||
-  "postgres://avnadmin:AVNS_zeE6oufcsDGsHvWpShG@dbpos-mhdalhzau.e.aivencloud.com:18498/defaultdb?sslmode=require";
+const dbUrl = "postgres://avnadmin:AVNS_zeE6oufcsDGsHvWpShG@dbpos-mhdalhzau.e.aivencloud.com:18498/defaultdb?sslmode=require";
 
 if (!dbUrl) {
   throw new Error("DATABASE_URL is not set");
