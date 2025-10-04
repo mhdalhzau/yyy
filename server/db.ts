@@ -5,14 +5,13 @@ import * as schema from "@shared/schema";
 import fs from "fs";
 import path from "path";
 
-const dbUrl =
-  "postgres://avnadmin:AVNS_zeE6oufcsDGsHvWpShG@dbpos-mhdalhzau.e.aivencloud.com:18498/defaultdb?sslmode=require";
+const dbUrl = process.env.DATABASE_URL;
 
-if (dbUrl) {
+if (!dbUrl) {
   throw new Error("DATABASE_URL is not set");
 }
 
-c;
+const url = new URL(dbUrl);
 const caPemPath = path.resolve(
   import.meta.dirname,
   "..",
@@ -21,11 +20,11 @@ const caPemPath = path.resolve(
 );
 
 const poolConfig: any = {
-  host: dbUrl.hostname,
-  port: parseInt(dbUrl.port),
-  database: dbUrl.pathname.slice(1),
-  user: dbUrl.username,
-  password: dbUrl.password,
+  host: url.hostname,
+  port: parseInt(url.port),
+  database: url.pathname.slice(1),
+  user: url.username,
+  password: url.password,
   ssl: fs.existsSync(caPemPath)
     ? {
         rejectUnauthorized: true,
