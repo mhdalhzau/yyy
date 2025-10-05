@@ -170,3 +170,114 @@ export const deleteExpense = async (id: string) => {
   const response = await apiRequest("DELETE", `/api/expenses/${id}`);
   return response.json();
 };
+
+// Brands
+export const getBrands = async () => {
+  const response = await apiRequest("GET", "/api/brands");
+  return response.json();
+};
+
+export const createBrand = async (data: any) => {
+  const response = await apiRequest("POST", "/api/brands", data);
+  return response.json();
+};
+
+export const updateBrand = async (id: string, data: any) => {
+  const response = await apiRequest("PUT", `/api/brands/${id}`, data);
+  return response.json();
+};
+
+export const deleteBrand = async (id: string) => {
+  const response = await apiRequest("DELETE", `/api/brands/${id}`);
+  return response.json();
+};
+
+// Units
+export const getUnits = async () => {
+  const response = await apiRequest("GET", "/api/units");
+  return response.json();
+};
+
+export const createUnit = async (data: any) => {
+  const response = await apiRequest("POST", "/api/units", data);
+  return response.json();
+};
+
+export const updateUnit = async (id: string, data: any) => {
+  const response = await apiRequest("PUT", `/api/units/${id}`, data);
+  return response.json();
+};
+
+export const deleteUnit = async (id: string) => {
+  const response = await apiRequest("DELETE", `/api/units/${id}`);
+  return response.json();
+};
+
+// SubCategories
+export const getSubCategories = async () => {
+  const response = await apiRequest("GET", "/api/sub-categories");
+  return response.json();
+};
+
+export const createSubCategory = async (data: any) => {
+  const response = await apiRequest("POST", "/api/sub-categories", data);
+  return response.json();
+};
+
+export const updateSubCategory = async (id: string, data: any) => {
+  const response = await apiRequest("PUT", `/api/sub-categories/${id}`, data);
+  return response.json();
+};
+
+export const deleteSubCategory = async (id: string) => {
+  const response = await apiRequest("DELETE", `/api/sub-categories/${id}`);
+  return response.json();
+};
+
+// VariantAttributes
+export const getVariantAttributes = async () => {
+  const response = await apiRequest("GET", "/api/variant-attributes");
+  return response.json();
+};
+
+export const createVariantAttribute = async (data: any) => {
+  const response = await apiRequest("POST", "/api/variant-attributes", data);
+  return response.json();
+};
+
+export const updateVariantAttribute = async (id: string, data: any) => {
+  const response = await apiRequest("PUT", `/api/variant-attributes/${id}`, data);
+  return response.json();
+};
+
+export const deleteVariantAttribute = async (id: string) => {
+  const response = await apiRequest("DELETE", `/api/variant-attributes/${id}`);
+  return response.json();
+};
+
+// Warranties
+export const getWarranties = async () => {
+  const response = await apiRequest("GET", "/api/warranties");
+  return response.json();
+};
+
+export const createWarranty = async (data: any) => {
+  const response = await apiRequest("POST", "/api/warranties", data);
+  return response.json();
+};
+
+export const updateWarranty = async (id: string, data: any) => {
+  const response = await apiRequest("PUT", `/api/warranties/${id}`, data);
+  return response.json();
+};
+
+export const deleteWarranty = async (id: string) => {
+  const response = await apiRequest("DELETE", `/api/warranties/${id}`);
+  return response.json();
+};
+
+// Expired Products
+export const getExpiredProducts = async () => {
+  const response = await apiRequest("GET", "/api/products/expired");
+  return response.json();
+};
