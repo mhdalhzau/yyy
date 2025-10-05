@@ -1420,4 +1420,7 @@ export class DbStorage implements IStorage {
   }
 }
 
-export const storage = new DbStorage();
+// Using MemStorage for development (has all new methods implemented)
+// To use PostgreSQL, switch to: export const storage = new DbStorage();
+// Note: DbStorage needs to be updated with new methods first
+export const storage = new MemStorage();
