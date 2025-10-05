@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Search, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,24 +9,29 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { getWarranties, createWarranty, updateWarranty, deleteWarranty } from "@/lib/api";
+import { insertWarrantySchema } from "@shared/schema";
 import type { Warranty } from "@shared/schema";
 
 export default function Warranties() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingWarranty, setEditingWarranty] = useState<Warranty | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    duration: "",
-    durationType: "months",
-    description: "",
-  });
   const { toast } = useToast();
+
+  const form = useForm({
+    resolver: zodResolver(insertWarrantySchema),
+    defaultValues: {
+      name: "",
+      duration: 0,
+      durationType: "months",
+      description: "",
+    },
+  });
 
   const { data: warranties = [], isLoading } = useQuery<Warranty[]>({
     queryKey: ["/api/warranties"],
@@ -40,7 +47,7 @@ export default function Warranties() {
         description: "Garansi berhasil ditambahkan",
       });
       setIsDialogOpen(false);
-      setFormData({ name: "", duration: "", durationType: "months", description: "" });
+      form.reset();
     },
     onError: () => {
       toast({
@@ -61,7 +68,7 @@ export default function Warranties() {
       });
       setIsDialogOpen(false);
       setEditingWarranty(null);
-      setFormData({ name: "", duration: "", durationType: "months", description: "" });
+      form.reset();
     },
     onError: () => {
       toast({
@@ -95,24 +102,19 @@ export default function Warranties() {
     warranty.description?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const submitData = {
-      ...formData,
-      duration: parseInt(formData.duration, 10),
-    };
+  const handleSubmit = form.handleSubmit((data) => {
     if (editingWarranty) {
-      updateWarrantyMutation.mutate({ id: editingWarranty.id, data: submitData });
+      updateWarrantyMutation.mutate({ id: editingWarranty.id, data });
     } else {
-      createWarrantyMutation.mutate(submitData);
+      createWarrantyMutation.mutate(data);
     }
-  };
+  });
 
   const handleEdit = (warranty: Warranty) => {
     setEditingWarranty(warranty);
-    setFormData({
+    form.reset({
       name: warranty.name,
-      duration: warranty.duration.toString(),
+      duration: warranty.duration,
       durationType: warranty.durationType,
       description: warranty.description || "",
     });
@@ -128,7 +130,7 @@ export default function Warranties() {
   const handleDialogClose = () => {
     setIsDialogOpen(false);
     setEditingWarranty(null);
-    setFormData({ name: "", duration: "", durationType: "months", description: "" });
+    form.reset({ name: "", duration: 0, durationType: "months", description: "" });
   };
 
   const getDurationLabel = (duration: number, durationType: string) => {
@@ -143,7 +145,7 @@ export default function Warranties() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading warranties...</div>
+        <div className="text-lg" data-testid="text-loading">Loading warranties...</div>
       </div>
     );
   }
@@ -153,105 +155,139 @@ export default function Warranties() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground" data-testid="text-page-title">Garansi</h1>
-          <p className="text-muted-foreground">Kelola garansi produk Anda</p>
+          <p className="text-muted-foreground" data-testid="text-page-description">Kelola garansi produk Anda</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="btn-primary" data-testid="button-add-warranty">
+            <Button 
+              className="btn-primary"
+              onClick={() => {
+                setEditingWarranty(null);
+                form.reset({ name: "", duration: 0, durationType: "months", description: "" });
+              }}
+              data-testid="button-add-warranty"
+            >
               <Plus className="w-4 h-4 mr-2" />
               Tambah Garansi
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>
+              <DialogTitle data-testid="text-dialog-title">
                 {editingWarranty ? "Edit Garansi" : "Tambah Garansi"}
               </DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="name">Nama Garansi *</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Masukkan nama garansi"
-                  required
-                  data-testid="input-warranty-name"
+            <Form {...form}>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nama Garansi</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Masukkan nama garansi" 
+                          {...field} 
+                          data-testid="input-warranty-name"
+                        />
+                      </FormControl>
+                      <FormMessage data-testid="error-warranty-name" />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="duration">Durasi *</Label>
-                  <Input
-                    id="duration"
-                    type="number"
-                    min="1"
-                    value={formData.duration}
-                    onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
-                    placeholder="Masukkan durasi"
-                    required
-                    data-testid="input-warranty-duration"
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="duration"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Durasi</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="number"
+                            min="1"
+                            placeholder="Masukkan durasi" 
+                            {...field}
+                            onChange={(e) => field.onChange(parseInt(e.target.value, 10) || 0)}
+                            data-testid="input-warranty-duration"
+                          />
+                        </FormControl>
+                        <FormMessage data-testid="error-warranty-duration" />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="durationType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tipe Durasi</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger data-testid="select-duration-type">
+                              <SelectValue placeholder="Pilih tipe" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="days">Hari</SelectItem>
+                            <SelectItem value="months">Bulan</SelectItem>
+                            <SelectItem value="years">Tahun</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage data-testid="error-warranty-duration-type" />
+                      </FormItem>
+                    )}
                   />
                 </div>
-                <div>
-                  <Label htmlFor="durationType">Tipe Durasi *</Label>
-                  <Select 
-                    value={formData.durationType} 
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, durationType: value }))}
-                    required
-                  >
-                    <SelectTrigger data-testid="select-duration-type">
-                      <SelectValue placeholder="Pilih tipe" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="days">Hari</SelectItem>
-                      <SelectItem value="months">Bulan</SelectItem>
-                      <SelectItem value="years">Tahun</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="description">Deskripsi</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                  placeholder="Masukkan deskripsi garansi"
-                  rows={3}
-                  data-testid="textarea-warranty-description"
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Deskripsi</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Masukkan deskripsi garansi" 
+                          {...field}
+                          value={field.value || ""}
+                          data-testid="textarea-warranty-description"
+                        />
+                      </FormControl>
+                      <FormMessage data-testid="error-warranty-description" />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div className="flex gap-2 pt-4">
-                <Button 
-                  type="submit" 
-                  className="btn-primary"
-                  disabled={createWarrantyMutation.isPending || updateWarrantyMutation.isPending}
-                  data-testid="button-save-warranty"
-                >
-                  {createWarrantyMutation.isPending || updateWarrantyMutation.isPending 
-                    ? "Menyimpan..." 
-                    : editingWarranty ? "Perbarui" : "Simpan"
-                  }
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={handleDialogClose}
-                  data-testid="button-cancel-warranty"
-                >
-                  Batal
-                </Button>
-              </div>
-            </form>
+                <div className="flex gap-2 pt-4">
+                  <Button 
+                    type="submit" 
+                    className="btn-primary"
+                    disabled={createWarrantyMutation.isPending || updateWarrantyMutation.isPending}
+                    data-testid="button-save-warranty"
+                  >
+                    {createWarrantyMutation.isPending || updateWarrantyMutation.isPending 
+                      ? "Menyimpan..." 
+                      : editingWarranty ? "Perbarui" : "Simpan"
+                    }
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={handleDialogClose}
+                    data-testid="button-cancel-warranty"
+                  >
+                    Batal
+                  </Button>
+                </div>
+              </form>
+            </Form>
           </DialogContent>
         </Dialog>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Daftar Garansi</CardTitle>
+          <CardTitle data-testid="text-card-title">Daftar Garansi</CardTitle>
           <div className="relative">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
@@ -267,33 +303,33 @@ export default function Warranties() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nama Garansi</TableHead>
-                <TableHead>Durasi</TableHead>
-                <TableHead>Deskripsi</TableHead>
-                <TableHead>Tanggal Dibuat</TableHead>
-                <TableHead>Aksi</TableHead>
+                <TableHead data-testid="text-header-name">Nama Garansi</TableHead>
+                <TableHead data-testid="text-header-duration">Durasi</TableHead>
+                <TableHead data-testid="text-header-description">Deskripsi</TableHead>
+                <TableHead data-testid="text-header-created">Tanggal Dibuat</TableHead>
+                <TableHead data-testid="text-header-actions">Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredWarranties.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground" data-testid="text-no-warranties">
                     {searchTerm ? "Tidak ada garansi yang sesuai pencarian" : "Belum ada garansi"}
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredWarranties.map((warranty) => (
                   <TableRow key={warranty.id} className="table-row" data-testid={`row-warranty-${warranty.id}`}>
-                    <TableCell className="font-semibold">{warranty.name}</TableCell>
-                    <TableCell>
+                    <TableCell className="font-semibold" data-testid={`text-warranty-name-${warranty.id}`}>{warranty.name}</TableCell>
+                    <TableCell data-testid={`text-warranty-duration-${warranty.id}`}>
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary">
                         {getDurationLabel(warranty.duration, warranty.durationType)}
                       </span>
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
+                    <TableCell className="text-muted-foreground" data-testid={`text-warranty-description-${warranty.id}`}>
                       {warranty.description || "Tidak ada deskripsi"}
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
+                    <TableCell className="text-muted-foreground" data-testid={`text-warranty-created-${warranty.id}`}>
                       {new Date(warranty.createdAt!).toLocaleDateString("id-ID")}
                     </TableCell>
                     <TableCell>

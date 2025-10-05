@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Search, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { getVariantAttributes, createVariantAttribute, updateVariantAttribute, deleteVariantAttribute } from "@/lib/api";
+import { insertVariantAttributeSchema } from "@shared/schema";
 import type { VariantAttribute } from "@shared/schema";
 import { TagsInput } from "react-tag-input-component";
 
@@ -17,11 +20,15 @@ export default function VariantAttributes() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingAttribute, setEditingAttribute] = useState<VariantAttribute | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    values: [] as string[],
-  });
   const { toast } = useToast();
+
+  const form = useForm({
+    resolver: zodResolver(insertVariantAttributeSchema),
+    defaultValues: {
+      name: "",
+      values: [] as string[],
+    },
+  });
 
   const { data: attributes = [], isLoading } = useQuery<VariantAttribute[]>({
     queryKey: ["/api/variant-attributes"],
@@ -37,7 +44,7 @@ export default function VariantAttributes() {
         description: "Atribut varian berhasil ditambahkan",
       });
       setIsDialogOpen(false);
-      setFormData({ name: "", values: [] });
+      form.reset();
     },
     onError: () => {
       toast({
@@ -58,7 +65,7 @@ export default function VariantAttributes() {
       });
       setIsDialogOpen(false);
       setEditingAttribute(null);
-      setFormData({ name: "", values: [] });
+      form.reset();
     },
     onError: () => {
       toast({
@@ -91,18 +98,17 @@ export default function VariantAttributes() {
     attr.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = form.handleSubmit((data) => {
     if (editingAttribute) {
-      updateAttributeMutation.mutate({ id: editingAttribute.id, data: formData });
+      updateAttributeMutation.mutate({ id: editingAttribute.id, data });
     } else {
-      createAttributeMutation.mutate(formData);
+      createAttributeMutation.mutate(data);
     }
-  };
+  });
 
   const handleEdit = (attribute: VariantAttribute) => {
     setEditingAttribute(attribute);
-    setFormData({
+    form.reset({
       name: attribute.name,
       values: attribute.values || [],
     });
@@ -118,13 +124,13 @@ export default function VariantAttributes() {
   const handleDialogClose = () => {
     setIsDialogOpen(false);
     setEditingAttribute(null);
-    setFormData({ name: "", values: [] });
+    form.reset({ name: "", values: [] });
   };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading variant attributes...</div>
+        <div className="text-lg" data-testid="text-loading">Loading variant attributes...</div>
       </div>
     );
   }
@@ -134,76 +140,100 @@ export default function VariantAttributes() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground" data-testid="text-page-title">Atribut Varian</h1>
-          <p className="text-muted-foreground">Kelola atribut varian produk seperti ukuran, warna, dll</p>
+          <p className="text-muted-foreground" data-testid="text-page-description">Kelola atribut varian produk seperti ukuran, warna, dll</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="btn-primary" data-testid="button-add-attribute">
+            <Button 
+              className="btn-primary"
+              onClick={() => {
+                setEditingAttribute(null);
+                form.reset({ name: "", values: [] });
+              }}
+              data-testid="button-add-attribute"
+            >
               <Plus className="w-4 h-4 mr-2" />
               Tambah Atribut
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>
+              <DialogTitle data-testid="text-dialog-title">
                 {editingAttribute ? "Edit Atribut Varian" : "Tambah Atribut Varian"}
               </DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="name">Nama Atribut *</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Masukkan nama atribut (misal: Ukuran, Warna)"
-                  required
-                  data-testid="input-attribute-name"
+            <Form {...form}>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nama Atribut</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Masukkan nama atribut (misal: Ukuran, Warna)" 
+                          {...field} 
+                          data-testid="input-attribute-name"
+                        />
+                      </FormControl>
+                      <FormMessage data-testid="error-attribute-name" />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <Label htmlFor="values">Nilai Atribut *</Label>
-                <div className="mt-2" data-testid="tags-input-values">
-                  <TagsInput
-                    value={formData.values}
-                    onChange={(tags) => setFormData(prev => ({ ...prev, values: tags }))}
-                    name="values"
-                    placeHolder="Ketik nilai dan tekan Enter"
-                  />
+                <FormField
+                  control={form.control}
+                  name="values"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nilai Atribut</FormLabel>
+                      <FormControl>
+                        <div className="mt-2" data-testid="tags-input-values">
+                          <TagsInput
+                            value={field.value || []}
+                            onChange={field.onChange}
+                            name="values"
+                            placeHolder="Ketik nilai dan tekan Enter"
+                          />
+                        </div>
+                      </FormControl>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Ketik nilai dan tekan Enter untuk menambahkan. Contoh: S, M, L, XL
+                      </p>
+                      <FormMessage data-testid="error-attribute-values" />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex gap-2 pt-4">
+                  <Button 
+                    type="submit" 
+                    className="btn-primary"
+                    disabled={createAttributeMutation.isPending || updateAttributeMutation.isPending}
+                    data-testid="button-save-attribute"
+                  >
+                    {createAttributeMutation.isPending || updateAttributeMutation.isPending 
+                      ? "Menyimpan..." 
+                      : editingAttribute ? "Perbarui" : "Simpan"
+                    }
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={handleDialogClose}
+                    data-testid="button-cancel-attribute"
+                  >
+                    Batal
+                  </Button>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Ketik nilai dan tekan Enter untuk menambahkan. Contoh: S, M, L, XL
-                </p>
-              </div>
-              <div className="flex gap-2 pt-4">
-                <Button 
-                  type="submit" 
-                  className="btn-primary"
-                  disabled={createAttributeMutation.isPending || updateAttributeMutation.isPending}
-                  data-testid="button-save-attribute"
-                >
-                  {createAttributeMutation.isPending || updateAttributeMutation.isPending 
-                    ? "Menyimpan..." 
-                    : editingAttribute ? "Perbarui" : "Simpan"
-                  }
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={handleDialogClose}
-                  data-testid="button-cancel-attribute"
-                >
-                  Batal
-                </Button>
-              </div>
-            </form>
+              </form>
+            </Form>
           </DialogContent>
         </Dialog>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Daftar Atribut Varian</CardTitle>
+          <CardTitle data-testid="text-card-title">Daftar Atribut Varian</CardTitle>
           <div className="relative">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
@@ -219,24 +249,24 @@ export default function VariantAttributes() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nama Atribut</TableHead>
-                <TableHead>Nilai</TableHead>
-                <TableHead>Tanggal Dibuat</TableHead>
-                <TableHead>Aksi</TableHead>
+                <TableHead data-testid="text-header-name">Nama Atribut</TableHead>
+                <TableHead data-testid="text-header-values">Nilai</TableHead>
+                <TableHead data-testid="text-header-created">Tanggal Dibuat</TableHead>
+                <TableHead data-testid="text-header-actions">Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredAttributes.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={4} className="text-center py-8 text-muted-foreground" data-testid="text-no-attributes">
                     {searchTerm ? "Tidak ada atribut yang sesuai pencarian" : "Belum ada atribut varian"}
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredAttributes.map((attribute) => (
                   <TableRow key={attribute.id} className="table-row" data-testid={`row-attribute-${attribute.id}`}>
-                    <TableCell className="font-semibold">{attribute.name}</TableCell>
-                    <TableCell>
+                    <TableCell className="font-semibold" data-testid={`text-attribute-name-${attribute.id}`}>{attribute.name}</TableCell>
+                    <TableCell data-testid={`text-attribute-values-${attribute.id}`}>
                       <div className="flex flex-wrap gap-2">
                         {attribute.values && attribute.values.length > 0 ? (
                           attribute.values.map((value, index) => (
@@ -253,7 +283,7 @@ export default function VariantAttributes() {
                         )}
                       </div>
                     </TableCell>
-                    <TableCell className="text-muted-foreground">
+                    <TableCell className="text-muted-foreground" data-testid={`text-attribute-created-${attribute.id}`}>
                       {new Date(attribute.createdAt!).toLocaleDateString("id-ID")}
                     </TableCell>
                     <TableCell>

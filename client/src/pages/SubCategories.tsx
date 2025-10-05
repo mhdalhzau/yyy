@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Search, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,23 +9,28 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { getSubCategories, createSubCategory, updateSubCategory, deleteSubCategory, getCategories } from "@/lib/api";
+import { insertSubCategorySchema } from "@shared/schema";
 import type { SubCategory, Category } from "@shared/schema";
 
 export default function SubCategories() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSubCategory, setEditingSubCategory] = useState<SubCategory | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    categoryId: "",
-    description: "",
-  });
   const { toast } = useToast();
+
+  const form = useForm({
+    resolver: zodResolver(insertSubCategorySchema),
+    defaultValues: {
+      name: "",
+      categoryId: "",
+      description: "",
+    },
+  });
 
   const { data: subCategories = [], isLoading } = useQuery<SubCategory[]>({
     queryKey: ["/api/sub-categories"],
@@ -44,7 +51,7 @@ export default function SubCategories() {
         description: "Sub-kategori berhasil ditambahkan",
       });
       setIsDialogOpen(false);
-      setFormData({ name: "", categoryId: "", description: "" });
+      form.reset();
     },
     onError: () => {
       toast({
@@ -65,7 +72,7 @@ export default function SubCategories() {
       });
       setIsDialogOpen(false);
       setEditingSubCategory(null);
-      setFormData({ name: "", categoryId: "", description: "" });
+      form.reset();
     },
     onError: () => {
       toast({
@@ -99,18 +106,17 @@ export default function SubCategories() {
     subCat.description?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = form.handleSubmit((data) => {
     if (editingSubCategory) {
-      updateSubCategoryMutation.mutate({ id: editingSubCategory.id, data: formData });
+      updateSubCategoryMutation.mutate({ id: editingSubCategory.id, data });
     } else {
-      createSubCategoryMutation.mutate(formData);
+      createSubCategoryMutation.mutate(data);
     }
-  };
+  });
 
   const handleEdit = (subCategory: SubCategory) => {
     setEditingSubCategory(subCategory);
-    setFormData({
+    form.reset({
       name: subCategory.name,
       categoryId: subCategory.categoryId,
       description: subCategory.description || "",
@@ -127,13 +133,13 @@ export default function SubCategories() {
   const handleDialogClose = () => {
     setIsDialogOpen(false);
     setEditingSubCategory(null);
-    setFormData({ name: "", categoryId: "", description: "" });
+    form.reset({ name: "", categoryId: "", description: "" });
   };
 
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading sub-categories...</div>
+        <div className="text-lg" data-testid="text-loading">Loading sub-categories...</div>
       </div>
     );
   }
@@ -143,92 +149,119 @@ export default function SubCategories() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground" data-testid="text-page-title">Sub-Kategori</h1>
-          <p className="text-muted-foreground">Kelola sub-kategori produk Anda</p>
+          <p className="text-muted-foreground" data-testid="text-page-description">Kelola sub-kategori produk Anda</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="btn-primary" data-testid="button-add-subcategory">
+            <Button 
+              className="btn-primary"
+              onClick={() => {
+                setEditingSubCategory(null);
+                form.reset({ name: "", categoryId: "", description: "" });
+              }}
+              data-testid="button-add-subcategory"
+            >
               <Plus className="w-4 h-4 mr-2" />
               Tambah Sub-Kategori
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>
+              <DialogTitle data-testid="text-dialog-title">
                 {editingSubCategory ? "Edit Sub-Kategori" : "Tambah Sub-Kategori"}
               </DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label htmlFor="name">Nama Sub-Kategori *</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="Masukkan nama sub-kategori"
-                  required
-                  data-testid="input-subcategory-name"
+            <Form {...form}>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nama Sub-Kategori</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Masukkan nama sub-kategori" 
+                          {...field} 
+                          data-testid="input-subcategory-name"
+                        />
+                      </FormControl>
+                      <FormMessage data-testid="error-subcategory-name" />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div>
-                <Label htmlFor="categoryId">Kategori Induk *</Label>
-                <Select 
-                  value={formData.categoryId} 
-                  onValueChange={(value) => setFormData(prev => ({ ...prev, categoryId: value }))}
-                  required
-                >
-                  <SelectTrigger data-testid="select-category">
-                    <SelectValue placeholder="Pilih kategori induk" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
-                        {category.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="description">Deskripsi</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                  placeholder="Masukkan deskripsi sub-kategori"
-                  rows={3}
-                  data-testid="textarea-subcategory-description"
+                <FormField
+                  control={form.control}
+                  name="categoryId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Kategori Induk</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger data-testid="select-category">
+                            <SelectValue placeholder="Pilih kategori induk" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {categories.map((category) => (
+                            <SelectItem key={category.id} value={category.id}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage data-testid="error-subcategory-category" />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              <div className="flex gap-2 pt-4">
-                <Button 
-                  type="submit" 
-                  className="btn-primary"
-                  disabled={createSubCategoryMutation.isPending || updateSubCategoryMutation.isPending}
-                  data-testid="button-save-subcategory"
-                >
-                  {createSubCategoryMutation.isPending || updateSubCategoryMutation.isPending 
-                    ? "Menyimpan..." 
-                    : editingSubCategory ? "Perbarui" : "Simpan"
-                  }
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  onClick={handleDialogClose}
-                  data-testid="button-cancel-subcategory"
-                >
-                  Batal
-                </Button>
-              </div>
-            </form>
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Deskripsi</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Masukkan deskripsi sub-kategori" 
+                          {...field}
+                          value={field.value || ""}
+                          data-testid="textarea-subcategory-description"
+                        />
+                      </FormControl>
+                      <FormMessage data-testid="error-subcategory-description" />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex gap-2 pt-4">
+                  <Button 
+                    type="submit" 
+                    className="btn-primary"
+                    disabled={createSubCategoryMutation.isPending || updateSubCategoryMutation.isPending}
+                    data-testid="button-save-subcategory"
+                  >
+                    {createSubCategoryMutation.isPending || updateSubCategoryMutation.isPending 
+                      ? "Menyimpan..." 
+                      : editingSubCategory ? "Perbarui" : "Simpan"
+                    }
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={handleDialogClose}
+                    data-testid="button-cancel-subcategory"
+                  >
+                    Batal
+                  </Button>
+                </div>
+              </form>
+            </Form>
           </DialogContent>
         </Dialog>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Daftar Sub-Kategori</CardTitle>
+          <CardTitle data-testid="text-card-title">Daftar Sub-Kategori</CardTitle>
           <div className="relative">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
@@ -244,17 +277,17 @@ export default function SubCategories() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nama Sub-Kategori</TableHead>
-                <TableHead>Kategori Induk</TableHead>
-                <TableHead>Deskripsi</TableHead>
-                <TableHead>Tanggal Dibuat</TableHead>
-                <TableHead>Aksi</TableHead>
+                <TableHead data-testid="text-header-name">Nama Sub-Kategori</TableHead>
+                <TableHead data-testid="text-header-category">Kategori Induk</TableHead>
+                <TableHead data-testid="text-header-description">Deskripsi</TableHead>
+                <TableHead data-testid="text-header-created">Tanggal Dibuat</TableHead>
+                <TableHead data-testid="text-header-actions">Aksi</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredSubCategories.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground" data-testid="text-no-subcategories">
                     {searchTerm ? "Tidak ada sub-kategori yang sesuai pencarian" : "Belum ada sub-kategori"}
                   </TableCell>
                 </TableRow>
@@ -263,16 +296,16 @@ export default function SubCategories() {
                   const parentCategory = categories.find(cat => cat.id === subCategory.categoryId);
                   return (
                     <TableRow key={subCategory.id} className="table-row" data-testid={`row-subcategory-${subCategory.id}`}>
-                      <TableCell className="font-semibold">{subCategory.name}</TableCell>
-                      <TableCell>
+                      <TableCell className="font-semibold" data-testid={`text-subcategory-name-${subCategory.id}`}>{subCategory.name}</TableCell>
+                      <TableCell data-testid={`text-subcategory-category-${subCategory.id}`}>
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary">
                           {parentCategory?.name || "Tidak ditemukan"}
                         </span>
                       </TableCell>
-                      <TableCell className="text-muted-foreground">
+                      <TableCell className="text-muted-foreground" data-testid={`text-subcategory-description-${subCategory.id}`}>
                         {subCategory.description || "Tidak ada deskripsi"}
                       </TableCell>
-                      <TableCell className="text-muted-foreground">
+                      <TableCell className="text-muted-foreground" data-testid={`text-subcategory-created-${subCategory.id}`}>
                         {new Date(subCategory.createdAt!).toLocaleDateString("id-ID")}
                       </TableCell>
                       <TableCell>
