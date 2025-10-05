@@ -5,7 +5,7 @@ import * as schema from "@shared/schema";
 import fs from "fs";
 import path from "path";
 
-const dbUrl = "postgres://avnadmin:AVNS_zeE6oufcsDGsHvWpShG@dbpos-mhdalhzau.e.aivencloud.com:18498/defaultdb?sslmode=require";
+const dbUrl = process.env.DATABASE_URL;
 
 if (!dbUrl) {
   throw new Error("DATABASE_URL is not set");
@@ -18,21 +18,22 @@ const caPemPath = path.resolve(
   "attached_assets",
   "ca.pem",
 );
+const sslMode = url.searchParams.get('sslmode');
 
 const poolConfig: any = {
   host: url.hostname,
-  port: parseInt(url.port),
+  port: parseInt(url.port) || 5432,
   database: url.pathname.slice(1),
   user: url.username,
   password: url.password,
-  ssl: fs.existsSync(caPemPath)
+  ssl: sslMode === 'disable' ? false : (fs.existsSync(caPemPath)
     ? {
         rejectUnauthorized: true,
         ca: fs.readFileSync(caPemPath).toString(),
       }
     : {
         rejectUnauthorized: false,
-      },
+      }),
 };
 
 const pool = new Pool(poolConfig);

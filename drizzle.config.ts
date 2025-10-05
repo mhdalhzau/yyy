@@ -8,6 +8,7 @@ if (!process.env.DATABASE_URL) {
 
 const dbUrl = new URL(process.env.DATABASE_URL);
 const caPemPath = path.resolve(process.cwd(), "attached_assets", "ca.pem");
+const sslMode = dbUrl.searchParams.get('sslmode');
 
 export default defineConfig({
   out: "./migrations",
@@ -15,15 +16,15 @@ export default defineConfig({
   dialect: "postgresql",
   dbCredentials: {
     host: dbUrl.hostname,
-    port: parseInt(dbUrl.port),
+    port: parseInt(dbUrl.port) || 5432,
     database: dbUrl.pathname.slice(1),
     user: dbUrl.username,
     password: dbUrl.password,
-    ssl: fs.existsSync(caPemPath) ? {
+    ssl: sslMode === 'disable' ? false : (fs.existsSync(caPemPath) ? {
       rejectUnauthorized: true,
       ca: fs.readFileSync(caPemPath, 'utf-8')
     } : {
       rejectUnauthorized: false
-    }
+    })
   },
 });

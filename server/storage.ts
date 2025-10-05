@@ -1466,6 +1466,11 @@ export class DbStorage implements IStorage {
     return result.rowCount ? result.rowCount > 0 : false;
   }
 
+  async getExpiredProducts(): Promise<Product[]> {
+    const now = new Date();
+    return await db.select().from(products).where(sql`${products.expiryDate} < ${now}`);
+  }
+
   // Customers
   async getCustomers(): Promise<Customer[]> {
     return await db.select().from(customers);
@@ -1609,6 +1614,258 @@ export class DbStorage implements IStorage {
     return result.rowCount ? result.rowCount > 0 : false;
   }
 
+  // SubCategories
+  async getSubCategories(): Promise<SubCategory[]> {
+    return await db.select().from(subCategories);
+  }
+
+  async getSubCategory(id: string): Promise<SubCategory | undefined> {
+    const result = await db.select().from(subCategories).where(eq(subCategories.id, id));
+    return result[0];
+  }
+
+  async getSubCategoriesByCategoryId(categoryId: string): Promise<SubCategory[]> {
+    return await db.select().from(subCategories).where(eq(subCategories.categoryId, categoryId));
+  }
+
+  async createSubCategory(subCategory: InsertSubCategory): Promise<SubCategory> {
+    const result = await db.insert(subCategories).values(subCategory).returning();
+    return result[0];
+  }
+
+  async updateSubCategory(id: string, subCategory: Partial<InsertSubCategory>): Promise<SubCategory | undefined> {
+    const result = await db.update(subCategories).set(subCategory).where(eq(subCategories.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteSubCategory(id: string): Promise<boolean> {
+    const result = await db.delete(subCategories).where(eq(subCategories.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Brands
+  async getBrands(): Promise<Brand[]> {
+    return await db.select().from(brands);
+  }
+
+  async getBrand(id: string): Promise<Brand | undefined> {
+    const result = await db.select().from(brands).where(eq(brands.id, id));
+    return result[0];
+  }
+
+  async createBrand(brand: InsertBrand): Promise<Brand> {
+    const result = await db.insert(brands).values(brand).returning();
+    return result[0];
+  }
+
+  async updateBrand(id: string, brand: Partial<InsertBrand>): Promise<Brand | undefined> {
+    const result = await db.update(brands).set(brand).where(eq(brands.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteBrand(id: string): Promise<boolean> {
+    const result = await db.delete(brands).where(eq(brands.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Units
+  async getUnits(): Promise<Unit[]> {
+    return await db.select().from(units);
+  }
+
+  async getUnit(id: string): Promise<Unit | undefined> {
+    const result = await db.select().from(units).where(eq(units.id, id));
+    return result[0];
+  }
+
+  async createUnit(unit: InsertUnit): Promise<Unit> {
+    const result = await db.insert(units).values(unit).returning();
+    return result[0];
+  }
+
+  async updateUnit(id: string, unit: Partial<InsertUnit>): Promise<Unit | undefined> {
+    const result = await db.update(units).set(unit).where(eq(units.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteUnit(id: string): Promise<boolean> {
+    const result = await db.delete(units).where(eq(units.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // VariantAttributes
+  async getVariantAttributes(): Promise<VariantAttribute[]> {
+    return await db.select().from(variantAttributes);
+  }
+
+  async getVariantAttribute(id: string): Promise<VariantAttribute | undefined> {
+    const result = await db.select().from(variantAttributes).where(eq(variantAttributes.id, id));
+    return result[0];
+  }
+
+  async createVariantAttribute(variantAttribute: InsertVariantAttribute): Promise<VariantAttribute> {
+    const result = await db.insert(variantAttributes).values(variantAttribute).returning();
+    return result[0];
+  }
+
+  async updateVariantAttribute(id: string, variantAttribute: Partial<InsertVariantAttribute>): Promise<VariantAttribute | undefined> {
+    const result = await db.update(variantAttributes).set(variantAttribute).where(eq(variantAttributes.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteVariantAttribute(id: string): Promise<boolean> {
+    const result = await db.delete(variantAttributes).where(eq(variantAttributes.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // Warranties
+  async getWarranties(): Promise<Warranty[]> {
+    return await db.select().from(warranties);
+  }
+
+  async getWarranty(id: string): Promise<Warranty | undefined> {
+    const result = await db.select().from(warranties).where(eq(warranties.id, id));
+    return result[0];
+  }
+
+  async createWarranty(warranty: InsertWarranty): Promise<Warranty> {
+    const result = await db.insert(warranties).values(warranty).returning();
+    return result[0];
+  }
+
+  async updateWarranty(id: string, warranty: Partial<InsertWarranty>): Promise<Warranty | undefined> {
+    const result = await db.update(warranties).set(warranty).where(eq(warranties.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteWarranty(id: string): Promise<boolean> {
+    const result = await db.delete(warranties).where(eq(warranties.id, id));
+    return result.rowCount ? result.rowCount > 0 : false;
+  }
+
+  // StockAdjustments
+  async getStockAdjustments(): Promise<StockAdjustment[]> {
+    return await db.select().from(stockAdjustments);
+  }
+
+  async getStockAdjustment(id: string): Promise<StockAdjustment | undefined> {
+    const result = await db.select().from(stockAdjustments).where(eq(stockAdjustments.id, id));
+    return result[0];
+  }
+
+  async getStockAdjustmentsByProductId(productId: string): Promise<StockAdjustment[]> {
+    return await db.select().from(stockAdjustments).where(eq(stockAdjustments.productId, productId));
+  }
+
+  async createStockAdjustment(stockAdjustment: InsertStockAdjustment): Promise<StockAdjustment> {
+    const result = await db.insert(stockAdjustments).values(stockAdjustment).returning();
+    return result[0];
+  }
+
+  // StockTransfers
+  async getStockTransfers(): Promise<StockTransfer[]> {
+    return await db.select().from(stockTransfers);
+  }
+
+  async getStockTransfer(id: string): Promise<StockTransfer | undefined> {
+    const result = await db.select().from(stockTransfers).where(eq(stockTransfers.id, id));
+    return result[0];
+  }
+
+  async getStockTransfersByProductId(productId: string): Promise<StockTransfer[]> {
+    return await db.select().from(stockTransfers).where(eq(stockTransfers.productId, productId));
+  }
+
+  async createStockTransfer(stockTransfer: InsertStockTransfer): Promise<StockTransfer> {
+    const result = await db.insert(stockTransfers).values(stockTransfer).returning();
+    return result[0];
+  }
+
+  async updateStockTransfer(id: string, stockTransfer: Partial<InsertStockTransfer>): Promise<StockTransfer | undefined> {
+    const result = await db.update(stockTransfers).set(stockTransfer).where(eq(stockTransfers.id, id)).returning();
+    return result[0];
+  }
+
+  // PurchaseOrders
+  async getPurchaseOrders(): Promise<PurchaseOrder[]> {
+    return await db.select().from(purchaseOrders);
+  }
+
+  async getPurchaseOrder(id: string): Promise<PurchaseOrder | undefined> {
+    const result = await db.select().from(purchaseOrders).where(eq(purchaseOrders.id, id));
+    return result[0];
+  }
+
+  async createPurchaseOrder(purchaseOrder: InsertPurchaseOrder): Promise<PurchaseOrder> {
+    const result = await db.insert(purchaseOrders).values(purchaseOrder).returning();
+    return result[0];
+  }
+
+  async updatePurchaseOrder(id: string, purchaseOrder: Partial<InsertPurchaseOrder>): Promise<PurchaseOrder | undefined> {
+    const result = await db.update(purchaseOrders).set(purchaseOrder).where(eq(purchaseOrders.id, id)).returning();
+    return result[0];
+  }
+
+  // PurchaseOrderItems
+  async getPurchaseOrderItems(purchaseOrderId: string): Promise<PurchaseOrderItem[]> {
+    return await db.select().from(purchaseOrderItems).where(eq(purchaseOrderItems.purchaseOrderId, purchaseOrderId));
+  }
+
+  async createPurchaseOrderItem(purchaseOrderItem: InsertPurchaseOrderItem): Promise<PurchaseOrderItem> {
+    const result = await db.insert(purchaseOrderItems).values(purchaseOrderItem).returning();
+    return result[0];
+  }
+
+  // SalesReturns
+  async getSalesReturns(): Promise<SalesReturn[]> {
+    return await db.select().from(salesReturns);
+  }
+
+  async getSalesReturn(id: string): Promise<SalesReturn | undefined> {
+    const result = await db.select().from(salesReturns).where(eq(salesReturns.id, id));
+    return result[0];
+  }
+
+  async createSalesReturn(salesReturn: InsertSalesReturn): Promise<SalesReturn> {
+    const result = await db.insert(salesReturns).values(salesReturn).returning();
+    return result[0];
+  }
+
+  // SalesReturnItems
+  async getSalesReturnItems(salesReturnId: string): Promise<SalesReturnItem[]> {
+    return await db.select().from(salesReturnItems).where(eq(salesReturnItems.salesReturnId, salesReturnId));
+  }
+
+  async createSalesReturnItem(salesReturnItem: InsertSalesReturnItem): Promise<SalesReturnItem> {
+    const result = await db.insert(salesReturnItems).values(salesReturnItem).returning();
+    return result[0];
+  }
+
+  // PurchaseReturns
+  async getPurchaseReturns(): Promise<PurchaseReturn[]> {
+    return await db.select().from(purchaseReturns);
+  }
+
+  async getPurchaseReturn(id: string): Promise<PurchaseReturn | undefined> {
+    const result = await db.select().from(purchaseReturns).where(eq(purchaseReturns.id, id));
+    return result[0];
+  }
+
+  async createPurchaseReturn(purchaseReturn: InsertPurchaseReturn): Promise<PurchaseReturn> {
+    const result = await db.insert(purchaseReturns).values(purchaseReturn).returning();
+    return result[0];
+  }
+
+  // PurchaseReturnItems
+  async getPurchaseReturnItems(purchaseReturnId: string): Promise<PurchaseReturnItem[]> {
+    return await db.select().from(purchaseReturnItems).where(eq(purchaseReturnItems.purchaseReturnId, purchaseReturnId));
+  }
+
+  async createPurchaseReturnItem(purchaseReturnItem: InsertPurchaseReturnItem): Promise<PurchaseReturnItem> {
+    const result = await db.insert(purchaseReturnItems).values(purchaseReturnItem).returning();
+    return result[0];
+  }
+
   // Dashboard Stats
   async getDashboardStats(): Promise<{
     totalSales: string;
@@ -1668,7 +1925,4 @@ export class DbStorage implements IStorage {
   }
 }
 
-// Using MemStorage for development (has all new methods implemented)
-// To use PostgreSQL, switch to: export const storage = new DbStorage();
-// Note: DbStorage needs to be updated with new methods first
-export const storage = new MemStorage();
+export const storage = new DbStorage();
